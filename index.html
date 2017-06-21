@@ -1,39 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>D3</title>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-<link href="css/style.css" rel="stylesheet">
-<script src="https://d3js.org/d3.v4.min.js"></script>
-</head>
-
-<body>
-<h1>Hello World!</h1>
-
-
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="/js/plotly.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
 
 
-<svg width="250" height="250">
-	<rect x="50" y="50" width="20" height="20" fill="red" stroke="black" stroke-width="10"></rect>
-	<g transform="translate(50,0)"><circle r="75" cx="100" cy="100" fill="none" stroke="black" stroke-width="10"></circle></g>
-	<text x="0" y="50" class="main-text">Hello, this is svg.</text>
-</svg>
+<div class="container">
+  <h1 align="center">Spectral Energy Distribution (SED) for ARP 220:</h1>
+  <div id="my-graph"></div>
+  <h4>Photometric Data --- Published and Homogenized [Frequency, Flux Density] Units</h4>
+</div>
+
 
 
 <script>
-	
-	console.log("Hello JavaScript")
-	</script>
+//pulls in the CSV file
+Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
-<script>
-	d3.csv("data.csv", function(myArrayOfObjects){
-		myArrayOfObjects.forEach(function (d){
-			console.log(d.x + " , " + d.y);
-		});
-	});
-	</script>
+  var x = [], y = [], t = [], s = [];
+
+  dataCSV.forEach(function(p) {
+          x.push(p['Frequency']);
+          y.push(p['NED Photometry Measurement']);
+          t.push(p['Observed Passband']);
+          s.push(p['Photometry Measurement']);
+
+      });
+
+var data = [
+      {mode: 'markers',
+      type: "scatter",
+      name: 'this',
+      text: t,
+      x: x,
+      y: y}
+  ];
 
 
-</body>
+
+//Graph axis related things
+var layout = {
+  xaxis: {title: 'log v (Hz)', type:'log', autorange: true},
+  yaxis: {title: 'log f<sub>v</sub> (Jy)', type:'log', autorange: true},
+  margin: {t: 20},
+  hovermode: 'closest'
+};
+
+//Edits made to the toolbar
+var toolbar = {
+	scrollZoom: true, // lets us scroll to zoom in and out - works
+	showLink: false, // removes the link to edit on plotly - works
+	modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+  displaylogo: false
+};
+
+
+//Calls the plot into HTML
+Plotly.plot('my-graph', data, layout, toolbar);
+
+});
+
+
+
+</script>
+  </body>
 </html>
