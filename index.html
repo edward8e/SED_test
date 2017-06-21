@@ -7,6 +7,8 @@
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -21,7 +23,7 @@
 <div class="container">
   <h1 align="center">Spectral Energy Distribution (SED) for ARP 220:</h1>
   <div id="my-graph"></div>
-  <h4>Photometric Data --- Published and Homogenized [Frequency, Flux Density] Units</h4>
+  <div id="my-graph2"></div>
 </div>
 
 
@@ -35,7 +37,7 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
   dataCSV.forEach(function(p) {
           x.push(p['Frequency']);
           y.push(p['NED Photometry Measurement']);
-          t.push(p['Observed Passband']);
+          t.push(p['Comments']);
           s.push(p['Photometry Measurement']);
 
       });
@@ -76,5 +78,70 @@ Plotly.plot('my-graph', data, layout, toolbar);
 
 
 </script>
+
+
+
+
+<!-- Environment search directed towards:ARP 220 -->
+
+
+<script>
+
+//pulls in the CSV file
+Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
+
+  var r = [], t = [], c = [];
+
+  dataCSV.forEach(function(p) {
+          r.push(p['Sep. [Mpc]']);
+          t.push(p['cz [km/s]']);
+          c.push(p['Name']);
+
+      });
+
+var data = [
+      {mode: 'markers',
+      type: "scatter",
+      text: c,
+      r: r,
+      t: t}
+  ];
+
+
+
+//Graph axis related things
+var layout = {
+  title: 'Environment search directed towards:ARP 220',
+  font: {size: 15},
+  plot_bgcolor: 'rgb(223, 223, 223)',
+  angularaxis: {tickcolor: 'rgb(253,253,253)'}
+};
+
+//Edits made to the toolbar
+var toolbar = {
+	scrollZoom: true, // lets us scroll to zoom in and out - works
+	showLink: false, // removes the link to edit on plotly - works
+	modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+  displaylogo: false
+};
+
+
+//Calls the plot into HTML
+Plotly.plot('my-graph2', data, layout, toolbar);
+
+});
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
   </body>
 </html>
