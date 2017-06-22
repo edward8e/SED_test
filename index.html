@@ -21,8 +21,11 @@
 
 
 <div class="container">
-  <h1 align="center">Spectral Energy Distribution (SED) for ARP 220:</h1>
+  <h3 align="center">Spectral Energy Distribution (SED) for ARP 220:</h3>
   <div id="my-graph"></div>
+  <br>
+  <br>
+  <h3 align="center">Environment search directed towards: ARP 220</h3>
   <div id="my-graph2"></div>
 </div>
 
@@ -55,8 +58,28 @@ var data = [
 
 //Graph axis related things
 var layout = {
-  xaxis: {title: 'log v (Hz)', type:'log', autorange: true},
-  yaxis: {title: 'log f<sub>v</sub> (Jy)', type:'log', autorange: true},
+  xaxis: {
+    title: 'log v (Hz)',
+    type:'log',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,
+    },
+  yaxis: {
+    title: 'log f<sub>v</sub> (Jy)',
+    type:'log',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,
+    },
   margin: {t: 20},
   hovermode: 'closest'
 };
@@ -72,11 +95,7 @@ var toolbar = {
 
 //Calls the plot into HTML
 Plotly.plot('my-graph', data, layout, toolbar);
-
 });
-
-
-
 </script>
 
 
@@ -89,35 +108,138 @@ Plotly.plot('my-graph', data, layout, toolbar);
 <!-- Environment search directed towards:ARP 220 -->
 <script>
 //pulls in the CSV file
+// Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
+//
+//   var x = [], y = [], t = [], s = [];
+//
+//   dataCSV.forEach(function(p) {
+//           x.push(p['RA (J2000)']);
+//           y.push(p['Dec (J2000)']);
+//           t.push(p['Comments']);
+//           s.push(p['Photometry Measurement']);
+//
+//       });
+
+
+
+
+
+
+
+
+
+// Converter RA(right acension) to seconds
+// 00h00m00s to 00sec
+
+//Plotly gets every line and pushes into hms array
 Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
-
-  var x = [], y = [], t = [], s = [];
-
+var hms = [];   // your input string
+var hmsa = [];   // your input string
+var pn = []
   dataCSV.forEach(function(p) {
-          x.push(p['RA (J2000)']);
-          y.push(p['Dec (J2000)']);
-          t.push(p['Comments']);
-          s.push(p['Photometry Measurement']);
+          hms.push(p['RA (J2000)']);
+          hmsa.push(p['Dec (J2000)']);
+          pn.push(p['Δcz [km/s]']);
+     });
 
-      });
+var arrayLength = hms.length;
+var x;
+var seconds = [];
+var i;
+
+//filters out the strings and makes time into three section array
+ for(x = 0; x < arrayLength; x++)
+ {
+    hms[x] = hms[x].replace("s",""); //removes s
+    hms[x] = hms[x].split(/[hm]/); //separates based off "h" and "m"
+ }
+
+//Pulls array and calculates the seconds
+for(x = 0; x < arrayLength; x++){
+    var secCalc = (+hms[x][0]) * 60 * 60 + (+hms[x][1]) * 60 + (+hms[x][2]);
+    seconds.push(secCalc);
+  secCalc = 0;
+}
+
+console.log(seconds);
+
+// Converter Dec(right acension) to seconds
+// 00d00m00s to 00sec
+var arrayLength = hmsa.length;
+var arcseconds = [];
+
+
+//filters out the strings and makes time into three section array
+ for(x = 0; x < arrayLength; x++)
+ {
+    hmsa[x] = hmsa[x].replace("s",""); //removes s
+    hmsa[x] = hmsa[x].replace("+",""); //removes s
+    hmsa[x] = hmsa[x].split(/[dm]/); //separates based off "h" and "m"
+ }
+
+//Pulls array and calculates the seconds
+for(x = 0; x < arrayLength; x++){
+    var secCalc = (+hmsa[x][0]) * 60 * 60 + (+hmsa[x][1]) * 60 + (+hmsa[x][2]);
+    arcseconds.push(secCalc);
+  secCalc = 0;
+}
+
+console.log(arcseconds);
+
+
+//changes the color of the points to red and blue depending on positive or negative
+
+for(i = 0; i < arrayLength; i++)
+{
+  if (pn[i] > 0){
+    pn[i] = 'rgb(178,34,34)';
+  }
+  else{
+  pn[i] = 'rgb(0,0,139)';
+  }
+}
+console.log(pn);
+
+
+
+x = seconds;
+y = arcseconds;
+
+
+
+
 
 var data = [
       {mode: 'markers',
       type: "scatter",
       name: 'this',
-      text: t,
+      marker: {color: pn},
       x: x,
       y: y}
   ];
 
-
-
 //Graph axis related things
 var layout = {
-  xaxis: {title: 'log v (Hz)', autorange: true},
-  yaxis: {title: 'log f<sub>v</sub> (Jy)', autorange: true},
+  xaxis: {
+    title: 'RA<sub>(sec)</sub>',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,},
+  yaxis: {
+    title: 'Dec<sub>(arcsec)</sub>',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,},
   margin: {t: 20},
-  hovermode: 'closest'
+  hovermode: 'closest',
 };
 
 //Edits made to the toolbar
@@ -138,11 +260,80 @@ Plotly.plot('my-graph2', data, layout, toolbar);
 
 </script>
 
+<!--
+<script>
+
+// Converter RA(right acension) to seconds
+// 00h00m00s to 00sec
+
+//Plotly gets every line and pushes into hms array
+Plotly.d3.csv('test.csv', function(err, dataCSV){
+var hms = [];   // your input string
+  dataCSV.forEach(function(p) {
+          hms.push(p['RA (J2000)']);
+     });
+
+var arrayLength = hms.length;
+var x;
+var seconds = [];
+var i;
+
+//filters out the strings and makes time into three section array
+ for(x = 0; x < arrayLength; x++)
+ {
+    hms[x] = hms[x].replace("s",""); //removes s
+    hms[x] = hms[x].split(/[hm]/); //separates based off "h" and "m"
+ }
+
+//Pulls array and calculates the seconds
+for(x = 0; x < arrayLength; x++){
+    var secCalc = (+hms[x][0]) * 60 * 60 + (+hms[x][1]) * 60 + (+hms[x][2]);
+    seconds.push(secCalc);
+  secCalc = 0;
+}
+
+console.log(seconds);
 
 
+});
+
+</script> -->
+<!--
+
+<script>
+// Converter Dec(right acension) to seconds
+// 00d00m00s to 00sec
+
+Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
+var hms = [];   // your input string
+  dataCSV.forEach(function(p) {
+          hms.push(p['Dec (J2000)']);
+     });
+
+var arrayLength = hms.length;
+var x;
+var arcseconds = [];
+var i;
+
+//filters out the strings and makes time into three section array
+ for(x = 0; x < arrayLength; x++)
+ {
+    hms[x] = hms[x].replace("s",""); //removes s
+    hms[x] = hms[x].replace("+",""); //removes s
+    hms[x] = hms[x].split(/[dm]/); //separates based off "h" and "m"
+ }
+
+//Pulls array and calculates the seconds
+for(x = 0; x < arrayLength; x++){
+    var secCalc = (+hms[x][0]) * 60 * 60 + (+hms[x][1]) * 60 + (+hms[x][2]);
+    arcseconds.push(secCalc);
+  secCalc = 0;
+}
+
+console.log(arcseconds);
 
 
-
+</script> -->
 
 
 
