@@ -35,21 +35,112 @@
 //pulls in the CSV file
 Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
-  var x = [], y = [], t = [], s = [];
+  var x = [], y = [], t = [], s = [], type = [], number = [];
 
   dataCSV.forEach(function(p) {
           x.push(p['Frequency']);
           y.push(p['NED Photometry Measurement']);
           t.push(p['Comments']);
           s.push(p['Photometry Measurement']);
+          type.push(p['Frequency Mode']);
+          number.push(p['No.']);
 
       });
+
+
+//
+//       var arrayLength = x.length;
+//       var xFinal = [];
+//       var i;
+//
+//       //filters out the strings and makes time into three section array
+//        for(i = 0; i < arrayLength; i++)
+//        {
+//           x[i] = x[i].split(/[E]/); //separates based off "h" and "m"
+//        }
+//        console.log(x);
+//       //Pulls array and calculates the seconds
+//       for(i = 0; i < arrayLength; i++){
+//           var secCalc = Math.pow(x[i][0], x[i][1]);;
+//           xFinal.push(secCalc);
+//         secCalc = 0;
+//       }
+//
+//       console.log(xFinal);
+//       x = xFinal;
+//
+// //----------------------------------------------
+//
+//
+//       var arrayLength = y.length;
+//       var yFinal = [];
+//       var i;
+//
+//       //filters out the strings and makes time into three section array
+//        for(i = 0; i < arrayLength; i++)
+//        {
+//           y[i] = y[i].split(/[E]/); //separates based off "h" and "m"
+//        }
+//        console.log(y);
+//       //Pulls array and calculates the seconds
+//       for(i = 0; i < arrayLength; i++){
+//           var secCalc = Math.pow(y[i][0], y[i][1]);;
+//           yFinal.push(secCalc);
+//         secCalc = 0;
+//       }
+//
+//       console.log(yFinal);
+//       y = yFinal;
+//
+
+
+
+
+
+
+
+
+//console.log(type);
+
+var arrayLength = type.length;
+
+
+var i;
+var out;
+
+
+for(i = 0; i < arrayLength; i++)
+{
+  if (
+    type[i] != ' Broad-band measurement'
+    &&
+    type[i] != ' Broad-band measurement; broad-band flux derived by integration over spectrum; synthetic band'){
+    x.splice(i, 1);// need to figure out how splice works
+    y.splice(i, 1);
+    out = false;
+
+
+    delete x[i];
+    delete y[i];
+  }
+  else{
+    out = true;
+  }
+}
+
+
+
+// console.log(out);
+//
+//
+// console.log(x);
+// console.log(y);
 
 var data = [
       {mode: 'markers',
       type: "scatter",
       name: 'this',
-      text: t,
+      text: number,
       x: x,
       y: y}
   ];
@@ -84,12 +175,22 @@ var layout = {
   hovermode: 'closest'
 };
 
+var toImage2 = {
+  name: 'Download plot as a Postscript',
+  icon: Plotly.Icons.camera,
+  click: function(gd) {
+    Plotly.downloadImage(gd, {format: 'ps'})
+  }
+
+};
+
 //Edits made to the toolbar
 var toolbar = {
 	scrollZoom: true, // lets us scroll to zoom in and out - works
 	showLink: false, // removes the link to edit on plotly - works
-	modeBarButtonsToRemove: ['select2d', 'lasso2d'],
-  displaylogo: false
+	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
+  displaylogo: false,
+  modeBarButtonsToAdd: [toImage2]
 };
 
 
@@ -161,7 +262,7 @@ for(x = 0; x < arrayLength; x++){
   secCalc = 0;
 }
 
-console.log(seconds);
+//console.log(seconds);
 
 // Converter Dec(right acension) to seconds
 // 00d00m00s to 00sec
@@ -184,7 +285,7 @@ for(x = 0; x < arrayLength; x++){
   secCalc = 0;
 }
 
-console.log(arcseconds);
+//console.log(arcseconds);
 
 
 //changes the color of the points to red and blue depending on positive or negative
@@ -198,7 +299,7 @@ for(i = 0; i < arrayLength; i++)
   pn[i] = 'rgb(0,0,139)';
   }
 }
-console.log(pn);
+//console.log(pn);
 
 
 
