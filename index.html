@@ -82,10 +82,72 @@ Plotly.plot('my-graph', data, layout, toolbar);
 
 
 
+
+
+
+
 <!-- Environment search directed towards:ARP 220 -->
-
-
 <script>
+//pulls in the CSV file
+Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
+
+  var x = [], y = [], t = [], s = [];
+
+  dataCSV.forEach(function(p) {
+          x.push(p['RA (J2000)']);
+          y.push(p['Dec (J2000)']);
+          t.push(p['Comments']);
+          s.push(p['Photometry Measurement']);
+
+      });
+
+var data = [
+      {mode: 'markers',
+      type: "scatter",
+      name: 'this',
+      text: t,
+      x: x,
+      y: y}
+  ];
+
+
+
+//Graph axis related things
+var layout = {
+  xaxis: {title: 'log v (Hz)', autorange: true},
+  yaxis: {title: 'log f<sub>v</sub> (Jy)', autorange: true},
+  margin: {t: 20},
+  hovermode: 'closest'
+};
+
+//Edits made to the toolbar
+var toolbar = {
+	scrollZoom: true, // lets us scroll to zoom in and out - works
+	showLink: false, // removes the link to edit on plotly - works
+	modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+  displaylogo: false
+};
+
+
+//Calls the plot into HTML
+Plotly.plot('my-graph2', data, layout, toolbar);
+
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- <script>
 
 //pulls in the CSV file
 Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
@@ -131,17 +193,8 @@ Plotly.plot('my-graph2', data, layout, toolbar);
 
 });
 
-
-
-
-
-
-
-
-
-
 </script>
-
+ -->
 
   </body>
 </html>
