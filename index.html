@@ -21,12 +21,15 @@
 
 
 <div class="container">
-  <h3 align="center">Spectral Energy Distribution (SED) for ARP 220:</h3>
-  <div id="my-graph"></div>
-  <br>
-  <br>
-  <h3 align="center">Environment search directed towards: ARP 220</h3>
-  <div id="my-graph2"></div>
+  <div class="row"><h3 align="center">Spectral Energy Distribution (SED) for ARP 220:</h3>
+  <div id="my-graph"></div></div>
+
+  <div class="row">
+    <div class="col-sm-6"><h3 align="center">3D Spectral Energy Distribution (SED) for ARP 220:</h3>
+    <div id="my-graph3" style="height: 500px;"></div></div>
+
+  <div class="col-sm-6"><h3 align="center">Environment search directed towards: ARP 220</h3>
+  <div id="my-graph2" style="height: 500px; width: 600px;"></div></div></div>
 </div>
 
 
@@ -35,7 +38,7 @@
 //pulls in the CSV file
 Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
-  var x = [], y = [], t = [], s = [], type = [], number = [];
+  var x = [], y = [], t = [], s = [], type = [], number = [], symbol;
 
   dataCSV.forEach(function(p) {
           x.push(p['Frequency']);
@@ -47,67 +50,9 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
       });
 
-
-//
-//       var arrayLength = x.length;
-//       var xFinal = [];
-//       var i;
-//
-//       //filters out the strings and makes time into three section array
-//        for(i = 0; i < arrayLength; i++)
-//        {
-//           x[i] = x[i].split(/[E]/); //separates based off "h" and "m"
-//        }
-//        console.log(x);
-//       //Pulls array and calculates the seconds
-//       for(i = 0; i < arrayLength; i++){
-//           var secCalc = Math.pow(x[i][0], x[i][1]);;
-//           xFinal.push(secCalc);
-//         secCalc = 0;
-//       }
-//
-//       console.log(xFinal);
-//       x = xFinal;
-//
-// //----------------------------------------------
-//
-//
-//       var arrayLength = y.length;
-//       var yFinal = [];
-//       var i;
-//
-//       //filters out the strings and makes time into three section array
-//        for(i = 0; i < arrayLength; i++)
-//        {
-//           y[i] = y[i].split(/[E]/); //separates based off "h" and "m"
-//        }
-//        console.log(y);
-//       //Pulls array and calculates the seconds
-//       for(i = 0; i < arrayLength; i++){
-//           var secCalc = Math.pow(y[i][0], y[i][1]);;
-//           yFinal.push(secCalc);
-//         secCalc = 0;
-//       }
-//
-//       console.log(yFinal);
-//       y = yFinal;
-//
-
-
-
-
-
-
-
-
-//console.log(type);
-
 var arrayLength = type.length;
-
-
 var i;
 var out;
-
 
 for(i = 0; i < arrayLength; i++)
 {
@@ -115,10 +60,6 @@ for(i = 0; i < arrayLength; i++)
     type[i] != ' Broad-band measurement'
     &&
     type[i] != ' Broad-band measurement; broad-band flux derived by integration over spectrum; synthetic band'){
-    x.splice(i, 1);// need to figure out how splice works
-    y.splice(i, 1);
-    out = false;
-
 
     delete x[i];
     delete y[i];
@@ -128,24 +69,15 @@ for(i = 0; i < arrayLength; i++)
   }
 }
 
-
-
-// console.log(out);
-//
-//
-// console.log(x);
-// console.log(y);
-
 var data = [
       {mode: 'markers',
       type: "scatter",
       name: 'this',
       text: number,
+      // marker: {symbol: 'circle-open'},
       x: x,
       y: y}
   ];
-
-
 
 //Graph axis related things
 var layout = {
@@ -196,8 +128,182 @@ var toolbar = {
 
 //Calls the plot into HTML
 Plotly.plot('my-graph', data, layout, toolbar);
+
+});
+
+</script>
+
+
+
+
+<!-- Environment search directed towards:ARP 220 -->
+<script>
+
+// Converter RA(right acension) to seconds
+// 00h00m00s to 00sec
+
+//Plotly gets every line and pushes into hms array
+Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
+var hms = [];   // your input string
+var hmsa = [];   // your input string
+var pn = [];
+var z = [];
+  dataCSV.forEach(function(p) {
+          hms.push(p['RA (J2000)']);
+          hmsa.push(p['Dec (J2000)']);
+          pn.push(p['Δcz [km/s]']);
+          z.push(p['Δcz [km/s]']);
+     });
+
+
+//-----------------------------------------------------------
+var arrayLength = hms.length;
+var x;
+var seconds = [];
+var i;
+
+//filters out the strings and makes time into three section array
+ for(x = 0; x < arrayLength; x++)
+ {
+    hms[x] = hms[x].replace("s",""); //removes s
+    hms[x] = hms[x].split(/[hm]/); //separates based off "h" and "m"
+ }
+
+//Pulls array and calculates the seconds
+for(x = 0; x < arrayLength; x++){
+    var secCalc = (+hms[x][0]) * 60 * 60 + (+hms[x][1]) * 60 + (+hms[x][2]);
+    seconds.push(secCalc);
+  secCalc = 0;
+}
+
+//-----------------------------------------------------------
+// Converter Dec(right acension) to seconds
+// 00d00m00s to 00sec
+var arrayLength = hmsa.length;
+var arcseconds = [];
+
+
+//filters out the strings and makes time into three section array
+ for(x = 0; x < arrayLength; x++)
+ {
+    hmsa[x] = hmsa[x].replace("s",""); //removes s
+    hmsa[x] = hmsa[x].replace("+",""); //removes s
+    hmsa[x] = hmsa[x].split(/[dm]/); //separates based off "h" and "m"
+ }
+
+//Pulls array and calculates the seconds
+for(x = 0; x < arrayLength; x++){
+    var secCalc = (+hmsa[x][0]) * 60 * 60 + (+hmsa[x][1]) * 60 + (+hmsa[x][2]);
+    arcseconds.push(secCalc);
+  secCalc = 0;
+}
+//
+//-----------------------------------------------------------
+
+//changes the color of the points to red and blue depending on positive or negative
+
+for(i = 0; i < arrayLength; i++)
+{
+  if (pn[i] > 0){
+    pn[i] = 'rgb(178,34,34)';
+  }
+  else{
+  pn[i] = 'rgb(0,0,139)';
+  }
+}
+
+x = seconds;
+y = arcseconds;
+console.log(x);
+d = [1,2,3,4,5];
+var xmax = Math.max(d);
+
+console.log(xmax);
+
+
+var data = [
+      {mode: 'markers',
+      type: "scatter3d",
+      marker: {
+        color: pn,
+        symbol: 'circle',
+        // line: {
+      	// 	color: 'rgb(204, 204, 204)',
+      	// 	width: 1},
+        size: 5,
+      },
+      opacity: 0.3,
+      x: x,
+      y: y,
+      z: z}
+  ];
+
+//Graph axis related things
+var layout = {
+  xaxis: {
+    title: 'RA<sub>(sec)</sub>',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,},
+  yaxis: {
+    title: 'Dec<sub>(arcsec)</sub>',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,},
+  margin: {l: 0, r: 0, b: 0, t: 0},
+  hovermode: 'closest',
+  //
+  // // unfilled circle
+  // shapes: [
+  //   {
+  //     type: 'circle',
+  //     xref: 'xmax',
+  //     yref: 'ymax',
+  //     x0: 1,
+  //     y0: 1,
+  //     x1: 3,
+  //     y1: 3,
+  //     line: {
+  //       color: 'rgba(50, 171, 96, 1)'
+  //     }
+  //   }
+  //
+  //
+  //
+  // ]
+
+
+
+};
+
+//Edits made to the toolbar
+var toolbar = {
+	scrollZoom: true, // lets us scroll to zoom in and out - works
+	showLink: false, // removes the link to edit on plotly - works
+	modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+  displaylogo: false
+};
+
+
+//Calls the plot into HTML
+Plotly.plot('my-graph3', data, layout, toolbar);
 });
 </script>
+
+
+
+
+
+
+
 
 
 
@@ -262,7 +368,6 @@ for(x = 0; x < arrayLength; x++){
   secCalc = 0;
 }
 
-//console.log(seconds);
 
 // Converter Dec(right acension) to seconds
 // 00d00m00s to 00sec
@@ -285,8 +390,6 @@ for(x = 0; x < arrayLength; x++){
   secCalc = 0;
 }
 
-//console.log(arcseconds);
-
 
 //changes the color of the points to red and blue depending on positive or negative
 
@@ -299,15 +402,11 @@ for(i = 0; i < arrayLength; i++)
   pn[i] = 'rgb(0,0,139)';
   }
 }
-//console.log(pn);
 
 
 
 x = seconds;
 y = arcseconds;
-
-
-
 
 
 var data = [
@@ -354,6 +453,11 @@ var toolbar = {
 
 //Calls the plot into HTML
 Plotly.plot('my-graph2', data, layout, toolbar);
+
+// window.onresize = function() {
+//     Plotly.Plots.resize('my-graph2');
+// };
+
 
 });
 
