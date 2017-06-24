@@ -32,16 +32,7 @@
   <div class="col-sm-6"><h3 align="center">Environment search directed towards: ARP 220</h3>
   <div id="my-graph2" style="height: 500px; width: 600px;"></div></div></div>
 
-
-
-  <div class="row">
-    <div class="col-sm-6"><h3 align="center">3D Spectral Energy Distribution (SED) for ARP 220:</h3>
-    <div id="my-graph4" style="height: 600px; width: 600px;"></div></div>
-
-  <div class="col-sm-6"><h3 align="center">Environment search directed towards: ARP 220</h3>
-  <div id="my-graph5" style="height: 550px; width: 600px;"></div></div></div>
-
-
+  <div id="my-graph4" style="height: 500px; width: 600px;"></div>
 </div>
 
 
@@ -493,7 +484,7 @@ var layout = {
     ticks: 'inside',
     ticklen: 10,
     tickwidth: 2,
-    // rangeslider:{},
+    rangeslider:{},
   },
   yaxis: {
     title: 'Dec<sub>(arcsec)</sub>',
@@ -676,595 +667,49 @@ Plotly.plot('my-graph2', data, layout, toolbar);
 
 <!-- Environment search directed towards:ARP 220 -->
 <script>
-
-//Plotly gets every line and pushes into hms array
-Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
-var hms = [];   // your input string
-var hmsa = [];   // your input string
-var pn = [];
-  dataCSV.forEach(function(p) {
-          hms.push(p['RA (J2000)']);
-          hmsa.push(p['Dec (J2000)']);
-          pn.push(p['Δcz [km/s]']);
-     });
-
-var arrayLength = hms.length;
-var x;
-var seconds = [];
-var i;
-
-//filters out the strings and makes time into three section array
- for(x = 0; x < arrayLength; x++)
- {
-    hms[x] = hms[x].replace("s",""); //removes s
-    hms[x] = hms[x].split(/[hm]/); //separates based off "h" and "m"
- }
-
-//Pulls array and calculates the seconds
-for(x = 0; x < arrayLength; x++){
-    var secCalc = (+hms[x][0]) * 60 * 60 + (+hms[x][1]) * 60 + (+hms[x][2]);
-    seconds.push(-secCalc);// flipped the x-asix because of oritenation
-  secCalc = 0;
-}
+var rawDataURL = 'e_search_arp_220.csv';
+var xField = 'RA (J2000)';
+var yField = 'Dec (J2000)';
+var zField = 'Δcz [km/s]';
 
 
-// Converter Dec(right acension) to seconds
-// 00d00m00s to 00sec
-var arrayLength = hmsa.length;
-var arcseconds = [];
+Plotly.d3.csv(rawDataURL, function(err, rawData) {
+    if(err) throw err;
 
+    var data = prepData(rawData);
+    var layout = {
+        title: 'Time series with range slider and selectors',
+        xaxis: {
+            rangeslider: {}
+        },
+        yaxis: {
+            fixedrange: true
+        }
+    };
 
-//filters out the strings and makes time into three section array
- for(x = 0; x < arrayLength; x++)
- {
-    hmsa[x] = hmsa[x].replace("s",""); //removes s
-    hmsa[x] = hmsa[x].replace("+",""); //removes s
-    hmsa[x] = hmsa[x].split(/[dm]/); //separates based off "h" and "m"
- }
-
-//Pulls array and calculates the seconds
-for(x = 0; x < arrayLength; x++){
-    var secCalc = (+hmsa[x][0]) * 60 * 60 + (+hmsa[x][1]) * 60 + (+hmsa[x][2]);
-    arcseconds.push(secCalc);
-  secCalc = 0;
-}
-
-
-//changes the color of the points to red and blue depending on positive or negative
-
-for(i = 0; i < arrayLength; i++)
-{
-  if (pn[i] > 0){
-    pn[i] = 'rgb(178,34,34)';
-  }
-  else{
-  pn[i] = 'rgb(0,0,139)';
-  }
-}
-
-
-
-
-x = seconds;
-y = arcseconds;
-
-//Finding the center point for anotation
-var xmax = Math.max.apply(Math, seconds);
-var xmin = Math.min.apply(Math, seconds);
-var xcenter = (xmax + xmin)/2;
-
-var ymax = Math.max.apply(Math, arcseconds);
-var ymin = Math.min.apply(Math, arcseconds);
-var ycenter = (ymax + ymin)/2;
-
-var ylength = ymax - ymin;
-var xlength = xmax - xmin;
-console.log(ylength);
-console.log(xlength);
-
-
-// var xleft = xcenter + -500;
-// var xright = xcenter + 500;
-// var ybottom = ycenter + -50000;
-// var ytop = ycenter + 50000;
-
-
-//Outer circle 10pc
-var xleft = xcenter + xlength/2;
-var xright = xcenter - xlength/2;
-var ybottom = ycenter + ylength/2;
-var ytop = ycenter - ylength/2;
-
-//5pc
-var xleft1 = xcenter + xlength/4;
-var xright1 = xcenter - xlength/4;
-var ybottom1 = ycenter + ylength/4;
-var ytop1 = ycenter - ylength/4;
-
-//2.5pc
-var xleft2 = xcenter + xlength/8;
-var xright2 = xcenter - xlength/8;
-var ybottom2 = ycenter + ylength/8;
-var ytop2 = ycenter - ylength/8;
-
-//1.25pc
-var xleft3 = xcenter + xlength/16;
-var xright3 = xcenter - xlength/16;
-var ybottom3 = ycenter + ylength/16;
-var ytop3 = ycenter - ylength/16;
-
-//1.25pc
-var xleft4 = xcenter - xlength/32;
-var xright4 = xcenter + xlength/32;
-var ybottom4 = ycenter - ylength/32;
-var ytop4 = ycenter + ylength/32;
-
-
-var data = [
-      {mode: 'markers',
-      type: "scatter",
-      name: 'this',
-      marker: {color: pn},
-      x: x,
-      y: y}
-  ];
-
-//Graph axis related things
-var layout = {
-  xaxis: {
-    title: 'RA<sub>(sec)</sub>',
-    autorange: true,
-    linecolor: 'black',
-    linewidth: 2,
-    mirror: true,
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,
-    rangeslider:{},
-  },
-  yaxis: {
-    title: 'Dec<sub>(arcsec)</sub>',
-    autorange: true,
-    linecolor: 'black',
-    linewidth: 2,
-    mirror: true,
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,},
-  margin: {t: 20},
-  hovermode: 'closest',
-  shapes: [
-
-    // Unfilled Circle
-
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft,
-      y0: ytop,
-      x1: xright,
-      y1: ybottom,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft1,
-      y0: ytop1,
-      x1: xright1,
-      y1: ybottom1,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft2,
-      y0: ytop2,
-      x1: xright2,
-      y1: ybottom2,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft3,
-      y0: ytop3,
-      x1: xright3,
-      y1: ybottom3,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft4,
-      y0: ytop4,
-      x1: xright4,
-      y1: ybottom4,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-  ]
-};
-
-//Edits made to the toolbar
-var toolbar = {
-	scrollZoom: true, // lets us scroll to zoom in and out - works
-	showLink: false, // removes the link to edit on plotly - works
-	modeBarButtonsToRemove: ['select2d', 'lasso2d'],
-  displaylogo: false
-};
-
-
-//Calls the plot into HTML
-Plotly.plot('my-graph4', data, layout, toolbar);
-
+    Plotly.plot('my-graph4', data, layout);
 });
+
+function prepData(rawData) {
+    var x = [];
+    var y = [];
+
+    console.log(rawData.length)
+
+    rawData.forEach(function(datum, i) {
+        if(i % 100) return;
+
+        x.push(new Date(datum[xField]));
+        y.push(datum[yField]);
+    });
+
+    return [{
+        mode: 'lines',
+        x: x,
+        y: y
+    }];
+}
 </script>
-
-
-
-
-<!-- Environment search directed towards:ARP 220 -->
-<script>
-//Plotly gets every line and pushes into hms array
-Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
-var hms = [];   // your input string
-var hmsa = [];   // your input string
-var pn = [];
-  dataCSV.forEach(function(p) {
-          hms.push(p['RA (J2000)']);
-          hmsa.push(p['Dec (J2000)']);
-          pn.push(p['Δcz [km/s]']);
-     });
-
-var arrayLength = hms.length;
-var x;
-var xv1;
-var seconds = [];
-var i;
-
-//filters out the strings and makes time into three section array
- for(x = 0; x < arrayLength; x++)
- {
-    hms[x] = hms[x].replace("s",""); //removes s
-    hms[x] = hms[x].split(/[hm]/); //separates based off "h" and "m"
- }
-
-//Pulls array and calculates the seconds
-for(x = 0; x < arrayLength; x++){
-    var secCalc = (+hms[x][0]) * 60 * 60 + (+hms[x][1]) * 60 + (+hms[x][2]);
-    seconds.push(-secCalc);// flipped the x-asix because of oritenation
-  secCalc = 0;
-}
-
-
-// Converter Dec(right acension) to seconds
-// 00d00m00s to 00sec
-var arrayLength = hmsa.length;
-var arcseconds = [];
-
-
-//filters out the strings and makes time into three section array
- for(x = 0; x < arrayLength; x++)
- {
-    hmsa[x] = hmsa[x].replace("s",""); //removes s
-    hmsa[x] = hmsa[x].replace("+",""); //removes s
-    hmsa[x] = hmsa[x].split(/[dm]/); //separates based off "h" and "m"
- }
-
-//Pulls array and calculates the seconds
-for(x = 0; x < arrayLength; x++){
-    var secCalc = (+hmsa[x][0]) * 60 * 60 + (+hmsa[x][1]) * 60 + (+hmsa[x][2]);
-    arcseconds.push(secCalc);
-  secCalc = 0;
-}
-
-
-//changes the color of the points to red and blue depending on positive or negative
-
-for(i = 0; i < arrayLength; i++)
-{
-  if (pn[i] > 0){
-    pn[i] = 'rgb(178,34,34)';
-  }
-  else{
-  pn[i] = 'rgb(0,0,139)';
-  }
-}
-
-
-
-
-x = seconds;
-y = arcseconds;
-
-//Finding the center point for anotation
-var xmax = Math.max.apply(Math, seconds);
-var xmin = Math.min.apply(Math, seconds);
-var xcenter = (xmax + xmin)/2;
-
-var ymax = Math.max.apply(Math, arcseconds);
-var ymin = Math.min.apply(Math, arcseconds);
-var ycenter = (ymax + ymin)/2;
-
-var ylength = ymax - ymin;
-var xlength = xmax - xmin;
-console.log(ylength);
-console.log(xlength);
-
-
-// var xleft = xcenter + -500;
-// var xright = xcenter + 500;
-// var ybottom = ycenter + -50000;
-// var ytop = ycenter + 50000;
-
-
-//Outer circle 10pc
-var xleft = xcenter + xlength/2;
-var xright = xcenter - xlength/2;
-var ybottom = ycenter + ylength/2;
-var ytop = ycenter - ylength/2;
-
-//5pc
-var xleft1 = xcenter + xlength/4;
-var xright1 = xcenter - xlength/4;
-var ybottom1 = ycenter + ylength/4;
-var ytop1 = ycenter - ylength/4;
-var xv1 = x;
-var yv1 = y;
-
-for(i = 0; i < arrayLength; i++)
-{
-  if (xv1[i] < xleft1 && xv1[i] > xright1){
-  }
-  else{
-    delete xv1[i];
-  }
-}
-for(i = 0; i < arrayLength; i++)
-{
-  if (yv1[i] > ytop1 && yv1[i] < ybottom1){
-  }
-  else{
-    delete yv1[i];
-  }
-}
-
-//2.5pc
-var xleft2 = xcenter + xlength/8;
-var xright2 = xcenter - xlength/8;
-var ybottom2 = ycenter + ylength/8;
-var ytop2 = ycenter - ylength/8;
-var xv2 = x;
-var yv2 = y;
-
-for(i = 0; i < arrayLength; i++)
-{
-  if (xv2[i] < xleft2 && xv2[i] > xright2){
-  }
-  else{
-    delete xv2[i];
-  }
-}
-for(i = 0; i < arrayLength; i++)
-{
-  if (yv2[i] > ytop2 && yv2[i] < ybottom2){
-  }
-  else{
-    delete yv2[i];
-  }
-}
-
-//1.25pc
-var xleft3 = xcenter + xlength/16;
-var xright3 = xcenter - xlength/16;
-var ybottom3 = ycenter + ylength/16;
-var ytop3 = ycenter - ylength/16;
-var xv3 = x;
-var yv3 = y;
-
-for(i = 0; i < arrayLength; i++)
-{
-  if (xv3[i] < xleft3 && xv3[i] > xright3){
-  }
-  else{
-    delete xv3[i];
-  }
-}
-for(i = 0; i < arrayLength; i++)
-{
-  if (yv3[i] > ytop3 && yv3[i] < ybottom3){
-  }
-  else{
-    delete yv3[i];
-  }
-}
-
-console.log(xv3);
-
-
-//0.625pc
-var xleft4 = xcenter - xlength/32;
-var xright4 = xcenter + xlength/32;
-var ybottom4 = ycenter - ylength/32;
-var ytop4 = ycenter + ylength/32;
-
-
-var data = [
-      {mode: 'markers',
-      type: "scatter",
-      name: 'this',
-      marker: {color: pn},
-      x: x,
-      y: y}
-  ];
-
-//Graph axis related things
-var layout = {
-  xaxis: {
-    title: 'RA<sub>(sec)</sub>',
-    autorange: true,
-    linecolor: 'black',
-    linewidth: 2,
-    mirror: true,
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,
-    // rangeslider:{},
-  },
-  yaxis: {
-    title: 'Dec<sub>(arcsec)</sub>',
-    autorange: true,
-    linecolor: 'black',
-    linewidth: 2,
-    mirror: true,
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,},
-  margin: {t: 20},
-  hovermode: 'closest',
-  shapes: [
-
-    // Unfilled Circle
-
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft,
-      y0: ytop,
-      x1: xright,
-      y1: ybottom,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft1,
-      y0: ytop1,
-      x1: xright1,
-      y1: ybottom1,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft2,
-      y0: ytop2,
-      x1: xright2,
-      y1: ybottom2,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft3,
-      y0: ytop3,
-      x1: xright3,
-      y1: ybottom3,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-    {
-      type: 'circle',
-      xref: 'x',
-      yref: 'y',
-      // fillcolor: 'rgba(50, 171, 96, 0.7)',
-      x0: xleft4,
-      y0: ytop4,
-      x1: xright4,
-      y1: ybottom4,
-      line: {
-        color: 'rgba(0, 0, 0, .2)'
-      }
-    },
-  ],
-  sliders: [{
-    pad: {
-      t: 30
-    },
-    currentvalue: {
-      xanchor: 'right',
-      prefix: 'Distance: ',
-      font: {
-        color: '#888',
-        size: 20
-      }
-    },
-    steps: [{
-      label: '10pc',
-      method: 'data',
-      args: [x = 'x', y = 'y']
-    }, {
-      label: '5Mpc',
-      method: 'data',
-      args: [x = 'xv1', y = 'yv1']
-    }, {
-      label: '2.5Mpc',
-      method: 'data',
-      args: [x = 'xv2', y = 'yv2']
-    }, {
-      label: '1.25Mpc',
-      method: 'data',
-      args: [x = 'xv3', y = 'yv3']
-    },]
-  }]
-
-};
-
-console.log(x);
-console.log(y);
-
-
-//Edits made to the toolbar
-var toolbar = {
-	scrollZoom: true, // lets us scroll to zoom in and out - works
-	showLink: false, // removes the link to edit on plotly - works
-	modeBarButtonsToRemove: ['select2d', 'lasso2d'],
-  displaylogo: false
-};
-
-
-//Calls the plot into HTML
-Plotly.plot('my-graph5', data, layout, toolbar);
-
-});
-</script>
-
-
 
 
 
