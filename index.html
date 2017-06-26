@@ -39,8 +39,12 @@
     <div id="my-graph4" style="height: 600px; width: 600px;"></div></div>
 
   <div class="col-sm-6"><h3 align="center">Environment search directed towards: ARP 220</h3>
-  <div id="my-graph5" style="height: 550px; width: 600px;"></div></div></div>
+  <div id="my-graph5" style="height: 550px; width: 600px;"></div></div>
+</div>
 
+<div class="row">
+  <div id="my-graph6" style="height: 1000px; width: 500px;"></div>
+</div>
 
 </div>
 
@@ -355,10 +359,13 @@ Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
 var hms = [];   // your input string
 var hmsa = [];   // your input string
 var pn = [];
+var pShape = [];
   dataCSV.forEach(function(p) {
           hms.push(p['RA (J2000)']);
           hmsa.push(p['Dec (J2000)']);
           pn.push(p['Δcz [km/s]']);
+          pShape.push(p['Object Type']);
+
      });
 
 var arrayLength = hms.length;
@@ -472,12 +479,30 @@ var xright4 = xcenter + xlength/32;
 var ybottom4 = ycenter - ylength/32;
 var ytop4 = ycenter + ylength/32;
 
+//adds shape to the ponts
+for(i = 0; i < arrayLength; i++){
+  if (pShape[i] === "G") {
+    pShape[i] = "circle-open";
+  }
+  else if(pShape[i] === "GGroup"){
+    pShape[i] = "square-open";
+  }
+  else {
+    pShape[i] = "circle";
+  }
+}
+
+
+
 
 var data = [
       {mode: 'markers',
       type: "scatter",
       name: 'this',
-      marker: {color: pn},
+      marker: {
+        color: pn,
+        symbol: pShape,
+      },
       x: x,
       y: y}
   ];
@@ -1264,7 +1289,126 @@ Plotly.plot('my-graph5', data, layout, toolbar);
 });
 </script>
 
+<script>
+//pulls in the CSV file
+// Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
+//
+//   var x = [], y = [], t = [], s = [];
+//
+//   dataCSV.forEach(function(p) {
+//           x.push(p['RA (J2000)']);
+//           y.push(p['Dec (J2000)']);
+//           t.push(p['Comments']);
+//           s.push(p['Photometry Measurement']);
+//
+//       });
 
+
+
+
+
+
+
+
+
+// Converter RA(right acension) to seconds
+// 00h00m00s to 00sec
+
+//Plotly gets every line and pushes into hms array
+Plotly.d3.csv('e_search_arp_220.csv', function(err, dataCSV){
+var hms = [];
+var y = [];
+var pn = [];
+  dataCSV.forEach(function(p) {
+          hms.push(p['RA (J2000)']);
+          y.push(p['Δcz [km/s]']);
+          pn.push(p['Δcz [km/s]']);
+     });
+     var arrayLength = hms.length;
+     var x;
+     var seconds = [];
+     var i;
+
+     //filters out the strings and makes time into three section array
+      for(x = 0; x < arrayLength; x++)
+      {
+         hms[x] = hms[x].replace("s",""); //removes s
+         hms[x] = hms[x].split(/[hm]/); //separates based off "h" and "m"
+      }
+
+     //Pulls array and calculates the seconds
+     for(x = 0; x < arrayLength; x++){
+         var secCalc = (+hms[x][0]) * 60 * 60 + (+hms[x][1]) * 60 + (+hms[x][2]);
+         seconds.push(-secCalc);//flip xaxis
+       secCalc = 0;
+     }
+
+var arrayLength = pn.length;
+     //changes the color of the points to red and blue depending on positive or negative
+
+     for(i = 0; i < arrayLength; i++)
+     {
+       if (pn[i] > 0){
+         pn[i] = 'rgb(178,34,34)';
+       }
+       else{
+       pn[i] = 'rgb(0,0,139)';
+       }
+     }
+x = seconds;
+
+var data = [
+      {mode: 'markers',
+      type: "scatter",
+      name: 'this',
+      marker: {color: pn},
+      x: x,
+      y: y}
+  ];
+
+//Graph axis related things
+var layout = {
+  xaxis: {
+    title: 'RA<sub>(sec)</sub>',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,
+    // rangeslider:{},
+  },
+  yaxis: {
+    title: 'Δ<sub>cz</sub> [km/s]',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,},
+  margin: {t: 20},
+  hovermode: 'closest',
+};
+
+//Edits made to the toolbar
+var toolbar = {
+	scrollZoom: true, // lets us scroll to zoom in and out - works
+	showLink: false, // removes the link to edit on plotly - works
+	modeBarButtonsToRemove: ['select2d', 'lasso2d'],
+  displaylogo: false
+};
+
+
+//Calls the plot into HTML
+Plotly.plot('my-graph6', data, layout, toolbar);
+
+});
+
+
+
+</script>
 
 
 
