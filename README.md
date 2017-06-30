@@ -14,12 +14,15 @@ Galaxy Environment reference: http://ned.ipac.caltech.edu/cgi-bin/denv?obj=arp+2
 #Running the Server Locally:
 
 1. Open Terminal and Change Directory
+
 cd ~/documents/github/sed_proto
 
 
 2. Python Simple Server Code
+
 python -m SimpleHTTPServer 8000
 
 
 3. Open Local Server
+
 http://0.0.0.0:8000
