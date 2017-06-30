@@ -17,6 +17,10 @@
     <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript" src="/js/plotly.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
   </head>
   <body>
 
@@ -25,6 +29,8 @@
   <div class="row"><h3 align="center">Spectral Energy Distribution (SED) for ARP 220:</h3>
   <div id="my-graph"></div></div>
 
+<button id="ErrorBarOFF">Error Bar OFF</button>
+<button id="ErrorBarON">Error Bar ON</button>
 </div>
 
 
@@ -33,7 +39,7 @@
 //pulls in the CSV file
 Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
-  var x = [], y = [], t = [], s = [], type = [], number = [], symbol;
+  var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [];
 
   dataCSV.forEach(function(p) {
           x.push(p['Frequency']);
@@ -42,7 +48,7 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
           s.push(p['Photometry Measurement']);
           type.push(p['Frequency Mode']);
           number.push(p['No.']);
-
+          errorBar.push(p['NED Uncertainty']);
       });
 
 var arrayLength = type.length;
@@ -64,14 +70,35 @@ for(i = 0; i < arrayLength; i++)
   }
 }
 
+var errorBarNull = [];
+//filters out the strings and removes "+/- syntax"
+ for(var i = 0; i < arrayLength; i++)
+ {
+    errorBar[i] = errorBar[i].replace("+/-",""); //removes "+/-"
+    errorBarNull[i] = 0;
+ }
+
+
+
+
+
 var data = [
       {mode: 'markers',
       type: "scatter",
       name: 'this',
       text: number,
+      // marker:{color: 'rgb(0,0,139)'},
+      //
       // marker: {symbol: 'circle-open'},
       x: x,
-      y: y}
+      y: y,
+      error_y: {
+        type: 'data',
+        array: errorBar,
+        visible: true,
+        thickness: 1,
+        // color: 'rgb(0,0,139)'
+      }}
   ];
 
 //Graph axis related things
@@ -103,12 +130,11 @@ var layout = {
 };
 
 var toImage2 = {
-  name: 'Download plot as a Postscript',
+  name: 'Download plot as a SVG',
   icon: Plotly.Icons.camera,
   click: function(gd) {
-    Plotly.downloadImage(gd, {format: 'ps'})
+    Plotly.downloadImage(gd, {format: 'svg'})
   }
-
 };
 
 //Edits made to the toolbar
@@ -121,13 +147,81 @@ var toolbar = {
 };
 
 
+
+
+
+// 1. Create the button
+var button = ("#ErrorBarON").onclick = function() {
+
+    var data_update = {
+      error_y: {
+        type: 'data',
+        array: errorBar,
+        visible: true,
+        thickness: 1,
+        // color: 'rgb(0,0,139)'
+      }
+  };
+    Plotly.update('my-graph', data_update);
+
+
+};
+
+
+
+// 1. Create the button
+var button1 = document.createElement("button");
+button1.innerHTML = "ErrorBar Off";
+
+// 2. Append somewhere
+var body = document.getElementsByTagName("body")[0];
+body.appendChild(button1);
+
+// 3. Add event handler
+button1.onclick = function() {
+
+    var data_update = {
+      error_y: {
+        type: 'data',
+        array: errorBarNull,
+        visible: true,
+        thickness: 1,
+        // color: 'rgb(0,0,139)'
+      }
+  };
+    Plotly.update('my-graph', data_update);
+
+
+};
+
+
+
+
 //Calls the plot into HTML
-Plotly.plot('my-graph', data, layout, toolbar);
+Plotly.newPlot('my-graph', data, layout, toolbar, button, button1);
+
 
 });
 
-</script>
 
+
+
+</script>
+<style>
+
+button {
+  margin-top: 20px;
+  line-height: 60px;
+  font-weight: bold;
+  padding: 0 40px;
+  background: salmon;
+  border: none;
+}
+button:hover {
+  background: lightsalmon;
+}
+
+</style>
 
 
 
