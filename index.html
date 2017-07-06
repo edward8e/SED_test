@@ -160,7 +160,7 @@
 Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
   var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [],
-  xline = [], yline = [], xTrue =[], yTrue = [];
+  xline = [], yline = [], xWavelength = [];
 
   var OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
       NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
@@ -175,8 +175,6 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
           errorBar.push(p['NED Uncertainty']);
           xline.push(p['Frequency']);
           yline.push(p['NED Photometry Measurement']);
-          xTrue.push(p['Frequency']);
-          yTrue.push(p['NED Photometry Measurement']);
 
           //Table Data
           OPassband.push(p['Observed Passband']);
@@ -197,6 +195,7 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
           Comments.push(p['Comments']);
       });
 
+//---------------------Splits x and y broad-band and line points----------------------//
 var arrayLength = type.length;
 var i;
 var out;
@@ -210,8 +209,6 @@ for(i = 0; i < arrayLength; i++)
 
     delete x[i];
     delete y[i];
-    delete xTrue[i];
-    delete yTrue[i];
   }
   else{
     out = true;
@@ -219,6 +216,15 @@ for(i = 0; i < arrayLength; i++)
     delete yline[i];
   }
 }
+
+//---------------------computes x Wavelength values----------------------//
+
+for(i = 0; i < arrayLength; i++)
+{
+  xWavelength[i] = (299792458/x[i]) * 1000000;
+}
+console.log(xWavelength);
+
 
 
 var errorBarNull = [];
@@ -423,7 +429,9 @@ if(this.checked) {
 var xaxis_update = jsFunction = function(value)
 {
   if(value == 1){
-    var data_update = {};
+    var data_update = {
+      x: x
+    };
       var layout_update = {
         xaxis: {
           title: 'log(Frequency [Hz])',
@@ -442,7 +450,9 @@ var xaxis_update = jsFunction = function(value)
       Plotly.update('my-graph', data_update, layout_update);
   }
   else{
-    var data_update = {};
+    var data_update = {
+      x: xWavelength
+    };
       var layout_update = {
         xaxis: {
           title: 'log(Wavelength [microns])',
