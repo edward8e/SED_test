@@ -12,19 +12,22 @@
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 
 
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.popup.js"></script>
+    <!-- <script type="text/javascript" src="/js/jquery.popup.js"></script> -->
     <script type="text/javascript" src="/js/plotly.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/js/jquery.popup.js"></script>
 
 
  <link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -33,8 +36,8 @@
   <body>
 
 
-<div class="container-fluid">
-  <h3 align="center">Spectral Energy Distribution (SED) for ARP 220:</h3>
+<div class="container">
+  <h2 align="center" class="title-font">Spectral Energy Distribution (SED) for ARP 220:</h2>
   <div class="row">
 
     <div class="col-md-8">
@@ -42,8 +45,8 @@
     </div>
     <div class="col-md-4">
       <h3>Two types of Error Bar Options:</h3>
-      <button id="ErrorBarOFF">Error Bar OFF</button>
-      <button id="ErrorBarON">Error Bar ON</button>
+      <button type="button" class="btn btn-primary" id="ErrorBarOFF">Error Bar OFF</button>
+      <button type="button" class="btn btn-primary" id="ErrorBarON">Error Bar ON</button>
 
 
       <div class="onoffswitch">
@@ -101,6 +104,48 @@
     </div>
   </div>
 
+<div class="row table-responsive">
+  <table class="table-info table table-bordered">
+    <thead class="title-font">
+      <tr class="table-center">
+        <th></th>
+        <th colspan="4" align="center">Published Units</th>
+        <th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
+      </tr>
+
+      <tr class="table-center">
+        <th>No.</th>
+        <th>Observed Passband</th>
+        <th>Measurement</th>
+        <th>Uncertainty</th>
+        <th>Units</th>
+        <th>Freq (Hz)</th>
+        <th>Measurement</th>
+        <th>Uncertainty</th>
+        <th>Units</th>
+        <th>Mode</th>
+        <th>Aperture/Qualifiers</th>
+        <th>Reference Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th id="hoverinfonum"></th>
+        <th id="hoverinfoopassband"></th>
+        <th id ="hoverinfomeasurement"></th>
+        <th id="hoverinfouncertainty"></th>
+        <th id="hoverinfounits"></th>
+        <th id="hoverinfofrequency"></th>
+        <th id="hoverinfomeasurement2"></th>
+        <th id="hoverinfouncertainty2"></th>
+        <th id="hoverinfounits2"></th>
+        <th id="hoverinfomode"></th>
+        <th id="hoverinfoaperture"></th>
+        <th id="hoverinforcode"></th>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
 
@@ -114,6 +159,9 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
   var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [];
 
+  var OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
+      NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
+      SMode = [], Qualifiers = [], Comments = [];
   dataCSV.forEach(function(p) {
           x.push(p['Frequency']);
           y.push(p['NED Photometry Measurement']);
@@ -122,6 +170,24 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
           type.push(p['Frequency Mode']);
           number.push(p['No.']);
           errorBar.push(p['NED Uncertainty']);
+
+          //Table Data
+          OPassband.push(p['Observed Passband']);
+          PMeasurement.push(p['Photometry Measurement']);
+          Uncertainty.push(p['Uncertainty']);
+          Units.push(p['Units']);
+          Frequency.push(p['Frequency']);
+          NEDMeasurement.push(p['NED Photometry Measurement']);
+          NEDUncertainty.push(p['NED Uncertainty']);
+          NEDUnits.push(p['NED Units']);
+          Refcode.push(p['Refcode']);
+          Significance.push(p['Significance']);
+          PFrequency.push(p['Published frequency']);
+          FMode.push(p['Frequency Mode']);
+          CTargeted.push(p['Coordinates Targeted']);
+          SMode.push(p['Spatial Mode']);
+          Qualifiers.push(p['Qualifiers']);
+          Comments.push(p['Comments']);
       });
 
 var arrayLength = type.length;
@@ -158,7 +224,7 @@ var errorBarNull = [];
 var data = [
       {mode: 'markers',
       type: "scatter",
-      name: 'this',
+      name: number,
       text: number,
       // marker:{color: 'rgb(0,0,139)'},
       //
@@ -186,6 +252,7 @@ var layout = {
     ticks: 'inside',
     ticklen: 10,
     tickwidth: 2,
+    exponentformat: "power"
     },
   yaxis: {
     title: 'log f<sub>v</sub> (Jy)',
@@ -197,9 +264,10 @@ var layout = {
     ticks: 'inside',
     ticklen: 10,
     tickwidth: 2,
+    exponentformat: "power"
     },
   margin: {t: 20},
-  hovermode: false
+  hovermode: false,
 };
 
 var toImage2 = {
@@ -261,7 +329,7 @@ var button1 = document.getElementById("ErrorBarOFF").onclick = function() {
         type: 'data',
         array: errorBarNull,
         visible: true,
-        thickness: 1,
+        thickness: 0.001,
         // color: 'rgb(0,0,139)'
       }
   };
@@ -293,7 +361,7 @@ if(this.checked) {
         type: 'data',
         array: errorBarNull,
         visible: true,
-        thickness: 0.01,
+        thickness: 0.001,
         // color: 'rgb(0,0,139)'
       }};
       var layout_update = {};
@@ -332,8 +400,115 @@ var xaxis_update = function check(elem) {
 
 
 
+
+
+
+
+
+
+
+
 //Calls the plot into HTML
 Plotly.newPlot('my-graph', data, layout, toolbar, button, button1, checkbox, checkbox1, xaxis_update);
+
+
+
+
+//---------------------Pulls information into table----------------------//
+//Event handler in plotly when it comes to hovering
+var myPlot = document.getElementById('my-graph');
+var hoverInfoNum = document.getElementById('hoverinfonum');
+var hoverInfoOPassband = document.getElementById('hoverinfoopassband');
+var hoverInfoMeasurement = document.getElementById('hoverinfomeasurement');
+var hoverInfoUncertainty = document.getElementById('hoverinfouncertainty');
+var hoverInfoUnits = document.getElementById('hoverinfounits');
+var hoverInfoFrequency = document.getElementById('hoverinfofrequency');
+var hoverInfoMeasurement2 = document.getElementById('hoverinfomeasurement2');
+var hoverInfoUncertainty2 = document.getElementById('hoverinfouncertainty2');
+var hoverInfoUnits2 = document.getElementById('hoverinfounits2');
+var hoverInfoMode = document.getElementById('hoverinfomode');
+var hoverInfoAperture = document.getElementById('hoverinfoaperture');
+var hoverInfoRCode = document.getElementById('hoverinforcode');
+var hoverInfoUnits2 = document.getElementById('hoverinfounits2');
+
+myPlot.on('plotly_click', function(data){
+//displays point number and acts as a counter for arrays
+   var pts = '';
+      for(var i=0; i < data.points.length; i++){
+          pts = data.points[i].text;
+      }
+      var pCounter = pts - 1;
+
+
+  //Display the Point number
+   var numbertext = data.points.map(function(d){
+     return (pts);
+   });
+   hoverInfoNum.innerHTML = numbertext.join('');
+//Observed Passband
+   var Opassbandtext = data.points.map(function(d){
+     return(OPassband[pCounter]);
+   });
+   hoverInfoOPassband.innerHTML = Opassbandtext.join('');
+//Measurement
+   var Measurementtext = data.points.map(function(d){
+     return(PMeasurement[pCounter]);
+   });
+   hoverInfoMeasurement.innerHTML = Measurementtext.join('');
+//Uncertainty
+   var Uncertaintytext = data.points.map(function(d){
+     return(Uncertainty[pCounter]);
+   });
+   hoverInfoUncertainty.innerHTML = Uncertaintytext.join('');
+//Units
+   var Unitstext = data.points.map(function(d){
+     return(Units[pCounter]);
+   });
+   hoverInfoUnits.innerHTML = Unitstext.join('');
+//Frequency
+   var Frequencytext = data.points.map(function(d){
+     return(Frequency[pCounter]);
+   });
+   hoverInfoFrequency.innerHTML = Frequencytext.join('');
+//Measurement2
+   var Measurement2text = data.points.map(function(d){
+     return(NEDMeasurement[pCounter]);
+   });
+   hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+//Uncertainty2
+   var Uncertainty2text = data.points.map(function(d){
+     return(NEDUncertainty[pCounter]);
+   });
+   hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+//Units2
+   var Units2text = data.points.map(function(d){
+     return(NEDUnits[pCounter]);
+   });
+   hoverInfoUnits2.innerHTML = Units2text.join('');
+//Mode
+   var Modetext = data.points.map(function(d){
+     return(FMode[pCounter]);
+   });
+   hoverInfoMode.innerHTML = Modetext.join('');
+//Aperture
+   var Aperturetext = data.points.map(function(d){
+     return(Qualifiers[pCounter]);
+   });
+   hoverInfoAperture.innerHTML = Aperturetext.join('');
+//Reference Code
+   var Referencetext = data.points.map(function(d){
+     return(Refcode[pCounter]);
+   });
+   hoverInfoRCode.innerHTML = Referencetext.join('');
+
+
+
+});
+
+
+
+
+
 
 
 });
@@ -344,17 +519,6 @@ Plotly.newPlot('my-graph', data, layout, toolbar, button, button1, checkbox, che
 </script>
 <style>
 
-button {
-  margin-top: 20px;
-  line-height: 60px;
-  font-weight: bold;
-  padding: 0 40px;
-  background: salmon;
-  border: none;
-}
-button:hover {
-  background: lightsalmon;
-}
 
 </style>
 

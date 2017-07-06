@@ -15,7 +15,7 @@
 	src: url(../fonts/space_and_astronomy.ttf) format('truetype');
 }
 body{
-	font-family: space_and_astronomy,rajdhani,Segoe, Segoe UI, DejaVu Sans, Trebuchet MS, Verdana," sans-serif";
+	font-family: 'Raleway',space_and_astronomy,rajdhani,Segoe, Segoe UI, DejaVu Sans, Trebuchet MS, Verdana," sans-serif";
 }
 
 body{
@@ -28,11 +28,28 @@ body{
 	margin-bottom: 20px;
 }
 
-.container-fluid{
+.container-fluid, .container{
 	background-color: white;
 }
 
-/*Test*/
+.table-center{
+	text-align: center;
+}
+.table-info{
+
+}
+thead th{
+	text-align: center;
+}
+.title-font{
+	font-family: 'Dosis', sans-serif;
+	color: rgb(77, 99, 127);
+	font-weight: 600;
+}
+
+
+
+
 
 
 
