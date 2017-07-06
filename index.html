@@ -66,7 +66,7 @@
 
       <h4>Show Spectral Lines</h4>
       <label class="switch">
-        <input type="checkbox" checked>
+        <input type="checkbox" name="onoffswitch2">
         <div class="slider"></div>
       </label><br><br>
 
@@ -159,7 +159,8 @@
 //pulls in the CSV file
 Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
-  var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [];
+  var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [],
+  xline = [], yline = [], xTrue =[], yTrue = [];
 
   var OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
       NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
@@ -172,6 +173,10 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
           type.push(p['Frequency Mode']);
           number.push(p['No.']);
           errorBar.push(p['NED Uncertainty']);
+          xline.push(p['Frequency']);
+          yline.push(p['NED Photometry Measurement']);
+          xTrue.push(p['Frequency']);
+          yTrue.push(p['NED Photometry Measurement']);
 
           //Table Data
           OPassband.push(p['Observed Passband']);
@@ -205,11 +210,16 @@ for(i = 0; i < arrayLength; i++)
 
     delete x[i];
     delete y[i];
+    delete xTrue[i];
+    delete yTrue[i];
   }
   else{
     out = true;
+    delete xline[i];
+    delete yline[i];
   }
 }
+
 
 var errorBarNull = [];
 //filters out the strings and removes "+/- syntax"
@@ -226,7 +236,7 @@ var errorBarNull = [];
 var data = [
       {mode: 'markers',
       type: "scatter",
-      name: number,
+      name: "SED Points",
       text: number,
       // marker:{color: 'rgb(0,0,139)'},
       //
@@ -280,18 +290,6 @@ var toImage2 = {
   }
 };
 
-// var toggleHover2D = {
-//     name: 'toggleHover',
-//     title: 'Toggle show closest data on hover',
-//     attr: 'hovermode',
-//     val: null,
-//     toggle: true,
-//     icon: Plotly.Icons.tooltip_basic,
-//     gravity: 'ne',
-//     click: function(gd) {
-//         Plotly.toggleHover(gd);}
-// };
-
 
 //Edits made to the toolbar
 var toolbar = {
@@ -304,7 +302,7 @@ var toolbar = {
 
 
 
-
+//---------------------Error BARs Buttons----------------------//
 // 1. Create the button
 var button = document.getElementById("ErrorBarON").onclick = function() {
 
@@ -340,7 +338,7 @@ var button1 = document.getElementById("ErrorBarOFF").onclick = function() {
 
 };
 
-
+//---------------------Error Bar Switch----------------------//
 //Error Bars
 var checkbox = document.querySelector("input[name=onoffswitch]").onchange = function() {
 if(this.checked) {
@@ -373,7 +371,7 @@ if(this.checked) {
 }
 
 
-//Hover on and off
+//---------------------Hover on and off----------------------//
 var checkbox1 = document.querySelector("input[name=onoffswitch1]").onchange = function() {
 if(this.checked) {
   //When switch is on
@@ -391,6 +389,33 @@ if(this.checked) {
       };
 
     Plotly.update('my-graph', data_update, layout_update);
+  }
+}
+
+//---------------------Spectral lines on and off----------------------//
+var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+  var trace_lines =
+        {name: "Spectral Lines",
+          mode: 'markers',
+          type: "scatter",
+          text: number,
+          x: xline,
+          y: yline,
+          error_y: {
+            type: 'data',
+            array: errorBar,
+            visible: true,
+            thickness: 1,
+            // color: 'rgb(0,0,139)'
+          }}
+    ;
+    Plotly.addTraces('my-graph', trace_lines);
+  } else {
+    //when switch is off
+    //Removes the SED Trace from graph
+      Plotly.deleteTraces('my-graph', 1);
   }
 }
 
@@ -528,7 +553,8 @@ var yaxis_update = jsFunction1 = function(value)
 
 
 //Calls the plot into HTML
-Plotly.newPlot('my-graph', data, layout, toolbar, button, button1, checkbox, checkbox1, xaxis_update, yaxis_update);
+Plotly.newPlot('my-graph', data, layout, toolbar, button,
+button1, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
 
 
 
@@ -560,64 +586,40 @@ myPlot.on('plotly_click', function(data){
 
 
   //Display the Point number
-   var numbertext = data.points.map(function(d){
-     return (pts);
-   });
+   var numbertext = data.points.map(function(d){return (pts);});
    hoverInfoNum.innerHTML = numbertext.join('');
 //Observed Passband
-   var Opassbandtext = data.points.map(function(d){
-     return(OPassband[pCounter]);
-   });
+   var Opassbandtext = data.points.map(function(d){return(OPassband[pCounter]);});
    hoverInfoOPassband.innerHTML = Opassbandtext.join('');
 //Measurement
-   var Measurementtext = data.points.map(function(d){
-     return(PMeasurement[pCounter]);
-   });
+   var Measurementtext = data.points.map(function(d){return(PMeasurement[pCounter]);});
    hoverInfoMeasurement.innerHTML = Measurementtext.join('');
 //Uncertainty
-   var Uncertaintytext = data.points.map(function(d){
-     return(Uncertainty[pCounter]);
-   });
+   var Uncertaintytext = data.points.map(function(d){return(Uncertainty[pCounter]);});
    hoverInfoUncertainty.innerHTML = Uncertaintytext.join('');
 //Units
-   var Unitstext = data.points.map(function(d){
-     return(Units[pCounter]);
-   });
+   var Unitstext = data.points.map(function(d){return(Units[pCounter]);});
    hoverInfoUnits.innerHTML = Unitstext.join('');
 //Frequency
-   var Frequencytext = data.points.map(function(d){
-     return(Frequency[pCounter]);
-   });
+   var Frequencytext = data.points.map(function(d){return(Frequency[pCounter]);});
    hoverInfoFrequency.innerHTML = Frequencytext.join('');
 //Measurement2
-   var Measurement2text = data.points.map(function(d){
-     return(NEDMeasurement[pCounter]);
-   });
+   var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
    hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
 //Uncertainty2
-   var Uncertainty2text = data.points.map(function(d){
-     return(NEDUncertainty[pCounter]);
-   });
+   var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
    hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
 //Units2
-   var Units2text = data.points.map(function(d){
-     return(NEDUnits[pCounter]);
-   });
+   var Units2text = data.points.map(function(d){return(NEDUnits[pCounter]);});
    hoverInfoUnits2.innerHTML = Units2text.join('');
 //Mode
-   var Modetext = data.points.map(function(d){
-     return(FMode[pCounter]);
-   });
+   var Modetext = data.points.map(function(d){return(FMode[pCounter]);});
    hoverInfoMode.innerHTML = Modetext.join('');
 //Aperture
-   var Aperturetext = data.points.map(function(d){
-     return(Qualifiers[pCounter]);
-   });
+   var Aperturetext = data.points.map(function(d){return(Qualifiers[pCounter]);});
    hoverInfoAperture.innerHTML = Aperturetext.join('');
 //Reference Code
-   var Referencetext = data.points.map(function(d){
-     return(Refcode[pCounter]);
-   });
+   var Referencetext = data.points.map(function(d){return(Refcode[pCounter]);});
    hoverInfoRCode.innerHTML = Referencetext.join('');
 });
 
