@@ -10,27 +10,100 @@
     <title></title>
 
 
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+
+
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.popup.js"></script>
     <script type="text/javascript" src="/js/plotly.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
+
+
+ <link rel="stylesheet" type="text/css" href="/css/style.css">
+
   </head>
   <body>
 
 
-<div class="container">
-  <div class="row"><h3 align="center">Spectral Energy Distribution (SED) for ARP 220:</h3>
-  <div id="my-graph"></div></div>
+<div class="container-fluid">
+  <h3 align="center">Spectral Energy Distribution (SED) for ARP 220:</h3>
+  <div class="row">
 
-<button id="ErrorBarOFF">Error Bar OFF</button>
-<button id="ErrorBarON">Error Bar ON</button>
+    <div class="col-md-8">
+      <div id="my-graph"></div>
+    </div>
+    <div class="col-md-4">
+      <h3>Two types of Error Bar Options:</h3>
+      <button id="ErrorBarOFF">Error Bar OFF</button>
+      <button id="ErrorBarON">Error Bar ON</button>
+
+
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+          <label class="onoffswitch-label" for="myonoffswitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+
+      <h4>Hover on and off</h4>
+      <label class="switch">
+        <input type="checkbox" name="onoffswitch1">
+        <div class="slider"></div>
+      </label>
+
+
+      <h4>Show Spectral Lines</h4>
+      <label class="switch">
+        <input type="checkbox" checked>
+        <div class="slider"></div>
+      </label><br><br>
+
+      <label class="switch">
+        <input type="checkbox">
+        <div class="slider round"></div>
+      </label><br><br>
+
+      <label class="switch">
+        <input type="checkbox" checked>
+        <div class="slider round"></div>
+      </label>
+
+      <form>
+        <span>X-Axis: </span><select id="mySelectX" onChange="check(this);">
+        <option value="1">log(Frequency [Hz])</option>
+        <option value="2">log(Wavelength [microns])</option>
+        </select>
+        <br />
+
+        <span>Y-Axis: </span><select id="mySelectY" onChange="check(this);">
+        <option value="1">log(F_{nu} [Jy])</option>
+        <option value="2">log(F_{nu} [W m^{-2} Hz(-1}])</option>
+        <option value="3">log(nuF_{nu} [Jy-Hz])</option>
+        <option value="4">log(nuF_{nu} [W m^{-2}])</option>
+        </select>
+
+
+      </form>
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+
 </div>
 
 
@@ -126,7 +199,7 @@ var layout = {
     tickwidth: 2,
     },
   margin: {t: 20},
-  hovermode: 'closest'
+  hovermode: false
 };
 
 var toImage2 = {
@@ -136,6 +209,19 @@ var toImage2 = {
     Plotly.downloadImage(gd, {format: 'svg'})
   }
 };
+
+// var toggleHover2D = {
+//     name: 'toggleHover',
+//     title: 'Toggle show closest data on hover',
+//     attr: 'hovermode',
+//     val: null,
+//     toggle: true,
+//     icon: Plotly.Icons.tooltip_basic,
+//     gravity: 'ne',
+//     click: function(gd) {
+//         Plotly.toggleHover(gd);}
+// };
+
 
 //Edits made to the toolbar
 var toolbar = {
@@ -149,36 +235,26 @@ var toolbar = {
 
 
 
-
 // 1. Create the button
-var button = ("#ErrorBarON").onclick = function() {
+var button = document.getElementById("ErrorBarON").onclick = function() {
 
-    var data_update = {
-      error_y: {
-        type: 'data',
-        array: errorBar,
-        visible: true,
-        thickness: 1,
-        // color: 'rgb(0,0,139)'
-      }
-  };
+  var data_update = {
+    error_y: {
+      type: 'data',
+      array: errorBar,
+      visible: true,
+      thickness: 1,
+      // color: 'rgb(0,0,139)'
+    }
+};
     Plotly.update('my-graph', data_update);
 
 
 };
 
 
-
 // 1. Create the button
-var button1 = document.createElement("button");
-button1.innerHTML = "ErrorBar Off";
-
-// 2. Append somewhere
-var body = document.getElementsByTagName("body")[0];
-body.appendChild(button1);
-
-// 3. Add event handler
-button1.onclick = function() {
+var button1 = document.getElementById("ErrorBarOFF").onclick = function() {
 
     var data_update = {
       error_y: {
@@ -195,10 +271,69 @@ button1.onclick = function() {
 };
 
 
+//Error Bars
+var checkbox = document.querySelector("input[name=onoffswitch]").onchange = function() {
+if(this.checked) {
+  //When Switch is on
+  var data_update = {
+    error_y: {
+      type: 'data',
+      array: errorBar,
+      visible: true,
+      thickness: 1,
+      // color: 'rgb(0,0,139)'
+    }};
+    var layout_update = {};
+
+    Plotly.update('my-graph', data_update, layout_update);
+  } else {
+    //when Switch is off
+    var data_update = {
+      error_y: {
+        type: 'data',
+        array: errorBarNull,
+        visible: true,
+        thickness: 0.01,
+        // color: 'rgb(0,0,139)'
+      }};
+      var layout_update = {};
+
+    Plotly.update('my-graph', data_update, layout_update);
+  }
+}
+
+
+//Hover on and off
+var checkbox1 = document.querySelector("input[name=onoffswitch1]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+  var data_update = {};
+    var layout_update = {
+      hovermode: 'closest'
+    };
+
+    Plotly.update('my-graph', data_update, layout_update);
+  } else {
+    //when switch is off
+    var data_update = {};
+      var layout_update = {
+        hovermode: false
+      };
+
+    Plotly.update('my-graph', data_update, layout_update);
+  }
+}
+
+
+var xaxis_update = function check(elem) {
+    document.getElementById('mySelect1').disabled = !elem.selectedIndex;
+}
+
+
 
 
 //Calls the plot into HTML
-Plotly.newPlot('my-graph', data, layout, toolbar, button, button1);
+Plotly.newPlot('my-graph', data, layout, toolbar, button, button1, checkbox, checkbox1, xaxis_update);
 
 
 });
