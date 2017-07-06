@@ -81,17 +81,19 @@
       </label>
 
       <form>
-        <span>X-Axis: </span><select id="mySelectX" onChange="check(this);">
-        <option value="1">log(Frequency [Hz])</option>
-        <option value="2">log(Wavelength [microns])</option>
+        <span>X-Axis: </span>
+        <select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
+          <option value="1">log(Frequency [Hz])</option>
+          <option value="2">log(Wavelength [microns])</option>
         </select>
         <br />
 
-        <span>Y-Axis: </span><select id="mySelectY" onChange="check(this);">
-        <option value="1">log(F_{nu} [Jy])</option>
-        <option value="2">log(F_{nu} [W m^{-2} Hz(-1}])</option>
-        <option value="3">log(nuF_{nu} [Jy-Hz])</option>
-        <option value="4">log(nuF_{nu} [W m^{-2}])</option>
+        <span>Y-Axis: </span>
+        <select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
+          <option value="1">log(F_{nu} [Jy])</option>
+          <option value="2">log(F_{nu} [W m^{-2} Hz(-1}])</option>
+          <option value="3">log(nuF_{nu} [Jy-Hz])</option>
+          <option value="4">log(nuF_{nu} [W m^{-2}])</option>
         </select>
 
 
@@ -392,16 +394,133 @@ if(this.checked) {
   }
 }
 
+//---------------------Change the X-Axis Dropdown----------------------//
+var xaxis_update = jsFunction = function(value)
+{
+  if(value == 1){
+    var data_update = {};
+      var layout_update = {
+        xaxis: {
+          title: 'log(Frequency [Hz])',
+          type:'log',
+          autorange: true,
+          linecolor: 'black',
+          linewidth: 2,
+          mirror: true,
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          exponentformat: "power"
+          },
+        margin: {t: 20},
+      };
+      Plotly.update('my-graph', data_update, layout_update);
+  }
+  else{
+    var data_update = {};
+      var layout_update = {
+        xaxis: {
+          title: 'log(Wavelength [microns])',
+          type:'log',
+          autorange: true,
+          linecolor: 'black',
+          linewidth: 2,
+          mirror: true,
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          exponentformat: "power"
+          },
+        margin: {t: 20},
+      };
+    Plotly.update('my-graph', data_update, layout_update);
+  }
 
-var xaxis_update = function check(elem) {
-    document.getElementById('mySelect1').disabled = !elem.selectedIndex;
 }
+//---------------------END of X-Axis----------------------//
 
+//---------------------Change the Y-Axis Dropdown----------------------//
+var yaxis_update = jsFunction1 = function(value)
+{
+  if(value == 1){
+    var data_update = {};
+      var layout_update = {
+        yaxis: {
+          title: 'log(F_{nu} [Jy])',
+          type:'log',
+          autorange: true,
+          linecolor: 'black',
+          linewidth: 2,
+          mirror: true,
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          exponentformat: "power"
+          },
+        margin: {t: 20},
+      };
+      Plotly.update('my-graph', data_update, layout_update);
+  }
+  else if(value == 2){
+    var data_update = {};
+      var layout_update = {
+        yaxis: {
+          title: 'log(F_{nu} [W m^{-2} Hz(-1}])',
+          type:'log',
+          autorange: true,
+          linecolor: 'black',
+          linewidth: 2,
+          mirror: true,
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          exponentformat: "power"
+          },
+        margin: {t: 20},
+      };
+      Plotly.update('my-graph', data_update, layout_update);
+  }
+  else if(value == 3){
+    var data_update = {};
+      var layout_update = {
+        yaxis: {
+          title: 'log(nuF_{nu} [Jy-Hz])',
+          type:'log',
+          autorange: true,
+          linecolor: 'black',
+          linewidth: 2,
+          mirror: true,
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          exponentformat: "power"
+          },
+        margin: {t: 20},
+      };
+      Plotly.update('my-graph', data_update, layout_update);
+  }
+  else{
+    var data_update = {};
+      var layout_update = {
+        yaxis: {
+          title: 'log(nuF_{nu} [W m^{-2}])',
+          type:'log',
+          autorange: true,
+          linecolor: 'black',
+          linewidth: 2,
+          mirror: true,
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          exponentformat: "power"
+          },
+        margin: {t: 20},
+      };
+      Plotly.update('my-graph', data_update, layout_update);
+  }
 
-
-
-
-
+}
+//---------------------END of Y-Axis----------------------//
 
 
 
@@ -409,7 +528,7 @@ var xaxis_update = function check(elem) {
 
 
 //Calls the plot into HTML
-Plotly.newPlot('my-graph', data, layout, toolbar, button, button1, checkbox, checkbox1, xaxis_update);
+Plotly.newPlot('my-graph', data, layout, toolbar, button, button1, checkbox, checkbox1, xaxis_update, yaxis_update);
 
 
 
@@ -500,12 +619,9 @@ myPlot.on('plotly_click', function(data){
      return(Refcode[pCounter]);
    });
    hoverInfoRCode.innerHTML = Referencetext.join('');
-
-
-
 });
 
-
+//---------------------END OF TABLE----------------------//
 
 
 
