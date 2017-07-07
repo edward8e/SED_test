@@ -28,6 +28,7 @@
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
   <script type="text/javascript" src="/js/jquery.popup.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/style0.css">
  <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -484,8 +485,7 @@ if(this.checked) {
             array: errorBarTrue,
             visible: true,
             thickness: 1,
-          }}
-    ;
+          }};
     Plotly.addTraces('my-graph', trace_lines);
   } else {
     //when switch is off
