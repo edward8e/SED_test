@@ -89,7 +89,7 @@
         <br />
 
         <span>Y-Axis: </span>
-        <select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
+        <select id ="ddl2" name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
           <option value="1">log(F_{nu} [Jy])</option>
           <option value="2">log(F_{nu} [W m^{-2} Hz(-1}])</option>
           <option value="3">log(nuF_{nu} [Jy-Hz])</option>
@@ -351,28 +351,20 @@ if(this.checked) {
   //When Switch is on
   var data_update = {
     error_y: {
-      type: 'data',
       array: errorBar,
-      visible: true,
       thickness: 1,
-      // color: 'rgb(0,0,139)'
     }};
-    var layout_update = {};
 
-    Plotly.update('my-graph', data_update, layout_update);
+    Plotly.restyle('my-graph', data_update);
   } else {
     //when Switch is off
     var data_update = {
       error_y: {
-        type: 'data',
         array: errorBarNull,
-        visible: true,
         thickness: 0.001,
-        // color: 'rgb(0,0,139)'
       }};
-      var layout_update = {};
 
-    Plotly.update('my-graph', data_update, layout_update);
+    Plotly.restyle('my-graph', data_update);
   }
 }
 
@@ -381,25 +373,35 @@ if(this.checked) {
 var checkbox1 = document.querySelector("input[name=onoffswitch1]").onchange = function() {
 if(this.checked) {
   //When switch is on
-  var data_update = {};
     var layout_update = {
       hovermode: 'closest'
     };
 
-    Plotly.update('my-graph', data_update, layout_update);
+    Plotly.relayout('my-graph', layout_update);
   } else {
     //when switch is off
-    var data_update = {};
       var layout_update = {
         hovermode: false
       };
 
-    Plotly.update('my-graph', data_update, layout_update);
+    Plotly.relayout('my-graph', layout_update);
   }
 }
+var xchange = xline;
+
 
 //---------------------Spectral lines on and off----------------------//
 var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
+  //Checks which xaxis is on
+  var answer = document.getElementById("ddl");
+    if(answer[answer.selectedIndex].value == 1){
+      xchange = xline;
+    }
+    else{
+      xchange = xlineWavelength;
+    }
+
+
 if(this.checked) {
   //When switch is on
   var trace_lines =
@@ -407,7 +409,7 @@ if(this.checked) {
           mode: 'markers',
           type: "scatter",
           text: number,
-          x: xline,
+          x: xchange,
           y: yline,
           error_y: {
             type: 'data',
@@ -428,47 +430,26 @@ if(this.checked) {
 var xaxis_update = jsFunction = function(value)
 {
   if(value == 1){
-
     var data_update = {
-      x:[x]
+      x:[x,xline]
     };
       var layout_update = {
-        xaxis: {
-          title: 'log(Frequency [Hz])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
+        'xaxis.title': 'log(Frequency [Hz])'
       };
-      Plotly.update('my-graph', data_update, layout_update);
+
+      Plotly.restyle('my-graph', data_update);
+      Plotly.relayout('my-graph', layout_update);
   }
   else{
     var data_update = {
-      x: [xWavelength]
+      x:[xWavelength,xlineWavelength]
     };
       var layout_update = {
-        xaxis: {
-          title: 'log(Wavelength [microns])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
+        'xaxis.title': 'log(Wavelength [microns])'
       };
-    Plotly.update('my-graph', data_update, layout_update);
+
+      Plotly.restyle('my-graph', data_update);
+      Plotly.relayout('my-graph', layout_update);
   }
 
 }
@@ -478,80 +459,30 @@ var xaxis_update = jsFunction = function(value)
 var yaxis_update = jsFunction1 = function(value)
 {
   if(value == 1){
-    var data_update = {};
-      var layout_update = {
-        yaxis: {
-          title: 'log(F_{nu} [Jy])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
+    var layout_update = {
+      'yaxis.title': 'log(F_{nu} [Jy])'
+    };
+    Plotly.relayout('my-graph', layout_update);
+
   }
   else if(value == 2){
-    var data_update = {};
-      var layout_update = {
-        yaxis: {
-          title: 'log(F_{nu} [W m^{-2} Hz(-1}])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
+    var layout_update = {
+      'yaxis.title': 'log(F_{nu} [W m^{-2} Hz(-1}])'
+    };
+    Plotly.relayout('my-graph', layout_update);
+
   }
   else if(value == 3){
-    var data_update = {};
-      var layout_update = {
-        yaxis: {
-          title: 'log(nuF_{nu} [Jy-Hz])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
+    var layout_update = {
+      'yaxis.title': 'log(nuF_{nu} [Jy-Hz])'
+    };
+    Plotly.relayout('my-graph', layout_update);
   }
   else{
-    var data_update = {};
-      var layout_update = {
-        yaxis: {
-          title: 'log(nuF_{nu} [W m^{-2}])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
+    var layout_update = {
+      'yaxis.title': 'log(nuF_{nu} [W m^{-2}])'
+    };
+    Plotly.relayout('my-graph', layout_update);
   }
 
 }
