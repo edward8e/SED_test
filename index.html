@@ -160,7 +160,7 @@
 Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
   var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [],
-  xline = [], yline = [], xWavelength = [];
+  xline = [], yline = [], xWavelength = [], xlineWavelength = [];
 
   var OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
       NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
@@ -222,10 +222,10 @@ for(i = 0; i < arrayLength; i++)
 for(i = 0; i < arrayLength; i++)
 {
   xWavelength[i] = (299792458/x[i]) * 1000000;
+  xlineWavelength[i] = (299792458/xline[i]) * 1000000;
 }
+
 console.log(xWavelength);
-
-
 
 var errorBarNull = [];
 //filters out the strings and removes "+/- syntax"
@@ -414,7 +414,6 @@ if(this.checked) {
             array: errorBar,
             visible: true,
             thickness: 1,
-            // color: 'rgb(0,0,139)'
           }}
     ;
     Plotly.addTraces('my-graph', trace_lines);
@@ -429,8 +428,9 @@ if(this.checked) {
 var xaxis_update = jsFunction = function(value)
 {
   if(value == 1){
+
     var data_update = {
-      x: x
+      x:[x]
     };
       var layout_update = {
         xaxis: {
@@ -451,7 +451,7 @@ var xaxis_update = jsFunction = function(value)
   }
   else{
     var data_update = {
-      x: xWavelength
+      x: [xWavelength]
     };
       var layout_update = {
         xaxis: {
