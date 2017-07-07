@@ -83,17 +83,17 @@
       <form>
         <span>X-Axis: </span>
         <select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
-          <option value="1">log(Frequency [Hz])</option>
-          <option value="2">log(Wavelength [microns])</option>
+          <option value="1">log(<em>v</em> [Hz])</option>
+          <option value="2">log(λ [μm])</option>
         </select>
         <br />
 
         <span>Y-Axis: </span>
         <select id ="ddl2" name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
-          <option value="1">log(F_{nu} [Jy])</option>
-          <option value="2">log(F_{nu} [W m^{-2} Hz(-1}])</option>
-          <option value="3">log(nuF_{nu} [Jy-Hz])</option>
-          <option value="4">log(nuF_{nu} [W m^{-2}])</option>
+          <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
+          <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
+          <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
+          <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
         </select>
 
 
@@ -160,7 +160,9 @@
 Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
 
   var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [],
-  xline = [], yline = [], xWavelength = [], xlineWavelength = [];
+  xline = [], yline = [], xWavelength = [], xlineWavelength = [], ySI = [], ylineSI = [],
+  yJyHz = [], ylineJyHz = [], yWM = [], ylineWM = [],
+   errorBarSI = [], errorBarJyHz = [], errorBarWM = [], xComplete = [];
 
   var OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
       NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
@@ -175,6 +177,7 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
           errorBar.push(p['NED Uncertainty']);
           xline.push(p['Frequency']);
           yline.push(p['NED Photometry Measurement']);
+          xComplete.push(p['Frequency']);
 
           //Table Data
           OPassband.push(p['Observed Passband']);
@@ -194,6 +197,7 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
           Qualifiers.push(p['Qualifiers']);
           Comments.push(p['Comments']);
       });
+
 
 //---------------------Splits x and y broad-band and line points----------------------//
 var arrayLength = type.length;
@@ -217,15 +221,8 @@ for(i = 0; i < arrayLength; i++)
   }
 }
 
-//---------------------computes x Wavelength values----------------------//
 
-for(i = 0; i < arrayLength; i++)
-{
-  xWavelength[i] = (299792458/x[i]) * 1000000;
-  xlineWavelength[i] = (299792458/xline[i]) * 1000000;
-}
 
-console.log(xWavelength);
 
 var errorBarNull = [];
 //filters out the strings and removes "+/- syntax"
@@ -235,8 +232,26 @@ var errorBarNull = [];
     errorBarNull[i] = 0;
  }
 
+//Because x[] has blanks in array, xComplete was used because it has the full array
+ //---------------------computes x Wavelength values----------------------//
 
+ for(i = 0; i < arrayLength; i++)
+ {
+   xWavelength[i] = (299792458/x[i]) * 1000000;
+   xlineWavelength[i] = (299792458/xline[i]) * 1000000;
 
+   ySI[i] = y[i] * Math.pow(10, -26);
+   ylineSI[i] = yline[i] * Math.pow(10, -26);
+   errorBarSI[i] = errorBar[i] * Math.pow(10, -26);
+
+   yJyHz[i] = y[i] * x[i];
+   ylineJyHz[i] = yline[i] * xline[i];
+   errorBarJyHz[i] = errorBar[i] * xComplete[i];
+
+   yWM[i] = ySI[i] * x[i];
+   ylineWM[i] = ylineSI[i] * xline[i];
+   errorBarWM[i] = errorBarSI[i] * xComplete[i];
+ }
 
 
 var data = [
@@ -261,7 +276,7 @@ var data = [
 //Graph axis related things
 var layout = {
   xaxis: {
-    title: 'log v (Hz)',
+    title: 'log(<em>v</em> [Hz])',
     type:'log',
     autorange: true,
     linecolor: 'black',
@@ -273,7 +288,7 @@ var layout = {
     exponentformat: "power"
     },
   yaxis: {
-    title: 'log f<sub>v</sub> (Jy)',
+    title: 'log(λ [μm])',
     type:'log',
     autorange: true,
     linecolor: 'black',
@@ -308,14 +323,33 @@ var toolbar = {
 
 
 
+var xchange = xline;
+var ychange = yline;
+var errorBarTrue = errorBar;
+
+
 //---------------------Error BARs Buttons----------------------//
 // 1. Create the button
 var button = document.getElementById("ErrorBarON").onclick = function() {
+  //checks which yaxis is on
+  var answer2 = document.getElementById("ddl2");
+  if(answer2[answer2.selectedIndex].value == 1){
+    errorBarTrue = errorBar;
+  }
+  else if(answer2[answer2.selectedIndex].value == 2){
+    errorBarTrue = errorBarSI;
+  }
+  else if(answer2[answer2.selectedIndex].value == 3){
+    errorBarTrue = errorBarJyHz;
+  }
+  else {
+    errorBarTrue = errorBarWM;
+  }
 
   var data_update = {
     error_y: {
       type: 'data',
-      array: errorBar,
+      array: errorBarTrue,
       visible: true,
       thickness: 1,
       // color: 'rgb(0,0,139)'
@@ -348,10 +382,27 @@ var button1 = document.getElementById("ErrorBarOFF").onclick = function() {
 //Error Bars
 var checkbox = document.querySelector("input[name=onoffswitch]").onchange = function() {
 if(this.checked) {
+  //checks which yaxis is on
+  var answer2 = document.getElementById("ddl2");
+  if(answer2[answer2.selectedIndex].value == 1){
+    errorBarTrue = errorBar;
+  }
+  else if(answer2[answer2.selectedIndex].value == 2){
+    errorBarTrue = errorBarSI;
+  }
+  else if(answer2[answer2.selectedIndex].value == 3){
+    errorBarTrue = errorBarJyHz;
+  }
+  else {
+    errorBarTrue = errorBarWM;
+  }
+
+
+
   //When Switch is on
   var data_update = {
     error_y: {
-      array: errorBar,
+      array: errorBarTrue,
       thickness: 1,
     }};
 
@@ -387,7 +438,7 @@ if(this.checked) {
     Plotly.relayout('my-graph', layout_update);
   }
 }
-var xchange = xline;
+
 
 
 //---------------------Spectral lines on and off----------------------//
@@ -400,7 +451,24 @@ var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = fu
     else{
       xchange = xlineWavelength;
     }
-
+    //checks which yaxis is on
+    var answer2 = document.getElementById("ddl2");
+    if(answer2[answer2.selectedIndex].value == 1){
+      ychange = yline;
+      errorBarTrue = errorBar;
+    }
+    else if(answer2[answer2.selectedIndex].value == 2){
+      ychange = ylineSI;
+      errorBarTrue = errorBarSI;
+    }
+    else if(answer2[answer2.selectedIndex].value == 3){
+      ychange = ylineJyHz;
+      errorBarTrue = errorBarJyHz;
+    }
+    else {
+      ychange = ylineWM;
+      errorBarTrue = errorBarWM;
+    }
 
 if(this.checked) {
   //When switch is on
@@ -410,10 +478,10 @@ if(this.checked) {
           type: "scatter",
           text: number,
           x: xchange,
-          y: yline,
+          y: ychange,
           error_y: {
             type: 'data',
-            array: errorBar,
+            array: errorBarTrue,
             visible: true,
             thickness: 1,
           }}
@@ -434,7 +502,7 @@ var xaxis_update = jsFunction = function(value)
       x:[x,xline]
     };
       var layout_update = {
-        'xaxis.title': 'log(Frequency [Hz])'
+        'xaxis.title': 'log(<em>v</em> [Hz])'
       };
 
       Plotly.restyle('my-graph', data_update);
@@ -445,7 +513,7 @@ var xaxis_update = jsFunction = function(value)
       x:[xWavelength,xlineWavelength]
     };
       var layout_update = {
-        'xaxis.title': 'log(Wavelength [microns])'
+        'xaxis.title': 'log(λ [μm])'
       };
 
       Plotly.restyle('my-graph', data_update);
@@ -459,29 +527,57 @@ var xaxis_update = jsFunction = function(value)
 var yaxis_update = jsFunction1 = function(value)
 {
   if(value == 1){
+    var data_update = {
+      y:[y,yline],
+      error_y: {
+        array: errorBar,
+        thickness: 1,
+      }};
     var layout_update = {
-      'yaxis.title': 'log(F_{nu} [Jy])'
+      'yaxis.title': 'log(F<sub><em>v</em></sub> [Jy])'
     };
+    Plotly.restyle('my-graph', data_update);
     Plotly.relayout('my-graph', layout_update);
 
   }
   else if(value == 2){
+    var data_update = {
+      y:[ySI,ylineSI],
+      error_y: {
+        array: errorBarSI,
+        thickness: 1,
+      }};
     var layout_update = {
-      'yaxis.title': 'log(F_{nu} [W m^{-2} Hz(-1}])'
+      'yaxis.title': 'log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])'
     };
+    Plotly.restyle('my-graph', data_update);
     Plotly.relayout('my-graph', layout_update);
 
   }
   else if(value == 3){
+    var data_update = {
+      y:[yJyHz,ylineJyHz],
+      error_y: {
+        array: errorBarJyHz,
+        thickness: 1,
+      }};
     var layout_update = {
-      'yaxis.title': 'log(nuF_{nu} [Jy-Hz])'
+      'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])'
     };
+    Plotly.restyle('my-graph', data_update);
     Plotly.relayout('my-graph', layout_update);
   }
   else{
+    var data_update = {
+      y:[yWM,ylineWM],
+      error_y: {
+        array: errorBarWM,
+        thickness: 1,
+      }};
     var layout_update = {
-      'yaxis.title': 'log(nuF_{nu} [W m^{-2}])'
+      'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])'
     };
+    Plotly.restyle('my-graph', data_update);
     Plotly.relayout('my-graph', layout_update);
   }
 
