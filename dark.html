@@ -1,73 +1,64 @@
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title></title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap - Prebuilt Layout</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/popup.css">
 
 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/popup.css">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="/js/plotly.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/jquery.popup.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+<script type="text/javascript" src="js/svgToPdf.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
 
 
+<!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+<link rel="stylesheet" type="text/css" href="css/dark.css">
+</head>
+<body>
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- <script type="text/javascript" src="/js/jquery.popup.js"></script> -->
-    <script type="text/javascript" src="/js/plotly.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-  <script type="text/javascript" src="js/jquery.popup.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
-  <script type="text/javascript" src="js/svgToPdf.js"></script>
-
-
- <link rel="stylesheet" type="text/css" href="css/style.css">
- <!-- Latest compiled and minified JavaScript -->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
-
-
-  </head>
-  <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid"> 
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       <a class="navbar-brand" href="index.html">NED</a>
       </div>
+      
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="defaultNavbar1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="dark.html">Dark Theme<span class="sr-only">(current)</span></a></li>
+        <li><a href="dark.html">Dark Theme<span class="sr-only">(current)</span></a></li>
       </ul> 
     </div>
   </div>
 </nav>
 
-<div class="container">
-  <h2 align="center" class="title-font">Spectral Energy Distribution (SED) for ARP 220:</h2>
-  <div class="row">
 
-    <div class="col-md-8">
-      <div id="my-graph"></div>
-    </div>
-    <div class="col-md-4">
-      <h3>Two types of Error Bar Options:</h3>
+
+
+
+<div class="container-fluid main-body">
+	<div class="row">
+		<div class="col-sm-2 side-settings text-center light-dark">
+		<div class="row side-title blue-title"><h3>SETTINGS</h3></div>
+		<div class="row light-dark text-left">
+		<div class="col-sm-12"><h3>Two types of Error Bar Options:</h3>
       <button type="button" class="btn btn-primary" id="ErrorBarOFF">Error Bar OFF</button>
       <button type="button" class="btn btn-primary" id="ErrorBarON">Error Bar ON</button>
-
+		<br>
+      <br>
 
       <div class="onoffswitch">
           <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
@@ -102,14 +93,14 @@
 
       <form>
         <span>X-Axis: </span>
-        <select id ="ddl" class="btn-primary btn-lg" name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
+        <select id ="ddl" class="btn-primary" name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
           <option value="1">log(<em>v</em> [Hz])</option>
           <option value="2">log(λ [μm])</option>
         </select>
         <br />
 
         <span>Y-Axis: </span>
-        <select id ="ddl2" class="btn-primary btn-lg" name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
+        <select id ="ddl2" class="btn-primary" name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
           <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
           <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
           <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
@@ -117,64 +108,101 @@
         </select>
 
 
-      </form>
+      </form></div>
+	</div>	
+		</div>
+		<div class="col-sm-10">
+			<div class="row">
+				<div class="col-sm-8 light-dark">
+					<div id="my-graph"></div>
+				</div>
+				<div class="col-sm-4 light-dark">
+					<div class="row table-responsive ">
+						<div class="col-sm-12"><table class="table-info table table-bordered">
+							<thead class="title-font table-center" rowspan="10">
+								<tr>
+									<th></th>
+									<th>No.</th>
+									<td id="hoverinfonum"></td>
+								</tr>
+								<tr>
+									<th rowspan="5">Published Units</th>
+								</tr>
+								<tr><th>Observed Passband</th><td id="hoverinfoopassband"></td></tr>
+								<tr><th>Measurement</th><td id ="hoverinfomeasurement"></td></tr>
+								<tr><th>Uncertainty</th><td id="hoverinfouncertainty"></td></tr>
+								<tr><th>Units</th><td id="hoverinfounits"></td></tr>
 
+								<tr>
+									<th rowspan="8">Homogenized Units [Frequency, Flux Density]</th>
+								</tr>
+								<tr><th>Freq (Hz)</th><td id="hoverinfofrequency"></td></tr>
+								<tr><th>Measurement</th><td id="hoverinfomeasurement2"></td></tr>
+								<tr><th>Uncertainty</th><td id="hoverinfouncertainty2"></td></tr>
+								<tr><th>Units</th><td id="hoverinfounits2"></td></tr>
+								<tr><th>Mode</th><td id="hoverinfomode"></td></tr>
+								<tr><th>Aperture/Qualifiers</th><td id="hoverinfoaperture"></td></tr>
+								<tr><th>Reference Code</th><td id="hoverinforcode"></td></tr>
+							</thead>
+						</table></div>
+					</div>
+				</div>
+			</div>
+			<div class="row table-responsive " >
+				<div class="col-sm-12 light-dark bottom-table" >
+					<table class="table-info table " >
+						<thead class="title-font">
+							<tr class="table-center bg-primary ">
+								<th></th>
+								<th colspan="4" align="center">Published Units</th>
+								<th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
+							</tr>
 
-
-
-
-    </div>
-  </div>
-
-<div class="row table-responsive">
-  <table class="table-info table table-bordered">
-    <thead class="title-font">
-      <tr class="table-center">
-        <th></th>
-        <th colspan="4" align="center">Published Units</th>
-        <th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
-      </tr>
-
-      <tr class="table-center">
-        <th>No.</th>
-        <th>Observed Passband</th>
-        <th>Measurement</th>
-        <th>Uncertainty</th>
-        <th>Units</th>
-        <th>Freq (Hz)</th>
-        <th>Measurement</th>
-        <th>Uncertainty</th>
-        <th>Units</th>
-        <th>Mode</th>
-        <th>Aperture/Qualifiers</th>
-        <th>Reference Code</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th id="hoverinfonum"></th>
-        <th id="hoverinfoopassband"></th>
-        <th id ="hoverinfomeasurement"></th>
-        <th id="hoverinfouncertainty"></th>
-        <th id="hoverinfounits"></th>
-        <th id="hoverinfofrequency"></th>
-        <th id="hoverinfomeasurement2"></th>
-        <th id="hoverinfouncertainty2"></th>
-        <th id="hoverinfounits2"></th>
-        <th id="hoverinfomode"></th>
-        <th id="hoverinfoaperture"></th>
-        <th id="hoverinforcode"></th>
-      </tr>
-    </tbody>
-  </table>
+							<tr class="table-center bg-primary">
+								<th>No.</th>
+								<th>Observed Passband</th>
+								<th>Measurement</th>
+								<th>Uncertainty</th>
+								<th>Units</th>
+								<th>Freq (Hz)</th>
+								<th>Measurement</th>
+								<th>Uncertainty</th>
+								<th>Units</th>
+								<th>Mode</th>
+								<th>Aperture/Qualifiers</th>
+								<th>Reference Code</th>
+							</tr>
+						</thead>
+					</table>
+					<table id="test" class="table table-responsive" style="font-size: 10px" ></table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </div>
 
 
+<script>
+            d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
+                var parsedCSV = d3.csvParseRows(data);
+				
+                var container = d3.select("#test")
+//                    .append("table")
 
-</div>
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
 
-
-
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+	
+//	$("table").addClass('be-still');
+	
+	</script>
 <script>
 //pulls in the CSV file
 Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
@@ -685,5 +713,12 @@ myPlot.on('plotly_click', function(data){
 
 });
 </script>
-  </body>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery-1.11.3.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/bootstrap.js"></script>
+</body>
 </html>

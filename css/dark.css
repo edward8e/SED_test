@@ -1,51 +1,76 @@
-@charset "utf-8";
-/* CSS Document */
-
-@font-face{
-	font-family: "rajdhani";
-	src: url(../fonts/Rajdhani-Regular.ttf) format('truetype');
-}
-@font-face{
-	font-family: "rajdhani";
-	src: url(../fonts/Rajdhani-Bold.ttf) format('truetype');
-	font-weight: bold;
-}
-@font-face{
-	font-family: "space_and_astronomy";
-	src: url(../fonts/space_and_astronomy.ttf) format('truetype');
-}
 body{
+	background-color: rgb(48,48,48);
 	font-family: 'Raleway',space_and_astronomy,rajdhani,Segoe, Segoe UI, DejaVu Sans, Trebuchet MS, Verdana," sans-serif";
 }
-
-body{
-	background-color: #F5F5F5;
-	/*background-image: url(NEDBkg.jpg);*/
-
-}
-#my-graph{
-	height: 600px;
-	margin-bottom: 20px;
+.main-body{
+	color: white;
 }
 
-.container-fluid, .container{
-	background-color: white;
+
+
+nav{
+	background-color: rgb(61,64,72);
+	border-color: none;
+}
+.navbar-inverse{
+	border-radius: 0; 
+	border: 0px;
+	margin-bottom: 0px;
 }
 
-.table-center{
-	text-align: center;
+.light-dark{
+	background-color: rgb(61,64,72);
 }
-.table-info{
+.blue-title{
+	background-color: rgb(23,154,248);
+}
 
+.bottom-table{
+	height: 500px;
+	overflow: scroll;
 }
-thead th{
-	text-align: center;
-}
-.title-font{
-	font-family: 'Dosis', sans-serif;
-	color: rgb(77, 99, 127);
-	font-weight: 600;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
