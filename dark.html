@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bootstrap - Prebuilt Layout</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/popup.css">
 
@@ -50,11 +50,17 @@
 
 
 <div class="container-fluid main-body">
+
+
 	<div class="row">
-		<div class="col-sm-2 side-settings text-center light-dark">
-		<div class="row side-title blue-title"><h3>SETTINGS</h3></div>
-		<div class="row light-dark text-left">
-		<div class="col-sm-12"><h3>Two types of Error Bar Options:</h3>
+		<div class="col-sm-2 side-settings text-center">
+		
+		<div class="row  text-left">
+		<div class="col-sm-12">
+    
+     <div class="light-dark">
+     <div class="blue-title text-center setting-title"><h3>SETTINGS</h3></div>
+     <div class="setting-inner"><h4>Two types of Error Bar Options:</h4>
       <button type="button" class="btn btn-primary" id="ErrorBarOFF">Error Bar OFF</button>
       <button type="button" class="btn btn-primary" id="ErrorBarON">Error Bar ON</button>
 		<br>
@@ -109,76 +115,98 @@
 
 
       </form></div>
+      </div>
+      </div>
 	</div>	
 		</div>
+		
+		
+		
+		
 		<div class="col-sm-10">
 			<div class="row">
-				<div class="col-sm-8 light-dark">
+				<div class="col-sm-8">
+				<div class="blue-title SED-title">
+					<h2>Spectral Energy Distribution (SED) for ARP 220:</h2>
+				</div>
 					<div id="my-graph"></div>
 				</div>
-				<div class="col-sm-4 light-dark">
-					<div class="row table-responsive ">
-						<div class="col-sm-12"><table class="table-info table table-bordered">
-							<thead class="title-font table-center" rowspan="10">
-								<tr>
-									<th></th>
-									<th>No.</th>
-									<td id="hoverinfonum"></td>
-								</tr>
-								<tr>
-									<th rowspan="5">Published Units</th>
-								</tr>
-								<tr><th>Observed Passband</th><td id="hoverinfoopassband"></td></tr>
-								<tr><th>Measurement</th><td id ="hoverinfomeasurement"></td></tr>
-								<tr><th>Uncertainty</th><td id="hoverinfouncertainty"></td></tr>
-								<tr><th>Units</th><td id="hoverinfounits"></td></tr>
-
-								<tr>
-									<th rowspan="8">Homogenized Units [Frequency, Flux Density]</th>
-								</tr>
-								<tr><th>Freq (Hz)</th><td id="hoverinfofrequency"></td></tr>
-								<tr><th>Measurement</th><td id="hoverinfomeasurement2"></td></tr>
-								<tr><th>Uncertainty</th><td id="hoverinfouncertainty2"></td></tr>
-								<tr><th>Units</th><td id="hoverinfounits2"></td></tr>
-								<tr><th>Mode</th><td id="hoverinfomode"></td></tr>
-								<tr><th>Aperture/Qualifiers</th><td id="hoverinfoaperture"></td></tr>
-								<tr><th>Reference Code</th><td id="hoverinforcode"></td></tr>
-							</thead>
-						</table></div>
+				<div class="col-sm-4 ">
+					<div class="row ">
+						<div class="col-sm-12">
+						
+						<div class="light-dark data-box"><h4 class="info-highlight">Select point to populate information:</h4>
+						<h3>Data point No. <span id="hoverinfonum"></span></h3>
+						<hr>
+						<h4>Published Units:</h4>
+						<ul >
+							<li>Observed Passband: <span class="data-out" id="hoverinfoopassband"></span></li>
+							<li>Measurement: <span class="data-out" id ="hoverinfomeasurement"></span></li>
+							<li>Uncertainty: <span class="data-out" id="hoverinfouncertainty"></span></li>
+							<li>Units: <span class="data-out" id="hoverinfounits"></span></li>
+						</ul>
+						<h4>Homogenized Units [Frequency, Flux Density]</h4>
+						<ul>
+							<li>Freq (Hz): <span class="data-out" id="hoverinfofrequency"></span></li>
+							<li>Measurement: <span class="data-out" id="hoverinfomeasurement2"></span></li>
+							<li>Uncertainty: <span class="data-out" id="hoverinfouncertainty2"></span></li>
+							<li>Units: <span class="data-out" id="hoverinfounits2"></span></li>
+							<li>Mode: <span class="data-out" id="hoverinfomode"></span></li>
+							<li>Aperture/Qualifiers: <span class="data-out" id="hoverinfoaperture"></span></li>
+							<li>Reference Code: <span class="data-out" id="hoverinforcode"></span></li>
+							
+						</ul></div>
+						
+						
+						
+					
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row table-responsive " >
-				<div class="col-sm-12 light-dark bottom-table" >
-					<table class="table-info table " >
-						<thead class="title-font">
-							<tr class="table-center bg-primary ">
-								<th></th>
-								<th colspan="4" align="center">Published Units</th>
-								<th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
-							</tr>
-
-							<tr class="table-center bg-primary">
-								<th>No.</th>
-								<th>Observed Passband</th>
-								<th>Measurement</th>
-								<th>Uncertainty</th>
-								<th>Units</th>
-								<th>Freq (Hz)</th>
-								<th>Measurement</th>
-								<th>Uncertainty</th>
-								<th>Units</th>
-								<th>Mode</th>
-								<th>Aperture/Qualifiers</th>
-								<th>Reference Code</th>
-							</tr>
-						</thead>
-					</table>
-					<table id="test" class="table table-responsive" style="font-size: 10px" ></table>
-				</div>
-			</div>
+			<br>
+			
+			
+			
+				
 		</div>
 	</div>
+	
+	
+		<div class="row table-responsive " >
+					<div class="col-sm-12 bottom-table" >
+						<div class="light-dark ">
+							<table class="table-info table referece-table ">
+								<thead class="title-font">
+									<tr class="table-center bg-primary ">
+										<th></th>
+										<th colspan="4" align="center">Published Units</th>
+										<th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
+									</tr>
+
+									<tr class="table-center bg-primary">
+										<th>No.</th>
+										<th>Observed Passband</th>
+										<th>Measurement</th>
+										<th>Uncertainty</th>
+										<th>Units</th>
+										<th>Freq (Hz)</th>
+										<th>Measurement</th>
+										<th>Uncertainty</th>
+										<th>Units</th>
+										<th>Mode</th>
+										<th>Aperture/Qualifiers</th>
+										<th>Reference Code</th>
+									</tr>
+								</thead>
+							</table>
+						<div class="bottom-table-format">
+							<table id="test" class="table table-responsive table-hover"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+	
 	
 </div>
 
