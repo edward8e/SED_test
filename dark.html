@@ -30,18 +30,18 @@
 <body>
 
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid"> 
+  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       <a class="navbar-brand" href="index.html">NED</a>
       </div>
-      
+
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="defaultNavbar1">
       <ul class="nav navbar-nav">
         <li><a href="dark.html">Dark Theme<span class="sr-only">(current)</span></a></li>
         <li><a href="light.html">Light Theme<span class="sr-only">(current)</span></a></li>
-      </ul> 
+      </ul>
     </div>
   </div>
 </nav>
@@ -55,10 +55,10 @@
 
 	<div class="row">
 		<div class="col-sm-2 side-settings text-center">
-		
+
 		<div class="row  text-left">
 		<div class="col-sm-12">
-    
+
      <div class="light-dark">
      <div class="blue-title text-center setting-title"><h3>SETTINGS</h3></div>
      <div class="setting-inner"><h4>Two types of Error Bar Options:</h4>
@@ -118,12 +118,12 @@
       </form></div>
       </div>
       </div>
-	</div>	
+	</div>
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div class="col-sm-10">
 			<div class="row">
 				<div class="col-sm-8">
@@ -135,7 +135,7 @@
 				<div class="col-sm-4 ">
 					<div class="row ">
 						<div class="col-sm-12">
-						
+
 						<div class="light-dark data-box"><h4 class="info-highlight">Select point to populate information:</h4>
 						<h3>Data point No. <span id="hoverinfonum"></span></h3>
 						<hr>
@@ -155,25 +155,25 @@
 							<li>Mode: <span class="data-out" id="hoverinfomode"></span></li>
 							<li>Aperture/Qualifiers: <span class="data-out" id="hoverinfoaperture"></span></li>
 							<li>Reference Code: <span class="data-out" id="hoverinforcode"></span></li>
-							
+
 						</ul></div>
-						
-						
-						
-					
+
+
+
+
 						</div>
 					</div>
 				</div>
 			</div>
 			<br>
-			
-			
-			
-				
+
+
+
+
 		</div>
 	</div>
-	
-	
+
+
 		<div class="row table-responsive " >
 					<div class="col-sm-12 bottom-table" >
 						<div class="light-dark ">
@@ -207,15 +207,15 @@
 					</div>
 				</div>
 			</div>
-	
-	
+
+
 </div>
 
 
 <script>
             d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
                 var parsedCSV = d3.csvParseRows(data);
-				
+
                 var container = d3.select("#test")
 //                    .append("table")
 
@@ -228,9 +228,9 @@
                         .append("td")
                         .text(function(d) { return d; });
             });
-	
+
 //	$("table").addClass('be-still');
-	
+
 	</script>
 <script>
 //pulls in the CSV file
@@ -336,7 +336,7 @@ var data = [
       type: "scatter",
       name: "SED Points",
       text: number,
-      // marker:{color: 'rgb(0,0,139)'},
+      marker:{color: 'rgb(23,154,248)'},
       //
       // marker: {symbol: 'circle-open'},
       x: x,
@@ -362,7 +362,8 @@ var layout = {
     ticks: 'inside',
     ticklen: 10,
     tickwidth: 2,
-    exponentformat: "power"
+    exponentformat: "power",
+    color: 'rgb(255,255,255)'
     },
   yaxis: {
     title: 'log(λ [μm])',
@@ -374,10 +375,15 @@ var layout = {
     ticks: 'inside',
     ticklen: 10,
     tickwidth: 2,
-    exponentformat: "power"
+    exponentformat: "power",
+    color: 'rgb(255,255,255)'
     },
   margin: {t: 20},
   hovermode: false,
+  plot_bgcolor: 'rgb(61,64,72)',
+  paper_bgcolor: 'rgb(61,64,72)',
+  color: 'rgb(255,255,255)',
+  bordercolor: 'rgb(255,255,255)'
 };
 
 var toImage2 = {
@@ -744,10 +750,10 @@ myPlot.on('plotly_click', function(data){
 </script>
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-1.11.3.min.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
 </body>
 </html>
