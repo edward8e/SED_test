@@ -1,329 +1,106 @@
-
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
-
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/popup.css">
-
-
-
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- <script type="text/javascript" src="/js/jquery.popup.js"></script> -->
-    <script type="text/javascript" src="/js/plotly.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/js/jquery.popup.js"></script>
-
-<link rel="stylesheet" type="text/css" href="css/style0.css">
- <link rel="stylesheet" type="text/css" href="css/style.css">
-
+    <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+    <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
   </head>
   <body>
+    <h1>Packery - Draggabilly</h1>
 
-
-<div class="container">
-  <div class="row">
-
-    <div class="col-md-8">
-      <div id="my-graph"></div>
-    </div>
-    <div class="col-md-4">
-
-      <form>
-        <span>X-Axis: </span>
-        <select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
-          <option value="1">log(Frequency [Hz])</option>
-          <option value="2">log(Wavelength [microns])</option>
-        </select>
-        <br />
-
-        <span>Y-Axis: </span>
-        <select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
-          <option value="1">log(F_{nu} [Jy])</option>
-          <option value="2">log(F_{nu} [W m^{-2} Hz(-1}])</option>
-          <option value="3">log(nuF_{nu} [Jy-Hz])</option>
-          <option value="4">log(nuF_{nu} [W m^{-2}])</option>
-        </select>
-
-
-      </form>
-
-
-
-
-
-    </div>
-  </div>
-
-<div class="row table-responsive">
-
+<div class="grid">
+  <div class="grid-item grid-item--width2"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2 grid-item--height2"></div>
+  <div class="grid-item grid-item--width2"></div>
+  <div class="grid-item grid-item--width2"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2 grid-item--height2"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2"></div>
+  <div class="grid-item grid-item--height2"></div>
+  <div class="grid-item"></div>
 </div>
 
 
 
-</div>
 
 
-<script>
-//pulls in the CSV file
-Plotly.d3.csv('https://edward8e.github.io/sed_proto/arp_220.csv', function(err, dataCSV){
+    <style>
+    * { box-sizing: border-box; }
 
-  var x = [], y = [], type = [], number = [], xWavelength = [];
+body { font-family: sans-serif; }
 
-  dataCSV.forEach(function(p) {
-          x.push(p['Frequency']);
-          y.push(p['NED Photometry Measurement']);
-          type.push(p['Frequency Mode']);
-          number.push(p['No.']);
-      });
+/* ---- grid ---- */
 
-
-//---------------------Splits x and y broad-band and line points----------------------//
-var arrayLength = type.length;
-var i;
-var out;
-
-for(i = 0; i < arrayLength; i++)
-{
-  if (
-    type[i] != ' Broad-band measurement'
-    &&
-    type[i] != ' Broad-band measurement; broad-band flux derived by integration over spectrum; synthetic band'){
-
-    delete x[i];
-    delete y[i];
-  }
-  else{
-    out = true;
-  }
+.grid {
+  background: #DDD;
+  max-width: 1200px;
 }
 
-//---------------------computes x Wavelength values----------------------//
-
-for(i = 0; i < arrayLength; i++)
-{
-  xWavelength[i] = (299792458/x[i]) * 1000000;
+/* clear fix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
 }
 
+/* ---- .grid-item ---- */
 
-
-var data = [
-      {mode: 'markers',
-      type: "scatter",
-      name: "SED Points",
-      text: number,
-      x: x,
-      y: y,}
-  ];
-
-//Graph axis related things
-var layout = {
-  xaxis: {
-    title: 'log v (Hz)',
-    type:'log',
-    autorange: true,
-    linecolor: 'black',
-    linewidth: 2,
-    mirror: true,
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,
-    exponentformat: "power"
-    },
-  yaxis: {
-    title: 'log f<sub>v</sub> (Jy)',
-    type:'log',
-    autorange: true,
-    linecolor: 'black',
-    linewidth: 2,
-    mirror: true,
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,
-    exponentformat: "power"
-    },
-  margin: {t: 20},
-  hovermode: false,
-};
-
-var toImage2 = {
-  name: 'Download plot as a SVG',
-  icon: Plotly.Icons.camera,
-  click: function(gd) {
-    Plotly.downloadImage(gd, {format: 'svg'})
-  }
-};
-
-
-//Edits made to the toolbar
-var toolbar = {
-	scrollZoom: true, // lets us scroll to zoom in and out - works
-	showLink: false, // removes the link to edit on plotly - works
-	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
-  displaylogo: false,
-  modeBarButtonsToAdd: [toImage2]
-};
-
-
-
-
-
-//---------------------Change the X-Axis Dropdown----------------------//
-var xaxis_update = jsFunction = function(value)
-{
-  if(value == 1){
-
-    var data_update = {
-      x:[x]
-    };
-      var layout_update = {
-        xaxis: {
-          title: 'log(Frequency [Hz])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
-  }
-  else{
-    var data_update = {
-      x: [xWavelength]
-    };
-      var layout_update = {
-        xaxis: {
-          title: 'log(Wavelength [microns])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-    Plotly.update('my-graph', data_update, layout_update);
-  }
-
+.grid-item {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: #C09;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
 }
-//---------------------END of X-Axis----------------------//
 
-//---------------------Change the Y-Axis Dropdown----------------------//
-var yaxis_update = jsFunction1 = function(value)
-{
-  if(value == 1){
-    var data_update = {};
-      var layout_update = {
-        yaxis: {
-          title: 'log(F_{nu} [Jy])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
-  }
-  else if(value == 2){
-    var data_update = {};
-      var layout_update = {
-        yaxis: {
-          title: 'log(F_{nu} [W m^{-2} Hz(-1}])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
-  }
-  else if(value == 3){
-    var data_update = {};
-      var layout_update = {
-        yaxis: {
-          title: 'log(nuF_{nu} [Jy-Hz])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
-  }
-  else{
-    var data_update = {};
-      var layout_update = {
-        yaxis: {
-          title: 'log(nuF_{nu} [W m^{-2}])',
-          type:'log',
-          autorange: true,
-          linecolor: 'black',
-          linewidth: 2,
-          mirror: true,
-          ticks: 'inside',
-          ticklen: 10,
-          tickwidth: 2,
-          exponentformat: "power"
-          },
-        margin: {t: 20},
-      };
-      Plotly.update('my-graph', data_update, layout_update);
-  }
+.grid-item--width2 { width: 200px; }
+.grid-item--height2 { height: 200px; }
 
+.grid-item:hover {
+  border-color: hsla(0, 0%, 100%, 0.5);
+  cursor: move;
 }
-//---------------------END of Y-Axis----------------------//
 
+.grid-item.is-dragging,
+.grid-item.is-positioning-post-drag {
+  background: #C90;
+  z-index: 2;
+}
 
-//Calls the plot into HTML
-Plotly.newPlot('my-graph', data, layout, toolbar, xaxis_update, yaxis_update);
+.packery-drop-placeholder {
+  outline: 3px dashed hsla(0, 0%, 0%, 0.5);
+  outline-offset: -6px;
+  -webkit-transition: -webkit-transform 0.2s;
+          transition: transform 0.2s;
+}
+
+    </style>
+    <script>
+    // external js: packery.pkgd.js, draggabilly.pkgd.js
+
+var $grid = $('.grid').packery({
+  itemSelector: '.grid-item',
+  columnWidth: 100
 });
 
+// make all grid-items draggable
+$grid.find('.grid-item').each( function( i, gridItem ) {
+  var draggie = new Draggabilly( gridItem );
+  // bind drag events to Packery
+  $grid.packery( 'bindDraggabillyEvents', draggie );
+});
 
-
-
-
-</script>
+    </script>
   </body>
 </html>
