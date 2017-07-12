@@ -517,10 +517,16 @@ var tableHeight = scalescreenSize*0.4;
 var topItem1 = $("#settings-right").css("height");
 topItem1 = topItem1.replace("px","");
 var finalTopHeight = 0;
+
 var topItem2 = $("#data-right").css("height");
 topItem2 = topItem2.replace("px","");
 
+if(topHeight < topItem2){
+  finalTopHeight = topItem2;
+}else{
   finalTopHeight = topHeight;
+}
+
 
 
 $(".grid-item--width--main").css("height", finalTopHeight);
