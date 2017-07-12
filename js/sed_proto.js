@@ -201,53 +201,53 @@ var ychange = yline;
 var errorBarTrue = errorBar;
 
 
-//---------------------Error BARs Buttons----------------------//
-// 1. Create the button
-var button = document.getElementById("ErrorBarON").onclick = function() {
-  //checks which yaxis is on
-  var answer2 = document.getElementById("ddl2");
-  if(answer2[answer2.selectedIndex].value == 1){
-    errorBarTrue = errorBar;
-  }
-  else if(answer2[answer2.selectedIndex].value == 2){
-    errorBarTrue = errorBarSI;
-  }
-  else if(answer2[answer2.selectedIndex].value == 3){
-    errorBarTrue = errorBarJyHz;
-  }
-  else {
-    errorBarTrue = errorBarWM;
-  }
+// //---------------------Error BARs Buttons----------------------//
+// // 1. Create the button
+// var button = document.getElementById("ErrorBarON").onclick = function() {
+//   //checks which yaxis is on
+//   var answer2 = document.getElementById("ddl2");
+//   if(answer2[answer2.selectedIndex].value == 1){
+//     errorBarTrue = errorBar;
+//   }
+//   else if(answer2[answer2.selectedIndex].value == 2){
+//     errorBarTrue = errorBarSI;
+//   }
+//   else if(answer2[answer2.selectedIndex].value == 3){
+//     errorBarTrue = errorBarJyHz;
+//   }
+//   else {
+//     errorBarTrue = errorBarWM;
+//   }
+//
+//   var data_update = {
+//     error_y: {
+//       type: 'data',
+//       array: errorBarTrue,
+//       visible: true,
+//       thickness: 1,
+//       // color: 'rgb(0,0,139)'
+//     }
+// };
+//     Plotly.update('my-graph', data_update);
+//
+//
+// };
+//
 
-  var data_update = {
-    error_y: {
-      type: 'data',
-      array: errorBarTrue,
-      visible: true,
-      thickness: 1,
-      // color: 'rgb(0,0,139)'
-    }
-};
-    Plotly.update('my-graph', data_update);
-
-
-};
-
-
-// 1. Create the button
-var button1 = document.getElementById("ErrorBarOFF").onclick = function() {
-
-    var data_update = {
-      error_y: {
-        type: 'data',
-        array: errorBarNull,
-        visible: true,
-        thickness: 0.001,
-        // color: 'rgb(0,0,139)'
-      }
-  };
-    Plotly.update('my-graph', data_update);
-};
+// // 1. Create the button
+// var button1 = document.getElementById("ErrorBarOFF").onclick = function() {
+//
+//     var data_update = {
+//       error_y: {
+//         type: 'data',
+//         array: errorBarNull,
+//         visible: true,
+//         thickness: 0.001,
+//         // color: 'rgb(0,0,139)'
+//       }
+//   };
+//     Plotly.update('my-graph', data_update);
+// };
 
 //---------------------Error Bar Switch----------------------//
 //Error Bars
@@ -507,39 +507,84 @@ window.onresize = function() {
 };
 //-----------------END Responsive code-------------------//
 
+var scalescreenSize = $(window).height();
+var topHeight = scalescreenSize - scalescreenSize*0.4;
+
+var tableHeight = scalescreenSize*0.4;
+
+// var topItem = $(".data-box").css("height");
+// topItem = topItem.replace("px","");
+var topItem1 = $("#settings-right").css("height");
+topItem1 = topItem1.replace("px","");
+var finalTopHeight = 0;
+var topItem2 = $("#data-right").css("height");
+topItem2 = topItem2.replace("px","");
+
+  finalTopHeight = topHeight;
+
+
+$(".grid-item--width--main").css("height", finalTopHeight);
+// $(".grid-item").css({"height":finalTopHeight});
+$(".bottom-table").css({"height":tableHeight});
+// $(".grid-item--width--settings").css("height", topItem1);
+$(".grid-item--width--data").css("height", topItem2);
+$grid.packery('layout');
+
+
+
 //---------------------Big Picture mode----------------------//
 document.querySelector("input[name=onoffswitch4]").onchange = function() {
 if(this.checked) {
-  //When switch is on
+  // When switch is on
+    var scalescreenSize = $(window).height();
+    var bigHight = scalescreenSize - scalescreenSize*0.2;
 
   $(".grid-item--width--main").css({
     "width": "73%",
-    "height":"1000px"
+    "height":bigHight
   });
   Plotly.Plots.resize(gd);
 
   // trigger layout after item size changes
   // $grid.packery('shiftLayout');
   $grid.packery('layout');
-    alert("on");
+    // alert("on");
   } else {
+
     $(".grid-item--width--main").css({
-      "width": "48%",
-      "height":"600px"
+      "width": "73%", "height": finalTopHeight
     });
     Plotly.Plots.resize(gd);
-// trigger layout after item size changes
-// $grid.packery('shiftLayout');
-$grid.packery('layout');
-    alert("off");
+    // trigger layout after item size changes
+    $grid.packery('layout');
+    // alert("off");
+  }
+}
+
+
+
+
+//---------------------On and off Data----------------------//
+document.querySelector("input[name=onoffswitch5]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+  $( "#data-window" ).toggle();
+  $(".grid-item--width--main").css({"width": "73%"});
+  Plotly.Plots.resize(gd);
+  $grid.packery('layout');
+  } else {
+    //when switch is off
+    $( "#data-window" ).toggle();
+    $(".grid-item--width--main").css({"width": "98%"});
+    Plotly.Plots.resize(gd);
+    $grid.packery('layout');
   }
 }
 
 
 
 //Calls the plot into HTML
-Plotly.newPlot(gd, data, layout, toolbar, button,
-button1, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
 
 
 

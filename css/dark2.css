@@ -1,5 +1,6 @@
 body{
-	background-color: #060606;
+	/*background-color: #060606;*/
+	background: linear-gradient(to bottom right, #3c5576, #0f161f); /* Standard syntax */
 	font-family: 'Raleway',space_and_astronomy,rajdhani,Segoe, Segoe UI, DejaVu Sans, Trebuchet MS, Verdana," sans-serif";
 	/*font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;*/
 }
@@ -22,10 +23,10 @@ nav{
 
 .light-dark{
 	/*background-color: rgb(61,64,72);*/
-	background-color: #151515;
+	background-color: rgba(21,21,21,0.5);
 }
 .blue-title{
-	background-color: rgb(23,154,248);
+	background-color: rgba(23,154,248, 0.5);
 }
 
 .bottom-table{
