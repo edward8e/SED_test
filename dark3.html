@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NED SED</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/popup.css">
+
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="/js/plotly.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/jquery.popup.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+<script type="text/javascript" src="js/svgToPdf.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
+<!-- Masonry JS -->
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<!-- Draggabilly JS -->
+<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+
+
+<!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+<link rel="stylesheet" type="text/css" href="css/dark3.css">
+<link rel="stylesheet" type="text/css" href="css/layout1.css">
+</head>
+<body>
+
+
+
+
+<div class="container-fluid main-body">
+
+    <div class="row ">
+
+
+    <div class="col-sm-2 text-left" id="settings-right">
+     <div class="light-dark right-large">
+     <div class="table-heading text-center setting-title"><h4>SETTINGS</h4></div>
+
+     <div class="setting-inner">
+       <h4>SED Options:</h4>
+       <hr />
+       <h5>Error Bars:</h5>
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+          <label class="onoffswitch-label" for="myonoffswitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+      <h5>Hover on and off</h5>
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch1" class="onoffswitch-checkbox" id="myonoffswitch1">
+          <label class="onoffswitch-label" for="myonoffswitch1">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+      <h5>Show Spectral Lines</h5>
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch2" class="onoffswitch-checkbox" id="myonoffswitch2">
+          <label class="onoffswitch-label" for="myonoffswitch2">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+      <h5>Enable UI drag</h5>
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch3" class="onoffswitch-checkbox" id="myonoffswitch3">
+          <label class="onoffswitch-label" for="myonoffswitch3">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+      <h5>Big Picture Mode</h5>
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch4" class="onoffswitch-checkbox" id="myonoffswitch4">
+          <label class="onoffswitch-label" for="myonoffswitch4">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+      <h5>Data Points</h5>
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch5" class="onoffswitch-checkbox" id="myonoffswitch5" >
+          <label class="onoffswitch-label" for="myonoffswitch5">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+      <h5>Plot Controls</h5>
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch6" class="onoffswitch-checkbox" id="myonoffswitch6" >
+          <label class="onoffswitch-label" for="myonoffswitch6">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+      <form>
+        <span>X-Axis: </span>
+        <select id ="ddl" class="selectpicker"  data-width="auto"  name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
+          <option value="1">log(<em>v</em> [Hz])</option>
+          <option value="2">log(λ [μm])</option>
+        </select>
+        <br />
+        <br />
+        <span>Y-Axis: </span>
+        <select id ="ddl2" class="selectpicker" data-width="auto"  name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
+          <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
+          <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
+          <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
+          <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
+        </select>
+
+      </form>
+      <br />
+      <button id="button-download" class="btn btn-default">Download Graph</button>
+    </div>
+      </div>
+      </div>
+
+
+
+
+
+
+  <div class="col-sm-10">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+          <a class="navbar-brand" href="index.html">NED</a>
+          </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="defaultNavbar1">
+          <ul class="nav navbar-nav">
+            <li><a href="dark.html">Dark Theme<span class="sr-only">(current)</span></a></li>
+            <li><a href="light.html">Light Theme<span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <div class="grid">
+  <div class="grid-item grid-item--width--main grid-item--height2">
+    <!-- <div class="SED-title">
+      <h3>Spectral Energy Distribution (SED) for ARP 220</h3>
+    </div> -->
+    <div id="my-graph" class="rounded-corners"></div>
+  </div>
+
+
+
+
+
+  <div class="grid-item grid-item--height2 grid-item--width--data" id="data-window">
+    <div class="row ">
+      <div class="col-sm-12" id="data-right">
+
+      <div class="light-dark data-box rounded-corners"><h4 class="info-highlight">Select point to populate information:</h4>
+      <h3>Data point No. <span id="hoverinfonum"></span></h3>
+      <hr>
+      <h4>Published Units:</h4>
+      <ul >
+        <li>Observed Passband: <span class="data-out" id="hoverinfoopassband"></span></li>
+        <li>Measurement: <span class="data-out" id ="hoverinfomeasurement"></span></li>
+        <li>Uncertainty: <span class="data-out" id="hoverinfouncertainty"></span></li>
+        <li>Units: <span class="data-out" id="hoverinfounits"></span></li>
+      </ul>
+      <h4>Homogenized Units [Frequency, Flux Density]</h4>
+      <ul>
+        <li>Freq (Hz): <span class="data-out" id="hoverinfofrequency"></span></li>
+        <li>Measurement: <span class="data-out" id="hoverinfomeasurement2"></span></li>
+        <li>Uncertainty: <span class="data-out" id="hoverinfouncertainty2"></span></li>
+        <li>Units: <span class="data-out" id="hoverinfounits2"></span></li>
+        <li>Mode: <span class="data-out" id="hoverinfomode"></span></li>
+        <li>Aperture/Qualifiers: <span class="data-out" id="hoverinfoaperture"></span></li>
+        <li>Reference Code: <span class="data-out" id="hoverinforcode"></span></li>
+
+      </ul></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="grid-item grid-item--width--table">
+        <div class="row table-responsive " >
+					<div class="col-sm-12 bottom-table" >
+						<div class="light-dark ">
+							<table class="table-info table referece-table ">
+								<thead class="title-font">
+									<tr class="table-center table-heading rounded-corners ">
+										<th></th>
+										<th colspan="4" align="center">Published Units</th>
+										<th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
+									</tr>
+
+									<tr class="table-center table-heading rounded-corners">
+										<th>No.</th>
+										<th>Observed Passband</th>
+										<th>Measurement</th>
+										<th>Uncertainty</th>
+										<th>Units</th>
+										<th>Freq (Hz)</th>
+										<th>Measurement</th>
+										<th>Uncertainty</th>
+										<th>Units</th>
+										<th>Mode</th>
+										<th>Aperture/Qualifiers</th>
+										<th>Reference Code</th>
+									</tr>
+								</thead>
+							</table>
+						<div class="bottom-table-format">
+							<table id="test" class="table table-responsive table-hover"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+  </div>
+</div>
+<!-- End of grid -->
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+// external js: packery.pkgd.js, draggabilly.pkgd.js
+
+var $grid = $('.grid').packery({
+  itemSelector: '.grid-item',
+  columnWidth: 1,
+  // set positions with percent values
+percentPosition: true,
+fitWidth: true
+});
+
+
+// external js: packery.pkgd.js, jquery-ui-draggable.js
+
+
+
+//---------------------Draggable----------------------//
+document.querySelector("input[name=onoffswitch3]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+  // make all items draggable
+  var $items = $grid.find('.grid-item').draggable();
+  // bind drag events to Packery
+  $grid.packery( 'bindUIDraggableEvents', $items );
+    alert("on");
+  } else {
+    //when switch is off
+    // make all items draggable
+    var $items = $grid.find('.grid-item').draggable( "destroy" );
+    // bind drag events to Packery
+    $grid.packery( 'bindUIDraggableEvents', $items );
+      alert("off");
+  }
+}
+
+
+
+
+
+</script>
+
+<script>
+            d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
+                var parsedCSV = d3.csvParseRows(data);
+
+                var container = d3.select("#test")
+//                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+
+//	$("table").addClass('be-still');
+
+	</script>
+
+
+
+
+
+
+<script>
+
+window.onload = function() {
+  var layout_update = {
+    xaxis: {
+      title: 'log(<em>v</em> [Hz])',
+      type:'log',
+      autorange: true,
+      linecolor: 'rgba(88,255,185,1)',
+      linewidth: 2,
+      mirror: true,
+      ticks: 'inside',
+      ticklen: 10,
+      tickwidth: 2,
+      exponentformat: "power",
+      color: 'rgba(200,200,200,1)',
+      gridcolor: 'rgba(20,20,20,1)',
+      },
+    yaxis: {
+      title: 'log(λ [μm])',
+      type:'log',
+      autorange: true,
+      linecolor: 'rgba(88,255,185,1)',
+      linewidth: 2,
+      mirror: true,
+      ticks: 'inside',
+      ticklen: 10,
+      tickwidth: 2,
+      exponentformat: "power",
+      color: 'rgba(200,200,200,1)',
+      gridcolor: 'rgba(20,20,20,1)',
+      },
+    margin: {t: 50},
+    hovermode: false,
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    bordercolor: 'rgba(88,255,185,0)',
+    gridcolor: 'rgba(88,255,185,0)',
+    // yaxis2: {
+    //   color: 'rgb(255,255,255)',
+    //   visible: false
+    // },
+  };
+
+  setTimeout(function(){Plotly.relayout('my-graph', layout_update);}, 1);
+
+};
+</script>
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-1.11.3.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.js"></script>
+
+<!-- SED Prototype JS -->
+<!-- <script src="js/sed_proto.js"></script> -->
+
+
+<!-- SED Prototype JS -->
+<script>
+//pulls in the CSV file
+Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
+
+  var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [],
+  xline = [], yline = [], xWavelength = [], xlineWavelength = [], ySI = [],
+  yJyHz = [], yWM = [], ylineWM = [],
+   errorBarSI = [], errorBarJyHz = [], errorBarWM = [], xComplete = [];
+
+  var OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
+      NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
+      SMode = [], Qualifiers = [], Comments = [];
+  dataCSV.forEach(function(p) {
+          x.push(p['Frequency']);
+          y.push(p['NED Photometry Measurement']);
+          t.push(p['Comments']);
+          s.push(p['Photometry Measurement']);
+          type.push(p['Frequency Mode']);
+          number.push(p['No.']);
+          errorBar.push(p['NED Uncertainty']);
+          xline.push(p['Frequency']);
+          yline.push(p['NED Photometry Measurement']);
+          xComplete.push(p['Frequency']);
+
+          //Table Data
+          OPassband.push(p['Observed Passband']);
+          PMeasurement.push(p['Photometry Measurement']);
+          Uncertainty.push(p['Uncertainty']);
+          Units.push(p['Units']);
+          Frequency.push(p['Frequency']);
+          NEDMeasurement.push(p['NED Photometry Measurement']);
+          NEDUncertainty.push(p['NED Uncertainty']);
+          NEDUnits.push(p['NED Units']);
+          Refcode.push(p['Refcode']);
+          Significance.push(p['Significance']);
+          PFrequency.push(p['Published frequency']);
+          FMode.push(p['Frequency Mode']);
+          CTargeted.push(p['Coordinates Targeted']);
+          SMode.push(p['Spatial Mode']);
+          Qualifiers.push(p['Qualifiers']);
+          Comments.push(p['Comments']);
+      });
+
+
+//---------------------Splits x and y broad-band and line points----------------------//
+var arrayLength = type.length;
+var i;
+var out;
+
+for(i = 0; i < arrayLength; i++)
+{
+  if (
+    type[i] == ' Line measurement; flux integrated over line; lines measured in emission'
+    ||
+    type[i] == ' Line measurement; flux integrated over line'
+  ){
+
+    delete x[i];
+    delete y[i];
+  }
+  else{
+    out = true;
+    delete xline[i];
+    delete yline[i];
+  }
+}
+
+
+
+
+var errorBarNull = [];
+//filters out the strings and removes "+/- syntax"
+ for(var i = 0; i < arrayLength; i++)
+ {
+    errorBar[i] = errorBar[i].replace("+/-",""); //removes "+/-"
+    errorBarNull[i] = 0;
+ }
+
+//Because x[] has blanks in array, xComplete was used because it has the full array
+ //---------------------computes x Wavelength values----------------------//
+
+ for(i = 0; i < arrayLength; i++)
+ {
+   xWavelength[i] = (299792458/x[i]) * 1000000;
+   xlineWavelength[i] = (299792458/xline[i]) * 1000000;
+
+   ySI[i] = y[i] * Math.pow(10, -26);
+   errorBarSI[i] = errorBar[i] * Math.pow(10, -26);
+
+   yJyHz[i] = y[i] * x[i];
+   errorBarJyHz[i] = errorBar[i] * xComplete[i];
+
+   yWM[i] = ySI[i] * x[i];
+   ylineWM[i] = yline[i] * Math.pow(10, -26);
+   errorBarWM[i] = errorBarSI[i] * xComplete[i];
+ }
+
+//fix for error bars
+
+ for(i = 0; i < arrayLength; i++)
+ {
+   if (
+     type[i] == ' Line measurement; flux integrated over line; lines measured in emission'
+     ||
+     type[i] == ' Line measurement; flux integrated over line'
+   ){
+     errorBarWM[i] = errorBar[i] * Math.pow(10, -26);
+     errorBarJyHz[i] = errorBar[i];
+     errorBarSI[i] = errorBarWM[i];
+
+   }
+   else{
+   }
+ }
+
+
+
+
+
+var data = [
+      {mode: 'markers',
+      type: "scatter",
+      name: "SED Points",
+      text: number,
+      marker:{color: 'rgb(0,198,255)'},
+      //
+      // marker: {symbol: 'circle-open'},
+      x: x,
+      y: y,
+      error_y: {
+        type: 'data',
+        array: errorBar,
+        visible: true,
+        thickness: 1,
+        color: 'rgb(0,198,255)'
+      }}
+  ];
+
+//Graph axis related things
+var layout = {
+  title: 'Spectral Energy Distribution (SED) for ARP 220',
+  titlefont: {
+    color: 'rgba(200,200,200,1)',
+    family: 'FiraSans-bold',
+  },
+  xaxis: {
+    title: 'log(<em>v</em> [Hz])',
+    type:'log',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,
+    exponentformat: "power"
+    },
+  yaxis: {
+    title: 'log(λ [μm])',
+    type:'log',
+    autorange: true,
+    linecolor: 'black',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,
+    exponentformat: "power"
+    },
+  yaxis2: {
+    title: 'Jy-Hz',
+    type:'log',
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,
+    overlaying: 'y',
+    side: 'right',
+    exponentformat: "power",
+    visible: false,
+    color: 'rgba(200,200,200,1)',
+    gridcolor: 'rgba(105,105,105,1)',
+    },
+  margin: {t: 20},
+  hovermode: false,
+  legend: {
+    bgcolor: 'rgba(0,0,0,0)',
+    orientation: 'h',
+    font: {
+      color: 'white',
+    }
+  }
+};
+
+
+
+
+
+var toImage2 = {
+  name: 'Download plot as a SVG',
+  icon: Plotly.Icons.camera,
+  click: function(gd) {
+    Plotly.downloadImage(gd, {format: 'svg'})
+  }
+};
+
+
+//Edits made to the toolbar
+var toolbar = {
+	scrollZoom: true, // lets us scroll to zoom in and out - works
+	showLink: false, // removes the link to edit on plotly - works
+	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
+  displaylogo: false,
+  modeBarButtonsToAdd: [toImage2],
+  displayModeBar: false
+};
+
+
+
+var xchange = xline;
+var ychange = yline;
+var errorBarTrue = errorBar;
+
+
+// //---------------------Error BARs Buttons----------------------//
+// // 1. Create the button
+// var button = document.getElementById("ErrorBarON").onclick = function() {
+//   //checks which yaxis is on
+//   var answer2 = document.getElementById("ddl2");
+//   if(answer2[answer2.selectedIndex].value == 1){
+//     errorBarTrue = errorBar;
+//   }
+//   else if(answer2[answer2.selectedIndex].value == 2){
+//     errorBarTrue = errorBarSI;
+//   }
+//   else if(answer2[answer2.selectedIndex].value == 3){
+//     errorBarTrue = errorBarJyHz;
+//   }
+//   else {
+//     errorBarTrue = errorBarWM;
+//   }
+//
+//   var data_update = {
+//     error_y: {
+//       type: 'data',
+//       array: errorBarTrue,
+//       visible: true,
+//       thickness: 1,
+//       // color: 'rgb(0,0,139)'
+//     }
+// };
+//     Plotly.update('my-graph', data_update);
+//
+//
+// };
+//
+
+// // 1. Create the button
+// var button1 = document.getElementById("ErrorBarOFF").onclick = function() {
+//
+//     var data_update = {
+//       error_y: {
+//         type: 'data',
+//         array: errorBarNull,
+//         visible: true,
+//         thickness: 0.001,
+//         // color: 'rgb(0,0,139)'
+//       }
+//   };
+//     Plotly.update('my-graph', data_update);
+// };
+
+//---------------------Error Bar Switch----------------------//
+//Error Bars
+var checkbox = document.querySelector("input[name=onoffswitch]").onchange = function() {
+if(this.checked) {
+  //checks which yaxis is on
+  var answer2 = document.getElementById("ddl2");
+  if(answer2[answer2.selectedIndex].value == 1){
+    errorBarTrue = errorBar;
+  }
+  else if(answer2[answer2.selectedIndex].value == 2){
+    errorBarTrue = errorBarSI;
+  }
+  else if(answer2[answer2.selectedIndex].value == 3){
+    errorBarTrue = errorBarJyHz;
+  }
+  else {
+    errorBarTrue = errorBarWM;
+  }
+
+
+
+  //When Switch is on
+  var data_update = {
+    error_y: {
+      array: errorBarTrue,
+      thickness: 1,
+    }};
+
+    Plotly.restyle('my-graph', data_update);
+  } else {
+    //when Switch is off
+    var data_update = {
+      error_y: {
+        array: errorBarNull,
+        thickness: 0.001,
+      }};
+
+    Plotly.restyle('my-graph', data_update);
+  }
+}
+
+
+//---------------------Hover on and off----------------------//
+var checkboxDataON = function(){
+  var layout_update = {
+    hovermode: 'closest'
+  };
+  Plotly.relayout('my-graph', layout_update);
+};
+var checkboxDataOFF = function(){
+  var layout_update = {
+    hovermode: false
+  };
+  Plotly.relayout('my-graph', layout_update);
+};
+
+
+var checkbox1 = document.querySelector("input[name=onoffswitch1]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+    checkboxDataON();
+  } else {
+    //when switch is off
+    checkboxDataOFF();
+  }
+}
+
+
+
+//---------------------Spectral lines on and off----------------------//
+var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
+  //Checks which xaxis is on
+  var answer = document.getElementById("ddl");
+  var yaxis2Title;
+    if(answer[answer.selectedIndex].value == 1){
+      xchange = xline;
+    }
+    else{
+      xchange = xlineWavelength;
+    }
+    //checks which yaxis is on
+    var answer2 = document.getElementById("ddl2");
+    if(answer2[answer2.selectedIndex].value == 1){
+      ychange = yline;
+      errorBarTrue = errorBar;
+      yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
+    }
+    else if(answer2[answer2.selectedIndex].value == 2){
+      ychange = ylineWM;
+      errorBarTrue = errorBarSI;
+      yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
+    }
+    else if(answer2[answer2.selectedIndex].value == 3){
+      ychange = yline;
+      errorBarTrue = errorBar;
+      yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
+    }
+    else {
+      ychange = ylineWM;
+      errorBarTrue = errorBarWM;
+      yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
+    }
+
+if(this.checked) {
+  //When switch is on
+  var trace_lines =
+        {name: "Spectral Lines",
+          mode: 'markers',
+          type: "scatter",
+          text: number,
+          marker:{color: 'rgb(212,98,63)'},
+          x: xchange,
+          y: ychange,
+          yaxis: 'y2',
+          error_y: {
+            type: 'data',
+            array: errorBarTrue,
+            visible: true,
+            thickness: 1,
+          }};
+
+    var layout_update = {
+      'yaxis2.title': yaxis2Title,
+      'yaxis2.overlaying': 'y',
+      'yaxis2.side': 'right',
+      'yaxis2.type': 'log',
+      'yaxis2.exponentformat': 'power',
+      'yaxis2.ticks': 'inside',
+      // 'yaxis2.ticklen': '10',
+      // 'yaxis2.tickwidth': '2',
+      'yaxis2.visible': 'true',
+      // 'legend.font': 'color.white',
+      'yaxis2.color': 'rgba(200,200,200,1)',
+      'yaxis2.gridcolor': 'rgba(20,20,20,1)'
+    };
+
+    Plotly.relayout('my-graph', layout_update);
+    Plotly.addTraces('my-graph', trace_lines);
+
+  } else {
+    //when switch is off
+    //Removes the SED Trace from graph
+    //had to iterate twice, because title still showed
+
+    var layout_update = {
+      yaxis2: {
+        title: "",
+    }
+    };
+    Plotly.relayout('my-graph', layout_update);
+      var layout_update = {
+        yaxis2: {
+          visible: false,
+      }
+    };
+      Plotly.relayout('my-graph', layout_update);
+      Plotly.deleteTraces('my-graph', 1);
+  }
+}
+
+//---------------------Change the X-Axis Dropdown----------------------//
+var xaxis_update = jsFunction = function(value)
+{
+  if(value == 1){
+    var data_update = {
+      x:[x,xline]
+    };
+      var layout_update = {
+        'xaxis.title': 'log(<em>v</em> [Hz])'
+      };
+
+      Plotly.restyle('my-graph', data_update);
+      Plotly.relayout('my-graph', layout_update);
+  }
+  else{
+    var data_update = {
+      x:[xWavelength,xlineWavelength]
+    };
+      var layout_update = {
+        'xaxis.title': 'log(λ [μm])'
+      };
+
+      Plotly.restyle('my-graph', data_update);
+      Plotly.relayout('my-graph', layout_update);
+  }
+
+}
+//---------------------END of X-Axis----------------------//
+
+//---------------------Change the Y-Axis Dropdown----------------------//
+var yaxis_update = jsFunction1 = function(value)
+{
+  if(value == 1){
+    var data_update = {
+      y:[y,yline],
+      error_y: {
+        array: errorBar,
+        thickness: 1,
+      }};
+    var layout_update = {
+      'yaxis.title': 'log(F<sub><em>v</em></sub> [Jy])'
+    };
+    Plotly.restyle('my-graph', data_update);
+    Plotly.relayout('my-graph', layout_update);
+
+  }
+  else if(value == 2){
+    var data_update = {
+      y:[ySI,ylineWM],
+      error_y: {
+        array: errorBarSI,
+        thickness: 1,
+      }};
+    var layout_update = {
+      'yaxis.title': 'log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])'
+    };
+    Plotly.restyle('my-graph', data_update);
+    Plotly.relayout('my-graph', layout_update);
+
+  }
+  else if(value == 3){
+    var data_update = {
+      y:[yJyHz,yline],
+      error_y: {
+        array: errorBarJyHz,
+        thickness: 1,
+      }};
+    var layout_update = {
+      'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])'
+    };
+    Plotly.restyle('my-graph', data_update);
+    Plotly.relayout('my-graph', layout_update);
+  }
+  else{
+    var data_update = {
+      y:[yWM,ylineWM],
+      error_y: {
+        array: errorBarWM,
+        thickness: 1,
+      }};
+    var layout_update = {
+      'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])'
+    };
+    Plotly.restyle('my-graph', data_update);
+    Plotly.relayout('my-graph', layout_update);
+  }
+
+}
+//---------------------END of Y-Axis----------------------//
+
+
+//----------------Make Plotly Responsive-----------------//
+//----------------Edits the CSS in the div---------------//
+var WIDTH_IN_PERCENT_OF_PARENT = 100,
+    HEIGHT_IN_PERCENT_OF_PARENT = 100;
+
+Plotly.d3.select('#my-graph')
+    .style({
+        width: WIDTH_IN_PERCENT_OF_PARENT + '%',
+        height: HEIGHT_IN_PERCENT_OF_PARENT + '%',
+    });
+var gd = Plotly.d3.select('#my-graph').node();
+
+window.onresize = function() {
+    Plotly.Plots.resize(gd);
+};
+//-----------------END Responsive code-------------------//
+
+var scalescreenSize = $(window).height();
+var topHeight = scalescreenSize - scalescreenSize*0.4;
+
+var tableHeight = scalescreenSize*0.4;
+
+// var topItem = $(".data-box").css("height");
+// topItem = topItem.replace("px","");
+var topItem1 = $("#settings-right").css("height");
+topItem1 = topItem1.replace("px","");
+var finalTopHeight = 0;
+
+var topItem2 = $("#data-right").css("height");
+topItem2 = topItem2.replace("px","");
+
+if(topHeight < topItem2){
+  finalTopHeight = topItem2;
+}else{
+  finalTopHeight = topHeight;
+}
+
+
+
+$(".grid-item--width--main").css("height", finalTopHeight);
+// $(".grid-item").css({"height":finalTopHeight});
+$(".bottom-table").css({"height":tableHeight});
+// $(".grid-item--width--settings").css("height", topItem1);
+$(".grid-item--width--data").css("height", topItem2);
+$grid.packery('layout');
+
+
+
+//---------------------Big Picture mode----------------------//
+document.querySelector("input[name=onoffswitch4]").onchange = function() {
+if(this.checked) {
+  // When switch is on
+    var scalescreenSize = $(window).height();
+    var bigHight = scalescreenSize - scalescreenSize*0.2;
+
+  $(".grid-item--width--main").css({
+    "width": "73%",
+    "height":bigHight
+  });
+  Plotly.Plots.resize(gd);
+
+  // trigger layout after item size changes
+  // $grid.packery('shiftLayout');
+  $grid.packery('layout');
+    // alert("on");
+  } else {
+
+    $(".grid-item--width--main").css({
+      "width": "73%", "height": finalTopHeight
+    });
+    Plotly.Plots.resize(gd);
+    // trigger layout after item size changes
+    $grid.packery('layout');
+    // alert("off");
+  }
+}
+
+
+
+
+//---------------------On and off Data----------------------//
+document.querySelector("input[name=onoffswitch5]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+  $( "#data-window" ).toggle();
+  $(".grid-item--width--main").css({"width": "73%"});
+  $("#myonoffswitch1").prop("checked", true);
+  checkboxDataON();
+  Plotly.Plots.resize(gd);
+  $grid.packery('layout');
+  } else {
+    //when switch is off
+    $( "#data-window" ).toggle();
+    $(".grid-item--width--main").css({"width": "98%"});
+    // $("#myonoffswitch1").prop("checked", false);
+    // checkboxDataOFF();
+    Plotly.Plots.resize(gd);
+    $grid.packery('layout');
+  }
+}
+  $( "#data-window" ).toggle();
+  $(".grid-item--width--main").css({"width": "98%"});
+  Plotly.Plots.resize(gd);
+  $grid.packery('layout');
+  //---------------------END of controls----------------------//
+
+
+
+//---------------------On and off Plot controls----------------------//
+document.querySelector("input[name=onoffswitch6]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+  //Calls the plot into HTML
+  //Edits made to the toolbar
+  var toolbar = {
+  	scrollZoom: true, // lets us scroll to zoom in and out - works
+  	showLink: false, // removes the link to edit on plotly - works
+  	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
+    displaylogo: false,
+    modeBarButtonsToAdd: [toImage2],
+    displayModeBar: true
+  };
+  Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+  alert("on");
+  } else {
+    //when switch is off
+    //Edits made to the toolbar
+    var toolbar = {
+    	scrollZoom: true, // lets us scroll to zoom in and out - works
+    	showLink: false, // removes the link to edit on plotly - works
+    	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
+      displaylogo: false,
+      modeBarButtonsToAdd: [toImage2],
+      displayModeBar: false
+    };
+    Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+    alert("off");
+  }
+}
+  //---------------------END of controls----------------------//
+
+//---------------------Download Plot Button----------------------//
+  // 1. Create the button
+document.getElementById("button-download").onclick = function() {
+  // var layout_update = {
+  //   'yaxis2.title': yaxis2Title,
+  //   'yaxis2.overlaying': 'y',
+  //   'yaxis2.side': 'right',
+  //   'yaxis2.type': 'log',
+  //   'yaxis2.exponentformat': 'power',
+  //   'yaxis2.ticks': 'inside',
+  //   // 'yaxis2.ticklen': '10',
+  //   // 'yaxis2.tickwidth': '2',
+  //   'yaxis2.visible': 'true',
+  //   'yaxis2.color': 'white',
+  //   // 'legend.font': 'color.white',
+  // };
+  //
+  // Plotly.relayout('my-graph', layout_update);
+      Plotly.downloadImage(gd, {
+        format: 'svg',
+        height: 500,
+        width: 1000,
+        filename: 'newplot'
+      })
+  };
+
+//---------------------END of controls----------------------//
+
+
+
+//Calls the plot into HTML
+Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+
+
+
+//---------------------Pulls information into table----------------------//
+//Event handler in plotly when it comes to hovering
+var myPlot = document.getElementById('my-graph');
+var hoverInfoNum = document.getElementById('hoverinfonum');
+var hoverInfoOPassband = document.getElementById('hoverinfoopassband');
+var hoverInfoMeasurement = document.getElementById('hoverinfomeasurement');
+var hoverInfoUncertainty = document.getElementById('hoverinfouncertainty');
+var hoverInfoUnits = document.getElementById('hoverinfounits');
+var hoverInfoFrequency = document.getElementById('hoverinfofrequency');
+var hoverInfoMeasurement2 = document.getElementById('hoverinfomeasurement2');
+var hoverInfoUncertainty2 = document.getElementById('hoverinfouncertainty2');
+var hoverInfoUnits2 = document.getElementById('hoverinfounits2');
+var hoverInfoMode = document.getElementById('hoverinfomode');
+var hoverInfoAperture = document.getElementById('hoverinfoaperture');
+var hoverInfoRCode = document.getElementById('hoverinforcode');
+var hoverInfoUnits2 = document.getElementById('hoverinfounits2');
+
+myPlot.on('plotly_click', function(data){
+//displays point number and acts as a counter for arrays
+   var pts = '';
+      for(var i=0; i < data.points.length; i++){
+          pts = data.points[i].text;
+      }
+      var pCounter = pts - 1;
+
+
+  //Display the Point number
+   var numbertext = data.points.map(function(d){return (pts);});
+   hoverInfoNum.innerHTML = numbertext.join('');
+//Observed Passband
+   var Opassbandtext = data.points.map(function(d){return(OPassband[pCounter]);});
+   hoverInfoOPassband.innerHTML = Opassbandtext.join('');
+//Measurement
+   var Measurementtext = data.points.map(function(d){return(PMeasurement[pCounter]);});
+   hoverInfoMeasurement.innerHTML = Measurementtext.join('');
+//Uncertainty
+   var Uncertaintytext = data.points.map(function(d){return(Uncertainty[pCounter]);});
+   hoverInfoUncertainty.innerHTML = Uncertaintytext.join('');
+//Units
+   var Unitstext = data.points.map(function(d){return(Units[pCounter]);});
+   hoverInfoUnits.innerHTML = Unitstext.join('');
+//Frequency
+   var Frequencytext = data.points.map(function(d){return(Frequency[pCounter]);});
+   hoverInfoFrequency.innerHTML = Frequencytext.join('');
+//Measurement2
+   var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
+   hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+//Uncertainty2
+   var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
+   hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+//Units2
+   var Units2text = data.points.map(function(d){return(NEDUnits[pCounter]);});
+   hoverInfoUnits2.innerHTML = Units2text.join('');
+//Mode
+   var Modetext = data.points.map(function(d){return(FMode[pCounter]);});
+   hoverInfoMode.innerHTML = Modetext.join('');
+//Aperture
+   var Aperturetext = data.points.map(function(d){return(Qualifiers[pCounter]);});
+   hoverInfoAperture.innerHTML = Aperturetext.join('');
+//Reference Code
+   var Referencetext = data.points.map(function(d){return(Refcode[pCounter]);});
+   hoverInfoRCode.innerHTML = Referencetext.join('');
+});
+
+//---------------------END OF TABLE----------------------//
+
+
+
+
+
+});
+
+</script>
+
+
+
+</body>
+</html>

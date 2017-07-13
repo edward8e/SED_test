@@ -57,7 +57,11 @@
     <div class="col-sm-2 text-left" id="settings-right">
      <div class="light-dark right-large">
      <div class="blue-title text-center setting-title"><h4>SETTINGS</h4></div>
-     <div class="setting-inner"><h5>Error Bars:</h5>
+
+     <div class="setting-inner">
+       <h4>SED Options:</h4>
+       <hr />
+       <h5>Error Bars:</h5>
       <div class="onoffswitch">
           <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
           <label class="onoffswitch-label" for="myonoffswitch">
@@ -130,7 +134,8 @@
         </select>
 
       </form>
-      <button id="button-download">Download Graph</button>
+      <br />
+      <button id="button-download" class="btn btn-default">Download Graph</button>
     </div>
       </div>
       </div>
@@ -342,7 +347,7 @@ window.onload = function() {
       exponentformat: "power",
       color: 'rgb(255,255,255)'
       },
-    margin: {t: 20},
+    margin: {t: 50},
     hovermode: false,
     plot_bgcolor: '#151515',
     paper_bgcolor: '#151515',
@@ -512,6 +517,10 @@ var data = [
 
 //Graph axis related things
 var layout = {
+  title: 'Spectral Energy Distribution (SED) for ARP 220',
+  titlefont: {
+    color: 'white',
+  },
   xaxis: {
     title: 'log(<em>v</em> [Hz])',
     type:'log',
@@ -578,6 +587,7 @@ var toolbar = {
 	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
   displaylogo: false,
   modeBarButtonsToAdd: [toImage2],
+  displayModeBar: false
 };
 
 
