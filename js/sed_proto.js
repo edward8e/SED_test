@@ -161,17 +161,17 @@ var layout = {
     tickwidth: 2,
     exponentformat: "power"
     },
-  yaxis2: {
-    title: 'Jy-Hz',
-    type:'log',
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,
-    overlaying: 'y',
-    side: 'right',
-    exponentformat: "power",
-    visible: false
-    },
+  // yaxis2: {
+  //   title: 'Jy-Hz',
+  //   type:'log',
+  //   ticks: 'inside',
+  //   ticklen: 10,
+  //   tickwidth: 2,
+  //   overlaying: 'y',
+  //   side: 'right',
+  //   exponentformat: "power",
+  //   // visible: false
+  //   },
   margin: {t: 20},
   hovermode: false,
 };
@@ -376,7 +376,7 @@ if(this.checked) {
     };
 
     Plotly.relayout('my-graph', layout_update);
-Plotly.addTraces('my-graph', trace_lines);
+    Plotly.addTraces('my-graph', trace_lines);
 
   } else {
     //when switch is off
@@ -586,7 +586,12 @@ if(this.checked) {
     $grid.packery('layout');
   }
 }
-
+// function(){
+  $( "#data-window" ).toggle();
+  $(".grid-item--width--main").css({"width": "98%"});
+  Plotly.Plots.resize(gd);
+  $grid.packery('layout');
+// }
 
 
 //Calls the plot into HTML
