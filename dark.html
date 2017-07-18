@@ -14,7 +14,7 @@
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script type="text/javascript" src="/js/plotly.js"></script>
+<!-- <script type="text/javascript" src="/js/plotly.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/jquery.popup.js"></script>
@@ -89,14 +89,6 @@
               <span class="onoffswitch-switch"></span>
           </label>
       </div>
-      <h5>Big Picture Mode</h5>
-      <div class="onoffswitch">
-          <input type="checkbox" name="onoffswitch4" class="onoffswitch-checkbox" id="myonoffswitch4">
-          <label class="onoffswitch-label" for="myonoffswitch4">
-              <span class="onoffswitch-inner"></span>
-              <span class="onoffswitch-switch"></span>
-          </label>
-      </div>
       <h5>Data Points</h5>
       <div class="onoffswitch">
           <input type="checkbox" name="onoffswitch5" class="onoffswitch-checkbox" id="myonoffswitch5" >
@@ -107,7 +99,7 @@
       </div>
       <h5>Plot Controls</h5>
       <div class="onoffswitch">
-          <input type="checkbox" name="onoffswitch6" class="onoffswitch-checkbox" id="myonoffswitch6" >
+          <input type="checkbox" name="onoffswitch6" class="onoffswitch-checkbox" id="myonoffswitch6" checked >
           <label class="onoffswitch-label" for="myonoffswitch6">
               <span class="onoffswitch-inner"></span>
               <span class="onoffswitch-switch"></span>
@@ -154,6 +146,21 @@
             <li><a href="dark.html">Dark Theme<span class="sr-only">(current)</span></a></li>
             <li><a href="light.html">Light Theme<span class="sr-only">(current)</span></a></li>
           </ul>
+
+          <div class="row pull-right">
+            <div class="col-xs-6">
+              <h6>Activate Dark Mode: </h6>
+            </div>
+            <div class="col-xs-6" style="padding: 10px 0px;">
+              <div class="onoffswitch" >
+                <input type="checkbox" name="onoffswitch12" class="onoffswitch-checkbox" id="myonoffswitch12">
+                <label class="onoffswitch-label" for="myonoffswitch12">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -307,60 +314,6 @@ if(this.checked) {
 
 	</script>
 
-
-
-
-
-
-<script>
-
-window.onload = function() {
-  var layout_update = {
-    xaxis: {
-      title: 'log(<em>v</em> [Hz])',
-      type:'log',
-      autorange: true,
-      linecolor: 'white',
-      linewidth: 2,
-      mirror: true,
-      ticks: 'inside',
-      ticklen: 10,
-      tickwidth: 2,
-      exponentformat: "power",
-      color: 'rgb(255,255,255)'
-      },
-    yaxis: {
-      title: 'log(λ [μm])',
-      type:'log',
-      autorange: true,
-      linecolor: 'white',
-      linewidth: 2,
-      mirror: true,
-      ticks: 'inside',
-      ticklen: 10,
-      tickwidth: 2,
-      exponentformat: "power",
-      color: 'rgb(255,255,255)'
-      },
-    margin: {t: 20},
-    hovermode: false,
-    plot_bgcolor: '#151515',
-    paper_bgcolor: '#151515',
-    color: 'rgb(255,255,255)',
-    bordercolor: 'rgb(255,255,255)',
-    // yaxis2: {
-    //   color: 'rgb(255,255,255)',
-    //   visible: false
-    // },
-  };
-
-  setTimeout(function(){Plotly.relayout('my-graph', layout_update);}, 1);
-
-};
-</script>
-
-
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-1.11.3.min.js"></script>
 
@@ -374,29 +327,20 @@ window.onload = function() {
 <!-- SED Prototype JS -->
 <script>
 //pulls in the CSV file
-Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
+Plotly.d3.csv('https://edward8e.github.io/sed_proto/arp_220.csv', function(err, dataCSV){
 
-  var x = [], y = [], t = [], s = [], type = [], number = [], errorBar = [],
+  var x = [], y = [], type = [], number = [], errorBar = [],
   xline = [], yline = [], xWavelength = [], xlineWavelength = [], ySI = [],
   yJyHz = [], yWM = [], ylineWM = [],
-   errorBarSI = [], errorBarJyHz = [], errorBarWM = [], xComplete = [];
+   errorBarSI = [], errorBarJyHz = [], errorBarWM = [];
+   var errorBarNull = [];
 
   var OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
       NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
       SMode = [], Qualifiers = [], Comments = [];
   dataCSV.forEach(function(p) {
-          x.push(p['Frequency']);
-          y.push(p['NED Photometry Measurement']);
-          t.push(p['Comments']);
-          s.push(p['Photometry Measurement']);
-          type.push(p['Frequency Mode']);
-          number.push(p['No.']);
-          errorBar.push(p['NED Uncertainty']);
-          xline.push(p['Frequency']);
-          yline.push(p['NED Photometry Measurement']);
-          xComplete.push(p['Frequency']);
-
           //Table Data
+          number.push(p['No.']);
           OPassband.push(p['Observed Passband']);
           PMeasurement.push(p['Photometry Measurement']);
           Uncertainty.push(p['Uncertainty']);
@@ -415,46 +359,51 @@ Plotly.d3.csv('arp_220.csv', function(err, dataCSV){
           Comments.push(p['Comments']);
       });
 
+      x = Frequency.slice();
+      y = NEDMeasurement.slice();
+      type = FMode.slice();
+      errorBar = NEDUncertainty.slice();
+      xline = Frequency.slice();
+      yline = NEDMeasurement.slice();
+      var arrayLength = x.length;
 
 //---------------------Splits x and y broad-band and line points----------------------//
-var arrayLength = type.length;
-var i;
-var out;
-
-for(i = 0; i < arrayLength; i++)
-{
-  if (
-    type[i] == ' Line measurement; flux integrated over line; lines measured in emission'
-    ||
-    type[i] == ' Line measurement; flux integrated over line'
-  ){
-
-    delete x[i];
-    delete y[i];
-  }
-  else{
-    out = true;
-    delete xline[i];
-    delete yline[i];
+function LineSplit(){
+  for(var i = 0; i < type.length; i++){
+    if (
+      type[i] == ' Line measurement; flux integrated over line; lines measured in emission'
+      ||
+      type[i] == ' Line measurement; flux integrated over line'
+    ){
+      delete x[i];
+      delete xWavelength[i];
+      delete y[i];
+      delete ySI[i];
+      delete yJyHz[i];
+      delete yWM[i];
+      errorBarWM[i] = errorBar[i] * Math.pow(10, -26);
+      errorBarJyHz[i] = errorBar[i];
+      errorBarSI[i] = errorBarWM[i];
+    }else{
+      delete xline[i];
+      delete yline[i];
+      delete ylineWM[i];
+      delete xlineWavelength[i];
+    }
   }
 }
-
-
-
-
-var errorBarNull = [];
-//filters out the strings and removes "+/- syntax"
- for(var i = 0; i < arrayLength; i++)
+//---------------------Parses the ErrorBar Values and creates ErrorBarNull----------------------//
+function ErrorBarParse(){
+  //filters out the strings and removes "+/- syntax"
+ for(var i = 0; i < errorBar.length; i++)
  {
     errorBar[i] = errorBar[i].replace("+/-",""); //removes "+/-"
-    errorBarNull[i] = 0;
+    errorBarNull.push(0);
  }
-
-//Because x[] has blanks in array, xComplete was used because it has the full array
- //---------------------computes x Wavelength values----------------------//
-
- for(i = 0; i < arrayLength; i++)
- {
+}
+//---------------------Computes both errorbar values and unit change values----------------------//
+function UnitConversions(){
+  for(var i = 0; i < arrayLength; i++){
    xWavelength[i] = (299792458/x[i]) * 1000000;
    xlineWavelength[i] = (299792458/xline[i]) * 1000000;
 
@@ -462,33 +411,21 @@ var errorBarNull = [];
    errorBarSI[i] = errorBar[i] * Math.pow(10, -26);
 
    yJyHz[i] = y[i] * x[i];
-   errorBarJyHz[i] = errorBar[i] * xComplete[i];
+   errorBarJyHz[i] = errorBar[i] * x[i];
 
    yWM[i] = ySI[i] * x[i];
    ylineWM[i] = yline[i] * Math.pow(10, -26);
-   errorBarWM[i] = errorBarSI[i] * xComplete[i];
+   errorBarWM[i] = errorBarSI[i] * x[i];
  }
-
-//fix for error bars
-
- for(i = 0; i < arrayLength; i++)
- {
-   if (
-     type[i] == ' Line measurement; flux integrated over line; lines measured in emission'
-     ||
-     type[i] == ' Line measurement; flux integrated over line'
-   ){
-     errorBarWM[i] = errorBar[i] * Math.pow(10, -26);
-     errorBarJyHz[i] = errorBar[i];
-     errorBarSI[i] = errorBarWM[i];
-
-   }
-   else{
-   }
- }
+}
 
 
-
+//ErrorBar Function
+ErrorBarParse();
+//Unit Conversions for SED Points
+UnitConversions();
+//splits the lines from the SED points
+LineSplit();
 
 
 var data = [
@@ -522,7 +459,8 @@ var layout = {
     ticks: 'inside',
     ticklen: 10,
     tickwidth: 2,
-    exponentformat: "power"
+    exponentformat: "power",
+    color: '#444'
     },
   yaxis: {
     title: 'log(λ [μm])',
@@ -534,7 +472,8 @@ var layout = {
     ticks: 'inside',
     ticklen: 10,
     tickwidth: 2,
-    exponentformat: "power"
+    exponentformat: "power",
+    color: '#444'
     },
   yaxis2: {
     title: 'Jy-Hz',
@@ -549,11 +488,13 @@ var layout = {
     },
   margin: {t: 20},
   hovermode: false,
+  plot_bgcolor: '#fff',
+  paper_bgcolor: '#fff',
   legend: {
     bgcolor: 'rgba(0,0,0,0)',
     orientation: 'h',
     font: {
-      color: 'white',
+      color: 'black',
     }
   }
 };
@@ -570,7 +511,6 @@ var toImage2 = {
   }
 };
 
-
 //Edits made to the toolbar
 var toolbar = {
 	scrollZoom: true, // lets us scroll to zoom in and out - works
@@ -582,58 +522,9 @@ var toolbar = {
 
 
 
-var xchange = xline;
-var ychange = yline;
+var xchange = xline.slice();
+var ychange = yline.slice();
 var errorBarTrue = errorBar;
-
-
-// //---------------------Error BARs Buttons----------------------//
-// // 1. Create the button
-// var button = document.getElementById("ErrorBarON").onclick = function() {
-//   //checks which yaxis is on
-//   var answer2 = document.getElementById("ddl2");
-//   if(answer2[answer2.selectedIndex].value == 1){
-//     errorBarTrue = errorBar;
-//   }
-//   else if(answer2[answer2.selectedIndex].value == 2){
-//     errorBarTrue = errorBarSI;
-//   }
-//   else if(answer2[answer2.selectedIndex].value == 3){
-//     errorBarTrue = errorBarJyHz;
-//   }
-//   else {
-//     errorBarTrue = errorBarWM;
-//   }
-//
-//   var data_update = {
-//     error_y: {
-//       type: 'data',
-//       array: errorBarTrue,
-//       visible: true,
-//       thickness: 1,
-//       // color: 'rgb(0,0,139)'
-//     }
-// };
-//     Plotly.update('my-graph', data_update);
-//
-//
-// };
-//
-
-// // 1. Create the button
-// var button1 = document.getElementById("ErrorBarOFF").onclick = function() {
-//
-//     var data_update = {
-//       error_y: {
-//         type: 'data',
-//         array: errorBarNull,
-//         visible: true,
-//         thickness: 0.001,
-//         // color: 'rgb(0,0,139)'
-//       }
-//   };
-//     Plotly.update('my-graph', data_update);
-// };
 
 //---------------------Error Bar Switch----------------------//
 //Error Bars
@@ -705,10 +596,10 @@ if(this.checked) {
 
 
 //---------------------Spectral lines on and off----------------------//
-var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
+function SpectralLineUpdate(){
+    var yaxis2Title;
   //Checks which xaxis is on
-  var answer = document.getElementById("ddl");
-  var yaxis2Title;
+    var answer = document.getElementById("ddl");
     if(answer[answer.selectedIndex].value == 1){
       xchange = xline;
     }
@@ -737,9 +628,57 @@ var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = fu
       errorBarTrue = errorBarWM;
       yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
     }
+    return {
+      xchange: xchange,
+      ychange: ychange,
+      errorBarTrue: errorBarTrue,
+      yaxis2Title: yaxis2Title,
+    };
+}
 
-if(this.checked) {
-  //When switch is on
+function SpectralLineLayout(yaxis2Title){
+  if(document.querySelector("input[name=onoffswitch12]").checked){
+        var layout_update = {
+            'yaxis2.title': yaxis2Title,
+            'yaxis2.overlaying': 'y',
+            'yaxis2.side': 'right',
+            'yaxis2.type': 'log',
+            'yaxis2.exponentformat': 'power',
+            'yaxis2.ticks': 'inside',
+            'yaxis2.visible': 'true',
+            'yaxis2.color': 'white',
+          };
+        }else{
+          var layout_update = {
+              'yaxis2.title': yaxis2Title,
+              'yaxis2.overlaying': 'y',
+              'yaxis2.side': 'right',
+              'yaxis2.type': 'log',
+              'yaxis2.exponentformat': 'power',
+              'yaxis2.ticks': 'inside',
+              'yaxis2.visible': 'true',
+              'yaxis2.color': 'black',
+            };
+        }
+        return Plotly.relayout('my-graph', layout_update);
+  }
+  function clearYAxis2(){
+    var layout_update = {
+      yaxis2: {
+        title: "",
+    }
+    };
+    return Plotly.relayout('my-graph', layout_update);
+  }
+  function removeLayoutYAxis2(){
+    var layout_update = {
+      yaxis2: {
+        visible: false,
+    }
+  }
+  return Plotly.relayout('my-graph', layout_update);
+}
+function AddSpectralLines(xchange, ychange, errorBarTrue){
   var trace_lines =
         {name: "Spectral Lines",
           mode: 'markers',
@@ -754,43 +693,25 @@ if(this.checked) {
             visible: true,
             thickness: 1,
           }};
+        return  Plotly.addTraces('my-graph', trace_lines);
+}
 
-    var layout_update = {
-      'yaxis2.title': yaxis2Title,
-      'yaxis2.overlaying': 'y',
-      'yaxis2.side': 'right',
-      'yaxis2.type': 'log',
-      'yaxis2.exponentformat': 'power',
-      'yaxis2.ticks': 'inside',
-      // 'yaxis2.ticklen': '10',
-      // 'yaxis2.tickwidth': '2',
-      'yaxis2.visible': 'true',
-      'yaxis2.color': 'white',
-      // 'legend.font': 'color.white',
+var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
+  //call function outputs in form of object
+  var output = SpectralLineUpdate();
+  var yaxis2Title = output.yaxis2Title;
+  var xchange = output.xchange;
+  var ychange = output.ychange;
+  var errorBarTrue = output.errorBarTrue;
 
-
-    };
-
-    Plotly.relayout('my-graph', layout_update);
-    Plotly.addTraces('my-graph', trace_lines);
-
+if(this.checked) {
+  //When switch is on
+    SpectralLineLayout(yaxis2Title);
+    AddSpectralLines(xchange, ychange, errorBarTrue);
   } else {
     //when switch is off
-    //Removes the SED Trace from graph
-    //had to iterate twice, because title still showed
-
-    var layout_update = {
-      yaxis2: {
-        title: "",
-    }
-    };
-    Plotly.relayout('my-graph', layout_update);
-      var layout_update = {
-        yaxis2: {
-          visible: false,
-      }
-    };
-      Plotly.relayout('my-graph', layout_update);
+      clearYAxis2();
+      removeLayoutYAxis2();
       Plotly.deleteTraces('my-graph', 1);
   }
 }
@@ -823,6 +744,10 @@ var xaxis_update = jsFunction = function(value)
 
 }
 //---------------------END of X-Axis----------------------//
+
+
+console.log(yline);
+console.log(ylineWM);
 
 //---------------------Change the Y-Axis Dropdown----------------------//
 var yaxis_update = jsFunction1 = function(value)
@@ -908,8 +833,6 @@ var topHeight = scalescreenSize - scalescreenSize*0.4;
 
 var tableHeight = scalescreenSize*0.4;
 
-// var topItem = $(".data-box").css("height");
-// topItem = topItem.replace("px","");
 var topItem1 = $("#settings-right").css("height");
 topItem1 = topItem1.replace("px","");
 var finalTopHeight = 0;
@@ -923,73 +846,38 @@ if(topHeight < topItem2){
   finalTopHeight = topHeight;
 }
 
-
-
 $(".grid-item--width--main").css("height", finalTopHeight);
-// $(".grid-item").css({"height":finalTopHeight});
 $(".bottom-table").css({"height":tableHeight});
-// $(".grid-item--width--settings").css("height", topItem1);
-$(".grid-item--width--data").css("height", topItem2);
 $grid.packery('layout');
 
 
 
-//---------------------Big Picture mode----------------------//
-document.querySelector("input[name=onoffswitch4]").onchange = function() {
-if(this.checked) {
-  // When switch is on
-    var scalescreenSize = $(window).height();
-    var bigHight = scalescreenSize - scalescreenSize*0.2;
-
-  $(".grid-item--width--main").css({
-    "width": "73%",
-    "height":bigHight
-  });
-  Plotly.Plots.resize(gd);
-
-  // trigger layout after item size changes
-  // $grid.packery('shiftLayout');
-  $grid.packery('layout');
-    // alert("on");
-  } else {
-
-    $(".grid-item--width--main").css({
-      "width": "73%", "height": finalTopHeight
-    });
-    Plotly.Plots.resize(gd);
-    // trigger layout after item size changes
-    $grid.packery('layout');
-    // alert("off");
-  }
-}
-
-
-
-
 //---------------------On and off Data----------------------//
-document.querySelector("input[name=onoffswitch5]").onchange = function() {
-if(this.checked) {
-  //When switch is on
-  $( "#data-window" ).toggle();
-  $(".grid-item--width--main").css({"width": "73%"});
-  $("#myonoffswitch1").prop("checked", true);
-  checkboxDataON();
-  Plotly.Plots.resize(gd);
-  $grid.packery('layout');
-  } else {
-    //when switch is off
-    $( "#data-window" ).toggle();
-    $(".grid-item--width--main").css({"width": "98%"});
-    // $("#myonoffswitch1").prop("checked", false);
-    // checkboxDataOFF();
-    Plotly.Plots.resize(gd);
-    $grid.packery('layout');
-  }
-}
+function BigScreen(){
   $( "#data-window" ).toggle();
   $(".grid-item--width--main").css({"width": "98%"});
   Plotly.Plots.resize(gd);
   $grid.packery('layout');
+}
+function SmallScreen(){
+  $( "#data-window" ).toggle();
+  $(".grid-item--width--main").css({"width": "73%"});
+  $("#myonoffswitch1").prop("checked", true);
+  Plotly.Plots.resize(gd);
+  $grid.packery('layout');
+}
+document.querySelector("input[name=onoffswitch5]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+  SmallScreen();
+  checkboxDataON();
+  } else {
+    //when switch is off
+    BigScreen();
+  }
+}
+//Initialize Large Screen
+ BigScreen();
   //---------------------END of controls----------------------//
 
 
@@ -1009,7 +897,6 @@ if(this.checked) {
     displayModeBar: true
   };
   Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
-  alert("on");
   } else {
     //when switch is off
     //Edits made to the toolbar
@@ -1022,7 +909,6 @@ if(this.checked) {
       displayModeBar: false
     };
     Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
-    alert("off");
   }
 }
   //---------------------END of controls----------------------//
@@ -1030,20 +916,6 @@ if(this.checked) {
 //---------------------Download Plot Button----------------------//
   // 1. Create the button
 document.getElementById("button-download").onclick = function() {
-  // var layout_update = {
-  //   'yaxis2.title': yaxis2Title,
-  //   'yaxis2.overlaying': 'y',
-  //   'yaxis2.side': 'right',
-  //   'yaxis2.type': 'log',
-  //   'yaxis2.exponentformat': 'power',
-  //   'yaxis2.ticks': 'inside',
-  //   // 'yaxis2.ticklen': '10',
-  //   // 'yaxis2.tickwidth': '2',
-  //   'yaxis2.visible': 'true',
-  //   'yaxis2.color': 'white',
-  //   // 'legend.font': 'color.white',
-  // };
-  //
   // Plotly.relayout('my-graph', layout_update);
       Plotly.downloadImage(gd, {
         format: 'svg',
@@ -1127,6 +999,160 @@ myPlot.on('plotly_click', function(data){
 });
 
 //---------------------END OF TABLE----------------------//
+
+
+
+//---------------------Dark Mode----------------------//
+document.querySelector("input[name=onoffswitch12]").onchange = function() {
+if(this.checked) {
+        //Graph axis related things
+        var layout_update = {
+          xaxis: {
+            title: 'log(<em>v</em> [Hz])',
+            type:'log',
+            autorange: true,
+            linecolor: 'white',
+            linewidth: 2,
+            mirror: true,
+            ticks: 'inside',
+            ticklen: 10,
+            tickwidth: 2,
+            exponentformat: "power",
+            color: 'rgb(255,255,255)'
+            },
+          yaxis: {
+            title: 'log(λ [μm])',
+            type:'log',
+            autorange: true,
+            linecolor: 'white',
+            linewidth: 2,
+            mirror: true,
+            ticks: 'inside',
+            ticklen: 10,
+            tickwidth: 2,
+            exponentformat: "power",
+            color: 'rgb(255,255,255)'
+            },
+          margin: {t: 20},
+          hovermode: false,
+          plot_bgcolor: '#151515',
+          paper_bgcolor: '#151515',
+          legend: {
+            bgcolor: 'rgba(0,0,0,0)',
+            orientation: 'h',
+            font: {
+              color: 'white',
+            }
+          }
+        };
+
+        $('body').addClass('dark-mode');
+        Plotly.relayout('my-graph', layout_update);
+
+        if(document.querySelector("input[name=onoffswitch2]").checked){
+          var output = SpectralLineUpdate();
+          var yaxis2Title = output.yaxis2Title;
+          SpectralLineLayout(yaxis2Title);
+        }else{
+          clearYAxis2();
+          removeLayoutYAxis2();
+        }
+  } else {
+    //when switch is off
+    //Graph axis related things
+    var layout_update = {
+      xaxis: {
+        title: 'log(<em>v</em> [Hz])',
+        type:'log',
+        autorange: true,
+        linecolor: 'black',
+        linewidth: 2,
+        mirror: true,
+        ticks: 'inside',
+        ticklen: 10,
+        tickwidth: 2,
+        exponentformat: "power",
+        color: '#444'
+        },
+      yaxis: {
+        title: 'log(λ [μm])',
+        type:'log',
+        autorange: true,
+        linecolor: 'black',
+        linewidth: 2,
+        mirror: true,
+        ticks: 'inside',
+        ticklen: 10,
+        tickwidth: 2,
+        exponentformat: "power",
+        color: '#444'
+        },
+      margin: {t: 20},
+      hovermode: false,
+      plot_bgcolor: '#fff',
+      paper_bgcolor: '#fff',
+      legend: {
+        bgcolor: 'rgba(0,0,0,0)',
+        orientation: 'h',
+        font: {
+          color: 'black',
+        }
+      }
+    };
+    $('body').removeClass('dark-mode');
+    Plotly.relayout('my-graph', layout_update);
+
+    if(document.querySelector("input[name=onoffswitch2]").checked){
+      var output = SpectralLineUpdate();
+      var yaxis2Title = output.yaxis2Title;
+      SpectralLineLayout(yaxis2Title);
+    }else{
+      clearYAxis2();
+      removeLayoutYAxis2();
+    }
+  }
+}
+
+//Graph axis related things
+var layout = {
+  xaxis: {
+    title: 'log(<em>v</em> [Hz])',
+    type:'log',
+    autorange: true,
+    linecolor: 'white',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,
+    exponentformat: "power",
+    color: 'rgb(255,255,255)'
+    },
+  yaxis: {
+    title: 'log(λ [μm])',
+    type:'log',
+    autorange: true,
+    linecolor: 'white',
+    linewidth: 2,
+    mirror: true,
+    ticks: 'inside',
+    ticklen: 10,
+    tickwidth: 2,
+    exponentformat: "power",
+    color: 'rgb(255,255,255)'
+    },
+  margin: {t: 20},
+  hovermode: false,
+  plot_bgcolor: '#151515',
+  paper_bgcolor: '#151515',
+  legend: {
+    bgcolor: 'rgba(0,0,0,0)',
+    orientation: 'h',
+    font: {
+      color: 'white',
+    }
+  }
+};
 
 
 
