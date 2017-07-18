@@ -57,7 +57,11 @@
     <div class="col-sm-2 text-left" id="settings-right">
      <div class="light-dark right-large">
      <div class="blue-title text-center setting-title"><h4>SETTINGS</h4></div>
-     <div class="setting-inner"><h5>Error Bars:</h5>
+
+     <div class="setting-inner">
+       <h4>SED Options:</h4>
+       <hr />
+       <h5>Error Bars:</h5>
       <div class="onoffswitch">
           <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
           <label class="onoffswitch-label" for="myonoffswitch">
@@ -122,7 +126,8 @@
         </select>
 
       </form>
-      <button id="button-download">Download Graph</button>
+      <br />
+      <button id="button-download" class="btn btn-default">Download Graph</button>
     </div>
       </div>
       </div>
@@ -314,6 +319,63 @@ if(this.checked) {
 
 	</script>
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+<script>
+
+window.onload = function() {
+  var layout_update = {
+    xaxis: {
+      title: 'log(<em>v</em> [Hz])',
+      type:'log',
+      autorange: true,
+      linecolor: 'white',
+      linewidth: 2,
+      mirror: true,
+      ticks: 'inside',
+      ticklen: 10,
+      tickwidth: 2,
+      exponentformat: "power",
+      color: 'rgb(255,255,255)'
+      },
+    yaxis: {
+      title: 'log(λ [μm])',
+      type:'log',
+      autorange: true,
+      linecolor: 'white',
+      linewidth: 2,
+      mirror: true,
+      ticks: 'inside',
+      ticklen: 10,
+      tickwidth: 2,
+      exponentformat: "power",
+      color: 'rgb(255,255,255)'
+      },
+    margin: {t: 50},
+    hovermode: false,
+    plot_bgcolor: '#151515',
+    paper_bgcolor: '#151515',
+    color: 'rgb(255,255,255)',
+    bordercolor: 'rgb(255,255,255)',
+    // yaxis2: {
+    //   color: 'rgb(255,255,255)',
+    //   visible: false
+    // },
+  };
+
+  setTimeout(function(){Plotly.relayout('my-graph', layout_update);}, 1);
+
+};
+</script>
+
+
+
+>>>>>>> a0ed90f4c87e9caaba6a531f95394cd1915bff6f
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-1.11.3.min.js"></script>
 
@@ -449,6 +511,10 @@ var data = [
 
 //Graph axis related things
 var layout = {
+  title: 'Spectral Energy Distribution (SED) for ARP 220',
+  titlefont: {
+    color: 'white',
+  },
   xaxis: {
     title: 'log(<em>v</em> [Hz])',
     type:'log',
@@ -518,6 +584,7 @@ var toolbar = {
 	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
   displaylogo: false,
   modeBarButtonsToAdd: [toImage2],
+  displayModeBar: false
 };
 
 
