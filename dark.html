@@ -126,10 +126,11 @@
         </select>
 
       </form>
-      <form>
+
       Input Second Galaxy: <input type="text" name="additionalgalaxy"><br>
 
-      </form><button onclick="AddSED()">Submit</button>
+      <button onclick="AddSED()" class="btn btn-default">Submit</button>
+      <br />
       <br />
       <button id="button-download" class="btn btn-default">Download Graph</button>
 
@@ -266,55 +267,6 @@
 
 </div>
 
-<script>
-// $(document).ready(function(){
-//   $.ajax({
-//     type: "GET",
-//     url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + "arp220" + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
-//     dataType: "xml",
-//     success: xmlParser
-//   });
-// });
-//
-// function xmlParser(xml){
-//   var data = [];
-//     $(xml).find("TR").each(function(idx, v) {
-//         data[idx] = [];
-//         $(v).find("TD").each(function( i , vi) {
-//             data[idx].push( $(vi).text() );
-//         });
-//     });
-//     var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
-//         NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
-//         SMode = [], Qualifiers = [], Comments = [];
-//     console.log( data );
-//     for(var i = 0; i < data.length; i++){
-//       //Table Data
-//       number.push(data[i][0]);
-//       OPassband.push(data[i][1]);
-//       PMeasurement.push(data[i][2]);
-//       Uncertainty.push(data[i][3]);
-//       Units.push(data[i][4]);
-//       Frequency.push(data[i][5]);
-//       NEDMeasurement.push(data[i][6]);
-//       NEDUncertainty.push(data[i][7]);
-//       NEDUnits.push(data[i][8]);
-//       Refcode.push(data[i][9]);
-//       Significance.push(data[i][10]);
-//       PFrequency.push(data[i][11]);
-//       FMode.push(data[i][12]);
-//       CTargeted.push(data[i][13]);
-//       SMode.push(data[i][14]);
-//       Qualifiers.push(data[i][15]);
-//       Comments.push(data[i][16]);
-//     }
-// }
-
-
-
-
-</script>
-
 
 
 
@@ -400,11 +352,23 @@ var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = []
     NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
     SMode = [], Qualifiers = [], Comments = [];
     var lengthCounter;
+    var lengthCounter2;
     var lengthCounterTotal;
     var searchstring;
 
+    var xtemp = [], ytemp = [], typetemp = [], errorBartemp = [], xlinetemp = [], ylinetemp = [];
+
+
+      var x = [], y = [], type = [], errorBar = [],
+      xline = [], yline = [], xWavelength = [], xlineWavelength = [], ySI = [],
+      yJyHz = [], yWM = [], ylineWM = [],
+       errorBarSI = [], errorBarJyHz = [], errorBarWM = [];
+       var errorBarNull = [];
+
+
 function AddSED(){
-  searchstring = $('input[name=additionalgalaxy]').val();
+  // searchstring = $('input[name=additionalgalaxy]').val();
+  searchstring = "ngc6240";
   // var searchstring = searchstring.toString();
   console.log(searchstring);
   $.ajax({
@@ -424,6 +388,7 @@ function xmlParserAdd(xml){
             data[idx].push( $(vi).text() );
         });
     });
+
     lengthCounter = OPassband.length;
     for(var i = 0; i < data.length; i++){
       //Table Data
@@ -445,7 +410,12 @@ function xmlParserAdd(xml){
       Comments.push(data[i][16]);
     }
     AddPlot();
+    StoreValues();
+    CompleteValues();
+    console.log(number);
 }
+
+
 
 function AddPlot(){
   lengthCounterTotal = OPassband.length;
@@ -455,25 +425,28 @@ function AddPlot(){
   errorBar = NEDUncertainty.slice();
   xline = Frequency.slice();
   yline = NEDMeasurement.slice();
-  x.splice(0, lengthCounter);
-  y.splice(0, lengthCounter);
-  type.splice(0, lengthCounter);
-  errorBar.splice(0, lengthCounter);
-  xline.splice(0, lengthCounter);
-  yline.splice(0, lengthCounter);
-  console.log(lengthCounter);
-  console.log(lengthCounterTotal);
+
+  for(var i = 0; i <= lengthCounter; i++){
+    delete x[i];
+    delete y[i];
+    delete type[i];
+    delete errorBar[i];
+    delete xline[i];
+    delete yline[i];
+  }
+
   var numberNew = [];
+
   var newSED = lengthCounterTotal - lengthCounter;
   for(var i = lengthCounter; i <= lengthCounterTotal; i++){
-    number[i] = i;
+    number[i-1] = i;
   }
+
   lengthCounter = lengthCounter + 1;
-  for(var i = 0; i <= newSED; i++){
-    numberNew[i] = lengthCounter + i;
-  }
+
 lengthCounter = lengthCounterTotal;
-console.log(lengthCounter);
+
+// console.log(lengthCounter);
 
 //ErrorBar Function
 ErrorBarParse();
@@ -485,14 +458,66 @@ LineSplit();
         {name: searchstring,
           mode: 'markers',
           type: "scatter",
-          text: numberNew,
+          text: number,
           x: x,
           y: y,
+          error_y: {
+            type: 'data',
+            array: errorBar,
+            visible: true,
+            thickness: 1,
+            // color: 'rgb(0,0,139)'
+          }
         };
-        return  Plotly.addTraces('my-graph', trace_lines);
+  return  Plotly.addTraces('my-graph', trace_lines);
+}
+
+function StoreValues(){
+  var initial = lengthCounter2;
+var startVar = lengthCounter2 - x.length;
+ if(isNaN(startVar) === true){
+   startVar = 0;
+}
+if(startVar == 0 ){
+  startVar = 0;
+}else{
+  startVar = initial;
+}
+
+  for(var i = startVar; i <= x.length; i++){
+    xtemp[i] = x[i];
+    ytemp[i] = y[i];
+    typetemp[i] = type[i];
+    errorBartemp[i] = errorBar[i];
+    xlinetemp[i] = xline[i];
+    ylinetemp[i] = yline[i];
+  }
+  lengthCounter2 = x.length;
+
+}
+
+function CompleteValues(){
+  // console.log(x.length);
+
+  x = xtemp.slice();
+  y = ytemp.slice();
+  type = typetemp.slice();
+  errorBar = errorBartemp.slice();
+  xline = xlinetemp.slice();
+  yline = ylinetemp.slice();
+
+UnitConversions();
+//splits the lines from the SED points
+LineSplit();
+
+for(var i = 0; i <= xWavelength.length; i++){
+  if(isNaN(xWavelength[i]) === true){
+  delete xWavelength[i]
+}
 }
 
 
+}
 
     $(document).ready(function(){
       $.ajax({
@@ -532,19 +557,15 @@ LineSplit();
           Qualifiers.push(data[i][15]);
           Comments.push(data[i][16]);
         }
+          lengthCounter2 = OPassband.length;
         for(var i = 1; i <= data.length; i++){
-          number[i] = i;
+          number[i-1] = i;
         }
         LoadPlot();
+        StoreValues();
     }
 
 
-
-  var x = [], y = [], type = [], errorBar = [],
-  xline = [], yline = [], xWavelength = [], xlineWavelength = [], ySI = [],
-  yJyHz = [], yWM = [], ylineWM = [],
-   errorBarSI = [], errorBarJyHz = [], errorBarWM = [];
-   var errorBarNull = [];
 
 
 
@@ -581,8 +602,12 @@ function ErrorBarParse(){
   //filters out the strings and removes "+/- syntax"
  for(var i = 0; i < errorBar.length; i++)
  {
+   if(errorBar[i] === undefined){
+     errorBar[i] = "";
+   }
     errorBar[i] = errorBar[i].replace("+/-",""); //removes "+/-"
     errorBarNull.push(0);
+
  }
 }
 //---------------------Computes both errorbar values and unit change values----------------------//
@@ -612,6 +637,7 @@ function LoadPlot(){
       errorBar = NEDUncertainty.slice();
       xline = Frequency.slice();
       yline = NEDMeasurement.slice();
+
 
 
 //ErrorBar Function
@@ -684,7 +710,7 @@ var layout = {
     exponentformat: "power",
     visible: false
     },
-  margin: {t: 20},
+  margin: {t: 50},
   hovermode: false,
   plot_bgcolor: '#fff',
   paper_bgcolor: '#fff',
@@ -720,19 +746,32 @@ var toolbar = {
 };
 
 
-
 var xchange = xline.slice();
 var ychange = yline.slice();
 var errorBarTrue = errorBar;
+
+function ErrorBarON(){
+  //When Switch is on
+  var data_update = {
+    error_y: {
+      array: errorBarTrue,
+      thickness: 1,
+    }};
+
+    return Plotly.restyle('my-graph', data_update);
+}
 
 //---------------------Error Bar Switch----------------------//
 //Error Bars
 var checkbox = document.querySelector("input[name=onoffswitch]").onchange = function() {
 if(this.checked) {
+
   //checks which yaxis is on
   var answer2 = document.getElementById("ddl2");
   if(answer2[answer2.selectedIndex].value == 1){
     errorBarTrue = errorBar;
+
+
   }
   else if(answer2[answer2.selectedIndex].value == 2){
     errorBarTrue = errorBarSI;
@@ -746,21 +785,15 @@ if(this.checked) {
 
 
 
-  //When Switch is on
-  var data_update = {
-    error_y: {
-      array: errorBarTrue,
-      thickness: 1,
-    }};
-
-    Plotly.restyle('my-graph', data_update);
+  ErrorBarON();
   } else {
     //when Switch is off
     var data_update = {
       error_y: {
         array: errorBarNull,
         thickness: 0.001,
-      }};
+      }
+    };
 
     Plotly.restyle('my-graph', data_update);
   }
@@ -920,7 +953,7 @@ var xaxis_update = jsFunction = function(value)
 {
   if(value == 1){
     var data_update = {
-      x:[x,xline]
+      x:[x],
     };
       var layout_update = {
         'xaxis.title': 'log(<em>v</em> [Hz])'
@@ -931,7 +964,7 @@ var xaxis_update = jsFunction = function(value)
   }
   else{
     var data_update = {
-      x:[xWavelength,xlineWavelength]
+      x:[xWavelength]
     };
       var layout_update = {
         'xaxis.title': 'log(λ [μm])'
@@ -951,7 +984,7 @@ var yaxis_update = jsFunction1 = function(value)
 {
   if(value == 1){
     var data_update = {
-      y:[y,yline],
+      y:[y],
       error_y: {
         array: errorBar,
         thickness: 1,
@@ -965,7 +998,7 @@ var yaxis_update = jsFunction1 = function(value)
   }
   else if(value == 2){
     var data_update = {
-      y:[ySI,ylineWM],
+      y:[ySI],
       error_y: {
         array: errorBarSI,
         thickness: 1,
@@ -979,7 +1012,7 @@ var yaxis_update = jsFunction1 = function(value)
   }
   else if(value == 3){
     var data_update = {
-      y:[yJyHz,yline],
+      y:[yJyHz],
       error_y: {
         array: errorBarJyHz,
         thickness: 1,
@@ -992,7 +1025,7 @@ var yaxis_update = jsFunction1 = function(value)
   }
   else{
     var data_update = {
-      y:[yWM,ylineWM],
+      y:[yWM],
       error_y: {
         array: errorBarWM,
         thickness: 1,
@@ -1234,7 +1267,7 @@ if(this.checked) {
             exponentformat: "power",
             color: 'rgb(255,255,255)'
             },
-          margin: {t: 20},
+          margin: {t: 50},
           hovermode: false,
           plot_bgcolor: '#151515',
           paper_bgcolor: '#151515',
@@ -1292,7 +1325,7 @@ if(this.checked) {
         exponentformat: "power",
         color: '#444'
         },
-      margin: {t: 20},
+      margin: {t: 50},
       hovermode: false,
       plot_bgcolor: '#fff',
       paper_bgcolor: '#fff',
@@ -1346,7 +1379,7 @@ var layout = {
     exponentformat: "power",
     color: 'rgb(255,255,255)'
     },
-  margin: {t: 20},
+  margin: {t: 50},
   hovermode: false,
   plot_bgcolor: '#151515',
   paper_bgcolor: '#151515',
@@ -1362,8 +1395,6 @@ var layout = {
 
 }
 
-//
-// });
 
 </script>
 
