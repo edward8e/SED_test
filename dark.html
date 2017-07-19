@@ -126,8 +126,17 @@
         </select>
 
       </form>
+      <form>
+      Input Second Galaxy: <input type="text" name="additionalgalaxy"><br>
+
+      </form><button onclick="AddSED()">Submit</button>
       <br />
       <button id="button-download" class="btn btn-default">Download Graph</button>
+
+      <p id="someElement"></p>
+      <div id="result">
+
+      </div>
     </div>
       </div>
       </div>
@@ -257,6 +266,54 @@
 
 </div>
 
+<script>
+// $(document).ready(function(){
+//   $.ajax({
+//     type: "GET",
+//     url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + "arp220" + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+//     dataType: "xml",
+//     success: xmlParser
+//   });
+// });
+//
+// function xmlParser(xml){
+//   var data = [];
+//     $(xml).find("TR").each(function(idx, v) {
+//         data[idx] = [];
+//         $(v).find("TD").each(function( i , vi) {
+//             data[idx].push( $(vi).text() );
+//         });
+//     });
+//     var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
+//         NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
+//         SMode = [], Qualifiers = [], Comments = [];
+//     console.log( data );
+//     for(var i = 0; i < data.length; i++){
+//       //Table Data
+//       number.push(data[i][0]);
+//       OPassband.push(data[i][1]);
+//       PMeasurement.push(data[i][2]);
+//       Uncertainty.push(data[i][3]);
+//       Units.push(data[i][4]);
+//       Frequency.push(data[i][5]);
+//       NEDMeasurement.push(data[i][6]);
+//       NEDUncertainty.push(data[i][7]);
+//       NEDUnits.push(data[i][8]);
+//       Refcode.push(data[i][9]);
+//       Significance.push(data[i][10]);
+//       PFrequency.push(data[i][11]);
+//       FMode.push(data[i][12]);
+//       CTargeted.push(data[i][13]);
+//       SMode.push(data[i][14]);
+//       Qualifiers.push(data[i][15]);
+//       Comments.push(data[i][16]);
+//     }
+// }
+
+
+
+
+</script>
 
 
 
@@ -339,46 +396,160 @@ if(this.checked) {
 
 <!-- SED Prototype JS -->
 <script>
-//pulls in the CSV file
-Plotly.d3.csv('https://edward8e.github.io/sed_proto/arp_220.csv', function(err, dataCSV){
+var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
+    NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
+    SMode = [], Qualifiers = [], Comments = [];
+    var lengthCounter;
+    var lengthCounterTotal;
+    var searchstring;
 
-  var x = [], y = [], type = [], number = [], errorBar = [],
+function AddSED(){
+  searchstring = $('input[name=additionalgalaxy]').val();
+  // var searchstring = searchstring.toString();
+  console.log(searchstring);
+  $.ajax({
+    type: "GET",
+    url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + searchstring + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+    dataType: "xml",
+    success: xmlParserAdd
+  });
+
+}
+
+function xmlParserAdd(xml){
+  var data = [];
+    $(xml).find("TR").each(function(idx, v) {
+        data[idx] = [];
+        $(v).find("TD").each(function( i , vi) {
+            data[idx].push( $(vi).text() );
+        });
+    });
+    lengthCounter = OPassband.length;
+    for(var i = 0; i < data.length; i++){
+      //Table Data
+      OPassband.push(data[i][1]);
+      PMeasurement.push(data[i][2]);
+      Uncertainty.push(data[i][3]);
+      Units.push(data[i][4]);
+      Frequency.push(data[i][5]);
+      NEDMeasurement.push(data[i][6]);
+      NEDUncertainty.push(data[i][7]);
+      NEDUnits.push(data[i][8]);
+      Refcode.push(data[i][9]);
+      Significance.push(data[i][10]);
+      PFrequency.push(data[i][11]);
+      FMode.push(data[i][12]);
+      CTargeted.push(data[i][13]);
+      SMode.push(data[i][14]);
+      Qualifiers.push(data[i][15]);
+      Comments.push(data[i][16]);
+    }
+    AddPlot();
+}
+
+function AddPlot(){
+  lengthCounterTotal = OPassband.length;
+  x = Frequency.slice();
+  y = NEDMeasurement.slice();
+  type = FMode.slice();
+  errorBar = NEDUncertainty.slice();
+  xline = Frequency.slice();
+  yline = NEDMeasurement.slice();
+  x.splice(0, lengthCounter);
+  y.splice(0, lengthCounter);
+  type.splice(0, lengthCounter);
+  errorBar.splice(0, lengthCounter);
+  xline.splice(0, lengthCounter);
+  yline.splice(0, lengthCounter);
+  console.log(lengthCounter);
+  console.log(lengthCounterTotal);
+  var numberNew = [];
+  var newSED = lengthCounterTotal - lengthCounter;
+  for(var i = lengthCounter; i <= lengthCounterTotal; i++){
+    number[i] = i;
+  }
+  lengthCounter = lengthCounter + 1;
+  for(var i = 0; i <= newSED; i++){
+    numberNew[i] = lengthCounter + i;
+  }
+lengthCounter = lengthCounterTotal;
+console.log(lengthCounter);
+
+//ErrorBar Function
+ErrorBarParse();
+//Unit Conversions for SED Points
+UnitConversions();
+//splits the lines from the SED points
+LineSplit();
+  var trace_lines =
+        {name: searchstring,
+          mode: 'markers',
+          type: "scatter",
+          text: numberNew,
+          x: x,
+          y: y,
+        };
+        return  Plotly.addTraces('my-graph', trace_lines);
+}
+
+
+
+    $(document).ready(function(){
+      $.ajax({
+        type: "GET",
+        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + "arp220" + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+        dataType: "xml",
+        success: xmlParser
+      });
+    });
+
+    function xmlParser(xml){
+      var data = [];
+        $(xml).find("TR").each(function(idx, v) {
+            data[idx] = [];
+            $(v).find("TD").each(function( i , vi) {
+                data[idx].push( $(vi).text() );
+            });
+        });
+
+
+        for(var i = 0; i < data.length; i++){
+          //Table Data
+          OPassband.push(data[i][1]);
+          PMeasurement.push(data[i][2]);
+          Uncertainty.push(data[i][3]);
+          Units.push(data[i][4]);
+          Frequency.push(data[i][5]);
+          NEDMeasurement.push(data[i][6]);
+          NEDUncertainty.push(data[i][7]);
+          NEDUnits.push(data[i][8]);
+          Refcode.push(data[i][9]);
+          Significance.push(data[i][10]);
+          PFrequency.push(data[i][11]);
+          FMode.push(data[i][12]);
+          CTargeted.push(data[i][13]);
+          SMode.push(data[i][14]);
+          Qualifiers.push(data[i][15]);
+          Comments.push(data[i][16]);
+        }
+        for(var i = 1; i <= data.length; i++){
+          number[i] = i;
+        }
+        LoadPlot();
+    }
+
+
+
+  var x = [], y = [], type = [], errorBar = [],
   xline = [], yline = [], xWavelength = [], xlineWavelength = [], ySI = [],
   yJyHz = [], yWM = [], ylineWM = [],
    errorBarSI = [], errorBarJyHz = [], errorBarWM = [];
    var errorBarNull = [];
 
-  var OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
-      NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
-      SMode = [], Qualifiers = [], Comments = [];
-  dataCSV.forEach(function(p) {
-          //Table Data
-          number.push(p['No.']);
-          OPassband.push(p['Observed Passband']);
-          PMeasurement.push(p['Photometry Measurement']);
-          Uncertainty.push(p['Uncertainty']);
-          Units.push(p['Units']);
-          Frequency.push(p['Frequency']);
-          NEDMeasurement.push(p['NED Photometry Measurement']);
-          NEDUncertainty.push(p['NED Uncertainty']);
-          NEDUnits.push(p['NED Units']);
-          Refcode.push(p['Refcode']);
-          Significance.push(p['Significance']);
-          PFrequency.push(p['Published frequency']);
-          FMode.push(p['Frequency Mode']);
-          CTargeted.push(p['Coordinates Targeted']);
-          SMode.push(p['Spatial Mode']);
-          Qualifiers.push(p['Qualifiers']);
-          Comments.push(p['Comments']);
-      });
 
-      x = Frequency.slice();
-      y = NEDMeasurement.slice();
-      type = FMode.slice();
-      errorBar = NEDUncertainty.slice();
-      xline = Frequency.slice();
-      yline = NEDMeasurement.slice();
-      var arrayLength = x.length;
+
+
+
 
 //---------------------Splits x and y broad-band and line points----------------------//
 function LineSplit(){
@@ -416,7 +587,7 @@ function ErrorBarParse(){
 }
 //---------------------Computes both errorbar values and unit change values----------------------//
 function UnitConversions(){
-  for(var i = 0; i < arrayLength; i++){
+  for(var i = 0; i < x.length; i++){
    xWavelength[i] = (299792458/x[i]) * 1000000;
    xlineWavelength[i] = (299792458/xline[i]) * 1000000;
 
@@ -431,6 +602,16 @@ function UnitConversions(){
    errorBarWM[i] = errorBarSI[i] * x[i];
  }
 }
+
+
+
+function LoadPlot(){
+      x = Frequency.slice();
+      y = NEDMeasurement.slice();
+      type = FMode.slice();
+      errorBar = NEDUncertainty.slice();
+      xline = Frequency.slice();
+      yline = NEDMeasurement.slice();
 
 
 //ErrorBar Function
@@ -1179,10 +1360,10 @@ var layout = {
 };
 
 
+}
 
-
-
-});
+//
+// });
 
 </script>
 
