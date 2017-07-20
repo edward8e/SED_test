@@ -180,12 +180,22 @@
       </div>
     </nav>
 
+
+
   <div class="grid">
+
   <div class="grid-item grid-item--width--main grid-item--height2">
+
     <!-- <div class="SED-title">
       <h3>Spectral Energy Distribution (SED) for ARP 220</h3>
     </div> -->
-    <div id="my-graph"></div>
+    <div id="my-graph"></div><div class="lds-css ng-scope" id="loading">
+    <div style="width:100%;height:100%" class="lds-facebook" align="center">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
   </div>
 
 
@@ -357,6 +367,9 @@ var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = []
     var searchstring;
 
     var xtemp = [], ytemp = [], typetemp = [], errorBartemp = [], xlinetemp = [], ylinetemp = [];
+    var xWork = [], yWork = [], typeWork = [], errorBarWork = [], xlineWork = [], ylineWork = [];
+    var xWavelengthWork = [], xlineWavelengthWork = [], ySIWork = [], yJyHzWork = [], yWMWork = [], ylineWMWork = [],
+     errorBarSIWork = [], errorBarJyHzWork = [], errorBarWMWork = [];
 
 
       var x = [], y = [], type = [], errorBar = [],
@@ -365,6 +378,8 @@ var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = []
        errorBarSI = [], errorBarJyHz = [], errorBarWM = [];
        var errorBarNull = [];
 
+var data = [];
+var TotalTraces = 0;
 
 function AddSED(){
   // searchstring = $('input[name=additionalgalaxy]').val();
@@ -410,30 +425,28 @@ function xmlParserAdd(xml){
       Comments.push(data[i][16]);
     }
     AddPlot();
-    StoreValues();
-    CompleteValues();
-    console.log(number);
+    // console.log(number);
 }
 
 
 
 function AddPlot(){
   lengthCounterTotal = OPassband.length;
-  x = Frequency.slice();
-  y = NEDMeasurement.slice();
-  type = FMode.slice();
-  errorBar = NEDUncertainty.slice();
-  xline = Frequency.slice();
-  yline = NEDMeasurement.slice();
 
-  for(var i = 0; i <= lengthCounter; i++){
-    delete x[i];
-    delete y[i];
-    delete type[i];
-    delete errorBar[i];
-    delete xline[i];
-    delete yline[i];
-  }
+  xWork = Frequency.slice(lengthCounter);
+  yWork = NEDMeasurement.slice(lengthCounter);
+  typeWork = FMode.slice(lengthCounter);
+  errorBarWork = NEDUncertainty.slice(lengthCounter);
+  xlineWork = Frequency.slice(lengthCounter);
+  ylineWork = NEDMeasurement.slice(lengthCounter);
+
+  xWavelengthWork = [];
+  ySIWork = [];
+  yJyHzWork = [];
+  yWMWork = [];
+  errorBarSIWork = [];
+  errorBarJyHzWork = [];
+  errorBarWMWork = [];
 
   var numberNew = [];
 
@@ -441,12 +454,10 @@ function AddPlot(){
   for(var i = lengthCounter; i <= lengthCounterTotal; i++){
     number[i-1] = i;
   }
+  numberNew = number.slice(lengthCounter);
 
   lengthCounter = lengthCounter + 1;
-
-lengthCounter = lengthCounterTotal;
-
-// console.log(lengthCounter);
+  lengthCounter = lengthCounterTotal;
 
 //ErrorBar Function
 ErrorBarParse();
@@ -454,75 +465,36 @@ ErrorBarParse();
 UnitConversions();
 //splits the lines from the SED points
 LineSplit();
+//Adds computed data to arrays
+LoadData();
+console.log(xline);
   var trace_lines =
         {name: searchstring,
           mode: 'markers',
           type: "scatter",
-          text: number,
-          x: x,
-          y: y,
+          text: numberNew,
+          x: xWork,
+          y: yWork,
           error_y: {
             type: 'data',
-            array: errorBar,
+            array: errorBarWork,
             visible: true,
             thickness: 1,
             // color: 'rgb(0,0,139)'
           }
         };
+          TotalTraces = TotalTraces + 1;
+          console.log(TotalTraces);
+
   return  Plotly.addTraces('my-graph', trace_lines);
 }
 
-function StoreValues(){
-  var initial = lengthCounter2;
-var startVar = lengthCounter2 - x.length;
- if(isNaN(startVar) === true){
-   startVar = 0;
-}
-if(startVar == 0 ){
-  startVar = 0;
-}else{
-  startVar = initial;
-}
-
-  for(var i = startVar; i <= x.length; i++){
-    xtemp[i] = x[i];
-    ytemp[i] = y[i];
-    typetemp[i] = type[i];
-    errorBartemp[i] = errorBar[i];
-    xlinetemp[i] = xline[i];
-    ylinetemp[i] = yline[i];
-  }
-  lengthCounter2 = x.length;
-
-}
-
-function CompleteValues(){
-  // console.log(x.length);
-
-  x = xtemp.slice();
-  y = ytemp.slice();
-  type = typetemp.slice();
-  errorBar = errorBartemp.slice();
-  xline = xlinetemp.slice();
-  yline = ylinetemp.slice();
-
-UnitConversions();
-//splits the lines from the SED points
-LineSplit();
-
-for(var i = 0; i <= xWavelength.length; i++){
-  if(isNaN(xWavelength[i]) === true){
-  delete xWavelength[i]
-}
-}
-
-
-}
-
     $(document).ready(function(){
+      // var value = prompt("Type in inital Galaxy:","arp220");
+      var value = "arp220";
       $.ajax({
         type: "GET",
-        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + "arp220" + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + value + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
         dataType: "xml",
         success: xmlParser
       });
@@ -562,9 +534,8 @@ for(var i = 0; i <= xWavelength.length; i++){
           number[i-1] = i;
         }
         LoadPlot();
-        StoreValues();
+        $("#loading").fadeOut();
     }
-
 
 
 
@@ -574,71 +545,119 @@ for(var i = 0; i <= xWavelength.length; i++){
 
 //---------------------Splits x and y broad-band and line points----------------------//
 function LineSplit(){
-  for(var i = 0; i < type.length; i++){
+  for(var i = 0; i < typeWork.length; i++){
     if (
-      type[i] == ' Line measurement; flux integrated over line; lines measured in emission'
+      typeWork[i] == ' Line measurement; flux integrated over line; lines measured in emission'
       ||
-      type[i] == ' Line measurement; flux integrated over line'
+      typeWork[i] == ' Line measurement; flux integrated over line'
     ){
-      delete x[i];
-      delete xWavelength[i];
-      delete y[i];
-      delete ySI[i];
-      delete yJyHz[i];
-      delete yWM[i];
-      errorBarWM[i] = errorBar[i] * Math.pow(10, -26);
-      errorBarJyHz[i] = errorBar[i];
-      errorBarSI[i] = errorBarWM[i];
+      delete xWork[i];
+      delete xWavelengthWork[i];
+      delete yWork[i];
+      delete ySIWork[i];
+      delete yJyHzWork[i];
+      delete yWMWork[i];
+      errorBarWMWork[i] = errorBarWork[i] * Math.pow(10, -26);
+      errorBarJyHzWork[i] = errorBarWork[i];
+      errorBarSIWork[i] = errorBarWMWork[i];
     }else{
-      delete xline[i];
-      delete yline[i];
-      delete ylineWM[i];
-      delete xlineWavelength[i];
+      delete xlineWork[i];
+      delete ylineWork[i];
+      delete ylineWMWork[i];
+      delete xlineWavelengthWork[i];
     }
   }
 }
 //---------------------Parses the ErrorBar Values and creates ErrorBarNull----------------------//
 function ErrorBarParse(){
   //filters out the strings and removes "+/- syntax"
- for(var i = 0; i < errorBar.length; i++)
- {
-   if(errorBar[i] === undefined){
-     errorBar[i] = "";
+ for(var i = 0; i < errorBarWork.length; i++){
+   if(errorBarWork[i] === undefined){
+     errorBarWork[i] = "";
    }
-    errorBar[i] = errorBar[i].replace("+/-",""); //removes "+/-"
+    errorBarWork[i] = errorBarWork[i].replace("+/-",""); //removes "+/-"
     errorBarNull.push(0);
-
  }
 }
 //---------------------Computes both errorbar values and unit change values----------------------//
 function UnitConversions(){
-  for(var i = 0; i < x.length; i++){
-   xWavelength[i] = (299792458/x[i]) * 1000000;
-   xlineWavelength[i] = (299792458/xline[i]) * 1000000;
+  for(var i = 0; i < xWork.length; i++){
+   xWavelengthWork[i] = (299792458/xWork[i]) * 1000000;
+   xlineWavelengthWork[i] = (299792458/xlineWork[i]) * 1000000;
 
-   ySI[i] = y[i] * Math.pow(10, -26);
-   errorBarSI[i] = errorBar[i] * Math.pow(10, -26);
+   ySIWork[i] = yWork[i] * Math.pow(10, -26);
+   errorBarSIWork[i] = errorBarWork[i] * Math.pow(10, -26);
 
-   yJyHz[i] = y[i] * x[i];
-   errorBarJyHz[i] = errorBar[i] * x[i];
+   yJyHzWork[i] = yWork[i] * xWork[i];
+   errorBarJyHzWork[i] = errorBarWork[i] * xWork[i];
 
-   yWM[i] = ySI[i] * x[i];
-   ylineWM[i] = yline[i] * Math.pow(10, -26);
-   errorBarWM[i] = errorBarSI[i] * x[i];
+   yWMWork[i] = ySIWork[i] * xWork[i];
+   ylineWMWork[i] = ylineWork[i] * Math.pow(10, -26);
+   errorBarWMWork[i] = errorBarSIWork[i] * xWork[i];
  }
+}
+
+function LoadData(){
+  x.push(xWork);
+  xWavelength.push(xWavelengthWork);
+  y.push(yWork);
+  ySI.push(ySIWork);
+  yJyHz.push(yJyHzWork);
+  yWM.push(yWMWork);
+  errorBar.push(errorBarWork);
+  errorBarSI.push(errorBarSIWork);
+  errorBarJyHz.push(errorBarJyHzWork);
+  errorBarWM.push(errorBarWMWork);
+  for(var i = 0; i < xlineWork.length; i++){
+    xline.push(xlineWork[i]);
+    yline.push(ylineWork[i]);
+    xlineWavelength.push(xlineWavelengthWork[i]);
+    ylineWM.push(ylineWMWork[i]);
+  }
+}
+function CreateTrace(){
+  var trace = {
+    mode: 'markers',
+    type: "scatter",
+    name: "SED Points",
+    text: number,
+    // marker:{color: 'rgb(0,0,139)'},
+    //
+    // marker: {symbol: 'circle-open'},
+    x: xWork,
+    y: yWork,
+    error_y: {
+      type: 'data',
+      array: errorBarWork,
+      visible: true,
+      thickness: 1,
+      // color: 'rgb(0,0,139)'
+    }
+  };
+  data.push(trace);
+  TotalTraces = TotalTraces + 1;
 }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 function LoadPlot(){
-      x = Frequency.slice();
-      y = NEDMeasurement.slice();
-      type = FMode.slice();
-      errorBar = NEDUncertainty.slice();
-      xline = Frequency.slice();
-      yline = NEDMeasurement.slice();
-
-
+      xWork = Frequency.slice();
+      yWork = NEDMeasurement.slice();
+      typeWork = FMode.slice();
+      errorBarWork = NEDUncertainty.slice();
+      xlineWork = Frequency.slice();
+      ylineWork = NEDMeasurement.slice();
 
 //ErrorBar Function
 ErrorBarParse();
@@ -646,26 +665,10 @@ ErrorBarParse();
 UnitConversions();
 //splits the lines from the SED points
 LineSplit();
-
-
-var data = [
-      {mode: 'markers',
-      type: "scatter",
-      name: "SED Points",
-      text: number,
-      // marker:{color: 'rgb(0,0,139)'},
-      //
-      // marker: {symbol: 'circle-open'},
-      x: x,
-      y: y,
-      error_y: {
-        type: 'data',
-        array: errorBar,
-        visible: true,
-        thickness: 1,
-        // color: 'rgb(0,0,139)'
-      }}
-  ];
+//pushes the array of data into function
+LoadData();
+//Creates object and appends to graph
+CreateTrace();
 
 //Graph axis related things
 var layout = {
@@ -750,15 +753,15 @@ var xchange = xline.slice();
 var ychange = yline.slice();
 var errorBarTrue = errorBar;
 
-function ErrorBarON(){
+function ErrorBarON(count){
   //When Switch is on
   var data_update = {
     error_y: {
-      array: errorBarTrue,
+      array: errorBarTrue[count],
       thickness: 1,
     }};
+    return Plotly.restyle('my-graph', data_update, count);
 
-    return Plotly.restyle('my-graph', data_update);
 }
 
 //---------------------Error Bar Switch----------------------//
@@ -766,26 +769,29 @@ function ErrorBarON(){
 var checkbox = document.querySelector("input[name=onoffswitch]").onchange = function() {
 if(this.checked) {
 
-  //checks which yaxis is on
+for(var i = 0; i < TotalTraces; i++){
+    //checks which yaxis is on
   var answer2 = document.getElementById("ddl2");
   if(answer2[answer2.selectedIndex].value == 1){
-    errorBarTrue = errorBar;
-
-
+    errorBarTrue[i] = errorBar[i];
   }
   else if(answer2[answer2.selectedIndex].value == 2){
-    errorBarTrue = errorBarSI;
+    errorBarTrue[i] = errorBarSI[i];
   }
   else if(answer2[answer2.selectedIndex].value == 3){
-    errorBarTrue = errorBarJyHz;
+    errorBarTrue[i] = errorBarJyHz[i];
   }
   else {
-    errorBarTrue = errorBarWM;
+    errorBarTrue[i] = errorBarWM[i];
   }
+}
 
 
 
-  ErrorBarON();
+for(var i = 0; i < TotalTraces; i++){
+    ErrorBarON(i);
+}
+
   } else {
     //when Switch is off
     var data_update = {
@@ -798,6 +804,8 @@ if(this.checked) {
     Plotly.restyle('my-graph', data_update);
   }
 }
+
+
 
 
 //---------------------Hover on and off----------------------//
@@ -827,8 +835,13 @@ if(this.checked) {
 
 
 
+
+
+
 //---------------------Spectral lines on and off----------------------//
 function SpectralLineUpdate(){
+  console.log(xline);
+  console.log(xlineWavelength);
     var yaxis2Title;
   //Checks which xaxis is on
     var answer = document.getElementById("ddl");
@@ -910,6 +923,7 @@ function SpectralLineLayout(yaxis2Title){
   }
   return Plotly.relayout('my-graph', layout_update);
 }
+var SpectralCurrent = 0;
 function AddSpectralLines(xchange, ychange, errorBarTrue){
   var trace_lines =
         {name: "Spectral Lines",
@@ -925,7 +939,8 @@ function AddSpectralLines(xchange, ychange, errorBarTrue){
             visible: true,
             thickness: 1,
           }};
-        return  Plotly.addTraces('my-graph', trace_lines);
+          SpectralCurrent = TotalTraces;
+        return  Plotly.addTraces('my-graph', trace_lines, SpectralCurrent);
 }
 
 var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
@@ -940,103 +955,181 @@ if(this.checked) {
   //When switch is on
     SpectralLineLayout(yaxis2Title);
     AddSpectralLines(xchange, ychange, errorBarTrue);
+    TotalTraces = TotalTraces + 1;
   } else {
     //when switch is off
       clearYAxis2();
       removeLayoutYAxis2();
-      Plotly.deleteTraces('my-graph', 1);
+      TotalTraces = TotalTraces - 1;
+      Plotly.deleteTraces('my-graph', SpectralCurrent);
+  }
+}
+//Need To Fix this
+// function checkErrorBar(count){
+//   if(document.querySelector("input[name=onoffswitch]").checked == true){
+//     //checks which yaxis is on
+//   var answer2 = document.getElementById("ddl2");
+//   if(answer2[answer2.selectedIndex].value == 1){
+//     errorBarTrue = errorBar[count];
+//   }
+//   else if(answer2[answer2.selectedIndex].value == 2){
+//     errorBarTrue = errorBarSI[count];
+//   }
+//   else if(answer2[answer2.selectedIndex].value == 3){
+//     errorBarTrue = errorBarJyHz[count];
+//   }
+//   else {
+//     errorBarTrue = errorBarWM[count];
+//   }
+//     return errorBarTrue;
+//   }
+//
+// }
+function checkErrorBarLine(){
+  if(document.querySelector("input[name=onoffswitch]").checked == true){
+    return 1;
+  }else{
+    return 0.001;
   }
 }
 
 //---------------------Change the X-Axis Dropdown----------------------//
-var xaxis_update = jsFunction = function(value)
-{
+var xaxis_update = jsFunction = function(value){
   if(value == 1){
+    for(var i = 0; i < TotalTraces; i++){
     var data_update = {
-      x:[x],
+      x: [x[i]],
     };
+      Plotly.restyle('my-graph', data_update, i);
+    }
+    if(document.querySelector("input[name=onoffswitch2]").checked == true){
+    var data_update = {
+      x: [xline],
+    };
+      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+    }
       var layout_update = {
         'xaxis.title': 'log(<em>v</em> [Hz])'
       };
-
-      Plotly.restyle('my-graph', data_update);
       Plotly.relayout('my-graph', layout_update);
   }
   else{
+    for(var i = 0; i < TotalTraces; i++){
     var data_update = {
-      x:[xWavelength]
+      x: [xWavelength[i]],
     };
+      Plotly.restyle('my-graph', data_update, i);
+    }
+    if(document.querySelector("input[name=onoffswitch2]").checked == true){
+    var data_update = {
+      x: [xlineWavelength],
+    };
+      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+    }
       var layout_update = {
         'xaxis.title': 'log(λ [μm])'
       };
-
-      Plotly.restyle('my-graph', data_update);
       Plotly.relayout('my-graph', layout_update);
   }
-
 }
 //---------------------END of X-Axis----------------------//
 
 
 
+
+
+
 //---------------------Change the Y-Axis Dropdown----------------------//
-var yaxis_update = jsFunction1 = function(value)
-{
+var yaxis_update = jsFunction1 = function(value){
   if(value == 1){
+    for(var i = 0; i < TotalTraces; i++){
+      var data_update = {
+        y:[y[i]],
+        error_y: {
+          array: errorBar[i],
+          thickness: checkErrorBarLine(),
+        }};
+      Plotly.restyle('my-graph', data_update, i);
+    }
+    if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
-      y:[y],
-      error_y: {
-        array: errorBar,
-        thickness: 1,
-      }};
+      y: [yline],
+    };
+      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+    SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
+    }
     var layout_update = {
       'yaxis.title': 'log(F<sub><em>v</em></sub> [Jy])'
     };
-    Plotly.restyle('my-graph', data_update);
     Plotly.relayout('my-graph', layout_update);
-
   }
   else if(value == 2){
+    for(var i = 0; i < TotalTraces; i++){
+      var data_update = {
+        y:[ySI[i]],
+        error_y: {
+          array: errorBarSI[i],
+          thickness: checkErrorBarLine(),
+        }};
+      Plotly.restyle('my-graph', data_update, i);
+    }
+    if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
-      y:[ySI],
-      error_y: {
-        array: errorBarSI,
-        thickness: 1,
-      }};
+      y: [ylineWM],
+    };
+      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+      SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
+    }
     var layout_update = {
       'yaxis.title': 'log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])'
     };
-    Plotly.restyle('my-graph', data_update);
     Plotly.relayout('my-graph', layout_update);
-
   }
   else if(value == 3){
+    for(var i = 0; i < TotalTraces; i++){
+      var data_update = {
+        y:[yJyHz[i]],
+        error_y: {
+          array: errorBarJyHz[i],
+          thickness: checkErrorBarLine(),
+        }};
+      Plotly.restyle('my-graph', data_update, i);
+    }
+    if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
-      y:[yJyHz],
-      error_y: {
-        array: errorBarJyHz,
-        thickness: 1,
-      }};
+      y: [yline],
+    };
+      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+    SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
+    }
     var layout_update = {
       'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])'
     };
-    Plotly.restyle('my-graph', data_update);
     Plotly.relayout('my-graph', layout_update);
   }
   else{
+    for(var i = 0; i < TotalTraces; i++){
+      var data_update = {
+        y:[yWM[i]],
+        error_y: {
+          array: errorBarWM[i],
+          thickness: checkErrorBarLine(),
+        }};
+      Plotly.restyle('my-graph', data_update, i);
+    }
+    if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
-      y:[yWM],
-      error_y: {
-        array: errorBarWM,
-        thickness: 1,
-      }};
+      y: [ylineWM],
+    };
+      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+      SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
+    }
+
     var layout_update = {
       'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])'
     };
-    Plotly.restyle('my-graph', data_update);
     Plotly.relayout('my-graph', layout_update);
   }
-
 }
 //---------------------END of Y-Axis----------------------//
 
