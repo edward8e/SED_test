@@ -382,8 +382,8 @@ var data = [];
 var TotalTraces = 0;
 
 function AddSED(){
-  // searchstring = $('input[name=additionalgalaxy]').val();
-  searchstring = "ngc6240";
+  searchstring = $('input[name=additionalgalaxy]').val();
+  // searchstring = "ngc6240";
   // var searchstring = searchstring.toString();
   console.log(searchstring);
   $.ajax({
@@ -490,8 +490,8 @@ console.log(xline);
 }
 
     $(document).ready(function(){
-      // var value = prompt("Type in inital Galaxy:","arp220");
-      var value = "arp220";
+      var value = prompt("Type in inital Galaxy:","arp220");
+      // var value = "arp220";
       $.ajax({
         type: "GET",
         url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + value + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
