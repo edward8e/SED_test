@@ -380,7 +380,7 @@ var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = []
 
 var data = [];
 var TotalTraces = 0;
-
+var InputValue;
 function AddSED(){
   searchstring = $('input[name=additionalgalaxy]').val();
   // searchstring = "ngc6240";
@@ -490,16 +490,18 @@ console.log(xline);
 }
 
     $(document).ready(function(){
-      var value = prompt("Type in inital Galaxy:","arp220");
-      // var value = "arp220";
+      InputValue = prompt("Type in inital Galaxy:","arp220");
+      // var InputValue = "arp220";
       $.ajax({
         type: "GET",
-        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + value + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + InputValue.toLowerCase().replace(/\s/g, '') + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
         dataType: "xml",
-        success: xmlParser
+        success: xmlParser,
       });
     });
-
+function GalaxyInput(){
+  InputValue = prompt("Type in inital Galaxy:","arp220");
+}
     function xmlParser(xml){
       var data = [];
         $(xml).find("TR").each(function(idx, v) {
@@ -508,7 +510,9 @@ console.log(xline);
                 data[idx].push( $(vi).text() );
             });
         });
-
+        if(data == 0){
+          alert("No SED Data. Please reload page.");
+        }
 
         for(var i = 0; i < data.length; i++){
           //Table Data
@@ -619,7 +623,7 @@ function CreateTrace(){
   var trace = {
     mode: 'markers',
     type: "scatter",
-    name: "SED Points",
+    name: InputValue,
     text: number,
     // marker:{color: 'rgb(0,0,139)'},
     //
@@ -632,7 +636,7 @@ function CreateTrace(){
       visible: true,
       thickness: 1,
       // color: 'rgb(0,0,139)'
-    }
+    },
   };
   data.push(trace);
   TotalTraces = TotalTraces + 1;
@@ -672,7 +676,7 @@ CreateTrace();
 
 //Graph axis related things
 var layout = {
-  title: 'Spectral Energy Distribution (SED) for ARP 220',
+  title: 'Spectral Energy Distribution (SED) for ' + InputValue,
   titlefont: {
     color: 'black',
   },
@@ -759,7 +763,17 @@ function ErrorBarON(count){
     error_y: {
       array: errorBarTrue[count],
       thickness: 1,
-    }};
+    },
+    //This is a test for the frequency range errorbar
+    error_x: {
+      type: 'percent',
+      array: 15,
+      visible: true,
+      thickness: 3,
+      color: 'rgb(0,0,139)',
+      width: 0,
+    },
+  };
     return Plotly.restyle('my-graph', data_update, count);
 
 }
