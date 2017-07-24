@@ -111,23 +111,24 @@
       </div>
       <form>
         <span>X-Axis: </span>
-        <select id ="ddl" class="selectpicker"  data-width="auto"  name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
+        <div class="drop-constraint"><select id ="ddl" class="selectpicker"  data-width="auto"  name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
           <option value="1">log(<em>v</em> [Hz])</option>
           <option value="2">log(λ [μm])</option>
-        </select>
+        </select></div>
         <br />
         <br />
         <span>Y-Axis: </span>
-        <select id ="ddl2" class="selectpicker" data-width="auto"  name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
+        <div class="drop-constraint"><select id ="ddl2" class="selectpicker" data-width="auto"  name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
           <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
           <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
           <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
           <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
-        </select>
+        </select></div>
 
       </form>
+<br />
+      Input Second Galaxy: <input type="text" name="additionalgalaxy" class="dark-mode input-box"><br>
 
-      Input Second Galaxy: <input type="text" name="additionalgalaxy"><br>
 
       <button onclick="AddSED()" class="btn btn-default">Submit</button>
       <br />
@@ -186,14 +187,14 @@
 
   <div class="grid-item grid-item--width--main grid-item--height2">
 
-    <!-- <div class="SED-title">
-      <h3>Spectral Energy Distribution (SED) for ARP 220</h3>
-    </div> -->
-    <div id="my-graph"></div><div class="lds-css ng-scope" id="loading">
-    <div style="width:100%;height:100%" class="lds-facebook" align="center">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="my-graph"></div>
+    <div class="lds-css ng-scope" id="loading">
+    <div class="loading-box">
+      <div class="lds-facebook" align="center">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   </div>
   </div>
@@ -207,7 +208,9 @@
       <div class="col-sm-12" id="data-right">
 
       <div class="light-dark data-box"><h4 class="info-highlight">Select point to populate information:</h4>
-      <h3>Data point No. <span id="hoverinfonum"></span></h3>
+      <h4><span id="hoverinfosed"></h4>
+      <h3 style="margin-top: 0px;">Data point No. <span id="hoverinfonum"></span></h3>
+
       <hr>
       <h4>Published Units:</h4>
       <ul >
@@ -261,7 +264,7 @@
 								</thead>
 							</table>
 						<div class="bottom-table-format">
-							<table id="test" class="table table-responsive table-hover"></table>
+							<table id="test" class="table table-responsive table-hover dark-mode"></table>
 						</div>
 					</div>
 				</div>
@@ -381,6 +384,76 @@ var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = []
 var data = [];
 var TotalTraces = 0;
 var InputValue;
+var SEDName = [];
+
+
+$(document).ready(function(){
+  InputValue = prompt("Type in inital Galaxy:","arp220").toLowerCase().replace(/\s/g, '');
+  // var InputValue = "arp220";
+  $.ajax({
+    type: "GET",
+    url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + InputValue + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+    dataType: "xml",
+    success: xmlParser,
+  });
+});
+function GalaxyInput(){
+InputValue = prompt("Type in inital Galaxy:","arp220");
+}
+function xmlParser(xml){
+  var data = [];
+    $(xml).find("TR").each(function(idx, v) {
+        data[idx] = [];
+        $(v).find("TD").each(function( i , vi) {
+            data[idx].push( $(vi).text() );
+        });
+    });
+    if(data == 0){
+      alert("No SED Data. Please reload page.");
+    }
+
+    for(var i = 0; i < data.length; i++){
+      //Table Data
+      SEDName.push(InputValue.toUpperCase());
+      OPassband.push(data[i][1]);
+      PMeasurement.push(data[i][2]);
+      Uncertainty.push(data[i][3]);
+      Units.push(data[i][4]);
+      Frequency.push(data[i][5]);
+      NEDMeasurement.push(data[i][6]);
+      NEDUncertainty.push(data[i][7]);
+      NEDUnits.push(data[i][8]);
+      Refcode.push(data[i][9]);
+      Significance.push(data[i][10]);
+      PFrequency.push(data[i][11]);
+      FMode.push(data[i][12]);
+      CTargeted.push(data[i][13]);
+      SMode.push(data[i][14]);
+      Qualifiers.push(data[i][15]);
+      Comments.push(data[i][16]);
+    }
+      lengthCounter2 = OPassband.length;
+    for(var i = 1; i <= data.length; i++){
+      number[i-1] = i;
+    }
+    LoadPlot();
+    $("#loading").fadeOut();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function AddSED(){
   searchstring = $('input[name=additionalgalaxy]').val();
   // searchstring = "ngc6240";
@@ -388,7 +461,7 @@ function AddSED(){
   console.log(searchstring);
   $.ajax({
     type: "GET",
-    url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + searchstring + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+    url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + searchstring.toLowerCase().replace(/\s/g, '') + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
     dataType: "xml",
     success: xmlParserAdd
   });
@@ -407,6 +480,7 @@ function xmlParserAdd(xml){
     lengthCounter = OPassband.length;
     for(var i = 0; i < data.length; i++){
       //Table Data
+      SEDName.push(searchstring.toUpperCase().replace(/\s/g, ''));
       OPassband.push(data[i][1]);
       PMeasurement.push(data[i][2]);
       Uncertainty.push(data[i][3]);
@@ -426,6 +500,7 @@ function xmlParserAdd(xml){
     }
     AddPlot();
     // console.log(number);
+    console.log(SEDName);
 }
 
 
@@ -489,57 +564,12 @@ console.log(xline);
   return  Plotly.addTraces('my-graph', trace_lines);
 }
 
-    $(document).ready(function(){
-      InputValue = prompt("Type in inital Galaxy:","arp220");
-      // var InputValue = "arp220";
-      $.ajax({
-        type: "GET",
-        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + InputValue.toLowerCase().replace(/\s/g, '') + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
-        dataType: "xml",
-        success: xmlParser,
-      });
-    });
-function GalaxyInput(){
-  InputValue = prompt("Type in inital Galaxy:","arp220");
-}
-    function xmlParser(xml){
-      var data = [];
-        $(xml).find("TR").each(function(idx, v) {
-            data[idx] = [];
-            $(v).find("TD").each(function( i , vi) {
-                data[idx].push( $(vi).text() );
-            });
-        });
-        if(data == 0){
-          alert("No SED Data. Please reload page.");
-        }
 
-        for(var i = 0; i < data.length; i++){
-          //Table Data
-          OPassband.push(data[i][1]);
-          PMeasurement.push(data[i][2]);
-          Uncertainty.push(data[i][3]);
-          Units.push(data[i][4]);
-          Frequency.push(data[i][5]);
-          NEDMeasurement.push(data[i][6]);
-          NEDUncertainty.push(data[i][7]);
-          NEDUnits.push(data[i][8]);
-          Refcode.push(data[i][9]);
-          Significance.push(data[i][10]);
-          PFrequency.push(data[i][11]);
-          FMode.push(data[i][12]);
-          CTargeted.push(data[i][13]);
-          SMode.push(data[i][14]);
-          Qualifiers.push(data[i][15]);
-          Comments.push(data[i][16]);
-        }
-          lengthCounter2 = OPassband.length;
-        for(var i = 1; i <= data.length; i++){
-          number[i-1] = i;
-        }
-        LoadPlot();
-        $("#loading").fadeOut();
-    }
+
+
+
+
+
 
 
 
@@ -676,7 +706,7 @@ CreateTrace();
 
 //Graph axis related things
 var layout = {
-  title: 'Spectral Energy Distribution (SED) for ' + InputValue,
+  title: 'Spectral Energy Distribution (SED) for ' + InputValue.toUpperCase(),
   titlefont: {
     color: 'black',
   },
@@ -765,14 +795,14 @@ function ErrorBarON(count){
       thickness: 1,
     },
     //This is a test for the frequency range errorbar
-    error_x: {
-      type: 'percent',
-      array: 15,
-      visible: true,
-      thickness: 3,
-      color: 'rgb(0,0,139)',
-      width: 0,
-    },
+    // error_x: {
+    //   type: 'percent',
+    //   array: 15,
+    //   visible: true,
+    //   thickness: 3,
+    //   color: 'rgb(0,0,139)',
+    //   width: 0,
+    // },
   };
     return Plotly.restyle('my-graph', data_update, count);
 
@@ -1274,6 +1304,7 @@ Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yax
 //---------------------Pulls information into table----------------------//
 //Event handler in plotly when it comes to hovering
 var myPlot = document.getElementById('my-graph');
+var hoverInfoSED = document.getElementById('hoverinfosed');
 var hoverInfoNum = document.getElementById('hoverinfonum');
 var hoverInfoOPassband = document.getElementById('hoverinfoopassband');
 var hoverInfoMeasurement = document.getElementById('hoverinfomeasurement');
@@ -1300,6 +1331,9 @@ myPlot.on('plotly_click', function(data){
   //Display the Point number
    var numbertext = data.points.map(function(d){return (pts);});
    hoverInfoNum.innerHTML = numbertext.join('');
+//SED Name
+   var SEDtext = data.points.map(function(d){return(SEDName[pCounter]);});
+   hoverInfoSED.innerHTML = SEDtext.join('');
 //Observed Passband
    var Opassbandtext = data.points.map(function(d){return(OPassband[pCounter]);});
    hoverInfoOPassband.innerHTML = Opassbandtext.join('');
