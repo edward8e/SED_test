@@ -109,6 +109,7 @@
               <span class="onoffswitch-switch"></span>
           </label>
       </div>
+      <hr />
       <form>
         <span>X-Axis: </span>
         <div class="drop-constraint"><select id ="ddl" class="selectpicker"  data-width="auto"  name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
@@ -127,12 +128,27 @@
 
       </form>
 <br />
-      Input Second Galaxy: <input type="text" name="additionalgalaxy" class="dark-mode input-box"><br>
+<hr />
+      Input Second Object: <input type="text" name="additionalgalaxy" class="dark-mode input-box"><br>
 
 
       <button onclick="AddSED()" class="btn btn-default">Submit</button>
       <br />
       <br />
+
+      <span>Remove Object:</span>
+      <div>
+        <select id ="ddl3"  name="ddl3" onmousedown="this.value='';">
+
+        </select>
+      </div>
+      <br />
+      <br />
+      <button id="RemoveSED" class="btn btn-default">Remove</button>
+      <br />
+      <br />
+
+<hr />
       <button id="button-download" class="btn btn-default">Download Graph</button>
 
       <p id="someElement"></p>
@@ -148,7 +164,7 @@
 
 
 
-  <div class="col-sm-10">
+  <div class="col-sm-10 main-section">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -385,6 +401,10 @@ var data = [];
 var TotalTraces = 0;
 var InputValue;
 var SEDName = [];
+var TraceCounter = 0;
+var OptionsCounter = 0;
+var TraceArray = [0];
+var SpectralArray = [];
 
 
 $(document).ready(function(){
@@ -438,6 +458,8 @@ function xmlParser(xml){
     }
     LoadPlot();
     $("#loading").fadeOut();
+    OptionsCounter = TotalTraces;
+    SpectralArray.push(0);
 }
 
 
@@ -476,8 +498,13 @@ function xmlParserAdd(xml){
             data[idx].push( $(vi).text() );
         });
     });
-
     lengthCounter = OPassband.length;
+    if(data != 0){
+      SpectralArray.push([]);
+      SpectralArray[OptionsCounter].push(OPassband.length);
+    }
+
+
     for(var i = 0; i < data.length; i++){
       //Table Data
       SEDName.push(searchstring.toUpperCase().replace(/\s/g, ''));
@@ -498,12 +525,23 @@ function xmlParserAdd(xml){
       Qualifiers.push(data[i][15]);
       Comments.push(data[i][16]);
     }
-    AddPlot();
-    // console.log(number);
-    console.log(SEDName);
+    if(data != 0){
+      SpectralArray[OptionsCounter].push(OPassband.length);
+      AddPlot();
+      GalaxySelector();
+    }
+
 }
 
-
+function GalaxySelector(){
+  $('#ddl3').append($('<option>', {
+    value: OptionsCounter - 1,
+    text: searchstring.toUpperCase().replace(/\s/g, '')
+}));
+var ArrayAdd = TraceArray[TraceArray.length - 1];
+TraceArray.push(0);
+TraceArray[TraceArray.length - 1] = ArrayAdd;
+}
 
 function AddPlot(){
   lengthCounterTotal = OPassband.length;
@@ -542,7 +580,6 @@ UnitConversions();
 LineSplit();
 //Adds computed data to arrays
 LoadData();
-console.log(xline);
   var trace_lines =
         {name: searchstring,
           mode: 'markers',
@@ -559,11 +596,10 @@ console.log(xline);
           }
         };
           TotalTraces = TotalTraces + 1;
-          console.log(TotalTraces);
+          OptionsCounter = OptionsCounter + 1;
 
   return  Plotly.addTraces('my-graph', trace_lines);
 }
-
 
 
 
@@ -884,8 +920,6 @@ if(this.checked) {
 
 //---------------------Spectral lines on and off----------------------//
 function SpectralLineUpdate(){
-  console.log(xline);
-  console.log(xlineWavelength);
     var yaxis2Title;
   //Checks which xaxis is on
     var answer = document.getElementById("ddl");
@@ -983,8 +1017,14 @@ function AddSpectralLines(xchange, ychange, errorBarTrue){
             visible: true,
             thickness: 1,
           }};
-          SpectralCurrent = TotalTraces;
-        return  Plotly.addTraces('my-graph', trace_lines, SpectralCurrent);
+          OptionsCounter = OptionsCounter + 1;
+          SpectralArray.push([]);
+          var ArrayAdd = TraceArray[TraceArray.length - 1];
+          TraceArray.push(0);
+          TraceArray[TraceArray.length - 1] = ArrayAdd;
+          SpectralCurrent = OptionsCounter-1;
+          console.log(SpectralCurrent);
+        return  Plotly.addTraces('my-graph', trace_lines);
 }
 
 var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
@@ -1004,8 +1044,15 @@ if(this.checked) {
     //when switch is off
       clearYAxis2();
       removeLayoutYAxis2();
+      var currentGalaxy = SpectralCurrent;
+      currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
+      Plotly.deleteTraces(gd, currentGalaxy);
+      for(i = SpectralCurrent; i < TraceArray.length; i++){
+        TraceArray[i] = TraceArray[i] + 1;
+      }
       TotalTraces = TotalTraces - 1;
-      Plotly.deleteTraces('my-graph', SpectralCurrent);
+      TraceCounter = TraceCounter + 1;
+      SpectralCurrent = 0;
   }
 }
 //Need To Fix this
@@ -1040,36 +1087,78 @@ function checkErrorBarLine(){
 //---------------------Change the X-Axis Dropdown----------------------//
 var xaxis_update = jsFunction = function(value){
   if(value == 1){
-    for(var i = 0; i < TotalTraces; i++){
-    var data_update = {
-      x: [x[i]],
-    };
-      Plotly.restyle('my-graph', data_update, i);
+    var currentGalaxy = SpectralCurrent;
+    currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
+
+    var space = 0;
+    for(var i = 0; i <= TotalTraces; i++){
+      if(currentGalaxy != i){
+        if(space == 1){
+          i = i - 1;
+          var data_update = {
+            x: [x[i]],
+          };
+          console.log(i);
+          i = i + 1;
+          Plotly.restyle('my-graph', data_update, i);
+
+        }else{
+          var data_update = {
+          x: [x[i]],
+        };
+        Plotly.restyle('my-graph', data_update, i);
+        console.log(i);
+        }
+      }else{
+        space = 1;
+      }
     }
+
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
       x: [xline],
     };
-      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+      Plotly.restyle('my-graph', data_update, currentGalaxy);
     }
+
       var layout_update = {
         'xaxis.title': 'log(<em>v</em> [Hz])'
       };
       Plotly.relayout('my-graph', layout_update);
   }
   else{
-    for(var i = 0; i < TotalTraces; i++){
-    var data_update = {
-      x: [xWavelength[i]],
-    };
-      Plotly.restyle('my-graph', data_update, i);
+    var currentGalaxy = SpectralCurrent;
+    currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
+    var space = 0;
+    for(var i = 0; i <= TotalTraces; i++){
+      if(currentGalaxy != i){
+        if(space == 1){
+          i = i - 1;
+          var data_update = {
+            x: [xWavelength[i]],
+          };
+          console.log(i);
+          i = i + 1;
+          Plotly.restyle('my-graph', data_update, i);
+
+        }else{
+          var data_update = {
+          x: [xWavelength[i]],
+        };
+        Plotly.restyle('my-graph', data_update, i);
+        console.log(i);
+        }
+      }else{
+        space = 1;
+      }
     }
-    if(document.querySelector("input[name=onoffswitch2]").checked == true){
-    var data_update = {
-      x: [xlineWavelength],
-    };
-      Plotly.restyle('my-graph', data_update, SpectralCurrent);
-    }
+
+  if(document.querySelector("input[name=onoffswitch2]").checked == true){
+  var data_update = {
+    x: [xlineWavelength],
+  };
+    Plotly.restyle('my-graph', data_update, currentGalaxy);
+  }
       var layout_update = {
         'xaxis.title': 'log(λ [μm])'
       };
@@ -1086,20 +1175,26 @@ var xaxis_update = jsFunction = function(value){
 //---------------------Change the Y-Axis Dropdown----------------------//
 var yaxis_update = jsFunction1 = function(value){
   if(value == 1){
+    var currentGalaxy = SpectralCurrent;
+    currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
+
     for(var i = 0; i < TotalTraces; i++){
-      var data_update = {
+      if(currentGalaxy != i || currentGalaxy == 0){
+        var data_update = {
         y:[y[i]],
         error_y: {
           array: errorBar[i],
           thickness: checkErrorBarLine(),
         }};
       Plotly.restyle('my-graph', data_update, i);
+      }
+
     }
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
       y: [yline],
     };
-      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+      Plotly.restyle('my-graph', data_update, currentGalaxy);
     SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
     }
     var layout_update = {
@@ -1108,20 +1203,25 @@ var yaxis_update = jsFunction1 = function(value){
     Plotly.relayout('my-graph', layout_update);
   }
   else if(value == 2){
+    var currentGalaxy = SpectralCurrent;
+    currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
     for(var i = 0; i < TotalTraces; i++){
-      var data_update = {
+      if(currentGalaxy != i || currentGalaxy == 0){
+        var data_update = {
         y:[ySI[i]],
         error_y: {
           array: errorBarSI[i],
           thickness: checkErrorBarLine(),
         }};
       Plotly.restyle('my-graph', data_update, i);
+      }
+
     }
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
       y: [ylineWM],
     };
-      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+      Plotly.restyle('my-graph', data_update, currentGalaxy);
       SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
     }
     var layout_update = {
@@ -1130,20 +1230,25 @@ var yaxis_update = jsFunction1 = function(value){
     Plotly.relayout('my-graph', layout_update);
   }
   else if(value == 3){
+    var currentGalaxy = SpectralCurrent;
+    currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
     for(var i = 0; i < TotalTraces; i++){
-      var data_update = {
+      if(currentGalaxy != i || currentGalaxy == 0){
+        var data_update = {
         y:[yJyHz[i]],
         error_y: {
           array: errorBarJyHz[i],
           thickness: checkErrorBarLine(),
         }};
       Plotly.restyle('my-graph', data_update, i);
+      }
+
     }
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
       y: [yline],
     };
-      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+      Plotly.restyle('my-graph', data_update, currentGalaxy);
     SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
     }
     var layout_update = {
@@ -1152,20 +1257,25 @@ var yaxis_update = jsFunction1 = function(value){
     Plotly.relayout('my-graph', layout_update);
   }
   else{
+    var currentGalaxy = SpectralCurrent;
+    currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
     for(var i = 0; i < TotalTraces; i++){
-      var data_update = {
+      if(currentGalaxy != i || currentGalaxy == 0){
+        var data_update = {
         y:[yWM[i]],
         error_y: {
           array: errorBarWM[i],
           thickness: checkErrorBarLine(),
         }};
       Plotly.restyle('my-graph', data_update, i);
+      }
+
     }
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
     var data_update = {
       y: [ylineWM],
     };
-      Plotly.restyle('my-graph', data_update, SpectralCurrent);
+      Plotly.restyle('my-graph', data_update, currentGalaxy);
       SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
     }
 
@@ -1176,6 +1286,9 @@ var yaxis_update = jsFunction1 = function(value){
   }
 }
 //---------------------END of Y-Axis----------------------//
+
+
+
 
 
 //----------------Make Plotly Responsive-----------------//
@@ -1290,6 +1403,49 @@ document.getElementById("button-download").onclick = function() {
         width: 1000,
         filename: 'newplot'
       })
+  };
+
+//---------------------END of controls----------------------//
+
+function DeleteTraceArray(ArrayNum){
+  x.splice(ArrayNum,1);
+  xWavelength.splice(ArrayNum,1);
+  y.splice(ArrayNum,1);
+  ySI.splice(ArrayNum,1);
+  yJyHz.splice(ArrayNum,1);
+  yWM.splice(ArrayNum,1);
+  errorBar.splice(ArrayNum,1);
+  errorBarSI.splice(ArrayNum,1);
+  errorBarJyHz.splice(ArrayNum,1);
+  errorBarWM.splice(ArrayNum,1);
+}
+//---------------------Remove SED Button----------------------//
+  // 1. Create the button
+document.getElementById("RemoveSED").onclick = function() {
+  var currentGalaxy = parseInt($('#ddl3').val());
+  currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
+
+  Plotly.deleteTraces(gd, currentGalaxy);
+  for(i = parseInt($('#ddl3').val()); i < TraceArray.length; i++){
+    TraceArray[i] = TraceArray[i] + 1;
+  }
+  var ArrayMax = SpectralArray[parseInt($('#ddl3').val())][1];
+  var ArrayMin = SpectralArray[parseInt($('#ddl3').val())][0];
+
+  for(i = ArrayMin; i < ArrayMax; i++){
+    delete xline[i];
+    delete xlineWavelength[i];
+    delete yline[i];
+    delete ylineWM[i];
+  }
+
+ DeleteTraceArray(currentGalaxy);
+
+
+
+  $('#ddl3 option[value="' + parseInt($('#ddl3').val()) + '"]').remove();
+  TotalTraces = TotalTraces - 1;
+  TraceCounter = TraceCounter + 1;
   };
 
 //---------------------END of controls----------------------//

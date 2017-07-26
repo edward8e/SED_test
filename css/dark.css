@@ -83,8 +83,12 @@ nav{
 	width: 17.5%;
 	height: 100%;
 }
+.main-section{
+	padding:0px 10px ;
+}
 
 
+/*Dark Mode Settings*/
 body.dark-mode{
 	background-color: #060606;
 }
