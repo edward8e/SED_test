@@ -129,7 +129,7 @@
       </form>
 <br />
 <hr />
-      Input Second Object: <input type="text" name="additionalgalaxy" class="dark-mode input-box"><br>
+      Input Second Object: <input type="text" name="additionalgalaxy" class="dark-mode input-box" value="NGC6240"><br>
 
 
       <button onclick="AddSED()" class="btn btn-default">Submit</button>
@@ -201,8 +201,16 @@
 
   <div class="grid">
 
-  <div class="grid-item grid-item--width--main grid-item--height2">
+  <div class="grid-item grid-item--width--main grid-item--height2" id="InputScreen">
+<div class="text-center" id="request-box">
+  <br />
+  <h2>Photometric Data Search Based On An Object Name</h2>
+  <h2>Enter Object Name:</h2>
+  <input type="text" name="initalgalaxy" class="dark-mode input-box" value="ARP220">
+  <button onclick="InitialPlot()" class="btn btn-default">Submit</button>
+  <h5>Example: ARP220, NGC6240, UCG5991,etc.</h5>
 
+</div>
     <div id="my-graph"></div>
     <div class="lds-css ng-scope" id="loading">
     <div class="loading-box">
@@ -341,28 +349,6 @@ if(this.checked) {
 
 </script>
 
-<script>
-            d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
-                var parsedCSV = d3.csvParseRows(data);
-
-                var container = d3.select("#test")
-//                    .append("table")
-
-                    .selectAll("tr")
-                        .data(parsedCSV).enter()
-                        .append("tr")
-
-                    .selectAll("td")
-                        .data(function(d) { return d; }).enter()
-                        .append("td")
-                        .text(function(d) { return d; });
-            });
-
-//	$("table").addClass('be-still');
-
-	</script>
-
-
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -406,9 +392,24 @@ var OptionsCounter = 0;
 var TraceArray = [0];
 var SpectralArray = [];
 
-
-$(document).ready(function(){
-  InputValue = prompt("Type in inital Galaxy:","arp220").toLowerCase().replace(/\s/g, '');
+function LoadTable(){
+  d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
+      var parsedCSV = d3.csvParseRows(data);
+      var container = d3.select("#test")
+          .selectAll("tr")
+              .data(parsedCSV).enter()
+              .append("tr")
+          .selectAll("td")
+              .data(function(d) { return d; }).enter()
+              .append("td")
+              .text(function(d) { return d; });
+  });
+}
+$(document).ready();
+function InitialPlot(){
+  $("#request-box").fadeOut();
+  $("#loading").fadeIn();
+  InputValue = $('input[name=initalgalaxy]').val().toLowerCase().replace(/\s/g, '');
   // var InputValue = "arp220";
   $.ajax({
     type: "GET",
@@ -416,7 +417,8 @@ $(document).ready(function(){
     dataType: "xml",
     success: xmlParser,
   });
-});
+  LoadTable();
+}
 function GalaxyInput(){
 InputValue = prompt("Type in inital Galaxy:","arp220");
 }

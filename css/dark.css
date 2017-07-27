@@ -528,3 +528,13 @@ input:checked + .slider:before {
 	justify-content: center;
 	align-items: center;
 }
+#InputScreen{
+	background-color: white;
+	min-height: 530px;
+}
+#loading{
+	display: none;
+}
+/*#data-window{
+	display: none;
+}*/
