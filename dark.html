@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/popup.css">
 
 
@@ -36,8 +37,8 @@
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css"> -->
 
 
 <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
@@ -59,9 +60,12 @@
      <div class="blue-title text-center setting-title"><h4>SETTINGS</h4></div>
 
      <div class="setting-inner">
-       <h4>SED Options:</h4>
-       <hr />
-       <h5>Error Bars:</h5>
+       <div class="bg-popin">
+         <h4>SED Options:</h4>
+       </div>
+
+       <div class="bg-popout">
+         <h5>Error Bars:</h5>
       <div class="onoffswitch">
           <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
           <label class="onoffswitch-label" for="myonoffswitch">
@@ -109,52 +113,44 @@
               <span class="onoffswitch-switch"></span>
           </label>
       </div>
-      <hr />
-      <form>
-        <span>X-Axis: </span>
-        <div class="drop-constraint"><select id ="ddl" class="selectpicker"  data-width="auto"  name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
-          <option value="1">log(<em>v</em> [Hz])</option>
-          <option value="2">log(λ [μm])</option>
-        </select></div>
-        <br />
-        <br />
-        <span>Y-Axis: </span>
-        <div class="drop-constraint"><select id ="ddl2" class="selectpicker" data-width="auto"  name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
-          <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
-          <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
-          <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
-          <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
-        </select></div>
+       </div>
 
-      </form>
-<br />
-<hr />
-      Input Second Object: <input type="text" name="additionalgalaxy" class="dark-mode input-box" value="NGC6240"><br>
+      <div class="bg-popin">
+        <form>
+          <span>X-Axis: </span>
+          <div class="drop-constraint"><select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
+            <option value="1">log(<em>v</em> [Hz])</option>
+            <option value="2">log(λ [μm])</option>
+          </select></div>
+          <br />
+          <br />
+          <span>Y-Axis: </span>
+          <div class="drop-constraint"><select id ="ddl2" name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
+            <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
+            <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
+            <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
+            <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
+          </select></div>
+        </form>
+      </div>
+      <div class="bg-popout">
+        Input Second Object: <input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240"><br>
 
 
-      <button onclick="AddSED()" class="btn btn-default">Submit</button>
+      <button id="ButtonAddSED" onclick="AddSED()" class="btn btn-primary">Submit</button>
       <br />
       <br />
 
       <span>Remove Object:</span>
-      <div>
-        <select id ="ddl3"  name="ddl3" onmousedown="this.value='';">
-
+        <select id ="ddl3"  name="ddl3" class="input-box" onmousedown="this.value='';">
         </select>
+      <button id="RemoveSED" class="btn btn-primary">Remove</button>
       </div>
-      <br />
-      <br />
-      <button id="RemoveSED" class="btn btn-default">Remove</button>
-      <br />
-      <br />
 
-<hr />
-      <button id="button-download" class="btn btn-default">Download Graph</button>
-
-      <p id="someElement"></p>
-      <div id="result">
-
+      <div class="bg-popin">
+      <button id="button-download" class="btn btn-primary">Download Graph</button>
       </div>
+
     </div>
       </div>
       </div>
@@ -207,7 +203,7 @@
   <h2>Photometric Data Search Based On An Object Name</h2>
   <h2>Enter Object Name:</h2>
   <input type="text" name="initalgalaxy" class="dark-mode input-box" value="ARP220">
-  <button onclick="InitialPlot()" class="btn btn-default">Submit</button>
+  <button onclick="InitialPlot()" class="btn btn-primary">Submit</button>
   <h5>Example: ARP220, NGC6240, UCG5991,etc.</h5>
 
 </div>
@@ -406,6 +402,24 @@ function LoadTable(){
   });
 }
 $(document).ready();
+function DisableButtonSwitches(bool){
+  document.querySelector("input[name=onoffswitch]").disabled = bool;
+  document.querySelector("input[name=onoffswitch1]").disabled = bool;
+  document.querySelector("input[name=onoffswitch2]").disabled = bool;
+  document.querySelector("input[name=onoffswitch3]").disabled = bool;
+  document.querySelector("input[name=onoffswitch5]").disabled = bool;
+  document.querySelector("input[name=onoffswitch6]").disabled = bool;
+  document.querySelector("input[name=onoffswitch12]").disabled = bool;
+  document.getElementById("ButtonAddSED").disabled = bool;
+  document.getElementById("RemoveSED").disabled = bool;
+  document.getElementById("button-download").disabled = bool;
+  document.getElementById("ddl").disabled = bool;
+  document.getElementById("ddl2").disabled = bool;
+  document.getElementById("ddl3").disabled = bool;
+  document.getElementById("additionalgalaxy").disabled = bool;
+}
+DisableButtonSwitches(true);
+
 function InitialPlot(){
   $("#request-box").fadeOut();
   $("#loading").fadeIn();
@@ -418,6 +432,7 @@ function InitialPlot(){
     success: xmlParser,
   });
   LoadTable();
+  DisableButtonSwitches(false);
 }
 function GalaxyInput(){
 InputValue = prompt("Type in inital Galaxy:","arp220");
