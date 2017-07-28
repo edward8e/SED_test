@@ -134,7 +134,7 @@
         </form>
       </div>
       <div class="bg-popout">
-        Input Second Object: <input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240"><br>
+        Input Additional Object: <input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240"><br>
 
 
       <button id="ButtonAddSED" onclick="AddSED()" class="btn btn-primary">Submit</button>
@@ -546,6 +546,8 @@ function xmlParserAdd(xml){
       SpectralArray[OptionsCounter].push(OPassband.length);
       AddPlot();
       GalaxySelector();
+    }else{
+      alert("No SED Data Found!");
     }
 
 }
@@ -852,10 +854,10 @@ var toImage2 = {
 var toolbar = {
 	scrollZoom: true, // lets us scroll to zoom in and out - works
 	showLink: false, // removes the link to edit on plotly - works
-	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
+	modeBarButtonsToRemove: ['lasso2d', 'sendDataToCloud'],
   displaylogo: false,
   modeBarButtonsToAdd: [toImage2],
-  displayModeBar: false
+  // displayModeBar: true,
 };
 
 
@@ -1487,24 +1489,26 @@ if(this.checked) {
   var toolbar = {
   	scrollZoom: true, // lets us scroll to zoom in and out - works
   	showLink: false, // removes the link to edit on plotly - works
-  	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
+  	modeBarButtonsToRemove: ['lasso2d', 'sendDataToCloud'],
     displaylogo: false,
     modeBarButtonsToAdd: [toImage2],
-    displayModeBar: true
+    displayModeBar: true,
   };
-  Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+  Plotly.newPlot('my-graph', data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
   } else {
     //when switch is off
     //Edits made to the toolbar
     var toolbar = {
     	scrollZoom: true, // lets us scroll to zoom in and out - works
     	showLink: false, // removes the link to edit on plotly - works
-    	modeBarButtonsToRemove: ['select2d', 'lasso2d', 'sendDataToCloud'],
+    	modeBarButtonsToRemove: [ 'lasso2d', 'sendDataToCloud'],
       displaylogo: false,
       modeBarButtonsToAdd: [toImage2],
-      displayModeBar: false
+      displayModeBar: false,
     };
-    Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+    // Plotly.newPlot('my-graph', data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+    Plotly.relayout('my-graph', toolbar);
+    Plotly.restyle('my-graph', toolbar);
   }
 }
   //---------------------END of controls----------------------//
