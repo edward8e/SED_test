@@ -388,6 +388,8 @@ var SpectralArray = [];
 var XInitial;
 var YInitial;
 var ErrorInitial;
+var XAxisCurrent;
+var YAxisCurrent;
 
 function LoadTable(){
   d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
@@ -1509,7 +1511,33 @@ if(this.checked) {
 //Initialize Large Screen
  BigScreen();
   //---------------------END of controls----------------------//
+
+  function GraphAxis(){
+    var answer = document.getElementById("ddl");
+    if(answer[answer.selectedIndex].value == 1){
+      XAxisCurrent = 'log(<em>v</em> [Hz])';
+    }
+    else{
+      XAxisCurrent = 'log(λ [μm])';
+    }
+    //checks which yaxis is on
+    var answer2 = document.getElementById("ddl2");
+    if(answer2[answer2.selectedIndex].value == 1){
+      YAxisCurrent = 'log(F<sub><em>v</em></sub> [Jy])';
+    }
+    else if(answer2[answer2.selectedIndex].value == 2){
+      YAxisCurrent = 'log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])';
+      }
+    else if(answer2[answer2.selectedIndex].value == 3){
+      YAxisCurrent = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
+      }
+    else {
+      YAxisCurrent = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
+      }
+  }
+
   function WhiteLayout(){
+    GraphAxis();
     //Graph axis related things
     var layout_update = {
       title: 'Spectral Energy Distribution (SED) for ' + InputValue.toUpperCase(),
@@ -1517,7 +1545,7 @@ if(this.checked) {
         color: 'black',
       },
       xaxis: {
-        title: 'log(<em>v</em> [Hz])',
+        title: XAxisCurrent,
         type:'log',
         autorange: true,
         linecolor: 'black',
@@ -1530,7 +1558,7 @@ if(this.checked) {
         color: '#444'
         },
       yaxis: {
-        title: 'log(λ [μm])',
+        title: YAxisCurrent,
         type:'log',
         autorange: true,
         linecolor: 'black',
@@ -1579,6 +1607,7 @@ if(this.checked) {
   }
 
   function DarkLayout(){
+    GraphAxis();
     //Graph axis related things
     var layout_update = {
       title: 'Spectral Energy Distribution (SED) for ' + InputValue.toUpperCase(),
@@ -1586,7 +1615,7 @@ if(this.checked) {
         color: 'white',
       },
       xaxis: {
-        title: 'log(<em>v</em> [Hz])',
+        title: XAxisCurrent,
         type:'log',
         autorange: true,
         linecolor: 'white',
@@ -1599,7 +1628,7 @@ if(this.checked) {
         color: 'rgb(255,255,255)'
         },
       yaxis: {
-        title: 'log(λ [μm])',
+        title: YAxisCurrent,
         type:'log',
         autorange: true,
         linecolor: 'white',
