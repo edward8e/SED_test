@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+
+
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/jquery.popup.js"></script> -->
+    <script type="text/javascript" src="/js/plotly.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/jquery.popup.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+  <script type="text/javascript" src="js/svgToPdf.js"></script>
+
+
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+ <!-- Latest compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
+
+
+  </head>
+  <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      <a class="navbar-brand" href="index.html">NED</a>
+      </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="defaultNavbar1">
+      <ul class="nav navbar-nav">
+        <li><a href="dark.html">Dark Theme<span class="sr-only">(current)</span></a></li>
+        <li><a href="light.html">Light Theme<span class="sr-only">(current)</span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <h2 align="center" class="title-font">Spectral Energy Distribution (SED) for ARP 220:</h2>
+  <div class="row">
+
+    <div class="col-md-8">
+      <div id="my-graph"></div>
+      <div id="my-graph1"></div>
+    </div>
+    <div class="col-md-4">
+      <h3>Two types of Error Bar Options:</h3>
+      <button type="button" class="btn btn-primary" id="ErrorBarOFF">Error Bar OFF</button>
+      <button type="button" class="btn btn-primary" id="ErrorBarON">Error Bar ON</button>
+
+
+      <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+          <label class="onoffswitch-label" for="myonoffswitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+          </label>
+      </div>
+
+      <h4>Hover on and off</h4>
+      <label class="switch">
+        <input type="checkbox" name="onoffswitch1">
+        <div class="slider"></div>
+      </label>
+
+
+      <h4>Show Spectral Lines</h4>
+      <label class="switch">
+        <input type="checkbox" name="onoffswitch2">
+        <div class="slider"></div>
+      </label><br><br>
+
+      <label class="switch">
+        <input type="checkbox">
+        <div class="slider round"></div>
+      </label><br><br>
+
+      <label class="switch">
+        <input type="checkbox" checked>
+        <div class="slider round"></div>
+      </label>
+
+      <form>
+        <span>X-Axis: </span>
+        <select id ="ddl" class="btn-primary btn-lg" name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
+          <option value="1">log(<em>v</em> [Hz])</option>
+          <option value="2">log(λ [μm])</option>
+        </select>
+        <br />
+
+        <span>Y-Axis: </span>
+        <select id ="ddl2" class="btn-primary btn-lg" name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
+          <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
+          <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
+          <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
+          <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
+        </select>
+
+
+      </form>
+
+
+
+
+
+    </div>
+  </div>
+
+<div class="row table-responsive">
+  <table class="table-info table table-bordered">
+    <thead class="title-font">
+      <tr class="table-center">
+        <th></th>
+        <th colspan="4" align="center">Published Units</th>
+        <th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
+      </tr>
+
+      <tr class="table-center">
+        <th>No.</th>
+        <th>Observed Passband</th>
+        <th>Measurement</th>
+        <th>Uncertainty</th>
+        <th>Units</th>
+        <th>Freq (Hz)</th>
+        <th>Measurement</th>
+        <th>Uncertainty</th>
+        <th>Units</th>
+        <th>Mode</th>
+        <th>Aperture/Qualifiers</th>
+        <th>Reference Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th id="hoverinfonum"></th>
+        <th id="hoverinfoopassband"></th>
+        <th id ="hoverinfomeasurement"></th>
+        <th id="hoverinfouncertainty"></th>
+        <th id="hoverinfounits"></th>
+        <th id="hoverinfofrequency"></th>
+        <th id="hoverinfomeasurement2"></th>
+        <th id="hoverinfouncertainty2"></th>
+        <th id="hoverinfounits2"></th>
+        <th id="hoverinfomode"></th>
+        <th id="hoverinfoaperture"></th>
+        <th id="hoverinforcode"></th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+ <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-1.11.3.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.js"></script>
+
+<!-- SED Prototype JS -->
+<script src="js/sed_proto.js"></script>
+
+  </body>
+</html>
