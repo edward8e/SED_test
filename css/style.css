@@ -71,7 +71,11 @@ nav a:hover{
 	font-weight: 600;
 }
 .data-out{
-	color: #949ba2;
+	/*color: #949ba2;*/
+	color: black;
+}
+.superbold{
+	font-weight: 900;
 }
 .total-height{
 	height: 100%;
@@ -155,6 +159,9 @@ body.dark-mode{
 }
 .dark-mode .bg-popin{
 	background-color: #151515;
+}
+.dark-mode .data-out{
+	color: white;
 }
 
 .panel-heading, .panel-body{

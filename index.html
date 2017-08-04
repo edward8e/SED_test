@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,800" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/popup.css">
 
 
@@ -229,9 +229,8 @@
            <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
              <div class="panel-body">
                <div class="bg-popin">
-                 Input Additional Object: <input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240"><br>
-
-
+                 Input Additional Object: (Max 10 SEDs)<input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240">
+                <br />
                <button id="ButtonAddSED" onclick="AddSED()" class="btn btn-primary">Submit</button>
                <br />
                <br />
@@ -309,20 +308,20 @@
       <hr>
       <h4>Published Values:</h4>
       <ul >
-        <li>Observed Passband: <span class="data-out" id="hoverinfoopassband"></span></li>
-        <li>Measurement: <span class="data-out" id ="hoverinfomeasurement"></span></li>
-        <li>Uncertainty: <span class="data-out" id="hoverinfouncertainty"></span></li>
-        <li>Units: <span class="data-out" id="hoverinfounits"></span></li>
+        <li><strong>Observed Passband: </strong><span class="data-out" id="hoverinfoopassband"></span></li>
+        <li><strong>Measurement: </strong><span class="data-out" id ="hoverinfomeasurement"></span></li>
+        <li><strong>Uncertainty: </strong><span class="data-out" id="hoverinfouncertainty"></span></li>
+        <li><strong>Units: </strong><span class="data-out" id="hoverinfounits"></span></li>
       </ul>
       <h4>Homogenized Units [Frequency, Flux Density]</h4>
       <ul>
-        <li>Freq (Hz): <span class="data-out" id="hoverinfofrequency"></span></li>
-        <li>Measurement: <span class="data-out" id="hoverinfomeasurement2"></span></li>
-        <li>Uncertainty: <span class="data-out" id="hoverinfouncertainty2"></span></li>
-        <li>Units: <span class="data-out" id="hoverinfounits2"></span></li>
-        <li>Mode: <span class="data-out" id="hoverinfomode"></span></li>
-        <li>Aperture/Qualifiers: <span class="data-out" id="hoverinfoaperture"></span></li>
-        <li>Reference Code: <span class="data-out" id="hoverinforcode"></span></li>
+        <li><strong>Freq (Hz): </strong><span class="data-out" id="hoverinfofrequency"></span></li>
+        <li><strong>Measurement: </strong><span class="data-out" id="hoverinfomeasurement2"></span></li>
+        <li><strong>Uncertainty: </strong><span class="data-out" id="hoverinfouncertainty2"></span></li>
+        <li><strong>Units: </strong><span class="data-out" id="hoverinfounits2"></span></li>
+        <li><strong>Mode: </strong><span class="data-out" id="hoverinfomode"></span></li>
+        <li><strong>Aperture/Qualifiers: </strong><span class="data-out" id="hoverinfoaperture"></span></li>
+        <li><strong>Reference Code: </strong><span class="data-out" id="hoverinforcode"></span></li>
 
       </ul></div>
       </div>
@@ -2001,6 +2000,7 @@ myPlot.on('plotly_click', function(data){
          //Uncertainty2
             var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
             hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+
     }
     else if(answer2[answer2.selectedIndex].value == 2){
       //Measurement2
@@ -2009,6 +2009,9 @@ myPlot.on('plotly_click', function(data){
          //Uncertainty2
             var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
             hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+            //Units2
+               var Units2text = data.points.map(function(d){return('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');});
+               hoverInfoUnits2.innerHTML = Units2text.join('');
       }
     else if(answer2[answer2.selectedIndex].value == 3){
       //Measurement2
@@ -2022,9 +2025,12 @@ myPlot.on('plotly_click', function(data){
       //Measurement2
          var Measurement2text = data.points.map(function(d){return(ylineWMWork.toPrecision(3));});
          hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-         //Uncertainty2
-            var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
-            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+     //Uncertainty2
+        var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
+        hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+      //Units2
+         var Units2text = data.points.map(function(d){return('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');});
+         hoverInfoUnits2.innerHTML = Units2text.join('');
       }
 
   }else{
@@ -2053,25 +2059,34 @@ myPlot.on('plotly_click', function(data){
         //Measurement2
            var Measurement2text = data.points.map(function(d){return(ySIWork.toPrecision(3));});
            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-           //Uncertainty2
-              var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
-              hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+       //Uncertainty2
+          var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
+          hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+      //Units2
+         var Units2text = data.points.map(function(d){return('F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>]');});
+         hoverInfoUnits2.innerHTML = Units2text.join('');
         }
       else if(answer2[answer2.selectedIndex].value == 3){
         //Measurement2
            var Measurement2text = data.points.map(function(d){return(yJyHzWork.toPrecision(3));});
            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-           //Uncertainty2
-              var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarJyHzWork.toPrecision(3));});
-              hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+       //Uncertainty2
+          var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarJyHzWork.toPrecision(3));});
+          hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+        //Units2
+           var Units2text = data.points.map(function(d){return('<em>v</em>F<sub><em>v</em></sub> [Jy-Hz]');});
+           hoverInfoUnits2.innerHTML = Units2text.join('');
         }
       else {
         //Measurement2
            var Measurement2text = data.points.map(function(d){return(yWMWork.toPrecision(3));});
            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-           //Uncertainty2
-              var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarWMWork.toPrecision(3));});
-              hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+       //Uncertainty2
+          var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarWMWork.toPrecision(3));});
+          hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+      //Units2
+         var Units2text = data.points.map(function(d){return('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');});
+         hoverInfoUnits2.innerHTML = Units2text.join('');
         }
   }
 
