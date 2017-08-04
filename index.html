@@ -133,7 +133,7 @@
               </div>
               <h5>Hover on and off</h5>
               <div class="onoffswitch">
-                  <input type="checkbox" name="onoffswitch1" class="onoffswitch-checkbox" id="myonoffswitch1">
+                  <input type="checkbox" name="onoffswitch1" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
                   <label class="onoffswitch-label" for="myonoffswitch1">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
@@ -157,7 +157,7 @@
               </div>
               <h5>Information Panel</h5>
               <div class="onoffswitch">
-                  <input type="checkbox" name="onoffswitch5" class="onoffswitch-checkbox" id="myonoffswitch5" >
+                  <input type="checkbox" name="onoffswitch5" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
                   <label class="onoffswitch-label" for="myonoffswitch5">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
@@ -946,7 +946,7 @@ var layout = {
     visible: false
     },
   margin: {t: 50},
-  hovermode: false,
+  hovermode: 'closest',
   plot_bgcolor: '#fff',
   paper_bgcolor: '#fff',
   legend: {
@@ -1074,7 +1074,13 @@ if(this.checked) {
     checkboxDataOFF();
   }
 }
-
+function checkhover(){
+      if(document.querySelector("input[name=onoffswitch1]").checked){
+        checkboxDataON();
+      }else{
+        checkboxDataOFF();
+      }
+    }
 
 
 
@@ -1595,7 +1601,7 @@ if(this.checked) {
   }
 }
 //Initialize Large Screen
- BigScreen();
+ // BigScreen();
   //---------------------END of controls----------------------//
 
   function GraphAxis(){
@@ -1690,6 +1696,7 @@ if(this.checked) {
       clearYAxis2();
       removeLayoutYAxis2();
     }
+    checkhover();
   }
 
   function DarkLayout(){
@@ -1761,7 +1768,7 @@ if(this.checked) {
       clearYAxis2();
       removeLayoutYAxis2();
     }
-
+    checkhover();
   }
 
 function CheckDarkMode(){
@@ -1950,108 +1957,77 @@ myPlot.on('plotly_click', function(data){
    var Referencetext = data.points.map(function(d){return(Refcode[pCounter]);});
    hoverInfoRCode.innerHTML = Referencetext.join('');
 
-   console.log(SEDName[pCounter]);
-  //  if(){
-   //
-  //  }else{
-   //
-  //  }
+
+   errorBarWork = NEDUncertainty[pCounter];
+   if(errorBarWork === undefined){
+     errorBarWork = "";
+   }
+    errorBarWork = errorBarWork.replace("+/-",""); //removes "+/-"
+   xWavelengthWork = (299792458/Frequency[pCounter]) * 1000000;
+   xlineWavelengthWork = (299792458/Frequency[pCounter]) * 1000000;
+
+   ySIWork = NEDMeasurement[pCounter] * Math.pow(10, -26);
+   errorBarSIWork = errorBarWork * Math.pow(10, -26);
+
+   yJyHzWork = NEDMeasurement[pCounter] * Frequency[pCounter];
+   errorBarJyHzWork = errorBarWork * Frequency[pCounter];
+
+   yWMWork = ySIWork * Frequency[pCounter];
+   ylineWMWork = NEDMeasurement[pCounter] * Math.pow(10, -26);
+   errorBarWMWork = errorBarSIWork * Frequency[pCounter];
 
   if (
     FMode[pCounter] == ' Line measurement; flux integrated over line; lines measured in emission'
     ||
     FMode[pCounter] == ' Line measurement; flux integrated over line'
   ){
-    // errorBarWork = NEDUncertainty[pCounter];
-    // if(errorBarWork === undefined){
-    //   errorBarWork = "";
-    // }
-    //  errorBarWork = errorBarWork.replace("+/-",""); //removes "+/-"
-    //
-    //
-    // xWavelengthWork = (299792458/Frequency[pCounter]) * 1000000;
-    // xlineWavelengthWork = (299792458/xlineWork) * 1000000;
-    //
-    // ySIWork = NEDMeasurement[pCounter] * Math.pow(10, -26);
-    // errorBarSIWork = errorBarWork * Math.pow(10, -26);
-    //
-    // yJyHzWork = NEDMeasurement[pCounter] * Frequency[pCounter];
-    // errorBarJyHzWork = errorBarWork * Frequency[pCounter];
-    //
-    // yWMWork = ySIWork * Frequency[pCounter];
-    // ylineWMWork = ylineWork * Math.pow(10, -26);
-    // errorBarWMWork = errorBarSIWork * Frequency[pCounter];
-
-    // var answer = document.getElementById("ddl");
-    // if(answer[answer.selectedIndex].value == 1){
-    //   //Frequency
-    //      var Frequencytext = data.points.map(function(d){return(Frequency[pCounter]);});
-    //      hoverInfoFrequency.innerHTML = Frequencytext.join('');
-    // }
-    // else{
-    //   //Frequency
-    //      var Frequencytext = data.points.map(function(d){return(xWavelengthWork.toPrecision(3));});
-    //      hoverInfoFrequency.innerHTML = Frequencytext.join('');
-    // }
-    // // checks which yaxis is on
-    // var answer2 = document.getElementById("ddl2");
-    // if(answer2[answer2.selectedIndex].value == 1){
-    //   //Measurement2
-    //      var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
-    //      hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-    //      //Uncertainty2
-    //         var Uncertainty2text = data.points.map(function(d){return("+/-" + NEDUncertainty[pCounter]);});
-    //         hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-    // }
-    // else if(answer2[answer2.selectedIndex].value == 2){
-    //   //Measurement2
-    //      var Measurement2text = data.points.map(function(d){return(ySIWork.toPrecision(3));});
-    //      hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-    //      //Uncertainty2
-    //         var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
-    //         hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-    //   }
-    // else if(answer2[answer2.selectedIndex].value == 3){
-    //   //Measurement2
-    //      var Measurement2text = data.points.map(function(d){return(yJyHzWork.toPrecision(3));});
-    //      hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-    //      //Uncertainty2
-    //         var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarJyHzWork.toPrecision(3));});
-    //         hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-    //   }
-    // else {
-    //   //Measurement2
-    //      var Measurement2text = data.points.map(function(d){return(yWMWork.toPrecision(3));});
-    //      hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-    //      //Uncertainty2
-    //         var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarWMWork.toPrecision(3));});
-    //         hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-    //   }
-
-
+    var answer = document.getElementById("ddl");
+    if(answer[answer.selectedIndex].value == 1){
+      //Frequency
+         var Frequencytext = data.points.map(function(d){return(Frequency[pCounter]);});
+         hoverInfoFrequency.innerHTML = Frequencytext.join('');
+    }
+    else{
+      //Frequency
+         var Frequencytext = data.points.map(function(d){return(xlineWavelengthWork.toPrecision(3));});
+         hoverInfoFrequency.innerHTML = Frequencytext.join('');
+    }
+    // checks which yaxis is on
+    var answer2 = document.getElementById("ddl2");
+    if(answer2[answer2.selectedIndex].value == 1){
+      //Measurement2
+         var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
+         hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+         //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+    }
+    else if(answer2[answer2.selectedIndex].value == 2){
+      //Measurement2
+         var Measurement2text = data.points.map(function(d){return(ylineWMWork.toPrecision(3));});
+         hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+         //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+      }
+    else if(answer2[answer2.selectedIndex].value == 3){
+      //Measurement2
+         var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
+         hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+         //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+      }
+    else {
+      //Measurement2
+         var Measurement2text = data.points.map(function(d){return(ylineWMWork.toPrecision(3));});
+         hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+         //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+      }
 
   }else{
-    errorBarWork = NEDUncertainty[pCounter];
-    if(errorBarWork === undefined){
-      errorBarWork = "";
-    }
-     errorBarWork = errorBarWork.replace("+/-",""); //removes "+/-"
-
-
-    xWavelengthWork = (299792458/Frequency[pCounter]) * 1000000;
-    // xlineWavelengthWork = (299792458/xlineWork) * 1000000;
-
-    ySIWork = NEDMeasurement[pCounter] * Math.pow(10, -26);
-    errorBarSIWork = errorBarWork * Math.pow(10, -26);
-
-    yJyHzWork = NEDMeasurement[pCounter] * Frequency[pCounter];
-    errorBarJyHzWork = errorBarWork * Frequency[pCounter];
-
-    yWMWork = ySIWork * Frequency[pCounter];
-    // ylineWMWork = ylineWork * Math.pow(10, -26);
-    errorBarWMWork = errorBarSIWork * Frequency[pCounter];
-
-
       var answer = document.getElementById("ddl");
       if(answer[answer.selectedIndex].value == 1){
         //Frequency
@@ -2070,7 +2046,7 @@ myPlot.on('plotly_click', function(data){
            var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
            //Uncertainty2
-              var Uncertainty2text = data.points.map(function(d){return("+/-" + NEDUncertainty[pCounter]);});
+              var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
               hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
       }
       else if(answer2[answer2.selectedIndex].value == 2){
@@ -2097,11 +2073,6 @@ myPlot.on('plotly_click', function(data){
               var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarWMWork.toPrecision(3));});
               hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
         }
-
-
-
-
-
   }
 
   // xWavelengthWork[i] = (299792458/Frequency[pCounter]) * 1000000;

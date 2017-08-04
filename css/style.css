@@ -15,7 +15,14 @@ h6, h5, h4, h3, h2, h1{
 nav{
 	background-color: rgb(61,64,72);
 	border-color: none;
-
+	color: black;
+}
+nav a{
+	text-decoration: none;
+	color: black;
+}
+nav a:hover{
+	text-decoration: none;
 }
 .navbar-default{
 	border-radius: 0;
