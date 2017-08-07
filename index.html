@@ -860,7 +860,6 @@ function LoadData(){
     errorBarline.push(errorBarlineWork[i]);
     errorBarSIline.push(errorBarSIlineWork[i]);
   }
-  console.log(yline);
   RemoveUndefined(yline);
   RemoveUndefined(ylineWM);
   RemoveUndefined(errorBarline);
@@ -1119,9 +1118,6 @@ function SpectralLineUpdate(){
     }
     //checks which yaxis is on
     var answer2 = document.getElementById("ddl2");
-    if(answer2[answer2.selectedIndex].value == undefined){
-      console.log("undefined term");
-    }
     if(answer2[answer2.selectedIndex].value == 1){
       ychange = yline;
       errorBarTrue = errorBarline;
