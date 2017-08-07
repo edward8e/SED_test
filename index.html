@@ -194,19 +194,21 @@
                <div class="bg-popin">
                  <form>
                    <span>X-Axis: </span>
-                   <div class="drop-constraint input-box"><select id ="ddl" name="ddl" onmousedown="this.value='';" onchange="jsFunction(this.value);">
+                   <div class="drop-constraint input-box"><select id ="ddl" name="ddl" onchange="jsFunction(this.value);">
                      <option value="1">log(<em>v</em> [Hz])</option>
                      <option value="2">log(λ [μm])</option>
                    </select></div>
                    <br />
                    <br />
                    <span>Y-Axis: </span>
-                   <div class="drop-constraint input-box"><select id ="ddl2" name="ddl2" onmousedown="this.value='';" onchange="jsFunction1(this.value);">
-                     <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
-                     <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
-                     <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
-                     <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
-                   </select></div>
+                   <div class="drop-constraint input-box">
+                     <select id ="ddl2" name="ddl2" onchange="jsFunction1(this.value);">
+                       <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
+                       <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
+                       <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
+                       <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
+                    </select>
+                  </div>
                  </form>
                </div>
              </div>
@@ -475,6 +477,10 @@ var YInitial;
 var ErrorInitial;
 var XAxisCurrent;
 var YAxisCurrent;
+var errorBarline = [];
+var errorBarSIline = [];
+var errorBarlineWork = [];
+var errorBarSIlineWork = [];
 
 function LoadTable(){
   d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
@@ -696,6 +702,8 @@ function AddPlot(){
   errorBarSIWork = [];
   errorBarJyHzWork = [];
   errorBarWMWork = [];
+  errorBarlineWork = [];
+  errorBarSIlineWork = [];
 
   var numberNew = [];
 
@@ -768,11 +776,14 @@ function LineSplit(){
       errorBarWMWork[i] = errorBarWork[i] * Math.pow(10, -26);
       errorBarJyHzWork[i] = errorBarWork[i];
       errorBarSIWork[i] = errorBarWMWork[i];
+
+      errorBarlineWork[i] = errorBarWork[i];
+      errorBarSIlineWork[i] = errorBarWork[i] * Math.pow(10, -26);
+
     }else{
       delete xlineWork[i];
       delete ylineWork[i];
       delete ylineWMWork[i];
-      delete xlineWavelengthWork[i];
     }
   }
 }
@@ -811,6 +822,7 @@ function RemoveUndefined(input){
     }
   }
 }
+
 function LoadData(){
   RemoveUndefined(xWork);
   RemoveUndefined(xWavelength);
@@ -826,6 +838,8 @@ function LoadData(){
   RemoveUndefined(ylineWork);
   RemoveUndefined(xlineWavelengthWork);
   RemoveUndefined(ylineWMWork);
+  RemoveUndefined(errorBarlineWork);
+  RemoveUndefined(errorBarSIlineWork);
 
   x.push(xWork);
   xWavelength.push(xWavelengthWork);
@@ -843,7 +857,14 @@ function LoadData(){
     yline.push(ylineWork[i]);
     xlineWavelength.push(xlineWavelengthWork[i]);
     ylineWM.push(ylineWMWork[i]);
+    errorBarline.push(errorBarlineWork[i]);
+    errorBarSIline.push(errorBarSIlineWork[i]);
   }
+  console.log(yline);
+  RemoveUndefined(yline);
+  RemoveUndefined(ylineWM);
+  RemoveUndefined(errorBarline);
+  RemoveUndefined(errorBarSIline);
 }
 
 function CreateTrace(){
@@ -1098,24 +1119,27 @@ function SpectralLineUpdate(){
     }
     //checks which yaxis is on
     var answer2 = document.getElementById("ddl2");
+    if(answer2[answer2.selectedIndex].value == undefined){
+      console.log("undefined term");
+    }
     if(answer2[answer2.selectedIndex].value == 1){
       ychange = yline;
-      errorBarTrue = errorBar;
+      errorBarTrue = errorBarline;
       yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
     }
     else if(answer2[answer2.selectedIndex].value == 2){
       ychange = ylineWM;
-      errorBarTrue = errorBarSI;
+      errorBarTrue = errorBarSIline;
       yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
     }
     else if(answer2[answer2.selectedIndex].value == 3){
       ychange = yline;
-      errorBarTrue = errorBar;
+      errorBarTrue = errorBarline;
       yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
     }
     else {
       ychange = ylineWM;
-      errorBarTrue = errorBarWM;
+      errorBarTrue = errorBarSIline;
       yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
     }
     return {
@@ -1186,7 +1210,6 @@ function AddSpectralLines(xchange, ychange, errorBarTrue){
           TraceArray.push(0);
           TraceArray[TraceArray.length - 1] = ArrayAdd;
           SpectralCurrent = OptionsCounter-1;
-          console.log(SpectralCurrent);
         return  Plotly.addTraces('my-graph', trace_lines);
 }
 
@@ -1197,7 +1220,6 @@ var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = fu
   var xchange = output.xchange;
   var ychange = output.ychange;
   var errorBarTrue = output.errorBarTrue;
-
 if(this.checked) {
   //When switch is on
     SpectralLineLayout(yaxis2Title);
@@ -1374,12 +1396,15 @@ var yaxis_update = jsFunction1 = function(value){
     }
 
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
+      var output = SpectralLineUpdate();
+      var ychange = output.ychange;
+      var errorBarTrue = output.errorBarTrue;
     var data_update = {
-      y: [yline],
-      // error_y: {
-      //   array: errorBar[0],
-      //   thickness: checkErrorBarLine(),
-      // }
+      y: [ychange],
+      error_y: {
+        array: errorBarTrue,
+        thickness: checkErrorBarLine(),
+      }
     };
       Plotly.restyle('my-graph', data_update, currentGalaxy);
     SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
@@ -1424,8 +1449,15 @@ var yaxis_update = jsFunction1 = function(value){
     }
 
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
+      var output = SpectralLineUpdate();
+      var ychange = output.ychange;
+      var errorBarTrue = output.errorBarTrue;
     var data_update = {
-      y: [ylineWM],
+      y: [ychange],
+      error_y: {
+        array: errorBarTrue,
+        thickness: checkErrorBarLine(),
+      }
     };
       Plotly.restyle('my-graph', data_update, currentGalaxy);
       SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
@@ -1469,8 +1501,15 @@ var yaxis_update = jsFunction1 = function(value){
     }
 
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
+      var output = SpectralLineUpdate();
+      var ychange = output.ychange;
+      var errorBarTrue = output.errorBarTrue;
     var data_update = {
-      y: [yline],
+      y: [ychange],
+      error_y: {
+        array: errorBarTrue,
+        thickness: checkErrorBarLine(),
+      }
     };
       Plotly.restyle('my-graph', data_update, currentGalaxy);
     SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
@@ -1515,8 +1554,15 @@ var yaxis_update = jsFunction1 = function(value){
     }
 
     if(document.querySelector("input[name=onoffswitch2]").checked == true){
+      var output = SpectralLineUpdate();
+      var ychange = output.ychange;
+      var errorBarTrue = output.errorBarTrue;
     var data_update = {
-      y: [ylineWM],
+      y: [ychange],
+      error_y: {
+        array: errorBarTrue,
+        thickness: checkErrorBarLine(),
+      }
     };
       Plotly.restyle('my-graph', data_update, currentGalaxy);
       SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
@@ -1805,7 +1851,6 @@ if(this.checked) {
       modeBarButtonsToAdd: [toImage2],
       displayModeBar: false,
     };
-    console.log(layout);
     Plotly.newPlot('my-graph', data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
     CheckDarkMode();
   }
@@ -1856,6 +1901,8 @@ document.getElementById("RemoveSED").onclick = function() {
     delete xlineWavelength[i];
     delete yline[i];
     delete ylineWM[i];
+    delete errorBarline[i];
+    delete errorBarSIline[i];
   }
 
  DeleteTraceArray(currentGalaxy);
