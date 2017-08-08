@@ -606,6 +606,3 @@ input:checked + .slider:before {
 #loading{
 	display: none;
 }
-/*#data-window{
-	display: none;
-}*/
