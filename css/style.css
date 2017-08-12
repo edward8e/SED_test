@@ -116,13 +116,18 @@ nav a:hover{
 	background-color: rgb(240,240,240);
 	box-shadow: 0 0px 8px rgba(0,0,0,0.2);
 }
-
+#InputScreen{
+	background-color: white;
+}
 /*Dark Mode Settings*/
 body.dark-mode{
 	background-color: #060606;
 }
 .dark-mode .light-dark{
 	background-color: #151515;
+}
+.dark-mode #InputScreen{
+	background-color: #252525;
 }
 .dark-mode .main-body{
 	color: white;
