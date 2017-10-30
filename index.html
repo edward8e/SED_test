@@ -514,6 +514,22 @@ function DisableButtonSwitches(bool){
 }
 DisableButtonSwitches(true);
 
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+
+var objname_url = $.urlParam('objname');
+
+if(objname_url =! null){
+  InitialPlotURL();
+}
+
 function InitialPlot(){
   $("#request-box").fadeOut();
   $("#loading").fadeIn();
@@ -528,6 +544,22 @@ function InitialPlot(){
   LoadTable();
   DisableButtonSwitches(false);
 }
+function InitialPlotURL(){
+  $("#request-box").fadeOut();
+  $("#loading").fadeIn();
+  InputValue = $.urlParam('objname').toLowerCase().replace(/\s/g, '');
+  console.log(InputValue);
+  // var InputValue = "arp220";
+  $.ajax({
+    type: "GET",
+    url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + InputValue + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+    dataType: "xml",
+    success: xmlParser,
+  });
+  LoadTable();
+  DisableButtonSwitches(false);
+}
+
 function GalaxyInput(){
 InputValue = prompt("Type in inital Galaxy:","arp220");
 }

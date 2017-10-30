@@ -29,8 +29,17 @@ var SpectralArray = [];
 var XInitial, YInitial, ErrorInitial, XAxisCurrent, YAxisCurrent;
 var errorBarline = [], errorBarSIline = [], errorBarlineWork = [], errorBarSIlineWork = [];
 
-
-
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+console.log($.urlParam('city'));
+console.log("hi");
 
 function InitialPlot(GalaxyName){
   $("#request-box").fadeOut();
