@@ -66,7 +66,7 @@
 
         <div class="row pull-right">
           <div class="col-xs-6">
-            <h6>Activate Dark Mode: </h6>
+            <h6>Dark Mode: </h6>
           </div>
           <div class="col-xs-6" style="padding: 10px 0px;">
             <div class="onoffswitch" >
@@ -131,7 +131,7 @@
                       <span class="onoffswitch-switch"></span>
                   </label>
               </div>
-              <h5>Hover on and off</h5>
+              <h5>Display (x, y, id) on hover</h5>
               <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch1" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
                   <label class="onoffswitch-label" for="myonoffswitch1">
@@ -147,14 +147,14 @@
                       <span class="onoffswitch-switch"></span>
                   </label>
               </div>
-              <h5>Enable UI drag</h5>
+              <!-- <h5>Enable UI drag</h5>
               <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch3" class="onoffswitch-checkbox" id="myonoffswitch3">
                   <label class="onoffswitch-label" for="myonoffswitch3">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                   </label>
-              </div>
+              </div> -->
               <h5>Information Panel</h5>
               <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch5" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
@@ -231,7 +231,7 @@
            <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
              <div class="panel-body">
                <div class="bg-popin">
-                 Input Additional Object: (Max 10 SEDs)<input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240">
+                 Input Additional Object: (Max 9 SEDs)<input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240">
                 <br />
                <button id="ButtonAddSED" onclick="AddSED()" class="btn btn-primary">Submit</button>
                <br />
@@ -407,22 +407,22 @@ fitWidth: true
 
 
 
-//---------------------Draggable----------------------//
-document.querySelector("input[name=onoffswitch3]").onchange = function() {
-if(this.checked) {
-  //When switch is on
-  // make all items draggable
-  var $items = $grid.find('.grid-item').draggable();
-  // bind drag events to Packery
-  $grid.packery( 'bindUIDraggableEvents', $items );
-  } else {
-    //when switch is off
-    // make all items draggable
-    var $items = $grid.find('.grid-item').draggable( "destroy" );
-    // bind drag events to Packery
-    $grid.packery( 'bindUIDraggableEvents', $items );
-  }
-}
+// //---------------------Draggable----------------------//
+// document.querySelector("input[name=onoffswitch3]").onchange = function() {
+// if(this.checked) {
+//   //When switch is on
+//   // make all items draggable
+//   var $items = $grid.find('.grid-item').draggable();
+//   // bind drag events to Packery
+//   $grid.packery( 'bindUIDraggableEvents', $items );
+//   } else {
+//     //when switch is off
+//     // make all items draggable
+//     var $items = $grid.find('.grid-item').draggable( "destroy" );
+//     // bind drag events to Packery
+//     $grid.packery( 'bindUIDraggableEvents', $items );
+//   }
+// }
 
 
 
@@ -500,7 +500,7 @@ function DisableButtonSwitches(bool){
   document.querySelector("input[name=onoffswitch]").disabled = bool;
   document.querySelector("input[name=onoffswitch1]").disabled = bool;
   document.querySelector("input[name=onoffswitch2]").disabled = bool;
-  document.querySelector("input[name=onoffswitch3]").disabled = bool;
+  // document.querySelector("input[name=onoffswitch3]").disabled = bool;
   document.querySelector("input[name=onoffswitch5]").disabled = bool;
   document.querySelector("input[name=onoffswitch6]").disabled = bool;
   document.querySelector("input[name=onoffswitch12]").disabled = bool;
@@ -1220,6 +1220,9 @@ function AddSpectralLines(xchange, ychange, errorBarTrue){
           mode: 'markers',
           type: "scatter",
           text: number,
+          marker:{
+            symbol: "diamond-x"
+          },
           x: xchange,
           y: ychange,
           yaxis: 'y2',
