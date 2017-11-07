@@ -131,7 +131,7 @@
                       <span class="onoffswitch-switch"></span>
                   </label>
               </div>
-              <h5>Display (x, y, id) on hover</h5>
+              <h5>Display (x, y, id) on hover:</h5>
               <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch1" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
                   <label class="onoffswitch-label" for="myonoffswitch1">
@@ -139,7 +139,7 @@
                       <span class="onoffswitch-switch"></span>
                   </label>
               </div>
-              <h5>Show Spectral Lines</h5>
+              <h5>Show Spectral Lines:</h5>
               <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch2" class="onoffswitch-checkbox" id="myonoffswitch2">
                   <label class="onoffswitch-label" for="myonoffswitch2">
@@ -155,7 +155,7 @@
                       <span class="onoffswitch-switch"></span>
                   </label>
               </div> -->
-              <h5>Information Panel</h5>
+              <h5>Information Panel:</h5>
               <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch5" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
                   <label class="onoffswitch-label" for="myonoffswitch5">
@@ -163,10 +163,18 @@
                       <span class="onoffswitch-switch"></span>
                   </label>
               </div>
-              <h5>Plot Controls</h5>
+              <h5>Plot Controls:</h5>
               <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch6" class="onoffswitch-checkbox" id="myonoffswitch6" checked >
                   <label class="onoffswitch-label" for="myonoffswitch6">
+                      <span class="onoffswitch-inner"></span>
+                      <span class="onoffswitch-switch"></span>
+                  </label>
+              </div>
+              <h5>Data Table:</h5>
+              <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch7" class="onoffswitch-checkbox" id="myonoffswitch7">
+                  <label class="onoffswitch-label" for="myonoffswitch7">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                   </label>
@@ -331,7 +339,7 @@
   </div>
 
 
-  <div class="grid-item grid-item--width--table">
+  <div class="grid-item grid-item--width--table" id="data-table" style="display: none;">
         <div class="row table-responsive " >
 					<div class="col-sm-12 bottom-table" >
 						<div class="light-dark ">
@@ -343,7 +351,7 @@
 										<th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
 									</tr>
 
-									<tr class="table-center bg-primary">
+									<!-- <tr class="table-center bg-primary">
 										<th>No.</th>
 										<th>Observed Passband</th>
 										<th>Measurement</th>
@@ -356,7 +364,7 @@
 										<th>Mode</th>
 										<th>Aperture/Qualifiers</th>
 										<th>Reference Code</th>
-									</tr>
+									</tr> -->
 								</thead>
 							</table>
 						<div class="bottom-table-format">
@@ -503,6 +511,7 @@ function DisableButtonSwitches(bool){
   // document.querySelector("input[name=onoffswitch3]").disabled = bool;
   document.querySelector("input[name=onoffswitch5]").disabled = bool;
   document.querySelector("input[name=onoffswitch6]").disabled = bool;
+  document.querySelector("input[name=onoffswitch7]").disabled = bool;
   document.querySelector("input[name=onoffswitch12]").disabled = bool;
   document.getElementById("ButtonAddSED").disabled = bool;
   document.getElementById("RemoveSED").disabled = bool;
@@ -529,6 +538,23 @@ var objname_url = $.urlParam('objname');
 if(objname_url =! null){
   InitialPlotURL();
 }
+
+$('input[name=initalgalaxy]').bind("enterKey",function(e){
+InitialPlot();
+});
+$('input[name=initalgalaxy]').keyup(function(e){
+if(e.keyCode == 13)
+{
+  $(this).trigger("enterKey");
+}
+});
+$('input[name=initalgalaxy]').keypress(function() {
+  console.log( "Handler for .keypress() called." );
+});
+
+
+
+
 
 function InitialPlot(){
   InputValue = $('input[name=initalgalaxy]').val().toLowerCase().replace(/\s/g, '');
@@ -993,7 +1019,7 @@ var layout = {
     exponentformat: "power",
     visible: false
     },
-  margin: {t: 50},
+  // margin: {t: 50},
   hovermode: 'closest',
   plot_bgcolor: '#fff',
   paper_bgcolor: '#fff',
@@ -1671,6 +1697,20 @@ if(this.checked) {
   } else {
     //when switch is off
     BigScreen();
+  }
+}
+document.querySelector("input[name=onoffswitch7]").onchange = function() {
+if(this.checked) {
+  //When switch is on
+  // SmallScreen();
+  // checkboxDataON();
+  $("#data-table").toggle();
+  $grid.packery('layout');
+  } else {
+    //when switch is off
+    // BigScreen();
+    $("#data-table").toggle();
+    $grid.packery('layout');
   }
 }
 //Initialize Large Screen
