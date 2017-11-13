@@ -548,10 +548,6 @@ if(e.keyCode == 13)
   $(this).trigger("enterKey");
 }
 });
-$('input[name=initalgalaxy]').keypress(function() {
-  console.log( "Handler for .keypress() called." );
-});
-
 
 
 
@@ -771,8 +767,11 @@ function AddPlot(){
   lengthCounter = lengthCounter + 1;
   lengthCounter = lengthCounterTotal;
 
+
 //ErrorBar Function
 ErrorBarParse();
+//Checks UpperLimit
+UpperLimit();
 //Unit Conversions for SED Points
 UnitConversions();
 //splits the lines from the SED points
@@ -803,7 +802,14 @@ InitialCoordinates();
 }
 
 
-
+function UpperLimit(){
+  console.log(yWork);
+  console.log(yWork.length);
+  for(var i = 0; i <= yWork.length; i++)
+    if(yWork[i] == ""){
+      yWork[i] = '  '+ errorBarWork[i]+'';
+    }
+}
 
 
 
@@ -965,8 +971,11 @@ function LoadPlot(){
       xlineWork = Frequency.slice();
       ylineWork = NEDMeasurement.slice();
 
+
 //ErrorBar Function
 ErrorBarParse();
+//Checks UpperLimit
+UpperLimit();
 //Unit Conversions for SED Points
 UnitConversions();
 //splits the lines from the SED points
@@ -1019,13 +1028,14 @@ var layout = {
     exponentformat: "power",
     visible: false
     },
-  // margin: {t: 50},
+  // margin: {b: 250},
   hovermode: 'closest',
   plot_bgcolor: '#fff',
   paper_bgcolor: '#fff',
   legend: {
     bgcolor: 'rgba(0,0,0,0)',
     orientation: 'h',
+    y: -0.14,
     font: {
       color: 'black',
     }
