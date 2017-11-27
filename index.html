@@ -489,6 +489,8 @@ var errorBarline = [];
 var errorBarSIline = [];
 var errorBarlineWork = [];
 var errorBarSIlineWork = [];
+var upperlimits = [];
+var InitialMarker = [];
 
 function LoadTable(){
   d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
@@ -743,6 +745,7 @@ function AddPlot(){
   yWork = NEDMeasurement.slice(lengthCounter);
   typeWork = FMode.slice(lengthCounter);
   errorBarWork = NEDUncertainty.slice(lengthCounter);
+  upperlimits = Uncertainty.slice(lengthCounter);
   xlineWork = Frequency.slice(lengthCounter);
   ylineWork = NEDMeasurement.slice(lengthCounter);
 
@@ -803,14 +806,11 @@ InitialCoordinates();
 
 
 function UpperLimit(){
-  console.log(yWork);
-  console.log(yWork.length);
   for(var i = 0; i <= yWork.length; i++)
     if(yWork[i] == ""){
       yWork[i] = '  '+ errorBarWork[i]+'';
     }
 }
-
 
 
 
@@ -855,9 +855,15 @@ function ErrorBarParse(){
    if(errorBarWork[i] === undefined){
      errorBarWork[i] = "";
    }
+   if(upperlimits[i].includes("<")){
+    //  console.log(upperlimits[i]);
+    //  errorBarWork[i] = "";
+     InitialMarker[i] = "line-ew-open";
+   }
     errorBarWork[i] = errorBarWork[i].replace("+/-",""); //removes "+/-"
     errorBarNull.push(0);
  }
+ console.log(errorBarWork);
 }
 //---------------------Computes both errorbar values and unit change values----------------------//
 function UnitConversions(){
@@ -932,6 +938,9 @@ function CreateTrace(){
     mode: 'markers',
     type: "scatter",
     name: InputValue,
+    marker: {
+      symbol: InitialMarker
+    },
     text: number,
     // marker:{color: 'rgb(0,0,139)'},
     //
@@ -970,6 +979,7 @@ function LoadPlot(){
       errorBarWork = NEDUncertainty.slice();
       xlineWork = Frequency.slice();
       ylineWork = NEDMeasurement.slice();
+      upperlimits = Uncertainty.slice(lengthCounter);
 
 
 //ErrorBar Function
@@ -1039,7 +1049,19 @@ var layout = {
     font: {
       color: 'black',
     }
-  }
+  },
+  annotations: [
+    {
+      x: 0,
+      y: 0,
+      xref: xWork[239],
+      yref: yWork[239],
+      showarrow: true,
+      arrowhead: 3,
+      ax: 0,
+      ay: -40
+    },
+  ]
 };
 
 
