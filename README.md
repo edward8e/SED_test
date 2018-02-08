@@ -48,3 +48,6 @@ List of functions
 6. `xmlParserAdd(xml)` - parses additional SED data via `AddSED()` function
 7. `GalaxySelector()` - generates left input box added galaxy
 8. `InitialCoordinates()` - Initializes X and Y coordinates
+
+### SED Tool Flowchart
+![diagram](https://cask.scotch.io/2014/10/V70cSEC.png)
