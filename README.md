@@ -26,3 +26,11 @@ python -m SimpleHTTPServer 8000
 3. Open Local Server
 
 http://0.0.0.0:8000
+
+
+### SED Tool in JavaScript
+
+List of functions
+
+1. `InitialPlot()` - upon correct object name input, pulls XML file and runs `xmlParser`
+2. `InitialPlotURL()` - passes objname ID via url, pulls XML file and runs `xmlParser`
