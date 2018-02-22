@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NED Spectral Energy Distributions</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,800" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/popup.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NED Spectral Energy Distributions</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,800" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/popup.css">
 
 
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<!-- <script type="text/javascript" src="/js/plotly.js"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/jquery.popup.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
-<script type="text/javascript" src="js/svgToPdf.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
-<!-- Masonry JS -->
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<!-- Draggabilly JS -->
-<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- <script type="text/javascript" src="/js/plotly.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/jquery.popup.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+  <script type="text/javascript" src="js/svgToPdf.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
+  <!-- Masonry JS -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <!-- Draggabilly JS -->
+  <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
-<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-  crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+  <script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css"> -->
 
 
-<!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
-<link href="css/simple-sidebar.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/layout.css">
+  <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/layout.css">
 </head>
+
 <body>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -55,7 +55,7 @@
           <a href="#menu-toggle" class="fa fa-bars fa-lg" id="menu-toggle"></a>
           <a href="index.html">NED</a>
         </div>
-        </div>
+      </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="defaultNavbar1">
@@ -69,7 +69,7 @@
             <h6>Dark Mode: </h6>
           </div>
           <div class="col-xs-6" style="padding: 10px 0px;">
-            <div class="onoffswitch" >
+            <div class="onoffswitch">
               <input type="checkbox" name="onoffswitch12" class="onoffswitch-checkbox" id="myonoffswitch12">
               <label class="onoffswitch-label" for="myonoffswitch12">
                   <span class="onoffswitch-inner"></span>
@@ -84,70 +84,72 @@
 
 
 
-<div class="container-fluid main-body" id="wrapper">
+  <div class="container-fluid main-body" id="wrapper">
 
     <div class="">
 
-<div id="sidebar-wrapper">
-    <div class="text-left" id="settings-right">
-     <div class="light-dark">
-     <div class="bg-popout"><div class="text-center setting-title"><h4>SETTINGS</h4></div></div>
+      <div id="sidebar-wrapper">
+        <div class="text-left" id="settings-right">
+          <div class="light-dark">
+            <div class="bg-popout">
+              <div class="text-center setting-title">
+                <h4>SETTINGS</h4></div>
+            </div>
 
-     <div class="setting-inner">
-
-
-
-
-
+            <div class="setting-inner">
 
 
 
 
 
 
-       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-         <div class="panel">
-           <div class="panel-heading" role="tab" id="headingOne">
-             <h4 class="panel-title">
+
+
+
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="panel">
+                  <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
                <a class="collapsed" onclick="DropDown(1)" role="button" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                  <div class="bg-popout">
                    <div class="drop-title">
                        <h4>SED Options:</h4>
-                       <i class="fa fa-plus-circle fa-lg" id="toggle-icon1"></i>
-                   </div>
-                 </div>
-               </a>
-             </h4>
-           </div>
-           <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-             <div class="panel-body">
-               <div class="bg-popin">
-                 <h5>Error Bars:</h5>
-              <div class="onoffswitch">
-                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                  <label class="onoffswitch-label" for="myonoffswitch">
+                    <i class="fa fa-plus-circle fa-lg" id="toggle-icon1"></i>
+                  </div>
+                </div>
+                </a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  <div class="bg-popin">
+                    <h5>Error Bars:</h5>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                      <label class="onoffswitch-label" for="myonoffswitch">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                   </label>
-              </div>
-              <h5>Display (x, y, id) on hover:</h5>
-              <div class="onoffswitch">
-                  <input type="checkbox" name="onoffswitch1" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
-                  <label class="onoffswitch-label" for="myonoffswitch1">
+                    </div>
+                    <h5>Display (x, y, id) on hover:</h5>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch1" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
+                      <label class="onoffswitch-label" for="myonoffswitch1">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                   </label>
-              </div>
-              <h5>Show Spectral Lines:</h5>
-              <div class="onoffswitch">
-                  <input type="checkbox" name="onoffswitch2" class="onoffswitch-checkbox" id="myonoffswitch2">
-                  <label class="onoffswitch-label" for="myonoffswitch2">
+                    </div>
+                    <h5>Show Spectral Lines:</h5>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch2" class="onoffswitch-checkbox" id="myonoffswitch2">
+                      <label class="onoffswitch-label" for="myonoffswitch2">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                   </label>
-              </div>
-              <!-- <h5>Enable UI drag</h5>
+                    </div>
+                    <!-- <h5>Enable UI drag</h5>
               <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch3" class="onoffswitch-checkbox" id="myonoffswitch3">
                   <label class="onoffswitch-label" for="myonoffswitch3">
@@ -155,203 +157,205 @@
                       <span class="onoffswitch-switch"></span>
                   </label>
               </div> -->
-              <h5>Information Panel:</h5>
-              <div class="onoffswitch">
-                  <input type="checkbox" name="onoffswitch5" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
-                  <label class="onoffswitch-label" for="myonoffswitch5">
+                    <h5>Information Panel:</h5>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch5" class="onoffswitch-checkbox" id="myonoffswitch5" checked>
+                      <label class="onoffswitch-label" for="myonoffswitch5">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                   </label>
-              </div>
-              <h5>Plot Controls:</h5>
-              <div class="onoffswitch">
-                  <input type="checkbox" name="onoffswitch6" class="onoffswitch-checkbox" id="myonoffswitch6" checked >
-                  <label class="onoffswitch-label" for="myonoffswitch6">
+                    </div>
+                    <h5>Plot Controls:</h5>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch6" class="onoffswitch-checkbox" id="myonoffswitch6" checked>
+                      <label class="onoffswitch-label" for="myonoffswitch6">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                   </label>
-              </div>
-              <h5>Data Table:</h5>
-              <div class="onoffswitch">
-                  <input type="checkbox" name="onoffswitch7" class="onoffswitch-checkbox" id="myonoffswitch7">
-                  <label class="onoffswitch-label" for="myonoffswitch7">
+                    </div>
+                    <h5>Data Table:</h5>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch7" class="onoffswitch-checkbox" id="myonoffswitch7">
+                      <label class="onoffswitch-label" for="myonoffswitch7">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
                   </label>
+                    </div>
+                  </div>
+                </div>
               </div>
-               </div>
-             </div>
-           </div>
-         </div>
+            </div>
 
-         <div class="panel">
-           <div class="panel-heading" role="tab" id="headingTwo">
-             <h4 class="panel-title">
+            <div class="panel">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
                <a class="collapsed" onclick="DropDown(2)" role="button" data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                  <div class="bg-popout">
                    <div class="drop-title">
                        <h4>Axis Options:</h4>
-                       <i class="fa fa-plus-circle fa-lg" id="toggle-icon2"></i>
-                   </div>
-                 </div>
-               </a>
-             </h4>
-           </div>
-           <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-             <div class="panel-body">
-               <div class="bg-popin">
-                 <form>
-                   <span>X-Axis: </span>
-                   <div class="drop-constraint input-box"><select id ="ddl" name="ddl" onchange="jsFunction(this.value);">
+                <i class="fa fa-plus-circle fa-lg" id="toggle-icon2"></i>
+              </div>
+            </div>
+            </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              <div class="bg-popin">
+                <form>
+                  <span>X-Axis: </span>
+                  <div class="drop-constraint input-box"><select id="ddl" name="ddl" onchange="jsFunction(this.value);">
                      <option value="1">log(<em>v</em> [Hz])</option>
                      <option value="2">log(λ [μm])</option>
                    </select></div>
-                   <br />
-                   <br />
-                   <span>Y-Axis: </span>
-                   <div class="drop-constraint input-box">
-                     <select id ="ddl2" name="ddl2" onchange="jsFunction1(this.value);">
+                  <br />
+                  <br />
+                  <span>Y-Axis: </span>
+                  <div class="drop-constraint input-box">
+                    <select id="ddl2" name="ddl2" onchange="jsFunction1(this.value);">
                        <option value="1">log(F<sub><em>v</em></sub> [Jy])</option>
                        <option value="2">log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])</option>
                        <option value="3">log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])</option>
                        <option value="4">log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])</option>
                     </select>
                   </div>
-                 </form>
-               </div>
-             </div>
-           </div>
-         </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
-         <div class="panel">
-           <div class="panel-heading" role="tab" id="headingThree">
-             <h4 class="panel-title">
+        <div class="panel">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
                <a class="collapsed" onclick="DropDown(3)" role="button" data-toggle="collapse" data-target="#collapseThree" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                  <div class="bg-popout">
                    <div class="drop-title">
                        <h4>Addition SED Options:</h4>
-                       <i class="fa fa-minus-circle fa-lg" id="toggle-icon3"></i>
-                   </div>
-                 </div>
-               </a>
-             </h4>
-           </div>
-           <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
-             <div class="panel-body">
-               <div class="bg-popin">
-                 Input Additional Object: (Max 9 SEDs)<input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240">
-                <br />
-               <button id="ButtonAddSED" onclick="AddSED()" class="btn btn-primary">Submit</button>
-               <br />
-               <br />
+            <i class="fa fa-minus-circle fa-lg" id="toggle-icon3"></i>
+          </div>
+        </div>
+        </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body">
+          <div class="bg-popin">
+            Input Additional Object: (Max 9 SEDs)<input type="text" name="additionalgalaxy" id="additionalgalaxy" class="dark-mode input-box" value="NGC6240">
+            <br />
+            <button id="ButtonAddSED" onclick="AddSED()" class="btn btn-primary">Submit</button>
+            <br />
+            <br />
 
-               <span>Remove Object:</span>
-                 <select id ="ddl3"  name="ddl3" class="input-box" onmousedown="this.value='';">
+            <span>Remove Object:</span>
+            <select id="ddl3" name="ddl3" class="input-box" onmousedown="this.value='';">
                  </select>
-               <button id="RemoveSED" class="btn btn-primary">Remove</button>
-               </div>
-             </div>
-           </div>
-         </div>
-
-       </div>
-
-
-
-
-
-
-      <div class="bg-popout">
-      <button id="button-download" class="btn btn-primary">Download Graph</button>
-      </div>
-
-    </div>
-      </div>
-      </div>
-</div>
-
-
-
-
-<div id="page-content-wrapper">
-  <div class="main-section">
-
-
-
-
-  <div class="grid">
-
-  <div class="grid-item grid-item--width--main grid-item--height2" id="InputScreen">
-<div class="text-center" id="request-box">
-  <br />
-  <h2>Photometric Data Search Based On An Object Name</h2>
-  <h2>Enter Object Name:</h2>
-  <input type="text" name="initalgalaxy" class="dark-mode input-box" value="ARP220">
-  <button onclick="InitialPlot()" class="btn btn-primary">Submit</button>
-  <h5>Example: ARP220, NGC6240, UCG5991,etc.</h5>
-
-</div>
-    <div id="my-graph"></div>
-    <div class="lds-css ng-scope" id="loading">
-    <div class="loading-box">
-      <div class="lds-facebook" align="center">
-        <div></div>
-        <div></div>
-        <div></div>
+            <button id="RemoveSED" class="btn btn-primary">Remove</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
   </div>
 
 
 
 
 
-  <div class="grid-item grid-item--height2 grid-item--width--data" id="data-window">
-    <div class="row ">
-      <div class="col-sm-12" id="data-right">
 
-      <div class="light-dark data-box"><h4 class="info-highlight">Select point to populate information:</h4>
-      <h4><span id="hoverinfosed"></h4>
-      <h3 style="margin-top: 0px;">Data point No. <span id="hoverinfonum"></span></h3>
+  <div class="bg-popout">
+    <button id="button-download" class="btn btn-primary">Download Graph</button>
+  </div>
 
-      <hr>
-      <h4>Published Values:</h4>
-      <ul >
-        <li><strong>Observed Passband: </strong><span class="data-out" id="hoverinfoopassband"></span></li>
-        <li><strong>Measurement: </strong><span class="data-out" id ="hoverinfomeasurement"></span></li>
-        <li><strong>Uncertainty: </strong><span class="data-out" id="hoverinfouncertainty"></span></li>
-        <li><strong>Units: </strong><span class="data-out" id="hoverinfounits"></span></li>
-      </ul>
-      <h4>Homogenized Units [Frequency, Flux Density]</h4>
-      <ul>
-        <li><strong>Freq (Hz): </strong><span class="data-out" id="hoverinfofrequency"></span></li>
-        <li><strong>Measurement: </strong><span class="data-out" id="hoverinfomeasurement2"></span></li>
-        <li><strong>Uncertainty: </strong><span class="data-out" id="hoverinfouncertainty2"></span></li>
-        <li><strong>Units: </strong><span class="data-out" id="hoverinfounits2"></span></li>
-        <li><strong>Mode: </strong><span class="data-out" id="hoverinfomode"></span></li>
-        <li><strong>Aperture/Qualifiers: </strong><span class="data-out" id="hoverinfoaperture"></span></li>
-        <li><strong>Reference Code: </strong><span class="data-out" id="hoverinforcode"></span></li>
-
-      </ul></div>
-      </div>
-    </div>
+  </div>
+  </div>
+  </div>
   </div>
 
 
-  <div class="grid-item grid-item--width--table" id="data-table" style="display: none;">
-        <div class="row table-responsive " >
-					<div class="col-sm-12 bottom-table" >
-						<div class="light-dark ">
-							<table class="table-info table referece-table ">
-								<thead class="title-font">
-									<tr class="table-center bg-primary ">
-										<th></th>
-										<th colspan="4" align="center">Published Values</th>
-										<th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
-									</tr>
 
-									<!-- <tr class="table-center bg-primary">
+
+  <div id="page-content-wrapper">
+    <div class="main-section">
+
+
+
+
+      <div class="grid">
+
+        <div class="grid-item grid-item--width--main grid-item--height2" id="InputScreen">
+          <div class="text-center" id="request-box">
+            <br />
+            <h2>Photometric Data Search Based On An Object Name</h2>
+            <h2>Enter Object Name:</h2>
+            <input type="text" name="initalgalaxy" class="dark-mode input-box" value="ARP220">
+            <button onclick="InitialPlot()" class="btn btn-primary">Submit</button>
+            <h5>Example: ARP220, NGC6240, UCG5991,etc.</h5>
+
+          </div>
+          <div id="my-graph"></div>
+          <div class="lds-css ng-scope" id="loading">
+            <div class="loading-box">
+              <div class="lds-facebook" align="center">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="grid-item grid-item--height2 grid-item--width--data" id="data-window">
+          <div class="row ">
+            <div class="col-sm-12" id="data-right">
+
+              <div class="light-dark data-box">
+                <h4 class="info-highlight">Select point to populate information:</h4>
+                <h4><span id="hoverinfosed"></h4>
+                <h3 style="margin-top: 0px;">Data point No. <span id="hoverinfonum"></span></h3>
+
+                <hr>
+                <h4>Published Values:</h4>
+                <ul>
+                  <li><strong>Observed Passband: </strong><span class="data-out" id="hoverinfoopassband"></span></li>
+                  <li><strong>Measurement: </strong><span class="data-out" id="hoverinfomeasurement"></span></li>
+                  <li><strong>Uncertainty: </strong><span class="data-out" id="hoverinfouncertainty"></span></li>
+                  <li><strong>Units: </strong><span class="data-out" id="hoverinfounits"></span></li>
+                </ul>
+                <h4>Homogenized Units [Frequency, Flux Density]</h4>
+                <ul>
+                  <li><strong>Freq (Hz): </strong><span class="data-out" id="hoverinfofrequency"></span></li>
+                  <li><strong>Measurement: </strong><span class="data-out" id="hoverinfomeasurement2"></span></li>
+                  <li><strong>Uncertainty: </strong><span class="data-out" id="hoverinfouncertainty2"></span></li>
+                  <li><strong>Units: </strong><span class="data-out" id="hoverinfounits2"></span></li>
+                  <li><strong>Mode: </strong><span class="data-out" id="hoverinfomode"></span></li>
+                  <li><strong>Aperture/Qualifiers: </strong><span class="data-out" id="hoverinfoaperture"></span></li>
+                  <li><strong>Reference Code: </strong><span class="data-out" id="hoverinforcode"></span></li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="grid-item grid-item--width--table" id="data-table" style="display: none;">
+          <div class="row table-responsive ">
+            <div class="col-sm-12 bottom-table">
+              <div class="light-dark ">
+                <table class="table-info table referece-table ">
+                  <thead class="title-font">
+                    <tr class="table-center bg-primary ">
+                      <th></th>
+                      <th colspan="4" align="center">Published Values</th>
+                      <th colspan="8">Homogenized Units [Frequency, Flux Density]</th>
+                    </tr>
+
+                    <!-- <tr class="table-center bg-primary">
 										<th>No.</th>
 										<th>Observed Passband</th>
 										<th>Measurement</th>
@@ -365,601 +369,728 @@
 										<th>Aperture/Qualifiers</th>
 										<th>Reference Code</th>
 									</tr> -->
-								</thead>
-							</table>
-						<div class="bottom-table-format">
-							<table id="test" class="table table-responsive table-hover dark-mode"></table>
-						</div>
-					</div>
-				</div>
-			</div>
+                  </thead>
+                </table>
+                <div class="bottom-table-format">
+                  <table id="test" class="table table-responsive table-hover dark-mode"></table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of grid -->
+    </div>
   </div>
-</div>
-<!-- End of grid -->
-</div>
-</div>
-</div>
+  </div>
 
 
 
 
-</div>
+  </div>
 
 
-<script>
-function DropDown(num){
-$('#toggle-icon'+ num).fadeOut(100, function(){
-            $('#toggle-icon'+ num).toggleClass('fa-plus-circle fa-minus-circle').fadeIn(200);
-        });
+  <script>
+    function DropDown(num) {
+      $('#toggle-icon' + num).fadeOut(100, function() {
+        $('#toggle-icon' + num).toggleClass('fa-plus-circle fa-minus-circle').fadeIn(200);
+      });
 
 
-// $(".minus").css("display", "block");
+      // $(".minus").css("display", "block");
 
-}
-</script>
-
-
-<script>
-// external js: packery.pkgd.js, draggabilly.pkgd.js
-
-var $grid = $('.grid').packery({
-  itemSelector: '.grid-item',
-  columnWidth: 1,
-  // set positions with percent values
-percentPosition: true,
-fitWidth: true
-});
+    }
+  </script>
 
 
-// external js: packery.pkgd.js, jquery-ui-draggable.js
+  <script>
+    // external js: packery.pkgd.js, draggabilly.pkgd.js
+
+    var $grid = $('.grid').packery({
+      itemSelector: '.grid-item',
+      columnWidth: 1,
+      // set positions with percent values
+      percentPosition: true,
+      fitWidth: true
+    });
 
 
-
-// //---------------------Draggable----------------------//
-// document.querySelector("input[name=onoffswitch3]").onchange = function() {
-// if(this.checked) {
-//   //When switch is on
-//   // make all items draggable
-//   var $items = $grid.find('.grid-item').draggable();
-//   // bind drag events to Packery
-//   $grid.packery( 'bindUIDraggableEvents', $items );
-//   } else {
-//     //when switch is off
-//     // make all items draggable
-//     var $items = $grid.find('.grid-item').draggable( "destroy" );
-//     // bind drag events to Packery
-//     $grid.packery( 'bindUIDraggableEvents', $items );
-//   }
-// }
+    // external js: packery.pkgd.js, jquery-ui-draggable.js
 
 
 
+    // //---------------------Draggable----------------------//
+    // document.querySelector("input[name=onoffswitch3]").onchange = function() {
+    // if(this.checked) {
+    //   //When switch is on
+    //   // make all items draggable
+    //   var $items = $grid.find('.grid-item').draggable();
+    //   // bind drag events to Packery
+    //   $grid.packery( 'bindUIDraggableEvents', $items );
+    //   } else {
+    //     //when switch is off
+    //     // make all items draggable
+    //     var $items = $grid.find('.grid-item').draggable( "destroy" );
+    //     // bind drag events to Packery
+    //     $grid.packery( 'bindUIDraggableEvents', $items );
+    //   }
+    // }
+  </script>
 
 
-</script>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="js/jquery-1.11.3.min.js"></script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.js"></script>
+
+  <!-- SED Prototype JS -->
+  <!-- <script src="js/sed_proto.js"></script> -->
 
 
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery-1.11.3.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.js"></script>
-
-<!-- SED Prototype JS -->
-<!-- <script src="js/sed_proto.js"></script> -->
-
-
-<!-- SED Prototype JS -->
-<script>
-var number = [], OPassband = [], PMeasurement = [], Uncertainty = [], Units = [], Frequency = [], NEDMeasurement = [],
-    NEDUncertainty = [], NEDUnits = [], Refcode = [], Significance = [], PFrequency = [], FMode = [], CTargeted = [],
-    SMode = [], Qualifiers = [], Comments = [];
+  <!-- SED Prototype JS -->
+  <script>
+    var number = [],
+      OPassband = [],
+      PMeasurement = [],
+      Uncertainty = [],
+      Units = [],
+      Frequency = [],
+      NEDMeasurement = [],
+      NEDUncertainty = [],
+      NEDUnits = [],
+      Refcode = [],
+      Significance = [],
+      PFrequency = [],
+      FMode = [],
+      CTargeted = [],
+      SMode = [],
+      Qualifiers = [],
+      Comments = [];
     var lengthCounter;
     var lengthCounter2;
     var lengthCounterTotal;
     var searchstring;
 
-    var xtemp = [], ytemp = [], typetemp = [], errorBartemp = [], xlinetemp = [], ylinetemp = [];
-    var xWork = [], yWork = [], typeWork = [], errorBarWork = [], xlineWork = [], ylineWork = [];
-    var xWavelengthWork = [], xlineWavelengthWork = [], ySIWork = [], yJyHzWork = [], yWMWork = [], ylineWMWork = [],
-     errorBarSIWork = [], errorBarJyHzWork = [], errorBarWMWork = [];
+    var xtemp = [],
+      ytemp = [],
+      typetemp = [],
+      errorBartemp = [],
+      xlinetemp = [],
+      ylinetemp = [];
+    var xWork = [],
+      yWork = [],
+      typeWork = [],
+      errorBarWork = [],
+      xlineWork = [],
+      ylineWork = [];
+    var xWavelengthWork = [],
+      xlineWavelengthWork = [],
+      ySIWork = [],
+      yJyHzWork = [],
+      yWMWork = [],
+      ylineWMWork = [],
+      errorBarSIWork = [],
+      errorBarJyHzWork = [],
+      errorBarWMWork = [];
 
 
-      var x = [], y = [], type = [], errorBar = [],
-      xline = [], yline = [], xWavelength = [], xlineWavelength = [], ySI = [],
-      yJyHz = [], yWM = [], ylineWM = [],
-       errorBarSI = [], errorBarJyHz = [], errorBarWM = [];
-       var errorBarNull = [];
+    var x = [],
+      y = [],
+      type = [],
+      errorBar = [],
+      xline = [],
+      yline = [],
+      xWavelength = [],
+      xlineWavelength = [],
+      ySI = [],
+      yJyHz = [],
+      yWM = [],
+      ylineWM = [],
+      errorBarSI = [],
+      errorBarJyHz = [],
+      errorBarWM = [];
+    var errorBarNull = [];
 
-var data = [];
-var TotalTraces = 0;
-var InputValue;
-var SEDName = [];
-var TraceCounter = 0;
-var OptionsCounter = 0;
-var TraceArray = [0];
-var SpectralArray = [];
-var XInitial;
-var YInitial;
-var ErrorInitial;
-var XAxisCurrent;
-var YAxisCurrent;
-var errorBarline = [];
-var errorBarSIline = [];
-var errorBarlineWork = [];
-var errorBarSIlineWork = [];
-var upperlimits = [];
-var InitialMarker = [];
+    var data = [];
+    var TotalTraces = 0;
+    var InputValue;
+    var SEDName = [];
+    var TraceCounter = 0;
+    var OptionsCounter = 0;
+    var TraceArray = [0];
+    var SpectralArray = [];
+    var XInitial;
+    var YInitial;
+    var ErrorInitial;
+    var XAxisCurrent;
+    var YAxisCurrent;
+    var errorBarline = [];
+    var errorBarSIline = [];
+    var errorBarlineWork = [];
+    var errorBarSIlineWork = [];
+    var upperlimits = [];
+    var InitialMarker = [];
 
-function LoadTable(){
-  d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
-      var parsedCSV = d3.csvParseRows(data);
-      var container = d3.select("#test")
+    var upperlimits_counter = [];
+
+    var upperlimit_broadband = [];
+    var upperlimit_line = [];
+    var annotations_upperlimit = [];
+    var annotations_upperlimit_broadband = [];
+    var annotations_upperlimit_line = [];
+    var obj = [];
+
+
+
+    function LoadTable() {
+      d3.text("https://edward8e.github.io/sed_proto/arp_220.csv", function(data) {
+        var parsedCSV = d3.csvParseRows(data);
+        var container = d3.select("#test")
           .selectAll("tr")
-              .data(parsedCSV).enter()
-              .append("tr")
+          .data(parsedCSV).enter()
+          .append("tr")
           .selectAll("td")
-              .data(function(d) { return d; }).enter()
-              .append("td")
-              .text(function(d) { return d; });
-  });
-}
-$(document).ready();
-function DisableButtonSwitches(bool){
-  document.querySelector("input[name=onoffswitch]").disabled = bool;
-  document.querySelector("input[name=onoffswitch1]").disabled = bool;
-  document.querySelector("input[name=onoffswitch2]").disabled = bool;
-  // document.querySelector("input[name=onoffswitch3]").disabled = bool;
-  document.querySelector("input[name=onoffswitch5]").disabled = bool;
-  document.querySelector("input[name=onoffswitch6]").disabled = bool;
-  document.querySelector("input[name=onoffswitch7]").disabled = bool;
-  document.querySelector("input[name=onoffswitch12]").disabled = bool;
-  document.getElementById("ButtonAddSED").disabled = bool;
-  document.getElementById("RemoveSED").disabled = bool;
-  document.getElementById("button-download").disabled = bool;
-  document.getElementById("ddl").disabled = bool;
-  document.getElementById("ddl2").disabled = bool;
-  document.getElementById("ddl3").disabled = bool;
-  document.getElementById("additionalgalaxy").disabled = bool;
-}
-DisableButtonSwitches(true);
-
-$.urlParam = function(name){
-    var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
-    if (results==null){
-       return null;
+          .data(function(d) {
+            return d;
+          }).enter()
+          .append("td")
+          .text(function(d) {
+            return d;
+          });
+      });
     }
-    else{
-       return results[1] || 0;
+
+    function DisableButtonSwitches(bool) {
+      document.querySelector("input[name=onoffswitch]").disabled = bool;
+      document.querySelector("input[name=onoffswitch1]").disabled = bool;
+      document.querySelector("input[name=onoffswitch2]").disabled = bool;
+      // document.querySelector("input[name=onoffswitch3]").disabled = bool;
+      document.querySelector("input[name=onoffswitch5]").disabled = bool;
+      document.querySelector("input[name=onoffswitch6]").disabled = bool;
+      document.querySelector("input[name=onoffswitch7]").disabled = bool;
+      document.querySelector("input[name=onoffswitch12]").disabled = bool;
+      document.getElementById("ButtonAddSED").disabled = bool;
+      document.getElementById("RemoveSED").disabled = bool;
+      document.getElementById("button-download").disabled = bool;
+      document.getElementById("ddl").disabled = bool;
+      document.getElementById("ddl2").disabled = bool;
+      document.getElementById("ddl3").disabled = bool;
+      document.getElementById("additionalgalaxy").disabled = bool;
     }
-}
+    DisableButtonSwitches(true);
 
-var objname_url = $.urlParam('objname');
+    $.urlParam = function(name) {
+      var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
+      if (results == null) {
+        return null;
+      } else {
+        return results[1] || 0;
+      }
+    }
 
-if(objname_url =! null){
-  InitialPlotURL();
-}
-
-$('input[name=initalgalaxy]').bind("enterKey",function(e){
-InitialPlot();
-});
-$('input[name=initalgalaxy]').keyup(function(e){
-if(e.keyCode == 13)
-{
-  $(this).trigger("enterKey");
-}
-});
+    var objname_url = $.urlParam('objname');
+    if(objname_url =! null){
+      InitialPlotURL();
+    }
 
 
 
+    function InitialPlot() {
+      InputValue = $('input[name=initalgalaxy]').val().toLowerCase().replace(/\s/g, '');
+      // var InputValue = "arp220";
+      $.ajax({
+        type: "GET",
+        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + InputValue +
+          "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+        dataType: "xml",
+        success: xmlParser,
+      });
+    }
 
-function InitialPlot(){
-  InputValue = $('input[name=initalgalaxy]').val().toLowerCase().replace(/\s/g, '');
-  // var InputValue = "arp220";
-  $.ajax({
-    type: "GET",
-    url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + InputValue + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
-    dataType: "xml",
-    success: xmlParser,
-  });
-}
-function InitialPlotURL(){
+    function InitialPlotURL() {
 
-  InputValue = $.urlParam('objname').toLowerCase().replace(/\s/g, '');
-  $.ajax({
-    type: "GET",
-    url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + InputValue + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
-    dataType: "xml",
-    success: xmlParser,
-  });
-}
+      InputValue = $.urlParam('objname').toLowerCase().replace(/\s/g, '');
+      $.ajax({
+        type: "GET",
+        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + InputValue +
+          "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+        dataType: "xml",
+        success: xmlParser,
+      });
+    }
 
-function GalaxyInput(){
-InputValue = prompt("Type in inital Galaxy:","arp220");
-}
-
-function xmlParser(xml){
-  var data = [];
-    $(xml).find("TR").each(function(idx, v) {
+    function xmlParser(xml) {
+      var data = [];
+      $(xml).find("TR").each(function(idx, v) {
         data[idx] = [];
-        $(v).find("TD").each(function( i , vi) {
-            data[idx].push( $(vi).text() );
+        $(v).find("TD").each(function(i, vi) {
+          data[idx].push($(vi).text());
         });
-    });
+      });
+      console.log(data);
 
-    if(data == 0){
-      alert("Invalid input position or input name not recognized by NED");
-    }else{
-      $("#request-box").fadeOut();
-      $("#loading").fadeIn();
-      LoadTable();
-      DisableButtonSwitches(false);
-          for(var i = 0; i < data.length; i++){
-      //Table Data
-      SEDName.push(InputValue.toUpperCase());
-      OPassband.push(data[i][1]);
-      PMeasurement.push(data[i][2]);
-      Uncertainty.push(data[i][3]);
-      Units.push(data[i][4]);
-      Frequency.push(data[i][5]);
-      NEDMeasurement.push(data[i][6]);
-      NEDUncertainty.push(data[i][7]);
-      NEDUnits.push(data[i][8]);
-      Refcode.push(data[i][9]);
-      Significance.push(data[i][10]);
-      PFrequency.push(data[i][11]);
-      FMode.push(data[i][12]);
-      CTargeted.push(data[i][13]);
-      SMode.push(data[i][14]);
-      Qualifiers.push(data[i][15]);
-      Comments.push(data[i][16]);
+      if (data == 0) {
+        alert("Invalid input position or input name not recognized by NED");
+      } else {
+        $("#request-box").fadeOut();
+        $("#loading").fadeIn();
+        LoadTable();
+        DisableButtonSwitches(false);
+        var objTemp = [];
+        console.log(data);
+        for (let point of data) {
+          //Table Data
+          SEDName.push(InputValue.toUpperCase());
+          OPassband.push(point[1]);
+          PMeasurement.push(point[2]);
+          Uncertainty.push(point[3]);
+          Units.push(point[4]);
+          Frequency.push(point[5]);
+          NEDMeasurement.push(point[6]);
+          NEDUncertainty.push(point[7]);
+          NEDUnits.push(point[8]);
+          Refcode.push(point[9]);
+          Significance.push(point[10]);
+          PFrequency.push(point[11]);
+          FMode.push(point[12]);
+          CTargeted.push(point[13]);
+          SMode.push(point[14]);
+          Qualifiers.push(point[15]);
+          Comments.push(point[16]);
+
+          objTemp.push({
+            objname: InputValue.toUpperCase(),
+            Opassband: point[1],
+            PMeasurement: point[2],
+            Uncertainty: point[3],
+            Units: point[4],
+            Frequency: point[5],
+            NEDMeasurement: point[6],
+            NEDUncertainty: point[7],
+            NEDUnits: point[8],
+            Refcode: point[9],
+            Significance: point[10],
+            PFrequency: point[11],
+            FMode: point[12],
+            CTargeted: point[13],
+            SMode: point[14],
+            Qualifiers: point[15],
+            Comments: point[16],
+          });
+        }
+
+        var objtemp1 = [];
+        objtemp1.push({
+          name: InputValue.toUpperCase()
+        });
+
+        objtemp1.push(objTemp);
+        obj.push({
+          Object: InputValue.toUpperCase(),
+          raw_data: objTemp,
+        });
+
+        function download(text, name, type) {
+          var a = document.createElement("a");
+          var file = new Blob([text], {
+            type: type
+          });
+          a.href = URL.createObjectURL(file);
+          a.download = name;
+          a.click();
+        }
+        download(JSON.stringify(obj[0]), 'raw_data.txt', 'text/plain');
+
+        lengthCounter2 = OPassband.length;
+        for (var i = 1; i <= data.length; i++) {
+          number[i - 1] = i;
+        }
+        LoadPlot();
+        $("#loading").fadeOut();
+        OptionsCounter = TotalTraces;
+        SpectralArray.push(0);
+      }
     }
-      lengthCounter2 = OPassband.length;
-    for(var i = 1; i <= data.length; i++){
-      number[i-1] = i;
+
+
+
+
+
+
+
+
+
+    function AddSED() {
+      searchstring = $('input[name=additionalgalaxy]').val().toLowerCase().replace(/\s/g, '');
+      // searchstring = "ngc6240";
+      // var searchstring = searchstring.toString();
+      console.log(searchstring);
+      $.ajax({
+        type: "GET",
+        url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + searchstring +
+          "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
+        dataType: "xml",
+        success: xmlParserAdd
+      });
+
     }
-    LoadPlot();
-    $("#loading").fadeOut();
-    OptionsCounter = TotalTraces;
-    SpectralArray.push(0);
-    }
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function AddSED(){
-  searchstring = $('input[name=additionalgalaxy]').val();
-  // searchstring = "ngc6240";
-  // var searchstring = searchstring.toString();
-  console.log(searchstring);
-  $.ajax({
-    type: "GET",
-    url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'https%3A%2F%2Fned.ipac.caltech.edu%2Fcgi-bin%2Fdatasearch%3Fobjname%3D" + searchstring.toLowerCase().replace(/\s/g, '') + "%26meas_type%3Dbot%26ebars_spec%3Debars%26label_spec%3Dno%26x_spec%3Dfreq%26y_spec%3DFnu_jy%26xr%3D-1%26of%3Dxml_main%26search_type%3DPhotometry'&diagnostics=true",
-    dataType: "xml",
-    success: xmlParserAdd
-  });
-
-}
-
-function xmlParserAdd(xml){
-  var data = [];
-    $(xml).find("TR").each(function(idx, v) {
+    function xmlParserAdd(xml) {
+      var data = [];
+      $(xml).find("TR").each(function(idx, v) {
         data[idx] = [];
-        $(v).find("TD").each(function( i , vi) {
-            data[idx].push( $(vi).text() );
+        $(v).find("TD").each(function(i, vi) {
+          data[idx].push($(vi).text());
         });
-    });
-    lengthCounter = OPassband.length;
-    if(data != 0){
-      SpectralArray.push([]);
-      SpectralArray[OptionsCounter].push(OPassband.length);
+      });
+      lengthCounter = OPassband.length;
+      if (data != 0) {
+        SpectralArray.push([]);
+        SpectralArray[OptionsCounter].push(OPassband.length);
+      }
+
+      var objTemp = [];
+      for (let point of data) {
+        //Table Data
+        SEDName.push(searchstring.toUpperCase().replace(/\s/g, ''));
+        OPassband.push(point[1]);
+        PMeasurement.push(point[2]);
+        Uncertainty.push(point[3]);
+        Units.push(point[4]);
+        Frequency.push(point[5]);
+        NEDMeasurement.push(point[6]);
+        NEDUncertainty.push(point[7]);
+        NEDUnits.push(point[8]);
+        Refcode.push(point[9]);
+        Significance.push(point[10]);
+        PFrequency.push(point[11]);
+        FMode.push(point[12]);
+        CTargeted.push(point[13]);
+        SMode.push(point[14]);
+        Qualifiers.push(point[15]);
+        Comments.push(point[16]);
+
+        objTemp.push({
+          objname: InputValue.toUpperCase(),
+          Opassband: point[1],
+          PMeasurement: point[2],
+          Uncertainty: point[3],
+          Units: point[4],
+          Frequency: point[5],
+          NEDMeasurement: point[6],
+          NEDUncertainty: point[7],
+          NEDUnits: point[8],
+          Refcode: point[9],
+          Significance: point[10],
+          PFrequency: point[11],
+          FMode: point[12],
+          CTargeted: point[13],
+          SMode: point[14],
+          Qualifiers: point[15],
+          Comments: point[16],
+        });
+
+      }
+      obj.push(objTemp);
+      console.log(obj);
+      if (data != 0) {
+        SpectralArray[OptionsCounter].push(OPassband.length);
+        AddPlot();
+        GalaxySelector();
+      } else {
+        alert("No SED Data Found!");
+      }
+
+    }
+
+    function GalaxySelector() {
+      $('#ddl3').append($('<option>', {
+        value: OptionsCounter - 1,
+        text: searchstring.toUpperCase().replace(/\s/g, '')
+      }));
+      var ArrayAdd = TraceArray[TraceArray.length - 1];
+      TraceArray.push(0);
+      TraceArray[TraceArray.length - 1] = ArrayAdd;
+    }
+
+    function InitialCoordinates() {
+      var answer = document.getElementById("ddl");
+      if (answer[answer.selectedIndex].value == 1) {
+        XInitial = xWork;
+      } else {
+        XInitial = xWavelengthWork;
+      }
+
+      //checks which yaxis is on
+      var answer2 = document.getElementById("ddl2");
+      if (answer2[answer2.selectedIndex].value == 1) {
+        YInitial = yWork;
+        ErrorInitial = errorBarWork;
+      } else if (answer2[answer2.selectedIndex].value == 2) {
+        YInitial = ySIWork;
+        ErrorInitial = errorBarSIWork;
+      } else if (answer2[answer2.selectedIndex].value == 3) {
+        YInitial = yJyHzWork;
+        ErrorInitial = errorBarJyHzWork;
+      } else {
+        YInitial = yWMWork;
+        ErrorInitial = errorBarWMWork;
+      }
+    }
+
+    function AddPlot() {
+      lengthCounterTotal = OPassband.length;
+
+      xWork = Frequency.slice(lengthCounter);
+      yWork = NEDMeasurement.slice(lengthCounter);
+      typeWork = FMode.slice(lengthCounter);
+      errorBarWork = NEDUncertainty.slice(lengthCounter);
+      upperlimits = Uncertainty.slice(lengthCounter);
+      xlineWork = Frequency.slice(lengthCounter);
+      ylineWork = NEDMeasurement.slice(lengthCounter);
+
+      xWavelengthWork = [];
+      ySIWork = [];
+      yJyHzWork = [];
+      yWMWork = [];
+      errorBarSIWork = [];
+      errorBarJyHzWork = [];
+      errorBarWMWork = [];
+      errorBarlineWork = [];
+      errorBarSIlineWork = [];
+
+      var numberNew = [];
+
+      var newSED = lengthCounterTotal - lengthCounter;
+      for (var i = lengthCounter; i <= lengthCounterTotal; i++) {
+        number[i - 1] = i;
+      }
+      numberNew = number.slice(lengthCounter);
+
+      lengthCounter = lengthCounter + 1;
+      lengthCounter = lengthCounterTotal;
+
+
+      //ErrorBar Function
+      ErrorBarParse();
+      //Checks UpperLimit
+      UpperLimit();
+      //Unit Conversions for SED Points
+      UnitConversions();
+      //splits the lines from the SED points
+      LineSplit();
+      //Adds computed data to arrays
+      LoadData();
+      //Loads x and y based on current axis
+      InitialCoordinates();
+      var trace_lines = {
+        name: searchstring,
+        mode: 'markers',
+        type: "scatter",
+        text: numberNew,
+        x: XInitial,
+        y: YInitial,
+        error_y: {
+          type: 'data',
+          array: ErrorInitial,
+          visible: true,
+          thickness: 1,
+          // color: 'rgb(0,0,139)'
+        }
+      };
+      TotalTraces = TotalTraces + 1;
+      OptionsCounter = OptionsCounter + 1;
+
+      return Plotly.addTraces('my-graph', trace_lines);
     }
 
 
-    for(var i = 0; i < data.length; i++){
-      //Table Data
-      SEDName.push(searchstring.toUpperCase().replace(/\s/g, ''));
-      OPassband.push(data[i][1]);
-      PMeasurement.push(data[i][2]);
-      Uncertainty.push(data[i][3]);
-      Units.push(data[i][4]);
-      Frequency.push(data[i][5]);
-      NEDMeasurement.push(data[i][6]);
-      NEDUncertainty.push(data[i][7]);
-      NEDUnits.push(data[i][8]);
-      Refcode.push(data[i][9]);
-      Significance.push(data[i][10]);
-      PFrequency.push(data[i][11]);
-      FMode.push(data[i][12]);
-      CTargeted.push(data[i][13]);
-      SMode.push(data[i][14]);
-      Qualifiers.push(data[i][15]);
-      Comments.push(data[i][16]);
-    }
-    if(data != 0){
-      SpectralArray[OptionsCounter].push(OPassband.length);
-      AddPlot();
-      GalaxySelector();
-    }else{
-      alert("No SED Data Found!");
+    function UpperLimit() {
+      for (var i = 0; i <= yWork.length; i++)
+        if (yWork[i] == "") {
+          yWork[i] = '  ' + errorBarWork[i] + '';
+        }
     }
 
-}
-
-function GalaxySelector(){
-  $('#ddl3').append($('<option>', {
-    value: OptionsCounter - 1,
-    text: searchstring.toUpperCase().replace(/\s/g, '')
-}));
-var ArrayAdd = TraceArray[TraceArray.length - 1];
-TraceArray.push(0);
-TraceArray[TraceArray.length - 1] = ArrayAdd;
-}
-
-function InitialCoordinates(){
-  var answer = document.getElementById("ddl");
-  if(answer[answer.selectedIndex].value == 1){
-    XInitial = xWork;
-  }
-  else{
-    XInitial = xWavelengthWork;
-  }
-
-  //checks which yaxis is on
-  var answer2 = document.getElementById("ddl2");
-  if(answer2[answer2.selectedIndex].value == 1){
-    YInitial = yWork;
-    ErrorInitial = errorBarWork;
-  }
-  else if(answer2[answer2.selectedIndex].value == 2){
-    YInitial = ySIWork;
-    ErrorInitial = errorBarSIWork;
-  }
-  else if(answer2[answer2.selectedIndex].value == 3){
-    YInitial = yJyHzWork;
-    ErrorInitial = errorBarJyHzWork;
-  }
-  else {
-    YInitial = yWMWork;
-    ErrorInitial = errorBarWMWork;
-  }
-}
-
-function AddPlot(){
-  lengthCounterTotal = OPassband.length;
-
-  xWork = Frequency.slice(lengthCounter);
-  yWork = NEDMeasurement.slice(lengthCounter);
-  typeWork = FMode.slice(lengthCounter);
-  errorBarWork = NEDUncertainty.slice(lengthCounter);
-  upperlimits = Uncertainty.slice(lengthCounter);
-  xlineWork = Frequency.slice(lengthCounter);
-  ylineWork = NEDMeasurement.slice(lengthCounter);
-
-  xWavelengthWork = [];
-  ySIWork = [];
-  yJyHzWork = [];
-  yWMWork = [];
-  errorBarSIWork = [];
-  errorBarJyHzWork = [];
-  errorBarWMWork = [];
-  errorBarlineWork = [];
-  errorBarSIlineWork = [];
-
-  var numberNew = [];
-
-  var newSED = lengthCounterTotal - lengthCounter;
-  for(var i = lengthCounter; i <= lengthCounterTotal; i++){
-    number[i-1] = i;
-  }
-  numberNew = number.slice(lengthCounter);
-
-  lengthCounter = lengthCounter + 1;
-  lengthCounter = lengthCounterTotal;
 
 
-//ErrorBar Function
-ErrorBarParse();
-//Checks UpperLimit
-UpperLimit();
-//Unit Conversions for SED Points
-UnitConversions();
-//splits the lines from the SED points
-LineSplit();
-//Adds computed data to arrays
-LoadData();
-//Loads x and y based on current axis
-InitialCoordinates();
-  var trace_lines =
-        {name: searchstring,
-          mode: 'markers',
-          type: "scatter",
-          text: numberNew,
-          x: XInitial,
-          y: YInitial,
-          error_y: {
-            type: 'data',
-            array: ErrorInitial,
-            visible: true,
-            thickness: 1,
-            // color: 'rgb(0,0,139)'
+
+
+
+
+    //---------------------Splits x and y broad-band and line points----------------------//
+    function LineSplit() {
+      for (var i = 0; i < typeWork.length; i++) {
+        if (
+          typeWork[i] == ' Line measurement; flux integrated over line; lines measured in emission' ||
+          typeWork[i] == ' Line measurement; flux integrated over line'
+        ) {
+          for (var j = 0; j < upperlimits_counter.length; j++) {
+            if (upperlimits_counter[j] == i) {
+              upperlimit_line.push({
+                number: upperlimits_counter[j],
+                x: xWork[i],
+                xlineWavelength: xlineWavelength[i],
+                y: yWork[i]
+              });
+            }
+
           }
-        };
-          TotalTraces = TotalTraces + 1;
-          OptionsCounter = OptionsCounter + 1;
+          delete xWork[i];
+          delete xWavelengthWork[i];
+          delete yWork[i];
+          delete ySIWork[i];
+          delete yJyHzWork[i];
+          delete yWMWork[i];
+          errorBarWMWork[i] = errorBarWork[i] * Math.pow(10, -26);
+          errorBarJyHzWork[i] = errorBarWork[i];
+          errorBarSIWork[i] = errorBarWMWork[i];
 
-  return  Plotly.addTraces('my-graph', trace_lines);
-}
+          errorBarlineWork[i] = errorBarWork[i];
+          errorBarSIlineWork[i] = errorBarWork[i] * Math.pow(10, -26);
 
+        } else {
+          delete xlineWork[i];
+          delete ylineWork[i];
+          delete ylineWMWork[i];
+          for (var j = 0; j < upperlimits_counter.length; j++) {
+            if (upperlimits_counter[j] == i) {
+              upperlimit_broadband.push({
+                number: upperlimits_counter[j],
+                x: xWork[i],
+                y: yWork[i],
+              });
+            }
+          }
 
-function UpperLimit(){
-  for(var i = 0; i <= yWork.length; i++)
-    if(yWork[i] == ""){
-      yWork[i] = '  '+ errorBarWork[i]+'';
+        }
+      }
+
     }
-}
 
 
-
-
-
-
-
-
-
-//---------------------Splits x and y broad-band and line points----------------------//
-function LineSplit(){
-  for(var i = 0; i < typeWork.length; i++){
-    if (
-      typeWork[i] == ' Line measurement; flux integrated over line; lines measured in emission'
-      ||
-      typeWork[i] == ' Line measurement; flux integrated over line'
-    ){
-      delete xWork[i];
-      delete xWavelengthWork[i];
-      delete yWork[i];
-      delete ySIWork[i];
-      delete yJyHzWork[i];
-      delete yWMWork[i];
-      errorBarWMWork[i] = errorBarWork[i] * Math.pow(10, -26);
-      errorBarJyHzWork[i] = errorBarWork[i];
-      errorBarSIWork[i] = errorBarWMWork[i];
-
-      errorBarlineWork[i] = errorBarWork[i];
-      errorBarSIlineWork[i] = errorBarWork[i] * Math.pow(10, -26);
-
-    }else{
-      delete xlineWork[i];
-      delete ylineWork[i];
-      delete ylineWMWork[i];
+    //---------------------Parses the ErrorBar Values and creates ErrorBarNull----------------------//
+    function ErrorBarParse() {
+      //filters out the strings and removes "+/- syntax"
+      for (var i = 0; i < errorBarWork.length; i++) {
+        if (errorBarWork[i] === undefined) {
+          errorBarWork[i] = "";
+        }
+        if (upperlimits[i].includes("<")) {
+          //  console.log(upperlimits[i]);
+          //  errorBarWork[i] = "";
+          InitialMarker[i] = "line-ew-open";
+          upperlimits_counter.push(i);
+        }
+        errorBarWork[i] = errorBarWork[i].replace("+/-", ""); //removes "+/-"
+        errorBarNull.push(0);
+      }
     }
-  }
-}
-//---------------------Parses the ErrorBar Values and creates ErrorBarNull----------------------//
-function ErrorBarParse(){
-  //filters out the strings and removes "+/- syntax"
- for(var i = 0; i < errorBarWork.length; i++){
-   if(errorBarWork[i] === undefined){
-     errorBarWork[i] = "";
-   }
-   if(upperlimits[i].includes("<")){
-    //  console.log(upperlimits[i]);
-    //  errorBarWork[i] = "";
-     InitialMarker[i] = "line-ew-open";
-   }
-    errorBarWork[i] = errorBarWork[i].replace("+/-",""); //removes "+/-"
-    errorBarNull.push(0);
- }
- console.log(errorBarWork);
-}
-//---------------------Computes both errorbar values and unit change values----------------------//
-function UnitConversions(){
-  for(var i = 0; i < xWork.length; i++){
-   xWavelengthWork[i] = (299792458/xWork[i]) * 1000000;
-   xlineWavelengthWork[i] = (299792458/xlineWork[i]) * 1000000;
+    //---------------------Computes both errorbar values and unit change values----------------------//
+    function UnitConversions() {
+      for (var i = 0; i < xWork.length; i++) {
+        xWavelengthWork[i] = (299792458 / xWork[i]) * 1000000;
+        xlineWavelengthWork[i] = (299792458 / xlineWork[i]) * 1000000;
 
-   ySIWork[i] = yWork[i] * Math.pow(10, -26);
-   errorBarSIWork[i] = errorBarWork[i] * Math.pow(10, -26);
+        ySIWork[i] = yWork[i] * Math.pow(10, -26);
+        errorBarSIWork[i] = errorBarWork[i] * Math.pow(10, -26);
 
-   yJyHzWork[i] = yWork[i] * xWork[i];
-   errorBarJyHzWork[i] = errorBarWork[i] * xWork[i];
+        yJyHzWork[i] = yWork[i] * xWork[i];
+        errorBarJyHzWork[i] = errorBarWork[i] * xWork[i];
 
-   yWMWork[i] = ySIWork[i] * xWork[i];
-   ylineWMWork[i] = ylineWork[i] * Math.pow(10, -26);
-   errorBarWMWork[i] = errorBarSIWork[i] * xWork[i];
- }
-}
-function RemoveUndefined(input){
-  for(var i = 0; i < input.length; i++){
-    if(input[i] === undefined){
-       delete input[i];
+        yWMWork[i] = ySIWork[i] * xWork[i];
+        ylineWMWork[i] = ylineWork[i] * Math.pow(10, -26);
+        errorBarWMWork[i] = errorBarSIWork[i] * xWork[i];
+      }
     }
-  }
-}
 
-function LoadData(){
-  RemoveUndefined(xWork);
-  RemoveUndefined(xWavelength);
-  RemoveUndefined(yWork);
-  RemoveUndefined(ySIWork);
-  RemoveUndefined(yJyHzWork);
-  RemoveUndefined(yWMWork);
-  RemoveUndefined(errorBarWork);
-  RemoveUndefined(errorBarSIWork);
-  RemoveUndefined(errorBarJyHzWork);
-  RemoveUndefined(errorBarWMWork);
-  RemoveUndefined(xlineWork);
-  RemoveUndefined(ylineWork);
-  RemoveUndefined(xlineWavelengthWork);
-  RemoveUndefined(ylineWMWork);
-  RemoveUndefined(errorBarlineWork);
-  RemoveUndefined(errorBarSIlineWork);
+    function RemoveUndefined(input) {
+      for (var i = 0; i < input.length; i++) {
+        if (input[i] === undefined) {
+          delete input[i];
+        }
+      }
+    }
 
-  x.push(xWork);
-  xWavelength.push(xWavelengthWork);
-  y.push(yWork);
-  ySI.push(ySIWork);
-  yJyHz.push(yJyHzWork);
-  yWM.push(yWMWork);
-  errorBar.push(errorBarWork);
-  errorBarSI.push(errorBarSIWork);
-  errorBarJyHz.push(errorBarJyHzWork);
-  errorBarWM.push(errorBarWMWork);
+    function LoadData() {
 
-  for(var i = 0; i < xlineWork.length; i++){
-    xline.push(xlineWork[i]);
-    yline.push(ylineWork[i]);
-    xlineWavelength.push(xlineWavelengthWork[i]);
-    ylineWM.push(ylineWMWork[i]);
-    errorBarline.push(errorBarlineWork[i]);
-    errorBarSIline.push(errorBarSIlineWork[i]);
-  }
-  RemoveUndefined(yline);
-  RemoveUndefined(ylineWM);
-  RemoveUndefined(errorBarline);
-  RemoveUndefined(errorBarSIline);
-}
+      RemoveUndefined(xWork);
+      RemoveUndefined(xWavelength);
+      RemoveUndefined(yWork);
+      RemoveUndefined(ySIWork);
+      RemoveUndefined(yJyHzWork);
+      RemoveUndefined(yWMWork);
+      RemoveUndefined(errorBarWork);
+      RemoveUndefined(errorBarSIWork);
+      RemoveUndefined(errorBarJyHzWork);
+      RemoveUndefined(errorBarWMWork);
+      RemoveUndefined(xlineWork);
+      RemoveUndefined(ylineWork);
+      RemoveUndefined(xlineWavelengthWork);
+      RemoveUndefined(ylineWMWork);
+      RemoveUndefined(errorBarlineWork);
+      RemoveUndefined(errorBarSIlineWork);
 
-function CreateTrace(){
-  var trace = {
-    mode: 'markers',
-    type: "scatter",
-    name: InputValue,
-    marker: {
-      symbol: InitialMarker
-    },
-    text: number,
-    // marker:{color: 'rgb(0,0,139)'},
-    //
-    // marker: {symbol: 'circle-open'},
-    x: xWork,
-    y: yWork,
-    error_y: {
-      type: 'data',
-      array: errorBarWork,
-      visible: true,
-      thickness: 1,
-      // color: 'rgb(0,0,139)'
-    },
-  };
-  data.push(trace);
-  TotalTraces = TotalTraces + 1;
-}
+      x.push(xWork);
+      xWavelength.push(xWavelengthWork);
+      y.push(yWork);
+      ySI.push(ySIWork);
+      yJyHz.push(yJyHzWork);
+      yWM.push(yWMWork);
+      errorBar.push(errorBarWork);
+      errorBarSI.push(errorBarSIWork);
+      errorBarJyHz.push(errorBarJyHzWork);
+      errorBarWM.push(errorBarWMWork);
+
+      for (var i = 0; i < xlineWork.length; i++) {
+        xline.push(xlineWork[i]);
+        yline.push(ylineWork[i]);
+        xlineWavelength.push(xlineWavelengthWork[i]);
+        ylineWM.push(ylineWMWork[i]);
+        errorBarline.push(errorBarlineWork[i]);
+        errorBarSIline.push(errorBarSIlineWork[i]);
+      }
+      RemoveUndefined(yline);
+      RemoveUndefined(ylineWM);
+      RemoveUndefined(errorBarline);
+      RemoveUndefined(errorBarSIline);
+    }
+
+    function CreateTrace() {
+
+      for(let i = 0; i < upperlimits.length; i++){
+        if (upperlimits[i].includes("<")) {
+           errorBarWork[i] = "";
+        }
+      }
 
 
+      var trace = {
+        mode: 'markers',
+        type: "scatter",
+        name: InputValue,
+        marker: {
+          symbol: InitialMarker
+        },
+        text: number,
+        // marker:{color: 'rgb(0,0,139)'},
+        //
+        // marker: {symbol: 'circle-open'},
+        x: xWork,
+        y: yWork,
+        error_y: {
+          type: 'data',
+          array: errorBarWork,
+          visible: true,
+          thickness: 1,
+          // color: 'rgb(0,0,139)'
+        },
+      };
+      data.push(trace);
+      TotalTraces = TotalTraces + 1;
+    }
 
 
 
@@ -969,273 +1100,293 @@ function CreateTrace(){
 
 
 
-
-
-
-function LoadPlot(){
+    function LoadPlot() {
       xWork = Frequency.slice();
       yWork = NEDMeasurement.slice();
       typeWork = FMode.slice();
       errorBarWork = NEDUncertainty.slice();
       xlineWork = Frequency.slice();
       ylineWork = NEDMeasurement.slice();
-      upperlimits = Uncertainty.slice(lengthCounter);
+      upperlimits = Uncertainty.slice();
 
 
-//ErrorBar Function
-ErrorBarParse();
-//Checks UpperLimit
-UpperLimit();
-//Unit Conversions for SED Points
-UnitConversions();
-//splits the lines from the SED points
-LineSplit();
-//pushes the array of data into function
-LoadData();
-//Creates object and appends to graph
-CreateTrace();
-
-//Graph axis related things
-var layout = {
-  title: 'Spectral Energy Distribution (SED) for ' + InputValue.toUpperCase(),
-  titlefont: {
-    color: 'black',
-  },
-  xaxis: {
-    title: 'log(<em>v</em> [Hz])',
-    type:'log',
-    autorange: true,
-    linecolor: 'black',
-    linewidth: 2,
-    mirror: true,
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,
-    exponentformat: "power",
-    color: '#444'
-    },
-  yaxis: {
-    title: 'log(F<sub><em>v</em></sub> [Jy])',
-    type:'log',
-    autorange: true,
-    linecolor: 'black',
-    linewidth: 2,
-    mirror: true,
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,
-    exponentformat: "power",
-    color: '#444'
-    },
-  yaxis2: {
-    title: 'Jy-Hz',
-    type:'log',
-    ticks: 'inside',
-    ticklen: 10,
-    tickwidth: 2,
-    overlaying: 'y',
-    side: 'right',
-    exponentformat: "power",
-    visible: false
-    },
-  // margin: {b: 250},
-  hovermode: 'closest',
-  plot_bgcolor: '#fff',
-  paper_bgcolor: '#fff',
-  legend: {
-    bgcolor: 'rgba(0,0,0,0)',
-    orientation: 'h',
-    y: -0.14,
-    font: {
-      color: 'black',
-    }
-  },
-  annotations: [
-    {
-      x: 0,
-      y: 0,
-      xref: xWork[239],
-      yref: yWork[239],
-      showarrow: true,
-      arrowhead: 3,
-      ax: 0,
-      ay: -40
-    },
-  ]
-};
+      //ErrorBar Function
+      ErrorBarParse();
+      //Checks UpperLimit
+      UpperLimit();
+      //Unit Conversions for SED Points
+      UnitConversions();
+      //splits the lines from the SED points
+      LineSplit();
+      //pushes the array of data into function
+      LoadData();
+      //Creates object and appends to graph
+      CreateTrace();
+      //Creates Annotations
+      CreateAnnotations();
 
 
-
-
-
-var toImage2 = {
-  name: 'Download plot as a SVG',
-  icon: Plotly.Icons.camera,
-  click: function(gd) {
-    Plotly.downloadImage(gd, {format: 'svg'})
-  }
-};
-
-//Edits made to the toolbar
-var toolbar = {
-	scrollZoom: true, // lets us scroll to zoom in and out - works
-	showLink: false, // removes the link to edit on plotly - works
-	modeBarButtonsToRemove: ['lasso2d', 'sendDataToCloud'],
-  displaylogo: false,
-  modeBarButtonsToAdd: [toImage2],
-  // displayModeBar: true,
-};
-
-
-var xchange = xline.slice();
-var ychange = yline.slice();
-var errorBarTrue = errorBar;
-
-function ErrorBarON(count){
-  //When Switch is on
-  var data_update = {
-    error_y: {
-      array: errorBarTrue[count],
-      thickness: 1,
-    },
-    //This is a test for the frequency range errorbar
-    // error_x: {
-    //   type: 'percent',
-    //   array: 15,
-    //   visible: true,
-    //   thickness: 3,
-    //   color: 'rgb(0,0,139)',
-    //   width: 0,
-    // },
-  };
-    return Plotly.restyle('my-graph', data_update, count);
-
-}
-
-//---------------------Error Bar Switch----------------------//
-//Error Bars
-var checkbox = document.querySelector("input[name=onoffswitch]").onchange = function() {
-if(this.checked) {
-
-for(var i = 0; i < TotalTraces; i++){
-    //checks which yaxis is on
-  var answer2 = document.getElementById("ddl2");
-  if(answer2[answer2.selectedIndex].value == 1){
-    errorBarTrue[i] = errorBar[i];
-  }
-  else if(answer2[answer2.selectedIndex].value == 2){
-    errorBarTrue[i] = errorBarSI[i];
-  }
-  else if(answer2[answer2.selectedIndex].value == 3){
-    errorBarTrue[i] = errorBarJyHz[i];
-  }
-  else {
-    errorBarTrue[i] = errorBarWM[i];
-  }
-}
-
-
-
-for(var i = 0; i < TotalTraces; i++){
-    ErrorBarON(i);
-}
-
-  } else {
-    //when Switch is off
-    var data_update = {
-      error_y: {
-        array: errorBarNull,
-        thickness: 0.001,
+      function CreateAnnotations() {
+        for (var i = 0; i < upperlimit_broadband.length; i++) {
+          annotations_upperlimit_broadband.push({
+            x: Math.log10(upperlimit_broadband[i].x),
+            y: Math.log10(upperlimit_broadband[i].y),
+            xref: 'x',
+            yref: 'y',
+            showarrow: true,
+            arrowhead: 3,
+            ax: 0,
+            ay: -40,
+            yshift: -30,
+            standoff: 10,
+            arrowcolor: '#1f77b4'
+          });
+        }
+        for (var i = 0; i < upperlimit_line.length; i++) {
+          annotations_upperlimit_line.push({
+            x: Math.log10(upperlimit_line[i].x),
+            y: Math.log10(upperlimit_line[i].y),
+            xref: 'x2',
+            yref: 'y2',
+            showarrow: true,
+            arrowhead: 3,
+            ax: 0,
+            ay: -40,
+            yshift: -30,
+            standoff: 10
+          });
+        }
+        for (var i = 0; i < annotations_upperlimit_broadband.length; i++) {
+          annotations_upperlimit.push(annotations_upperlimit_broadband[i]);
+        }
+        for (var i = 0; i < annotations_upperlimit_line.length; i++) {
+          annotations_upperlimit.push(annotations_upperlimit_line[i]);
+        }
+        console.log(annotations_upperlimit);
       }
-    };
 
-    Plotly.restyle('my-graph', data_update);
-  }
-}
+      //Graph axis related things
+      var layout = {
+        title: 'Spectral Energy Distribution (SED) for ' + InputValue.toUpperCase(),
+        titlefont: {
+          color: 'black',
+        },
+        xaxis: {
+          title: 'log(<em>v</em> [Hz])',
+          type: 'log',
+          autorange: true,
+          linecolor: 'black',
+          linewidth: 2,
+          mirror: true,
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          exponentformat: "power",
+          color: '#444'
+        },
+        yaxis: {
+          title: 'log(F<sub><em>v</em></sub> [Jy])',
+          type: 'log',
+          autorange: true,
+          linecolor: 'black',
+          linewidth: 2,
+          mirror: true,
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          exponentformat: "power",
+          color: '#444'
+        },
+        yaxis2: {
+          title: 'Jy-Hz',
+          type: 'log',
+          ticks: 'inside',
+          ticklen: 10,
+          tickwidth: 2,
+          overlaying: 'y',
+          side: 'right',
+          exponentformat: "power",
+          visible: false
+        },
+        // margin: {b: 250},
+        hovermode: 'closest',
+        plot_bgcolor: '#fff',
+        paper_bgcolor: '#fff',
+        legend: {
+          bgcolor: 'rgba(0,0,0,0)',
+          orientation: 'h',
+          y: -0.14,
+          font: {
+            color: 'black',
+          }
+        },
+        annotations: annotations_upperlimit_broadband
+      };
+
+      var toImage2 = {
+        name: 'Download plot as a SVG',
+        icon: Plotly.Icons.camera,
+        click: function(gd) {
+          Plotly.downloadImage(gd, {
+            format: 'svg'
+          })
+        }
+      };
+
+      //Edits made to the toolbar
+      var toolbar = {
+        scrollZoom: true, // lets us scroll to zoom in and out - works
+        showLink: false, // removes the link to edit on plotly - works
+        modeBarButtonsToRemove: ['lasso2d', 'sendDataToCloud'],
+        displaylogo: false,
+        modeBarButtonsToAdd: [toImage2],
+        // displayModeBar: true,
+      };
 
 
+      var xchange = xline.slice();
+      var ychange = yline.slice();
+      var errorBarTrue = errorBar;
 
+      function ErrorBarON(count) {
+        //When Switch is on
+        var data_update = {
+          error_y: {
+            array: errorBarTrue[count],
+            thickness: 1,
+          },
+          //This is a test for the frequency range errorbar
+          // error_x: {
+          //   type: 'percent',
+          //   array: 15,
+          //   visible: true,
+          //   thickness: 3,
+          //   color: 'rgb(0,0,139)',
+          //   width: 0,
+          // },
+        };
+        return Plotly.restyle('my-graph', data_update, count);
 
-//---------------------Hover on and off----------------------//
-var checkboxDataON = function(){
-  var layout_update = {
-    'hovermode': 'closest'
-  };
-  Plotly.relayout('my-graph', layout_update);
-};
-var checkboxDataOFF = function(){
-  var layout_update = {
-    'hovermode': false
-  };
-  Plotly.relayout('my-graph', layout_update);
-};
-
-
-var checkbox1 = document.querySelector("input[name=onoffswitch1]").onchange = function() {
-if(this.checked) {
-  //When switch is on
-    checkboxDataON();
-  } else {
-    //when switch is off
-    checkboxDataOFF();
-  }
-}
-function checkhover(){
-      if(document.querySelector("input[name=onoffswitch1]").checked){
-        checkboxDataON();
-      }else{
-        checkboxDataOFF();
       }
-    }
+
+      //---------------------Error Bar Switch----------------------//
+      //Error Bars
+      var checkbox = document.querySelector("input[name=onoffswitch]").onchange = function() {
+        if (this.checked) {
+
+          for (var i = 0; i < TotalTraces; i++) {
+            //checks which yaxis is on
+            var answer2 = document.getElementById("ddl2");
+            if (answer2[answer2.selectedIndex].value == 1) {
+              errorBarTrue[i] = errorBar[i];
+            } else if (answer2[answer2.selectedIndex].value == 2) {
+              errorBarTrue[i] = errorBarSI[i];
+            } else if (answer2[answer2.selectedIndex].value == 3) {
+              errorBarTrue[i] = errorBarJyHz[i];
+            } else {
+              errorBarTrue[i] = errorBarWM[i];
+            }
+          }
+
+
+
+          for (var i = 0; i < TotalTraces; i++) {
+            ErrorBarON(i);
+          }
+
+        } else {
+          //when Switch is off
+          var data_update = {
+            error_y: {
+              array: errorBarNull,
+              thickness: 0.001,
+            }
+          };
+
+          Plotly.restyle('my-graph', data_update);
+        }
+      }
 
 
 
 
-
-//---------------------Spectral lines on and off----------------------//
-function SpectralLineUpdate(){
-    var yaxis2Title;
-  //Checks which xaxis is on
-    var answer = document.getElementById("ddl");
-    if(answer[answer.selectedIndex].value == 1){
-      xchange = xline;
-    }
-    else{
-      xchange = xlineWavelength;
-    }
-    //checks which yaxis is on
-    var answer2 = document.getElementById("ddl2");
-    if(answer2[answer2.selectedIndex].value == 1){
-      ychange = yline;
-      errorBarTrue = errorBarline;
-      yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
-    }
-    else if(answer2[answer2.selectedIndex].value == 2){
-      ychange = ylineWM;
-      errorBarTrue = errorBarSIline;
-      yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
-    }
-    else if(answer2[answer2.selectedIndex].value == 3){
-      ychange = yline;
-      errorBarTrue = errorBarline;
-      yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
-    }
-    else {
-      ychange = ylineWM;
-      errorBarTrue = errorBarSIline;
-      yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
-    }
-    return {
-      xchange: xchange,
-      ychange: ychange,
-      errorBarTrue: errorBarTrue,
-      yaxis2Title: yaxis2Title,
-    };
-}
-
-function SpectralLineLayout(yaxis2Title){
-  if(document.querySelector("input[name=onoffswitch12]").checked){
+      //---------------------Hover on and off----------------------//
+      var checkboxDataON = function() {
         var layout_update = {
+          'hovermode': 'closest'
+        };
+        Plotly.relayout('my-graph', layout_update);
+      };
+      var checkboxDataOFF = function() {
+        var layout_update = {
+          'hovermode': false
+        };
+        Plotly.relayout('my-graph', layout_update);
+      };
+
+
+      var checkbox1 = document.querySelector("input[name=onoffswitch1]").onchange = function() {
+        if (this.checked) {
+          //When switch is on
+          checkboxDataON();
+        } else {
+          //when switch is off
+          checkboxDataOFF();
+        }
+      }
+
+      function checkhover() {
+        if (document.querySelector("input[name=onoffswitch1]").checked) {
+          checkboxDataON();
+        } else {
+          checkboxDataOFF();
+        }
+      }
+
+
+
+
+
+      //---------------------Spectral lines on and off----------------------//
+      function SpectralLineUpdate() {
+        var yaxis2Title;
+        //Checks which xaxis is on
+        var answer = document.getElementById("ddl");
+        if (answer[answer.selectedIndex].value == 1) {
+          xchange = xline;
+        } else {
+          xchange = xlineWavelength;
+        }
+        //checks which yaxis is on
+        var answer2 = document.getElementById("ddl2");
+        if (answer2[answer2.selectedIndex].value == 1) {
+          ychange = yline;
+          errorBarTrue = errorBarline;
+          yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
+        } else if (answer2[answer2.selectedIndex].value == 2) {
+          ychange = ylineWM;
+          errorBarTrue = errorBarSIline;
+          yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
+        } else if (answer2[answer2.selectedIndex].value == 3) {
+          ychange = yline;
+          errorBarTrue = errorBarline;
+          yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
+        } else {
+          ychange = ylineWM;
+          errorBarTrue = errorBarSIline;
+          yaxis2Title = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
+        }
+        return {
+          xchange: xchange,
+          ychange: ychange,
+          errorBarTrue: errorBarTrue,
+          yaxis2Title: yaxis2Title,
+        };
+      }
+
+      function SpectralLineLayout(yaxis2Title) {
+        if (document.querySelector("input[name=onoffswitch12]").checked) {
+          var layout_update = {
             'yaxis2.title': yaxis2Title,
             'yaxis2.overlaying': 'y',
             'yaxis2.side': 'right',
@@ -1245,40 +1396,44 @@ function SpectralLineLayout(yaxis2Title){
             'yaxis2.visible': true,
             'yaxis2.color': 'white',
           };
-        }else{
+        } else {
           var layout_update = {
-              'yaxis2.title': yaxis2Title,
-              'yaxis2.overlaying': 'y',
-              'yaxis2.side': 'right',
-              'yaxis2.type': 'log',
-              'yaxis2.exponentformat': 'power',
-              'yaxis2.ticks': 'inside',
-              'yaxis2.visible': true,
-              'yaxis2.color': 'black',
-            };
+            'yaxis2.title': yaxis2Title,
+            'yaxis2.overlaying': 'y',
+            'yaxis2.side': 'right',
+            'yaxis2.type': 'log',
+            'yaxis2.exponentformat': 'power',
+            'yaxis2.ticks': 'inside',
+            'yaxis2.visible': true,
+            'yaxis2.color': 'black',
+            'annotations': annotations_upperlimit
+          };
         }
         return Plotly.relayout('my-graph', layout_update);
-  }
-  function clearYAxis2(){
-    var layout_update = {
-      'yaxis2.title': "",
-    };
-    return Plotly.relayout('my-graph', layout_update);
-  }
-  function removeLayoutYAxis2(){
-    var layout_update = {
-    'yaxis2.visible': false
-  };
-  return Plotly.relayout('my-graph', layout_update);
-}
-var SpectralCurrent  = 10;
-function AddSpectralLines(xchange, ychange, errorBarTrue){
-  var trace_lines =
-        {name: "Spectral Lines",
+      }
+
+      function clearYAxis2() {
+        var layout_update = {
+          'yaxis2.title': "",
+        };
+        return Plotly.relayout('my-graph', layout_update);
+      }
+
+      function removeLayoutYAxis2() {
+        var layout_update = {
+          'yaxis2.visible': false
+        };
+        return Plotly.relayout('my-graph', layout_update);
+      }
+      var SpectralCurrent = 10;
+
+      function AddSpectralLines(xchange, ychange, errorBarTrue) {
+        var trace_lines = {
+          name: "Spectral Lines",
           mode: 'markers',
           type: "scatter",
           text: number,
-          marker:{
+          marker: {
             symbol: "diamond-x"
           },
           x: xchange,
@@ -1289,912 +1444,1008 @@ function AddSpectralLines(xchange, ychange, errorBarTrue){
             array: errorBarTrue,
             visible: true,
             thickness: 1,
-          }};
-          OptionsCounter = OptionsCounter + 1;
-          SpectralArray.push([]);
-          var ArrayAdd = TraceArray[TraceArray.length - 1];
-          TraceArray.push(0);
-          TraceArray[TraceArray.length - 1] = ArrayAdd;
-          SpectralCurrent = OptionsCounter-1;
-        return  Plotly.addTraces('my-graph', trace_lines);
-}
-
-var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
-  //call function outputs in form of object
-  var output = SpectralLineUpdate();
-  var yaxis2Title = output.yaxis2Title;
-  var xchange = output.xchange;
-  var ychange = output.ychange;
-  var errorBarTrue = output.errorBarTrue;
-if(this.checked) {
-  //When switch is on
-    SpectralLineLayout(yaxis2Title);
-    AddSpectralLines(xchange, ychange, errorBarTrue);
-    TotalTraces = TotalTraces + 1;
-  } else {
-    //when switch is off
-      clearYAxis2();
-      removeLayoutYAxis2();
-      var currentGalaxy = SpectralCurrent;
-      currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
-      Plotly.deleteTraces(gd, currentGalaxy);
-      for(i = SpectralCurrent; i < TraceArray.length; i++){
-        TraceArray[i] = TraceArray[i] + 1;
-      }
-      TotalTraces = TotalTraces - 1;
-      TraceCounter = TraceCounter + 1;
-      SpectralCurrent = 600;
-  }
-}
-//Need To Fix this
-// function checkErrorBar(count){
-//   if(document.querySelector("input[name=onoffswitch]").checked == true){
-//     //checks which yaxis is on
-//   var answer2 = document.getElementById("ddl2");
-//   if(answer2[answer2.selectedIndex].value == 1){
-//     errorBarTrue = errorBar[count];
-//   }
-//   else if(answer2[answer2.selectedIndex].value == 2){
-//     errorBarTrue = errorBarSI[count];
-//   }
-//   else if(answer2[answer2.selectedIndex].value == 3){
-//     errorBarTrue = errorBarJyHz[count];
-//   }
-//   else {
-//     errorBarTrue = errorBarWM[count];
-//   }
-//     return errorBarTrue;
-//   }
-//
-// }
-function checkErrorBarLine(){
-  if(document.querySelector("input[name=onoffswitch]").checked == true){
-    return 1;
-  }else{
-    return 0.001;
-  }
-}
-
-//---------------------Change the X-Axis Dropdown----------------------//
-var xaxis_update = jsFunction = function(value){
-    var currentGalaxy = SpectralCurrent;
-    currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
-  if(value == 1){
-    var space = 0;
-    for(var i = 0; i < TotalTraces; i++){
-      if(currentGalaxy != i){
-        if(space == 1){
-          i = i - 1;
-          var data_update = {
-            x: [x[i]],
-          };
-          if(data.length == 1){
-            Plotly.restyle('my-graph', data_update, i);
-            i = i + 1;
-          }else{
-            i = i + 1;
-            Plotly.restyle('my-graph', data_update, i);
           }
-        }else{
-          var data_update = {
-          x: [x[i]],
         };
-        Plotly.restyle('my-graph', data_update, i);
-        }
-      }else{
-        space = 1;
-      }
-    }
-
-    if(document.querySelector("input[name=onoffswitch2]").checked == true){
-    var data_update = {
-      x: [xline],
-    };
-      Plotly.restyle('my-graph', data_update, currentGalaxy);
-    }
-
-      var layout_update = {
-        'xaxis.title': 'log(<em>v</em> [Hz])'
-      };
-      Plotly.relayout('my-graph', layout_update);
-  }
-  else{
-    var space = 0;
-    for(var i = 0; i < TotalTraces; i++){
-      if(currentGalaxy != i){
-        if(space == 1){
-          i = i - 1;
-          var data_update = {
-            x: [xWavelength[i]],
-          };
-          if(data.length == 1){
-            Plotly.restyle('my-graph', data_update, i);
-            i = i + 1;
-          }else{
-            i = i + 1;
-            Plotly.restyle('my-graph', data_update, i);
-          }
-        }else{
-          var data_update = {
-          x: [xWavelength[i]],
+        OptionsCounter = OptionsCounter + 1;
+        SpectralArray.push([]);
+        var ArrayAdd = TraceArray[TraceArray.length - 1];
+        TraceArray.push(0);
+        TraceArray[TraceArray.length - 1] = ArrayAdd;
+        SpectralCurrent = OptionsCounter - 1;
+        return Plotly.addTraces('my-graph', trace_lines);
+        var layout_update = {
+          'annotations': annotations_upperlimit
         };
-        Plotly.restyle('my-graph', data_update, i);
-        }
-      }else{
-        space = 1;
-      }
-    }
+        console.log(layout_update);
 
-  if(document.querySelector("input[name=onoffswitch2]").checked == true){
-  var data_update = {
-    x: [xlineWavelength],
-  };
-    Plotly.restyle('my-graph', data_update, currentGalaxy);
-  }
-      var layout_update = {
-        'xaxis.title': 'log(λ [μm])'
+        return Plotly.relayout('my-graph', layout_update);
+      }
+
+      var checkbox2 = document.querySelector("input[name=onoffswitch2]").onchange = function() {
+        //call function outputs in form of object
+        var output = SpectralLineUpdate();
+        var yaxis2Title = output.yaxis2Title;
+        var xchange = output.xchange;
+        var ychange = output.ychange;
+        var errorBarTrue = output.errorBarTrue;
+        if (this.checked) {
+          //When switch is on
+          SpectralLineLayout(yaxis2Title);
+          AddSpectralLines(xchange, ychange, errorBarTrue);
+          TotalTraces = TotalTraces + 1;
+        } else {
+          //when switch is off
+          clearYAxis2();
+          removeLayoutYAxis2();
+          var currentGalaxy = SpectralCurrent;
+          currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
+          Plotly.deleteTraces(gd, currentGalaxy);
+          for (i = SpectralCurrent; i < TraceArray.length; i++) {
+            TraceArray[i] = TraceArray[i] + 1;
+          }
+          TotalTraces = TotalTraces - 1;
+          TraceCounter = TraceCounter + 1;
+          SpectralCurrent = 600;
+        }
+      }
+      //Need To Fix this
+      // function checkErrorBar(count){
+      //   if(document.querySelector("input[name=onoffswitch]").checked == true){
+      //     //checks which yaxis is on
+      //   var answer2 = document.getElementById("ddl2");
+      //   if(answer2[answer2.selectedIndex].value == 1){
+      //     errorBarTrue = errorBar[count];
+      //   }
+      //   else if(answer2[answer2.selectedIndex].value == 2){
+      //     errorBarTrue = errorBarSI[count];
+      //   }
+      //   else if(answer2[answer2.selectedIndex].value == 3){
+      //     errorBarTrue = errorBarJyHz[count];
+      //   }
+      //   else {
+      //     errorBarTrue = errorBarWM[count];
+      //   }
+      //     return errorBarTrue;
+      //   }
+      //
+      // }
+      function checkErrorBarLine() {
+        if (document.querySelector("input[name=onoffswitch]").checked == true) {
+          return 1;
+        } else {
+          return 0.001;
+        }
+      }
+
+      //---------------------Change the X-Axis Dropdown----------------------//
+      var xaxis_update = jsFunction = function(value) {
+        var currentGalaxy = SpectralCurrent;
+        currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
+        if (value == 1) {
+          var space = 0;
+          for (var i = 0; i < TotalTraces; i++) {
+            if (currentGalaxy != i) {
+              if (space == 1) {
+                i = i - 1;
+                var data_update = {
+                  x: [x[i]],
+                };
+                if (data.length == 1) {
+                  Plotly.restyle('my-graph', data_update, i);
+                  i = i + 1;
+                } else {
+                  i = i + 1;
+                  Plotly.restyle('my-graph', data_update, i);
+                }
+              } else {
+                var data_update = {
+                  x: [x[i]],
+                };
+                Plotly.restyle('my-graph', data_update, i);
+              }
+            } else {
+              space = 1;
+            }
+          }
+
+          if (document.querySelector("input[name=onoffswitch2]").checked == true) {
+            var data_update = {
+              x: [xline],
+            };
+            Plotly.restyle('my-graph', data_update, currentGalaxy);
+          }
+
+          var layout_update = {
+            'xaxis.title': 'log(<em>v</em> [Hz])'
+          };
+          Plotly.relayout('my-graph', layout_update);
+        } else {
+          var space = 0;
+          for (var i = 0; i < TotalTraces; i++) {
+            if (currentGalaxy != i) {
+              if (space == 1) {
+                i = i - 1;
+                var data_update = {
+                  x: [xWavelength[i]],
+                };
+                if (data.length == 1) {
+                  Plotly.restyle('my-graph', data_update, i);
+                  i = i + 1;
+                } else {
+                  i = i + 1;
+                  Plotly.restyle('my-graph', data_update, i);
+                }
+              } else {
+                var data_update = {
+                  x: [xWavelength[i]],
+                };
+                Plotly.restyle('my-graph', data_update, i);
+              }
+            } else {
+              space = 1;
+            }
+          }
+
+          if (document.querySelector("input[name=onoffswitch2]").checked == true) {
+            var data_update = {
+              x: [xlineWavelength],
+            };
+            Plotly.restyle('my-graph', data_update, currentGalaxy);
+          }
+          var layout_update = {
+            'xaxis.title': 'log(λ [μm])'
+          };
+          Plotly.relayout('my-graph', layout_update);
+        }
+      }
+      //---------------------END of X-Axis----------------------//
+
+
+
+
+
+
+      //---------------------Change the Y-Axis Dropdown----------------------//
+      var yaxis_update = jsFunction1 = function(value) {
+        var currentGalaxy = SpectralCurrent;
+        currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
+        if (value == 1) {
+          var space = 0;
+          for (var i = 0; i < TotalTraces; i++) {
+            if (currentGalaxy != i) {
+              if (space == 1) {
+                i = i - 1;
+                var data_update = {
+                  y: [y[i]],
+                  error_y: {
+                    array: errorBar[i],
+                    thickness: checkErrorBarLine(),
+                  }
+                };
+                if (data.length == 1) {
+                  Plotly.restyle('my-graph', data_update, i);
+                  i = i + 1;
+                } else {
+                  i = i + 1;
+                  Plotly.restyle('my-graph', data_update, i);
+                }
+              } else {
+                var data_update = {
+                  y: [y[i]],
+                  error_y: {
+                    array: errorBar[i],
+                    thickness: checkErrorBarLine(),
+                  }
+                };
+                Plotly.restyle('my-graph', data_update, i);
+              }
+            } else {
+              space = 1;
+            }
+          }
+
+          if (document.querySelector("input[name=onoffswitch2]").checked == true) {
+            var output = SpectralLineUpdate();
+            var ychange = output.ychange;
+            var errorBarTrue = output.errorBarTrue;
+            var data_update = {
+              y: [ychange],
+              error_y: {
+                array: errorBarTrue,
+                thickness: checkErrorBarLine(),
+              }
+            };
+            Plotly.restyle('my-graph', data_update, currentGalaxy);
+            SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
+          }
+
+          var layout_update = {
+            'yaxis.title': 'log(F<sub><em>v</em></sub> [Jy])'
+          };
+          Plotly.relayout('my-graph', layout_update);
+        } else if (value == 2) {
+          var space = 0;
+          for (var i = 0; i < TotalTraces; i++) {
+            if (currentGalaxy != i) {
+              if (space == 1) {
+                i = i - 1;
+                var data_update = {
+                  y: [ySI[i]],
+                  error_y: {
+                    array: errorBarSI[i],
+                    thickness: checkErrorBarLine(),
+                  }
+                };
+                if (data.length == 1) {
+                  Plotly.restyle('my-graph', data_update, i);
+                  i = i + 1;
+                } else {
+                  i = i + 1;
+                  Plotly.restyle('my-graph', data_update, i);
+                }
+              } else {
+                var data_update = {
+                  y: [ySI[i]],
+                  error_y: {
+                    array: errorBarSI[i],
+                    thickness: checkErrorBarLine(),
+                  }
+                };
+                Plotly.restyle('my-graph', data_update, i);
+              }
+            } else {
+              space = 1;
+            }
+          }
+
+          if (document.querySelector("input[name=onoffswitch2]").checked == true) {
+            var output = SpectralLineUpdate();
+            var ychange = output.ychange;
+            var errorBarTrue = output.errorBarTrue;
+            var data_update = {
+              y: [ychange],
+              error_y: {
+                array: errorBarTrue,
+                thickness: checkErrorBarLine(),
+              }
+            };
+            Plotly.restyle('my-graph', data_update, currentGalaxy);
+            SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
+          }
+          var layout_update = {
+            'yaxis.title': 'log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])'
+          };
+          Plotly.relayout('my-graph', layout_update);
+        } else if (value == 3) {
+          var space = 0;
+          for (var i = 0; i < TotalTraces; i++) {
+            if (currentGalaxy != i) {
+              if (space == 1) {
+                i = i - 1;
+                var data_update = {
+                  y: [yJyHz[i]],
+                  error_y: {
+                    array: errorBarJyHz[i],
+                    thickness: checkErrorBarLine(),
+                  }
+                };
+                if (data.length == 1) {
+                  Plotly.restyle('my-graph', data_update, i);
+                  i = i + 1;
+                } else {
+                  i = i + 1;
+                  Plotly.restyle('my-graph', data_update, i);
+                }
+              } else {
+                var data_update = {
+                  y: [yJyHz[i]],
+                  error_y: {
+                    array: errorBarJyHz[i],
+                    thickness: checkErrorBarLine(),
+                  }
+                };
+                Plotly.restyle('my-graph', data_update, i);
+              }
+            } else {
+              space = 1;
+            }
+          }
+
+          if (document.querySelector("input[name=onoffswitch2]").checked == true) {
+            var output = SpectralLineUpdate();
+            var ychange = output.ychange;
+            var errorBarTrue = output.errorBarTrue;
+            var data_update = {
+              y: [ychange],
+              error_y: {
+                array: errorBarTrue,
+                thickness: checkErrorBarLine(),
+              }
+            };
+            Plotly.restyle('my-graph', data_update, currentGalaxy);
+            SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
+          }
+
+          var layout_update = {
+            'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])'
+          };
+          Plotly.relayout('my-graph', layout_update);
+        } else {
+          var space = 0;
+          for (var i = 0; i < TotalTraces; i++) {
+            if (currentGalaxy != i) {
+              if (space == 1) {
+                i = i - 1;
+                var data_update = {
+                  y: [yWM[i]],
+                  error_y: {
+                    array: errorBarWM[i],
+                    thickness: checkErrorBarLine(),
+                  }
+                };
+                if (data.length == 1) {
+                  Plotly.restyle('my-graph', data_update, i);
+                  i = i + 1;
+                } else {
+                  i = i + 1;
+                  Plotly.restyle('my-graph', data_update, i);
+                }
+              } else {
+                var data_update = {
+                  y: [yWM[i]],
+                  error_y: {
+                    array: errorBarWM[i],
+                    thickness: checkErrorBarLine(),
+                  }
+                };
+                Plotly.restyle('my-graph', data_update, i);
+              }
+            } else {
+              space = 1;
+            }
+          }
+
+          if (document.querySelector("input[name=onoffswitch2]").checked == true) {
+            var output = SpectralLineUpdate();
+            var ychange = output.ychange;
+            var errorBarTrue = output.errorBarTrue;
+            var data_update = {
+              y: [ychange],
+              error_y: {
+                array: errorBarTrue,
+                thickness: checkErrorBarLine(),
+              }
+            };
+            Plotly.restyle('my-graph', data_update, currentGalaxy);
+            SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
+          }
+
+          var layout_update = {
+            'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])'
+          };
+          Plotly.relayout('my-graph', layout_update);
+        }
+      }
+      //---------------------END of Y-Axis----------------------//
+
+
+
+
+
+      //----------------Make Plotly Responsive-----------------//
+      //----------------Edits the CSS in the div---------------//
+      var WIDTH_IN_PERCENT_OF_PARENT = 100,
+        HEIGHT_IN_PERCENT_OF_PARENT = 100;
+
+      Plotly.d3.select('#my-graph')
+        .style({
+          width: WIDTH_IN_PERCENT_OF_PARENT + '%',
+          height: HEIGHT_IN_PERCENT_OF_PARENT + '%',
+        });
+      var gd = Plotly.d3.select('#my-graph').node();
+
+      window.onresize = function() {
+        Plotly.Plots.resize(gd);
       };
-      Plotly.relayout('my-graph', layout_update);
-  }
-}
-//---------------------END of X-Axis----------------------//
+      //-----------------END Responsive code-------------------//
+
+      var scalescreenSize = $(window).height();
+      var topHeight = scalescreenSize - scalescreenSize * 0.4;
+
+      var tableHeight = scalescreenSize * 0.4;
+
+      var topItem1 = $("#settings-right").css("height");
+      topItem1 = topItem1.replace("px", "");
+      var finalTopHeight = 0;
+
+      var topItem2 = $("#data-right").css("height");
+      topItem2 = topItem2.replace("px", "");
+
+      if (topHeight < topItem2) {
+        finalTopHeight = topItem2;
+      } else {
+        finalTopHeight = topHeight;
+      }
+
+      $(".grid-item--width--main").css("height", finalTopHeight);
+      $(".bottom-table").css({
+        "height": tableHeight
+      });
+      $grid.packery('layout');
 
 
 
+      //---------------------On and off Data----------------------//
+      function BigScreen() {
+        $("#data-window").toggle();
+        $(".grid-item--width--main").css({
+          "width": "98%"
+        });
+        Plotly.Plots.resize(gd);
+        $grid.packery('layout');
+      }
 
-
-
-//---------------------Change the Y-Axis Dropdown----------------------//
-var yaxis_update = jsFunction1 = function(value){
-    var currentGalaxy = SpectralCurrent;
-    currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
-  if(value == 1){
-    var space = 0;
-    for(var i = 0; i < TotalTraces; i++){
-      if(currentGalaxy != i){
-        if(space == 1){
-          i = i - 1;
-          var data_update = {
-          y:[y[i]],
-          error_y: {
-            array: errorBar[i],
-            thickness: checkErrorBarLine(),
-          }};
-          if(data.length == 1){
-            Plotly.restyle('my-graph', data_update, i);
-            i = i + 1;
-          }else{
-            i = i + 1;
-            Plotly.restyle('my-graph', data_update, i);
-          }
-        }else{
-          var data_update = {
-          y:[y[i]],
-          error_y: {
-            array: errorBar[i],
-            thickness: checkErrorBarLine(),
-          }};
-        Plotly.restyle('my-graph', data_update, i);
+      function SmallScreen() {
+        $("#data-window").toggle();
+        $(".grid-item--width--main").css({
+          "width": "73%"
+        });
+        $("#myonoffswitch1").prop("checked", true);
+        Plotly.Plots.resize(gd);
+        $grid.packery('layout');
+      }
+      document.querySelector("input[name=onoffswitch5]").onchange = function() {
+        if (this.checked) {
+          //When switch is on
+          SmallScreen();
+          checkboxDataON();
+        } else {
+          //when switch is off
+          BigScreen();
         }
-      }else{
-        space = 1;
       }
-    }
-
-    if(document.querySelector("input[name=onoffswitch2]").checked == true){
-      var output = SpectralLineUpdate();
-      var ychange = output.ychange;
-      var errorBarTrue = output.errorBarTrue;
-    var data_update = {
-      y: [ychange],
-      error_y: {
-        array: errorBarTrue,
-        thickness: checkErrorBarLine(),
-      }
-    };
-      Plotly.restyle('my-graph', data_update, currentGalaxy);
-    SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
-    }
-
-    var layout_update = {
-      'yaxis.title': 'log(F<sub><em>v</em></sub> [Jy])'
-    };
-    Plotly.relayout('my-graph', layout_update);
-  }
-  else if(value == 2){
-    var space = 0;
-    for(var i = 0; i < TotalTraces; i++){
-      if(currentGalaxy != i){
-        if(space == 1){
-          i = i - 1;
-          var data_update = {
-          y:[ySI[i]],
-          error_y: {
-            array: errorBarSI[i],
-            thickness: checkErrorBarLine(),
-          }};
-          if(data.length == 1){
-            Plotly.restyle('my-graph', data_update, i);
-            i = i + 1;
-          }else{
-            i = i + 1;
-            Plotly.restyle('my-graph', data_update, i);
-          }
-        }else{
-          var data_update = {
-          y:[ySI[i]],
-          error_y: {
-            array: errorBarSI[i],
-            thickness: checkErrorBarLine(),
-          }};
-        Plotly.restyle('my-graph', data_update, i);
+      document.querySelector("input[name=onoffswitch7]").onchange = function() {
+        if (this.checked) {
+          //When switch is on
+          // SmallScreen();
+          // checkboxDataON();
+          $("#data-table").toggle();
+          $grid.packery('layout');
+        } else {
+          //when switch is off
+          // BigScreen();
+          $("#data-table").toggle();
+          $grid.packery('layout');
         }
-      }else{
-        space = 1;
       }
-    }
+      //Initialize Large Screen
+      // BigScreen();
+      //---------------------END of controls----------------------//
 
-    if(document.querySelector("input[name=onoffswitch2]").checked == true){
-      var output = SpectralLineUpdate();
-      var ychange = output.ychange;
-      var errorBarTrue = output.errorBarTrue;
-    var data_update = {
-      y: [ychange],
-      error_y: {
-        array: errorBarTrue,
-        thickness: checkErrorBarLine(),
-      }
-    };
-      Plotly.restyle('my-graph', data_update, currentGalaxy);
-      SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
-    }
-    var layout_update = {
-      'yaxis.title': 'log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])'
-    };
-    Plotly.relayout('my-graph', layout_update);
-  }
-  else if(value == 3){
-    var space = 0;
-    for(var i = 0; i < TotalTraces; i++){
-      if(currentGalaxy != i){
-        if(space == 1){
-          i = i - 1;
-          var data_update = {
-          y:[yJyHz[i]],
-          error_y: {
-            array: errorBarJyHz[i],
-            thickness: checkErrorBarLine(),
-          }};
-          if(data.length == 1){
-            Plotly.restyle('my-graph', data_update, i);
-            i = i + 1;
-          }else{
-            i = i + 1;
-            Plotly.restyle('my-graph', data_update, i);
-          }
-        }else{
-          var data_update = {
-          y:[yJyHz[i]],
-          error_y: {
-            array: errorBarJyHz[i],
-            thickness: checkErrorBarLine(),
-          }};
-        Plotly.restyle('my-graph', data_update, i);
+      function GraphAxis() {
+        var answer = document.getElementById("ddl");
+        if (answer[answer.selectedIndex].value == 1) {
+          XAxisCurrent = 'log(<em>v</em> [Hz])';
+        } else {
+          XAxisCurrent = 'log(λ [μm])';
         }
-      }else{
-        space = 1;
-      }
-    }
-
-    if(document.querySelector("input[name=onoffswitch2]").checked == true){
-      var output = SpectralLineUpdate();
-      var ychange = output.ychange;
-      var errorBarTrue = output.errorBarTrue;
-    var data_update = {
-      y: [ychange],
-      error_y: {
-        array: errorBarTrue,
-        thickness: checkErrorBarLine(),
-      }
-    };
-      Plotly.restyle('my-graph', data_update, currentGalaxy);
-    SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])');
-    }
-
-    var layout_update = {
-      'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])'
-    };
-    Plotly.relayout('my-graph', layout_update);
-  }
-  else{
-    var space = 0;
-    for(var i = 0; i < TotalTraces; i++){
-      if(currentGalaxy != i){
-        if(space == 1){
-          i = i - 1;
-          var data_update = {
-          y:[yWM[i]],
-          error_y: {
-            array: errorBarWM[i],
-            thickness: checkErrorBarLine(),
-          }};
-          if(data.length == 1){
-            Plotly.restyle('my-graph', data_update, i);
-            i = i + 1;
-          }else{
-            i = i + 1;
-            Plotly.restyle('my-graph', data_update, i);
-          }
-        }else{
-          var data_update = {
-          y:[yWM[i]],
-          error_y: {
-            array: errorBarWM[i],
-            thickness: checkErrorBarLine(),
-          }};
-        Plotly.restyle('my-graph', data_update, i);
+        //checks which yaxis is on
+        var answer2 = document.getElementById("ddl2");
+        if (answer2[answer2.selectedIndex].value == 1) {
+          YAxisCurrent = 'log(F<sub><em>v</em></sub> [Jy])';
+        } else if (answer2[answer2.selectedIndex].value == 2) {
+          YAxisCurrent = 'log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])';
+        } else if (answer2[answer2.selectedIndex].value == 3) {
+          YAxisCurrent = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
+        } else {
+          YAxisCurrent = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
         }
-      }else{
-        space = 1;
       }
-    }
 
-    if(document.querySelector("input[name=onoffswitch2]").checked == true){
-      var output = SpectralLineUpdate();
-      var ychange = output.ychange;
-      var errorBarTrue = output.errorBarTrue;
-    var data_update = {
-      y: [ychange],
-      error_y: {
-        array: errorBarTrue,
-        thickness: checkErrorBarLine(),
+      function WhiteLayout() {
+        GraphAxis();
+        //Graph axis related things
+        var layout_update = {
+          'titlefont.color': 'black',
+          'xaxis.title': XAxisCurrent,
+          'xaxis.linecolor': 'black',
+          'xaxis.color': '#444',
+          'yaxis.title': YAxisCurrent,
+          'yaxis.linecolor': 'black',
+          'yaxis.color': '#444',
+          'plot_bgcolor': '#fff',
+          'paper_bgcolor': '#fff',
+          'legend.font.color': 'black'
+        };
+        $('body').removeClass('dark-mode');
+        Plotly.relayout('my-graph', layout_update);
+
+        if (document.querySelector("input[name=onoffswitch2]").checked) {
+          var output = SpectralLineUpdate();
+          var yaxis2Title = output.yaxis2Title;
+          SpectralLineLayout(yaxis2Title);
+        } else {
+          clearYAxis2();
+          removeLayoutYAxis2();
+        }
+        checkhover();
       }
-    };
-      Plotly.restyle('my-graph', data_update, currentGalaxy);
-      SpectralLineLayout('log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])');
-    }
 
-    var layout_update = {
-      'yaxis.title': 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])'
-    };
-    Plotly.relayout('my-graph', layout_update);
-  }
-}
-//---------------------END of Y-Axis----------------------//
+      function DarkLayout() {
+        GraphAxis();
+        //Graph axis related things
+        var layout_update = {
+          'titlefont.color': 'white',
+          'xaxis.title': XAxisCurrent,
+          'xaxis.linecolor': 'white',
+          'xaxis.color': 'rgb(255,255,255)',
+          'yaxis.title': YAxisCurrent,
+          'yaxis.linecolor': 'white',
+          'yaxis.color': 'rgb(255,255,255)',
+          'plot_bgcolor': '#151515',
+          'paper_bgcolor': '#151515',
+          'legend.font.color': 'white'
+        };
 
+        $('body').addClass('dark-mode');
+        Plotly.relayout('my-graph', layout_update);
 
-
-
-
-//----------------Make Plotly Responsive-----------------//
-//----------------Edits the CSS in the div---------------//
-var WIDTH_IN_PERCENT_OF_PARENT = 100,
-    HEIGHT_IN_PERCENT_OF_PARENT = 100;
-
-Plotly.d3.select('#my-graph')
-    .style({
-        width: WIDTH_IN_PERCENT_OF_PARENT + '%',
-        height: HEIGHT_IN_PERCENT_OF_PARENT + '%',
-    });
-var gd = Plotly.d3.select('#my-graph').node();
-
-window.onresize = function() {
-    Plotly.Plots.resize(gd);
-};
-//-----------------END Responsive code-------------------//
-
-var scalescreenSize = $(window).height();
-var topHeight = scalescreenSize - scalescreenSize*0.4;
-
-var tableHeight = scalescreenSize*0.4;
-
-var topItem1 = $("#settings-right").css("height");
-topItem1 = topItem1.replace("px","");
-var finalTopHeight = 0;
-
-var topItem2 = $("#data-right").css("height");
-topItem2 = topItem2.replace("px","");
-
-if(topHeight < topItem2){
-  finalTopHeight = topItem2;
-}else{
-  finalTopHeight = topHeight;
-}
-
-$(".grid-item--width--main").css("height", finalTopHeight);
-$(".bottom-table").css({"height":tableHeight});
-$grid.packery('layout');
-
-
-
-//---------------------On and off Data----------------------//
-function BigScreen(){
-  $( "#data-window" ).toggle();
-  $(".grid-item--width--main").css({"width": "98%"});
-  Plotly.Plots.resize(gd);
-  $grid.packery('layout');
-}
-function SmallScreen(){
-  $( "#data-window" ).toggle();
-  $(".grid-item--width--main").css({"width": "73%"});
-  $("#myonoffswitch1").prop("checked", true);
-  Plotly.Plots.resize(gd);
-  $grid.packery('layout');
-}
-document.querySelector("input[name=onoffswitch5]").onchange = function() {
-if(this.checked) {
-  //When switch is on
-  SmallScreen();
-  checkboxDataON();
-  } else {
-    //when switch is off
-    BigScreen();
-  }
-}
-document.querySelector("input[name=onoffswitch7]").onchange = function() {
-if(this.checked) {
-  //When switch is on
-  // SmallScreen();
-  // checkboxDataON();
-  $("#data-table").toggle();
-  $grid.packery('layout');
-  } else {
-    //when switch is off
-    // BigScreen();
-    $("#data-table").toggle();
-    $grid.packery('layout');
-  }
-}
-//Initialize Large Screen
- // BigScreen();
-  //---------------------END of controls----------------------//
-
-  function GraphAxis(){
-    var answer = document.getElementById("ddl");
-    if(answer[answer.selectedIndex].value == 1){
-      XAxisCurrent = 'log(<em>v</em> [Hz])';
-    }
-    else{
-      XAxisCurrent = 'log(λ [μm])';
-    }
-    //checks which yaxis is on
-    var answer2 = document.getElementById("ddl2");
-    if(answer2[answer2.selectedIndex].value == 1){
-      YAxisCurrent = 'log(F<sub><em>v</em></sub> [Jy])';
-    }
-    else if(answer2[answer2.selectedIndex].value == 2){
-      YAxisCurrent = 'log(F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>])';
+        if (document.querySelector("input[name=onoffswitch2]").checked) {
+          var output = SpectralLineUpdate();
+          var yaxis2Title = output.yaxis2Title;
+          SpectralLineLayout(yaxis2Title);
+        } else {
+          clearYAxis2();
+          removeLayoutYAxis2();
+        }
+        checkhover();
       }
-    else if(answer2[answer2.selectedIndex].value == 3){
-      YAxisCurrent = 'log(<em>v</em>F<sub><em>v</em></sub> [Jy-Hz])';
+
+      function CheckDarkMode() {
+        if ($("input[name=onoffswitch12]").is(':checked')) {
+          DarkLayout();
+        } else {
+          WhiteLayout();
+        }
       }
-    else {
-      YAxisCurrent = 'log(<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>])';
+      //---------------------On and off Plot controls----------------------//
+      document.querySelector("input[name=onoffswitch6]").onchange = function() {
+        if (this.checked) {
+          //When switch is on
+          //Calls the plot into HTML
+          //Edits made to the toolbar
+          var toolbar = {
+            scrollZoom: true, // lets us scroll to zoom in and out - works
+            showLink: false, // removes the link to edit on plotly - works
+            modeBarButtonsToRemove: ['lasso2d', 'sendDataToCloud'],
+            displaylogo: false,
+            modeBarButtonsToAdd: [toImage2],
+            displayModeBar: true,
+          };
+          Plotly.newPlot('my-graph', data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+          CheckDarkMode();
+        } else {
+          //when switch is off
+          //Edits made to the toolbar
+          var toolbar = {
+            scrollZoom: true, // lets us scroll to zoom in and out - works
+            showLink: false, // removes the link to edit on plotly - works
+            modeBarButtonsToRemove: ['lasso2d', 'sendDataToCloud'],
+            displaylogo: false,
+            modeBarButtonsToAdd: [toImage2],
+            displayModeBar: false,
+          };
+          Plotly.newPlot('my-graph', data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+          CheckDarkMode();
+        }
       }
-  }
+      //---------------------END of controls----------------------//
 
-  function WhiteLayout(){
-    GraphAxis();
-    //Graph axis related things
-    var layout_update = {
-      'titlefont.color': 'black',
-      'xaxis.title': XAxisCurrent,
-      'xaxis.linecolor': 'black',
-      'xaxis.color': '#444',
-      'yaxis.title': YAxisCurrent,
-      'yaxis.linecolor': 'black',
-      'yaxis.color': '#444',
-      'plot_bgcolor': '#fff',
-      'paper_bgcolor': '#fff',
-      'legend.font.color': 'black'
-    };
-    $('body').removeClass('dark-mode');
-    Plotly.relayout('my-graph', layout_update);
+      //---------------------Download Plot Button----------------------//
+      // 1. Create the button
+      document.getElementById("button-download").onclick = function() {
+        // Plotly.relayout('my-graph', layout_update);
+        Plotly.downloadImage(gd, {
+          format: 'svg',
+          height: 500,
+          width: 1000,
+          filename: 'newplot'
+        })
+      };
 
-    if(document.querySelector("input[name=onoffswitch2]").checked){
-      var output = SpectralLineUpdate();
-      var yaxis2Title = output.yaxis2Title;
-      SpectralLineLayout(yaxis2Title);
-    }else{
-      clearYAxis2();
-      removeLayoutYAxis2();
-    }
-    checkhover();
-  }
+      //---------------------END of controls----------------------//
 
-  function DarkLayout(){
-    GraphAxis();
-    //Graph axis related things
-    var layout_update = {
-      'titlefont.color': 'white',
-      'xaxis.title': XAxisCurrent,
-      'xaxis.linecolor': 'white',
-      'xaxis.color': 'rgb(255,255,255)',
-      'yaxis.title': YAxisCurrent,
-      'yaxis.linecolor': 'white',
-      'yaxis.color': 'rgb(255,255,255)',
-      'plot_bgcolor': '#151515',
-      'paper_bgcolor': '#151515',
-      'legend.font.color': 'white'
-    };
+      function DeleteTraceArray(ArrayNum) {
+        x.splice(ArrayNum, 1);
+        xWavelength.splice(ArrayNum, 1);
+        y.splice(ArrayNum, 1);
+        ySI.splice(ArrayNum, 1);
+        yJyHz.splice(ArrayNum, 1);
+        yWM.splice(ArrayNum, 1);
+        errorBar.splice(ArrayNum, 1);
+        errorBarSI.splice(ArrayNum, 1);
+        errorBarJyHz.splice(ArrayNum, 1);
+        errorBarWM.splice(ArrayNum, 1);
+      }
+      //---------------------Remove SED Button----------------------//
+      // 1. Create the button
+      document.getElementById("RemoveSED").onclick = function() {
+        var currentGalaxy = parseInt($('#ddl3').val());
+        currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
 
-    $('body').addClass('dark-mode');
-    Plotly.relayout('my-graph', layout_update);
+        Plotly.deleteTraces(gd, currentGalaxy);
+        for (i = parseInt($('#ddl3').val()); i < TraceArray.length; i++) {
+          TraceArray[i] = TraceArray[i] + 1;
+        }
+        var ArrayMax = SpectralArray[parseInt($('#ddl3').val())][1];
+        var ArrayMin = SpectralArray[parseInt($('#ddl3').val())][0];
 
-    if(document.querySelector("input[name=onoffswitch2]").checked){
-      var output = SpectralLineUpdate();
-      var yaxis2Title = output.yaxis2Title;
-      SpectralLineLayout(yaxis2Title);
-    }else{
-      clearYAxis2();
-      removeLayoutYAxis2();
-    }
-    checkhover();
-  }
+        for (i = ArrayMin; i < ArrayMax; i++) {
+          delete xline[i];
+          delete xlineWavelength[i];
+          delete yline[i];
+          delete ylineWM[i];
+          delete errorBarline[i];
+          delete errorBarSIline[i];
+        }
 
-function CheckDarkMode(){
-  if ($("input[name=onoffswitch12]").is(':checked')){
-    DarkLayout();
-  }
-  else {
-    WhiteLayout();
-  }
+        DeleteTraceArray(currentGalaxy);
+
+
+
+        $('#ddl3 option[value="' + parseInt($('#ddl3').val()) + '"]').remove();
+        TotalTraces = TotalTraces - 1;
+        TraceCounter = TraceCounter + 1;
+      };
+
+      //---------------------END of controls----------------------//
+
+      function resizeplot1(graph) {
+        $(this).delay(1000).queue(function() {
+          // your Code | Function here
+          $grid.packery('layout');
+          Plotly.Plots.resize(graph);
+          $(this).dequeue();
+        });
+      }
+      //Resize after sidebar click
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        resizeplot1(gd);
+      });
+
+      //Calls the plot into HTML
+      Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
+
+
+
+//print JSON file test
+let JSONtest = {data, layout};
+
+console.log(JSONtest);
+
+
+function download(text, name, type) {
+  var a = document.createElement("a");
+  var file = new Blob([text], {
+    type: type
+  });
+  a.href = URL.createObjectURL(file);
+  a.download = name;
+  a.click();
 }
-//---------------------On and off Plot controls----------------------//
-document.querySelector("input[name=onoffswitch6]").onchange = function() {
-if(this.checked) {
-  //When switch is on
-  //Calls the plot into HTML
-  //Edits made to the toolbar
-  var toolbar = {
-  	scrollZoom: true, // lets us scroll to zoom in and out - works
-  	showLink: false, // removes the link to edit on plotly - works
-  	modeBarButtonsToRemove: ['lasso2d', 'sendDataToCloud'],
-    displaylogo: false,
-    modeBarButtonsToAdd: [toImage2],
-    displayModeBar: true,
-  };
-  Plotly.newPlot('my-graph', data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
-  CheckDarkMode();
-  } else {
-    //when switch is off
-    //Edits made to the toolbar
-    var toolbar = {
-    	scrollZoom: true, // lets us scroll to zoom in and out - works
-    	showLink: false, // removes the link to edit on plotly - works
-    	modeBarButtonsToRemove: [ 'lasso2d', 'sendDataToCloud'],
-      displaylogo: false,
-      modeBarButtonsToAdd: [toImage2],
-      displayModeBar: false,
-    };
-    Plotly.newPlot('my-graph', data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
-    CheckDarkMode();
-  }
-}
-  //---------------------END of controls----------------------//
+download(JSON.stringify(JSONtest), 'PlotlyJSON_SED.txt', 'text/plain');
 
-//---------------------Download Plot Button----------------------//
-  // 1. Create the button
-document.getElementById("button-download").onclick = function() {
-  // Plotly.relayout('my-graph', layout_update);
-      Plotly.downloadImage(gd, {
-        format: 'svg',
-        height: 500,
-        width: 1000,
-        filename: 'newplot'
-      })
-  };
+      //---------------------Pulls information into table----------------------//
+      //Event handler in plotly when it comes to hovering
+      var myPlot = document.getElementById('my-graph');
+      var hoverInfoSED = document.getElementById('hoverinfosed');
+      var hoverInfoNum = document.getElementById('hoverinfonum');
+      var hoverInfoOPassband = document.getElementById('hoverinfoopassband');
+      var hoverInfoMeasurement = document.getElementById('hoverinfomeasurement');
+      var hoverInfoUncertainty = document.getElementById('hoverinfouncertainty');
+      var hoverInfoUnits = document.getElementById('hoverinfounits');
+      var hoverInfoFrequency = document.getElementById('hoverinfofrequency');
+      var hoverInfoMeasurement2 = document.getElementById('hoverinfomeasurement2');
+      var hoverInfoUncertainty2 = document.getElementById('hoverinfouncertainty2');
+      var hoverInfoUnits2 = document.getElementById('hoverinfounits2');
+      var hoverInfoMode = document.getElementById('hoverinfomode');
+      var hoverInfoAperture = document.getElementById('hoverinfoaperture');
+      var hoverInfoRCode = document.getElementById('hoverinforcode');
+      var hoverInfoUnits2 = document.getElementById('hoverinfounits2');
 
-//---------------------END of controls----------------------//
-
-function DeleteTraceArray(ArrayNum){
-  x.splice(ArrayNum,1);
-  xWavelength.splice(ArrayNum,1);
-  y.splice(ArrayNum,1);
-  ySI.splice(ArrayNum,1);
-  yJyHz.splice(ArrayNum,1);
-  yWM.splice(ArrayNum,1);
-  errorBar.splice(ArrayNum,1);
-  errorBarSI.splice(ArrayNum,1);
-  errorBarJyHz.splice(ArrayNum,1);
-  errorBarWM.splice(ArrayNum,1);
-}
-//---------------------Remove SED Button----------------------//
-  // 1. Create the button
-document.getElementById("RemoveSED").onclick = function() {
-  var currentGalaxy = parseInt($('#ddl3').val());
-  currentGalaxy = currentGalaxy - TraceArray[currentGalaxy];
-
-  Plotly.deleteTraces(gd, currentGalaxy);
-  for(i = parseInt($('#ddl3').val()); i < TraceArray.length; i++){
-    TraceArray[i] = TraceArray[i] + 1;
-  }
-  var ArrayMax = SpectralArray[parseInt($('#ddl3').val())][1];
-  var ArrayMin = SpectralArray[parseInt($('#ddl3').val())][0];
-
-  for(i = ArrayMin; i < ArrayMax; i++){
-    delete xline[i];
-    delete xlineWavelength[i];
-    delete yline[i];
-    delete ylineWM[i];
-    delete errorBarline[i];
-    delete errorBarSIline[i];
-  }
-
- DeleteTraceArray(currentGalaxy);
-
-
-
-  $('#ddl3 option[value="' + parseInt($('#ddl3').val()) + '"]').remove();
-  TotalTraces = TotalTraces - 1;
-  TraceCounter = TraceCounter + 1;
-  };
-
-//---------------------END of controls----------------------//
-
-function resizeplot1(graph){
-                $(this).delay(1000).queue(function() {
-                  // your Code | Function here
-                  $grid.packery('layout');
-                  Plotly.Plots.resize(graph);
-                  $(this).dequeue();
-               });
-}
-//Resize after sidebar click
-$("#menu-toggle").click(function(e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-    resizeplot1(gd);
-    });
-
-//Calls the plot into HTML
-Plotly.newPlot(gd, data, layout, toolbar, checkbox, checkbox1, xaxis_update, yaxis_update, checkbox2);
-
-
-
-//---------------------Pulls information into table----------------------//
-//Event handler in plotly when it comes to hovering
-var myPlot = document.getElementById('my-graph');
-var hoverInfoSED = document.getElementById('hoverinfosed');
-var hoverInfoNum = document.getElementById('hoverinfonum');
-var hoverInfoOPassband = document.getElementById('hoverinfoopassband');
-var hoverInfoMeasurement = document.getElementById('hoverinfomeasurement');
-var hoverInfoUncertainty = document.getElementById('hoverinfouncertainty');
-var hoverInfoUnits = document.getElementById('hoverinfounits');
-var hoverInfoFrequency = document.getElementById('hoverinfofrequency');
-var hoverInfoMeasurement2 = document.getElementById('hoverinfomeasurement2');
-var hoverInfoUncertainty2 = document.getElementById('hoverinfouncertainty2');
-var hoverInfoUnits2 = document.getElementById('hoverinfounits2');
-var hoverInfoMode = document.getElementById('hoverinfomode');
-var hoverInfoAperture = document.getElementById('hoverinfoaperture');
-var hoverInfoRCode = document.getElementById('hoverinforcode');
-var hoverInfoUnits2 = document.getElementById('hoverinfounits2');
-
-myPlot.on('plotly_click', function(data){
-//displays point number and acts as a counter for arrays
-   var pts = '';
-      for(var i=0; i < data.points.length; i++){
+      myPlot.on('plotly_click', function(data) {
+        //displays point number and acts as a counter for arrays
+        var pts = '';
+        for (var i = 0; i < data.points.length; i++) {
           pts = data.points[i].text;
-      }
-      var pCounter = pts - 1;
+        }
+        var pCounter = pts - 1;
 
 
-  //Display the Point number
-   var numbertext = data.points.map(function(d){return (pts);});
-   hoverInfoNum.innerHTML = numbertext.join('');
-//SED Name
-   var SEDtext = data.points.map(function(d){return(SEDName[pCounter]);});
-   hoverInfoSED.innerHTML = SEDtext.join('');
-//Observed Passband
-   var Opassbandtext = data.points.map(function(d){return(OPassband[pCounter]);});
-   hoverInfoOPassband.innerHTML = Opassbandtext.join('');
-//Measurement
-   var Measurementtext = data.points.map(function(d){return(PMeasurement[pCounter]);});
-   hoverInfoMeasurement.innerHTML = Measurementtext.join('');
-//Uncertainty
-   var Uncertaintytext = data.points.map(function(d){return(Uncertainty[pCounter]);});
-   hoverInfoUncertainty.innerHTML = Uncertaintytext.join('');
-//Units
-   var Unitstext = data.points.map(function(d){return(Units[pCounter]);});
-   hoverInfoUnits.innerHTML = Unitstext.join('');
-//Frequency
-   var Frequencytext = data.points.map(function(d){return(Frequency[pCounter]);});
-   hoverInfoFrequency.innerHTML = Frequencytext.join('');
-//Measurement2
-   var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
-   hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-//Uncertainty2
-   var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
-   hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-//Units2
-   var Units2text = data.points.map(function(d){return(NEDUnits[pCounter]);});
-   hoverInfoUnits2.innerHTML = Units2text.join('');
-//Mode
-   var Modetext = data.points.map(function(d){return(FMode[pCounter]);});
-   hoverInfoMode.innerHTML = Modetext.join('');
-//Aperture
-   var Aperturetext = data.points.map(function(d){return(Qualifiers[pCounter]);});
-   hoverInfoAperture.innerHTML = Aperturetext.join('');
-//Reference Code
-   var Referencetext = data.points.map(function(d){return(Refcode[pCounter]);});
-   hoverInfoRCode.innerHTML = Referencetext.join('');
+        //Display the Point number
+        var numbertext = data.points.map(function(d) {
+          return (pts);
+        });
+        hoverInfoNum.innerHTML = numbertext.join('');
+        //SED Name
+        var SEDtext = data.points.map(function(d) {
+          return (SEDName[pCounter]);
+        });
+        hoverInfoSED.innerHTML = SEDtext.join('');
+        //Observed Passband
+        var Opassbandtext = data.points.map(function(d) {
+          return (OPassband[pCounter]);
+        });
+        hoverInfoOPassband.innerHTML = Opassbandtext.join('');
+        //Measurement
+        var Measurementtext = data.points.map(function(d) {
+          return (PMeasurement[pCounter]);
+        });
+        hoverInfoMeasurement.innerHTML = Measurementtext.join('');
+        //Uncertainty
+        var Uncertaintytext = data.points.map(function(d) {
+          return (Uncertainty[pCounter]);
+        });
+        hoverInfoUncertainty.innerHTML = Uncertaintytext.join('');
+        //Units
+        var Unitstext = data.points.map(function(d) {
+          return (Units[pCounter]);
+        });
+        hoverInfoUnits.innerHTML = Unitstext.join('');
+        //Frequency
+        var Frequencytext = data.points.map(function(d) {
+          return (Frequency[pCounter]);
+        });
+        hoverInfoFrequency.innerHTML = Frequencytext.join('');
+        //Measurement2
+        var Measurement2text = data.points.map(function(d) {
+          return (NEDMeasurement[pCounter]);
+        });
+        hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+        //Uncertainty2
+        var Uncertainty2text = data.points.map(function(d) {
+          return (NEDUncertainty[pCounter]);
+        });
+        hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+        //Units2
+        var Units2text = data.points.map(function(d) {
+          return (NEDUnits[pCounter]);
+        });
+        hoverInfoUnits2.innerHTML = Units2text.join('');
+        //Mode
+        var Modetext = data.points.map(function(d) {
+          return (FMode[pCounter]);
+        });
+        hoverInfoMode.innerHTML = Modetext.join('');
+        //Aperture
+        var Aperturetext = data.points.map(function(d) {
+          return (Qualifiers[pCounter]);
+        });
+        hoverInfoAperture.innerHTML = Aperturetext.join('');
+        //Reference Code
+        var Referencetext = data.points.map(function(d) {
+          return (Refcode[pCounter]);
+        });
+        hoverInfoRCode.innerHTML = Referencetext.join('');
 
 
-   errorBarWork = NEDUncertainty[pCounter];
-   if(errorBarWork === undefined){
-     errorBarWork = "";
-   }
-    errorBarWork = errorBarWork.replace("+/-",""); //removes "+/-"
-   xWavelengthWork = (299792458/Frequency[pCounter]) * 1000000;
-   xlineWavelengthWork = (299792458/Frequency[pCounter]) * 1000000;
+        errorBarWork = NEDUncertainty[pCounter];
+        if (errorBarWork === undefined) {
+          errorBarWork = "";
+        }
+        errorBarWork = errorBarWork.replace("+/-", ""); //removes "+/-"
+        xWavelengthWork = (299792458 / Frequency[pCounter]) * 1000000;
+        xlineWavelengthWork = (299792458 / Frequency[pCounter]) * 1000000;
 
-   ySIWork = NEDMeasurement[pCounter] * Math.pow(10, -26);
-   errorBarSIWork = errorBarWork * Math.pow(10, -26);
+        ySIWork = NEDMeasurement[pCounter] * Math.pow(10, -26);
+        errorBarSIWork = errorBarWork * Math.pow(10, -26);
 
-   yJyHzWork = NEDMeasurement[pCounter] * Frequency[pCounter];
-   errorBarJyHzWork = errorBarWork * Frequency[pCounter];
+        yJyHzWork = NEDMeasurement[pCounter] * Frequency[pCounter];
+        errorBarJyHzWork = errorBarWork * Frequency[pCounter];
 
-   yWMWork = ySIWork * Frequency[pCounter];
-   ylineWMWork = NEDMeasurement[pCounter] * Math.pow(10, -26);
-   errorBarWMWork = errorBarSIWork * Frequency[pCounter];
+        yWMWork = ySIWork * Frequency[pCounter];
+        ylineWMWork = NEDMeasurement[pCounter] * Math.pow(10, -26);
+        errorBarWMWork = errorBarSIWork * Frequency[pCounter];
 
-  if (
-    FMode[pCounter] == ' Line measurement; flux integrated over line; lines measured in emission'
-    ||
-    FMode[pCounter] == ' Line measurement; flux integrated over line'
-  ){
-    var answer = document.getElementById("ddl");
-    if(answer[answer.selectedIndex].value == 1){
-      //Frequency
-         var Frequencytext = data.points.map(function(d){return(Frequency[pCounter]);});
-         hoverInfoFrequency.innerHTML = Frequencytext.join('');
-    }
-    else{
-      //Frequency
-         var Frequencytext = data.points.map(function(d){return(xlineWavelengthWork.toPrecision(3));});
-         hoverInfoFrequency.innerHTML = Frequencytext.join('');
-    }
-    // checks which yaxis is on
-    var answer2 = document.getElementById("ddl2");
-    if(answer2[answer2.selectedIndex].value == 1){
-      //Measurement2
-         var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
-         hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-         //Uncertainty2
-            var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
+        if (
+          FMode[pCounter] == ' Line measurement; flux integrated over line; lines measured in emission' ||
+          FMode[pCounter] == ' Line measurement; flux integrated over line'
+        ) {
+          var answer = document.getElementById("ddl");
+          if (answer[answer.selectedIndex].value == 1) {
+            //Frequency
+            var Frequencytext = data.points.map(function(d) {
+              return (Frequency[pCounter]);
+            });
+            hoverInfoFrequency.innerHTML = Frequencytext.join('');
+          } else {
+            //Frequency
+            var Frequencytext = data.points.map(function(d) {
+              return (xlineWavelengthWork.toPrecision(3));
+            });
+            hoverInfoFrequency.innerHTML = Frequencytext.join('');
+          }
+          // checks which yaxis is on
+          var answer2 = document.getElementById("ddl2");
+          if (answer2[answer2.selectedIndex].value == 1) {
+            //Measurement2
+            var Measurement2text = data.points.map(function(d) {
+              return (NEDMeasurement[pCounter]);
+            });
+            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+            //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d) {
+              return (NEDUncertainty[pCounter]);
+            });
             hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
 
-    }
-    else if(answer2[answer2.selectedIndex].value == 2){
-      //Measurement2
-         var Measurement2text = data.points.map(function(d){return(ylineWMWork.toPrecision(3));});
-         hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-         //Uncertainty2
-            var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
+          } else if (answer2[answer2.selectedIndex].value == 2) {
+            //Measurement2
+            var Measurement2text = data.points.map(function(d) {
+              return (ylineWMWork.toPrecision(3));
+            });
+            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+            //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d) {
+              return ("+/-" + errorBarSIWork.toPrecision(3));
+            });
             hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
             //Units2
-               var Units2text = data.points.map(function(d){return('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');});
-               hoverInfoUnits2.innerHTML = Units2text.join('');
-      }
-    else if(answer2[answer2.selectedIndex].value == 3){
-      //Measurement2
-         var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
-         hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-         //Uncertainty2
-            var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
+            var Units2text = data.points.map(function(d) {
+              return ('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');
+            });
+            hoverInfoUnits2.innerHTML = Units2text.join('');
+          } else if (answer2[answer2.selectedIndex].value == 3) {
+            //Measurement2
+            var Measurement2text = data.points.map(function(d) {
+              return (NEDMeasurement[pCounter]);
+            });
+            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+            //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d) {
+              return (NEDUncertainty[pCounter]);
+            });
             hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-      }
-    else {
-      //Measurement2
-         var Measurement2text = data.points.map(function(d){return(ylineWMWork.toPrecision(3));});
-         hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-     //Uncertainty2
-        var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
-        hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-      //Units2
-         var Units2text = data.points.map(function(d){return('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');});
-         hoverInfoUnits2.innerHTML = Units2text.join('');
-      }
+          } else {
+            //Measurement2
+            var Measurement2text = data.points.map(function(d) {
+              return (ylineWMWork.toPrecision(3));
+            });
+            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+            //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d) {
+              return ("+/-" + errorBarSIWork.toPrecision(3));
+            });
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+            //Units2
+            var Units2text = data.points.map(function(d) {
+              return ('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');
+            });
+            hoverInfoUnits2.innerHTML = Units2text.join('');
+          }
 
-  }else{
-      var answer = document.getElementById("ddl");
-      if(answer[answer.selectedIndex].value == 1){
-        //Frequency
-           var Frequencytext = data.points.map(function(d){return(Frequency[pCounter]);});
-           hoverInfoFrequency.innerHTML = Frequencytext.join('');
-      }
-      else{
-        //Frequency
-           var Frequencytext = data.points.map(function(d){return(xWavelengthWork.toPrecision(3));});
-           hoverInfoFrequency.innerHTML = Frequencytext.join('');
-      }
-      // checks which yaxis is on
-      var answer2 = document.getElementById("ddl2");
-      if(answer2[answer2.selectedIndex].value == 1){
-        //Measurement2
-           var Measurement2text = data.points.map(function(d){return(NEDMeasurement[pCounter]);});
-           hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-           //Uncertainty2
-              var Uncertainty2text = data.points.map(function(d){return(NEDUncertainty[pCounter]);});
-              hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-      }
-      else if(answer2[answer2.selectedIndex].value == 2){
-        //Measurement2
-           var Measurement2text = data.points.map(function(d){return(ySIWork.toPrecision(3));});
-           hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-       //Uncertainty2
-          var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarSIWork.toPrecision(3));});
-          hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-      //Units2
-         var Units2text = data.points.map(function(d){return('F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>]');});
-         hoverInfoUnits2.innerHTML = Units2text.join('');
+        } else {
+          var answer = document.getElementById("ddl");
+          if (answer[answer.selectedIndex].value == 1) {
+            //Frequency
+            var Frequencytext = data.points.map(function(d) {
+              return (Frequency[pCounter]);
+            });
+            hoverInfoFrequency.innerHTML = Frequencytext.join('');
+          } else {
+            //Frequency
+            var Frequencytext = data.points.map(function(d) {
+              return (xWavelengthWork.toPrecision(3));
+            });
+            hoverInfoFrequency.innerHTML = Frequencytext.join('');
+          }
+          // checks which yaxis is on
+          var answer2 = document.getElementById("ddl2");
+          if (answer2[answer2.selectedIndex].value == 1) {
+            //Measurement2
+            var Measurement2text = data.points.map(function(d) {
+              return (NEDMeasurement[pCounter]);
+            });
+            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+            //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d) {
+              return (NEDUncertainty[pCounter]);
+            });
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+          } else if (answer2[answer2.selectedIndex].value == 2) {
+            //Measurement2
+            var Measurement2text = data.points.map(function(d) {
+              return (ySIWork.toPrecision(3));
+            });
+            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+            //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d) {
+              return ("+/-" + errorBarSIWork.toPrecision(3));
+            });
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+            //Units2
+            var Units2text = data.points.map(function(d) {
+              return ('F<sub><em>v</em></sub> [W m<sup>-2</sup> Hz<sup>-1</sup>]');
+            });
+            hoverInfoUnits2.innerHTML = Units2text.join('');
+          } else if (answer2[answer2.selectedIndex].value == 3) {
+            //Measurement2
+            var Measurement2text = data.points.map(function(d) {
+              return (yJyHzWork.toPrecision(3));
+            });
+            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+            //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d) {
+              return ("+/-" + errorBarJyHzWork.toPrecision(3));
+            });
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+            //Units2
+            var Units2text = data.points.map(function(d) {
+              return ('<em>v</em>F<sub><em>v</em></sub> [Jy-Hz]');
+            });
+            hoverInfoUnits2.innerHTML = Units2text.join('');
+          } else {
+            //Measurement2
+            var Measurement2text = data.points.map(function(d) {
+              return (yWMWork.toPrecision(3));
+            });
+            hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
+            //Uncertainty2
+            var Uncertainty2text = data.points.map(function(d) {
+              return ("+/-" + errorBarWMWork.toPrecision(3));
+            });
+            hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
+            //Units2
+            var Units2text = data.points.map(function(d) {
+              return ('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');
+            });
+            hoverInfoUnits2.innerHTML = Units2text.join('');
+          }
         }
-      else if(answer2[answer2.selectedIndex].value == 3){
-        //Measurement2
-           var Measurement2text = data.points.map(function(d){return(yJyHzWork.toPrecision(3));});
-           hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-       //Uncertainty2
-          var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarJyHzWork.toPrecision(3));});
-          hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-        //Units2
-           var Units2text = data.points.map(function(d){return('<em>v</em>F<sub><em>v</em></sub> [Jy-Hz]');});
-           hoverInfoUnits2.innerHTML = Units2text.join('');
+
+        // xWavelengthWork[i] = (299792458/Frequency[pCounter]) * 1000000;
+        // xlineWavelengthWork[i] = (299792458/xlineWork[i]) * 1000000;
+        //
+        // ySIWork[i] = NEDMeasurement[pCounter] * Math.pow(10, -26);
+        // errorBarSIWork[i] = errorBarWork[i] * Math.pow(10, -26);
+        //
+        // yJyHzWork[i] = NEDMeasurement[pCounter] * Frequency[pCounter];
+        // errorBarJyHzWork[i] = errorBarWork[i] * Frequency[pCounter];
+        //
+        // yWMWork[i] = ySIWork[i] * Frequency[pCounter];
+        // ylineWMWork[i] = ylineWork[i] * Math.pow(10, -26);
+        // errorBarWMWork[i] = errorBarSIWork[i] * Frequency[pCounter];
+        //
+
+
+
+
+
+
+
+      });
+
+      //---------------------END OF TABLE----------------------//
+
+
+
+      //---------------------Dark Mode----------------------//
+      document.querySelector("input[name=onoffswitch12]").onchange = function() {
+        if (this.checked) {
+          DarkLayout();
+        } else {
+          //when switch is off
+          WhiteLayout();
         }
-      else {
-        //Measurement2
-           var Measurement2text = data.points.map(function(d){return(yWMWork.toPrecision(3));});
-           hoverInfoMeasurement2.innerHTML = Measurement2text.join('');
-       //Uncertainty2
-          var Uncertainty2text = data.points.map(function(d){return("+/-" + errorBarWMWork.toPrecision(3));});
-          hoverInfoUncertainty2.innerHTML = Uncertainty2text.join('');
-      //Units2
-         var Units2text = data.points.map(function(d){return('<em>v</em>F<sub><em>v</em></sub> [W m<sup>-2</sup>]');});
-         hoverInfoUnits2.innerHTML = Units2text.join('');
-        }
-  }
+      };
 
-  // xWavelengthWork[i] = (299792458/Frequency[pCounter]) * 1000000;
-  // xlineWavelengthWork[i] = (299792458/xlineWork[i]) * 1000000;
-  //
-  // ySIWork[i] = NEDMeasurement[pCounter] * Math.pow(10, -26);
-  // errorBarSIWork[i] = errorBarWork[i] * Math.pow(10, -26);
-  //
-  // yJyHzWork[i] = NEDMeasurement[pCounter] * Frequency[pCounter];
-  // errorBarJyHzWork[i] = errorBarWork[i] * Frequency[pCounter];
-  //
-  // yWMWork[i] = ySIWork[i] * Frequency[pCounter];
-  // ylineWMWork[i] = ylineWork[i] * Math.pow(10, -26);
-  // errorBarWMWork[i] = errorBarSIWork[i] * Frequency[pCounter];
-  //
-
-
-
-
-
-
-
-});
-
-//---------------------END OF TABLE----------------------//
-
-
-
-//---------------------Dark Mode----------------------//
-document.querySelector("input[name=onoffswitch12]").onchange = function() {
-if(this.checked) {
-DarkLayout();
-  } else {
-    //when switch is off
-WhiteLayout();
-}
-};
-
-};
-
-
-</script>
-<script src="https://use.fontawesome.com/6d2387fc38.js"></script>
+    };
+  </script>
+  <script src="https://use.fontawesome.com/6d2387fc38.js"></script>
 
 
 </body>
+
 </html>
