@@ -701,7 +701,7 @@
           a.download = name;
           a.click();
         }
-        download(JSON.stringify(obj[0]), 'raw_data.txt', 'text/plain');
+        // download(JSON.stringify(obj[0]), 'raw_data.txt', 'text/plain');
 
         lengthCounter2 = OPassband.length;
         for (var i = 1; i <= data.length; i++) {
@@ -2135,7 +2135,7 @@ function download(text, name, type) {
   a.download = name;
   a.click();
 }
-download(JSON.stringify(JSONtest), 'PlotlyJSON_SED.txt', 'text/plain');
+// download(JSON.stringify(JSONtest), 'PlotlyJSON_SED.txt', 'text/plain');
 
       //---------------------Pulls information into table----------------------//
       //Event handler in plotly when it comes to hovering
