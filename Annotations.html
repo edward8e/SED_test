@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Annotations</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div id="graph"></div>
+  </body>
+  <script>
+
+
+  //---------------------Creates annotation at upperlimit location----------------------//
+  function CreateAnnotations(xData, yData,location) {
+      upperlimit.push({
+        x: xData[location],
+        y: yData[location],
+        xref: 'x',
+        yref: 'y',
+        showarrow: true,
+        arrowhead: 3,
+        ax: 0,
+        ay: -40,
+        yshift: -30,
+        standoff: 10,
+        arrowcolor: '#1f77b4'
+      });
+      //Change marker symbol to flat line
+      upperSym[location] = 'line-ew-open';
+  }
+
+//---------------------Initialize Variables----------------------//
+  let upperlimit = []; //Upperlimit annotaion variable
+  let upperSym = []; //Upperlimit symbol variable
+  const x = [1, 2, 3, 4, 5];
+  const y = [1, 2, 4, 8, 16];
+
+//---------------------Plotly DATA and LAYOUT----------------------//
+  let data = [{
+    x: x,
+    y: y,
+    mode: 'markers',
+    marker: {
+      symbol: upperSym
+    },
+  }];
+  let layout = {
+    annotations: upperlimit,
+  };
+
+  //---------------------Call to plotly----------------------//
+  CreateAnnotations(x, y, 3)
+  Plotly.plot('graph', data, layout)
+
+  </script>
+</html>

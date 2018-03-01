@@ -50,4 +50,4 @@ List of functions
 8. `InitialCoordinates()` - Initializes X and Y coordinates
 
 ### SED Tool Flowchart
-![diagram](https://cask.scotch.io/2014/10/V70cSEC.png)
+![diagram](https://en.wikipedia.org/wiki/Plotly)
